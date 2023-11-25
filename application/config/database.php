@@ -80,19 +80,12 @@ if (strtolower($strHost) == '' || strtolower($strHost) == 'localhost'){
 	$password="";
 	$database="ags";
 }
-else if(strtolower($strHost) == 'qa.agsasa.com')
-{
-	$hostname="localhost";
-	$username="agsas_qa";
-	$password="qaags123#!";
-	$database="agsas_qa";
-}
 else
 {
 	$hostname="localhost";
-	$username="agsas_ags";
-	$password="ags123#!";
-	$database="agsas_ags";
+	$username="ypccozeony";
+	$password="RM57V1737V324A6V$";
+	$database="agsasa-database";
 }
 
 $active_group = 'default';
