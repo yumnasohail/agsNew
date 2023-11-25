@@ -1,0 +1,1 @@
+<object data="<?php echo $pdf; ?>" width="100%" height="500px" type="application/pdf"></object>

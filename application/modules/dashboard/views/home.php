@@ -1,0 +1,515 @@
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <main>
+        <div class="container-fluid">
+            
+            <div class="row">
+                <div class="col-12">
+                    <h1>Dashboard</h1>
+                    <div class="separator mb-5"></div>
+
+
+                </div>
+               
+                <div class="col-lg-3">
+                    <div class="card mb-4 progress-banner">
+                        <div class="card-body justify-content-between d-flex flex-row align-items-center">
+                            <div>
+                                <i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i>
+                                <div>
+                                    <p class="lead text-white"><?php echo $approved; ?> Krav</p>
+                                    <p class="text-small text-white">Godkjent</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div role="progressbar"
+                                    class="progress-bar-circle progress-bar-banner position-relative" data-color="white"
+                                    data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="<?php echo $approved; ?>" aria-valuemax="<?php echo $tot; ?>"
+                                    data-show-percent="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-4 progress-banner">
+                        <a href="#" class="card-body justify-content-between d-flex flex-row align-items-center">
+                            <div>
+                                <i class="iconsminds-timer mr-2 text-white align-text-bottom d-inline-block"></i>
+                                <div>
+                                    <p class="lead text-white"><?php echo $pending+$pendings; ?> Krav</p>
+                                    <p class="text-small text-white">Ikke behandlet og Avsl책tt, Avventer</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div role="progressbar"
+                                    class="progress-bar-circle progress-bar-banner position-relative" data-color="white"
+                                    data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="<?php echo $pending+$pendings; ?>" aria-valuemax="<?php echo $tot; ?>"
+                                    data-show-percent="false">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                 <div class="col-lg-3">
+                    <div class="card mb-4 progress-banner">
+                        <div class="card-body justify-content-between d-flex flex-row align-items-center">
+                            <div>
+                                <i class="iconsminds-yes mr-2 text-white align-text-bottom d-inline-block"></i>
+                                <div>
+                                    <p class="lead text-white"><?php echo $finished; ?> Krav</p>
+                                    <p class="text-small text-white">Avsluttet</p>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div role="progressbar"
+                                    class="progress-bar-circle progress-bar-banner position-relative" data-color="white"
+                                    data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="<?php echo $finished; ?>" aria-valuemax="<?php echo $tot; ?>"
+                                    data-show-percent="false">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="card mb-4 progress-banner">
+                        <a href="#" class="card-body justify-content-between d-flex flex-row align-items-center">
+                            <div>
+                                <i class="simple-icon-close mr-2 text-white align-text-bottom d-inline-block"></i>
+                                <div>
+                                    <p class="lead text-white"><?php echo $rejected; ?> Krav</p>
+                                    <p class="text-small text-white">Avvist</p>
+                                </div>
+                            </div>
+                            <div>
+                                <div role="progressbar"
+                                    class="progress-bar-circle progress-bar-banner position-relative" data-color="white"
+                                    data-trail-color="rgba(255,255,255,0.2)" aria-valuenow="<?php echo $rejected; ?>" aria-valuemax="<?php echo $tot; ?>"
+                                    data-show-percent="false">
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-xl-6">
+
+                    <div class="icon-cards-row">
+                        <div class="glide dashboard-numbers">
+                            <div class="glide__track" data-glide-el="track">
+                                <ul class="glide__slides">
+                                    <?php foreach($fd as $key => $value): ?>
+                                    <li class="glide__slide">
+                                        <a href="<?php echo ADMIN_BASE_URL.'claims/list/'.$value['title']; ?>" class="card">
+                                            <div class="card-body text-center">
+                                                <i class="<?php echo $value['icon']; ?>"></i>
+                                                <p class="card-text mb-0"><?php echo $value['name']; ?></p>
+                                                <?php 
+                                                $res=Modules::run('api/_get_specific_table_with_pagination',array('federation'=>$value['id']), 'id desc','claims','id',1,10000)->num_rows();
+
+                                                ?>
+                                                <p class="lead text-center"><?php echo $res ?></p>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                         <div class="col-md-12 col-sm-12 mb-4">
+                            <div class="card dashboard-filled-line-chart">
+                                <div class="card-body ">
+                                    <div class="float-left float-none-xs">
+                                        <div class="d-inline-block">
+                                            <h5 class="d-inline">Ukentlige krav</h5>
+                                            <span class="text-muted text-small d-block">Krav sendt inn</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="chart card-body pt-0">
+                                    <canvas id="conversionChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-12 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Kalender</h5>
+                            <div class="calendar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-md-12 col-lg-6 col-xl-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Monthly Claims</h5>
+                            <div class="chart-container chart">
+                                <canvas id="polarChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-lg-6 col-xl-4 mb-4">
+                    <div class="card dashboard-search">
+                        <div class="card-body">
+                            <h5 class="text-white mb-3">Advanced Search</h5>
+                            <div class="form-container">
+                                <form>
+                                    <div class="form-group">
+                                        <label>Federation</label>
+                                        <select class="form-control select2-single" data-width="100%">
+                                            <option label="&nbsp;">&nbsp;</option>
+                                            <option value="TPZ">Judo</option>
+                                            <option value="TTZ">Rugby</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group mb-5">
+                                        <label>Date</label>
+                                        <div class="input-group date">
+                                            <input type="text" class="form-control">
+                                            <span class="input-group-text input-group-append input-group-addon">
+
+                                                <i class="simple-icon-calendar"></i>
+                                            </span>
+                                        </div> 
+                                    </div>
+                                    <div class="form-group mb-5">
+                                        <label>Claim Range</label>
+                                        <div>
+                                            <div class="slider" id="dashboardPriceRange"></div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group text-center">
+                                        <button type="submit" class="btn btn-primary btn-lg mt-3">Search</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 col-lg-12 col-xl-4">
+                    <div class="row">
+                        <div class="col-6 mb-4">
+                            <div class="card dashboard-small-chart-analytics">
+                                <div class="card-body">
+                                    <p class="lead color-theme-1 mb-1 value"></p>
+                                    <p class="mb-0 label text-small"></p>
+                                    <div class="chart">
+                                        <canvas id="smallChart1"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <div class="card dashboard-small-chart-analytics">
+                                <div class="card-body">
+                                    <p class="lead color-theme-1 mb-1 value"></p>
+                                    <p class="mb-0 label text-small"></p>
+                                    <div class="chart">
+                                        <canvas id="smallChart2"></canvas>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <div class="card dashboard-small-chart-analytics">
+                                <div class="card-body">
+                                    <p class="lead color-theme-1 mb-1 value"></p>
+                                    <p class="mb-0 label text-small"></p>
+                                    <div class="chart">
+                                        <canvas id="smallChart3"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-4">
+                            <div class="card dashboard-small-chart-analytics">
+                                <div class="card-body">
+                                    <p class="lead color-theme-1 mb-1 value"></p>
+                                    <p class="mb-0 label text-small"></p>
+                                    <div class="chart">
+                                        <canvas id="smallChart4"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div> -->
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 mb-12">
+                <div class="row">
+                  <div class="col-xl-4 col-lg-4 mb-12">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-12 col-md-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
+                          <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
+                            <h5 class="card-title">Invoiced Amount Per Policy</h5>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
+                            <div class="input-daterange input-daterange-year input-group" id="datepicker">
+                              <input type="text" class="input-sm form-control startDate" name="start" placeholder="Start" />
+                              <span class="input-group-addon"></span>
+                              <input type="text" class="input-sm form-control endDate" name="end" placeholder="End" />
+                              <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search">&nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search</div>
+                            </div>
+                          </div>
+                        </div>
+                        <table class="table" id="dataTable9">
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+            
+        </div>
+    </main>
+    <script src="<?php echo STATIC_ADMIN_JS?>vendor/Chart.bundle.min.js"></script>
+    <script src="<?php echo STATIC_ADMIN_JS?>vendor/chartjs-plugin-datalabels.js"></script>
+  <script>
+window.addEventListener("load", function(){
+     
+      var rootStyle = getComputedStyle(document.body);
+    var themeColor1 = rootStyle.getPropertyValue("--theme-color-1").trim();
+    var themeColor2 = rootStyle.getPropertyValue("--theme-color-2").trim();
+    var themeColor3 = rootStyle.getPropertyValue("--theme-color-3").trim();
+    var themeColor4 = rootStyle.getPropertyValue("--theme-color-4").trim();
+    var themeColor5 = rootStyle.getPropertyValue("--theme-color-5").trim();
+    var themeColor6 = rootStyle.getPropertyValue("--theme-color-6").trim();
+    var themeColor1_10 = rootStyle
+      .getPropertyValue("--theme-color-1-10")
+      .trim();
+    var themeColor2_10 = rootStyle
+      .getPropertyValue("--theme-color-2-10")
+      .trim();
+    var themeColor3_10 = rootStyle
+      .getPropertyValue("--theme-color-3-10")
+      .trim();
+    var themeColor4_10 = rootStyle
+      .getPropertyValue("--theme-color-4-10")
+      .trim();
+
+    var themeColor5_10 = rootStyle
+      .getPropertyValue("--theme-color-5-10")
+      .trim();
+    var themeColor6_10 = rootStyle
+      .getPropertyValue("--theme-color-6-10")
+      .trim();
+
+    var primaryColor = rootStyle.getPropertyValue("--primary-color").trim();
+    var foregroundColor = rootStyle
+      .getPropertyValue("--foreground-color")
+      .trim();
+    var separatorColor = rootStyle.getPropertyValue("--separator-color").trim();
+
+    /* 03.02. Resize */
+    var subHiddenBreakpoint = 1440;
+    var searchHiddenBreakpoint = 768;
+    var menuHiddenBreakpoint = 768;
+    Chart.defaults.LineWithShadow = Chart.defaults.line;
+      Chart.controllers.LineWithShadow = Chart.controllers.line.extend({
+        draw: function (ease) {
+          Chart.controllers.line.prototype.draw.call(this, ease);
+          var ctx = this.chart.ctx;
+          ctx.save();
+          ctx.shadowColor = "rgba(0,0,0,0.15)";
+          ctx.shadowBlur = 10;
+          ctx.shadowOffsetX = 0;
+          ctx.shadowOffsetY = 10;
+          ctx.responsive = true;
+          ctx.stroke();
+          Chart.controllers.line.prototype.draw.apply(this, arguments);
+          ctx.restore();
+        }
+      });
+      var chartTooltip = {
+        backgroundColor: foregroundColor,
+        titleFontColor: primaryColor,
+        borderColor: separatorColor,
+        borderWidth: 0.5,
+        bodyFontColor: primaryColor,
+        bodySpacing: 10,
+        xPadding: 15,
+        yPadding: 15,
+        cornerRadius: 0.15,
+        displayColors: false
+      };
+      var count=<?php echo json_encode($graph['count']) ?>;
+      var date=<?php echo json_encode($graph['date'])?>;
+      if (document.getElementById("conversionChart")) {
+        var conversionChart = document
+          .getElementById("conversionChart")
+          .getContext("2d");
+        var myChart = new Chart(conversionChart, {
+          type: "LineWithShadow",
+          options: {
+            plugins: {
+              datalabels: {
+                display: false
+              }
+            },
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+              yAxes: [
+                {
+                  gridLines: {
+                    display: true,
+                    lineWidth: 1,
+                    color: "rgba(0,0,0,0.1)",
+                    drawBorder: false
+                  },
+                  ticks: {
+                    beginAtZero: true,
+                    padding: 0
+                  }
+                }
+              ],
+              xAxes: [
+                {
+                  gridLines: {
+                    display: false
+                  }
+                }
+              ]
+            },
+            legend: {
+              display: false
+            },
+            tooltips: chartTooltip
+          },
+          data: {
+            labels: date,
+            datasets: [
+              {
+                label: "",
+                data: count,
+                borderColor: themeColor2,
+                pointBackgroundColor: foregroundColor,
+                pointBorderColor: themeColor2,
+                pointHoverBackgroundColor: themeColor2,
+                pointHoverBorderColor: foregroundColor,
+                pointRadius: 4,
+                pointBorderWidth: 2,
+                pointHoverRadius: 5,
+                fill: true,
+                borderWidth: 2,
+                backgroundColor: themeColor2_10
+              }
+            ]
+          }
+        });
+      }
+    });
+      $(document).on('click', function(e) {
+    var btnSearch = $(".btn_search");
+    if (!$(e.target).closest(btnSearch).length) {
+      $('.startDate').removeClass('errorClass');
+      $('.endDate').removeClass('errorClass');
+    }
+  });
+  $(document).off("click", ".btn_search").on("click", ".btn_search", function(event) {
+    let startDate = $('.startDate').val();
+    let endDate = $('.endDate').val();
+    getDateWiseRecord(startDate, endDate);
+  });
+  function getDateWiseRecord(startDate, endDate) {
+    if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
+      $.ajax({
+        type: "POST",
+        url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchIncome/",
+        data: {
+          "startDate": startDate,
+          "endDate": endDate
+        },
+        dataType: "json",
+        success: function(json) {
+          if ($.fn.DataTable.isDataTable('#dataTable9')) {
+            table = $('#dataTable9').DataTable();
+            table.destroy();
+            $('#dataTable9').empty();
+          }
+          $("#dataTable9").css({
+            display: "block"
+          });
+          $('#dataTable9').DataTable({
+            "processing": true,
+            "serverSide": false,
+            "filter": true,
+            "orderMulti": false,
+            "bDestroy": true,
+            "data": json.data,
+            "columns": json.columns,
+            "responsive": true,
+          });
+        },
+        error: function(data) {
+          alert("Error while fetching Data");
+        }
+      });
+    } else if (_.isEmpty(startDate) && _.isEmpty(endDate)) {
+      $('.startDate').addClass('errorClass');
+      $('.endDate').addClass('errorClass');
+    } else if (_.isEmpty(startDate)) {
+      $('.startDate').addClass('errorClass');
+    } else if (_.isEmpty(endDate)) {
+      $('.endDate').addClass('errorClass');
+    } else {
+      $('.startDate').removeClass('errorClass');
+      $('.endDate').removeClass('errorClass');
+    }
+  }
+  $(document).off("click", ".processLogs").on("click", ".processLogs", function(event) {
+    event.preventDefault();
+    openConfrim.open();
+  });
+  let openConfrim = $.confirm({
+    content: function() {
+      var self = this;
+      return $.ajax({
+        url: '<?= ADMIN_BASE_URL . "dashboard/getPendingClaims" ?>',
+        dataType: 'json',
+        method: 'get'
+      }).done(function(response) {
+        self.setContentAppend('<div>Kravlogger oppdateres</div>');
+      }).fail(function() {
+        self.setContentAppend('<div>Ukjent feil oppstår, prøv senere.!</div>');
+      });
+    },
+    title: 'Kravlogger',
+    draggable: true,
+    dragWindowGap: 0,
+    animationBounce: 1.5,
+    closeAnimation: 'zoom',
+    animation: 'scale',
+    theme: 'modern',
+    lazyOpen: true,
+  });
+  let currentYear = new Date().getFullYear();
+  getDateWiseRecord("'"+currentYear+"'","'"+currentYear+"'");
+  </script>

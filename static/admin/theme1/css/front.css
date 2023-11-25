@@ -1,0 +1,62 @@
+.navbar-logo
+{
+    margin: 0 auto;
+}
+body, html
+{
+    background:#ffffff;
+}
+.card
+{
+    box-shadow:none;
+}
+main {
+    margin-right: 180px;
+    margin-top: 180px;
+}
+.sw-main>ul.step-anchor>li.active>a
+{
+    font-size:20px;
+}
+@media screen and (max-width: 768px){
+    .sw-theme-check>ul.step-anchor>li {
+        width: -webkit-fill-available;
+    }
+}
+.sw-main>ul.step-anchor {
+    justify-content: space-around;
+}
+#smartWizardValidation .card-body>div {
+     height: auto; 
+}
+.inpt-num
+{
+    width: 83%;
+    float: left;
+}
+.inpt-code
+{
+    width: 15%;
+    float: left;
+    margin-right: 2%;
+}
+form
+{
+        padding: 5% 13% 5% 13%;
+}
+.form-control {
+    box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04)!important;
+}
+.partner-image
+{
+    padding-bottom: inherit;
+}
+.prev-btn
+{
+    float:left;
+}
+.next-btn,
+.finish-btn
+{
+    float:right;
+}
