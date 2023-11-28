@@ -82,9 +82,9 @@ if (strtolower($strHost) == '' || strtolower($strHost) == 'localhost'){
 }
 else
 {
-	$hostname="localhost";
-	$username="ypccozeony";
-	$password="RM57V1737V324A6V$";
+	$hostname="agsasa-server.mysql.database.azure.com";
+	$username="nldkchoatw";
+	$password="X50H6K7TBCNXNL43$";
 	$database="agsasa-database";
 }
 
