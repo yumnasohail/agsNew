@@ -63,4 +63,4 @@ jobs:
           app-name: 'agsasa'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_61C78717FFB9414D8F976F0B85A2B060 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_74643EE23D5E4E4B806311EA02F48FF7 }}
