@@ -30,7 +30,7 @@ else
 	$localname='Fajira';
 //	echo $localname; exit;
 $prefix='http';
-if ( $_SERVER['HTTP_HOST'] == 'route66.yumnasohail.com')
+if ( $_SERVER['HTTP_HOST'] == 'agsasa.azurewebsites.net')
 	$prefix = 'https';
 
 $config['base_url']	= $prefix.'://'.$_SERVER['HTTP_HOST'].'/'.$localname;
@@ -66,7 +66,7 @@ $config['index_page'] = '';
 |
 */
 $config['uri_protocol']	= 'REQUEST_URI';
-
+$config['url_protocol'] = 'PATH_INFO';
 /*
 |--------------------------------------------------------------------------
 | URL suffix
