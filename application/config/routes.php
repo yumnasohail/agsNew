@@ -42,6 +42,7 @@
 	$route['admin/login/submit_login'] = "login/submit_login";
 	$route['admin'] = "login";
 	$route['admin/logout'] = "login/logout";
+	$route['admin/azureCallBack'] = "login/callback";
 	$route['table_list']= "api/table_list";
 	$folder="front/";
 	$route['curling']=$folder."curling";

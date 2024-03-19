@@ -37,16 +37,16 @@ $strHost = preg_replace('/www./', '', $strHost, 1);
 $folder =  substr($_SERVER['HTTP_HOST'], 0, (strpos($_SERVER['HTTP_HOST'], '.')));
 
 if (empty($folder) )
-	$folder = 'AGS';
+	$folder = 'agsNew';
 
 if (strpos($_SERVER['HTTP_HOST'], '.') > 0 && $_SERVER['HTTP_HOST'] != '192.168.2.50')
 {
 	$localname='';
 }
 else
-	$localname='AGS/';
+	$localname='agsNew/';
 
-$prefix = 'https';
+$prefix = 'http';
 // if ( $strHost == 'agsasa.com'  || $strHost == 'agsasa.azurewebsites.net')
 // 	$prefix = 'https';
 if($strHost=='localhost')

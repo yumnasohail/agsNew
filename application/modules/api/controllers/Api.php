@@ -11,33 +11,33 @@ class Api extends MX_Controller {
         $this->lang->load('english', 'english');
         parent::__construct();
         date_default_timezone_set("Asia/Karachi");
-        $this->db2 = $this->load->database('old_db', TRUE);
+     //   $this->db2 = $this->load->database('old_db', TRUE);
     }
-    function set_period_id()
-    {
-        $this->db2->where("form_id!=","1");
-        $this->db2->where("form_id!=","101");
-        $case=$this->db2->get('claim_handling')->result_array();
-        foreach($case as $key => $value)
-        {
-                $data['claim_id']=$value['reference_id'];
-                $data['period_id']=0;
-                if(!empty($value['policy_period_id']) || $value['policy_period_id']!=0 ){
-                   $period_id=$value['policy_period_id'];
-                    $this->db2->where("policy_period_id",$period_id);
-                    $p_old=$this->db2->get('policy_periods')->row();
-                    if(!empty($p_old->policy_period_reference_id))
-                        $result= Modules::run('api/_get_specific_table_with_pagination',array("start_date"=>$p_old->policy_period_datestart,"end_date"=>$p_old->policy_period_dateend,"contract_id"=>$p_old->contract_id_sportscover,"ags_policy_no"=>$p_old->policy_period_reference_id),"id desc","policy_period","id","","")->row();
-                    else
-                        $result= Modules::run('api/_get_specific_table_with_pagination',array("start_date"=>$p_old->policy_period_datestart,"end_date"=>$p_old->policy_period_dateend,"contract_id"=>$p_old->contract_id_sportscover),"id desc","policy_period","id","","")->row();
-                    $data['period_id']=$result->id; 
-                    if(!empty($data['period_id']))
-                    $this->update_specific_table(array("claim_id"=>$data['claim_id']),array("period_id"=>$data['period_id']),"process_claim");
-                }
-        }   
+    // function set_period_id()
+    // {
+    //     $this->db2->where("form_id!=","1");
+    //     $this->db2->where("form_id!=","101");
+    //     $case=$this->db2->get('claim_handling')->result_array();
+    //     foreach($case as $key => $value)
+    //     {
+    //             $data['claim_id']=$value['reference_id'];
+    //             $data['period_id']=0;
+    //             if(!empty($value['policy_period_id']) || $value['policy_period_id']!=0 ){
+    //                $period_id=$value['policy_period_id'];
+    //                 $this->db2->where("policy_period_id",$period_id);
+    //                 $p_old=$this->db2->get('policy_periods')->row();
+    //                 if(!empty($p_old->policy_period_reference_id))
+    //                     $result= Modules::run('api/_get_specific_table_with_pagination',array("start_date"=>$p_old->policy_period_datestart,"end_date"=>$p_old->policy_period_dateend,"contract_id"=>$p_old->contract_id_sportscover,"ags_policy_no"=>$p_old->policy_period_reference_id),"id desc","policy_period","id","","")->row();
+    //                 else
+    //                     $result= Modules::run('api/_get_specific_table_with_pagination',array("start_date"=>$p_old->policy_period_datestart,"end_date"=>$p_old->policy_period_dateend,"contract_id"=>$p_old->contract_id_sportscover),"id desc","policy_period","id","","")->row();
+    //                 $data['period_id']=$result->id; 
+    //                 if(!empty($data['period_id']))
+    //                 $this->update_specific_table(array("claim_id"=>$data['claim_id']),array("period_id"=>$data['period_id']),"process_claim");
+    //             }
+    //     }   
         
     
-    }
+    // }
     function encryptor($action, $string) {
         $output = false;
         $encrypt_method = "AES-256-CBC";
@@ -54,27 +54,27 @@ class Api extends MX_Controller {
         return $output;
     }
     
-    function payments_declined()
-    {
-        $this->db2->where("form_id!=","1");
-        $this->db2->where("form_id!=","101");
-        $case=$this->db2->get('transactions')->result_array();
-        foreach($case as $key => $value)
-        {
-            $id=$value['transaction_id'];
-            $trans_status=$value['payment_status'];
-            if($trans_status=="DELETED" || $trans_status=="DECLINED"  || $trans_status=="HOLD")
-            {
-                $trans=$this->_get_specific_table_with_pagination(array("id"=>$id),"id","transaction","*",'','')->row_array();
-                if(!empty($trans))
-                {
-                     $this->insert_or_update(array("id"=>$id),array("trans_status"=>"declined"),"transaction");
-                }
+    // function payments_declined()
+    // {
+    //     $this->db2->where("form_id!=","1");
+    //     $this->db2->where("form_id!=","101");
+    //     $case=$this->db2->get('transactions')->result_array();
+    //     foreach($case as $key => $value)
+    //     {
+    //         $id=$value['transaction_id'];
+    //         $trans_status=$value['payment_status'];
+    //         if($trans_status=="DELETED" || $trans_status=="DECLINED"  || $trans_status=="HOLD")
+    //         {
+    //             $trans=$this->_get_specific_table_with_pagination(array("id"=>$id),"id","transaction","*",'','')->row_array();
+    //             if(!empty($trans))
+    //             {
+    //                  $this->insert_or_update(array("id"=>$id),array("trans_status"=>"declined"),"transaction");
+    //             }
 
-            }
+    //         }
            
-        }
-    }
+    //     }
+    // }
     
        function claim_zeros()
     {
@@ -126,167 +126,167 @@ class Api extends MX_Controller {
         
 
     }
-     function multi1()
-    {
-        $this->db2->where("form_id","102");
-        $trans=$this->db2->get('reference_ids')->result_array();
-        foreach($trans as $keys => $val)
-        {
+    //  function multi1()
+    // {
+    //     $this->db2->where("form_id","102");
+    //     $trans=$this->db2->get('reference_ids')->result_array();
+    //     foreach($trans as $keys => $val)
+    //     {
          
-            $this->db2->where("reference_id",$val['reference_id']);
-            $value=$this->db2->get('form_entries_multi1')->row_array();
-            $data['federation']="8";
-             $split = explode(" ",$value['skade_dato']);
-             $date = $split[0];
-             $time = $split[1];
-            if(isset($value['reference_id']) && !empty($value['reference_id']))
-                $data['id']=$value['reference_id'];
+    //         $this->db2->where("reference_id",$val['reference_id']);
+    //         $value=$this->db2->get('form_entries_multi1')->row_array();
+    //         $data['federation']="8";
+    //          $split = explode(" ",$value['skade_dato']);
+    //          $date = $split[0];
+    //          $time = $split[1];
+    //         if(isset($value['reference_id']) && !empty($value['reference_id']))
+    //             $data['id']=$value['reference_id'];
                 
-            if(isset($value['klubb_navn']) && !empty($value['klubb_navn']))
-                $data['c_name']=$value['klubb_navn'];
+    //         if(isset($value['klubb_navn']) && !empty($value['klubb_navn']))
+    //             $data['c_name']=$value['klubb_navn'];
                 
-            if(isset($value['klubb_kontaktperson']) && !empty($value['klubb_kontaktperson']))
-                $data['c_contact']=$value['klubb_kontaktperson'];
+    //         if(isset($value['klubb_kontaktperson']) && !empty($value['klubb_kontaktperson']))
+    //             $data['c_contact']=$value['klubb_kontaktperson'];
                 
-            if(isset($value['klubb_adresse']) && !empty($value['klubb_adresse']))
-                $data['c_address']=$value['klubb_adresse'];
+    //         if(isset($value['klubb_adresse']) && !empty($value['klubb_adresse']))
+    //             $data['c_address']=$value['klubb_adresse'];
                 
-            if(isset($value['klubb_postnr']) && !empty($value['klubb_postnr']))
-                $data['c_code']=$value['klubb_postnr'];
+    //         if(isset($value['klubb_postnr']) && !empty($value['klubb_postnr']))
+    //             $data['c_code']=$value['klubb_postnr'];
                 
-            if(isset($value['klubb_poststed']) && !empty($value['klubb_poststed']))
-                $data['c_phone']=$value['klubb_poststed'];
+    //         if(isset($value['klubb_poststed']) && !empty($value['klubb_poststed']))
+    //             $data['c_phone']=$value['klubb_poststed'];
                 
-            if(isset($value['klubb_krets']) && !empty($value['klubb_krets']))
-                $data['circuit']=$value['klubb_krets'];
+    //         if(isset($value['klubb_krets']) && !empty($value['klubb_krets']))
+    //             $data['circuit']=$value['klubb_krets'];
                 
-            if(isset($value['spiller_fornavn']) && !empty($value['spiller_fornavn']))
-                $data['a_name']=$value['spiller_fornavn'];
+    //         if(isset($value['spiller_fornavn']) && !empty($value['spiller_fornavn']))
+    //             $data['a_name']=$value['spiller_fornavn'];
                 
-            if(isset($value['spiller_lisens']) && !empty($value['spiller_lisens']))
-                $data['license']=$value['spiller_lisens'];
+    //         if(isset($value['spiller_lisens']) && !empty($value['spiller_lisens']))
+    //             $data['license']=$value['spiller_lisens'];
                 
-            if(isset($value['spiller_fodselsnr']) && !empty($value['spiller_fodselsnr']))
-                $data['a_birth']=$value['spiller_fodselsnr'];
+    //         if(isset($value['spiller_fodselsnr']) && !empty($value['spiller_fodselsnr']))
+    //             $data['a_birth']=$value['spiller_fodselsnr'];
                 
-            if(isset($value['spiller_etternavn']) && !empty($value['spiller_etternavn']))
-                $data['a_surname']=$value['spiller_etternavn'];
+    //         if(isset($value['spiller_etternavn']) && !empty($value['spiller_etternavn']))
+    //             $data['a_surname']=$value['spiller_etternavn'];
                 
-            // if(isset($value['reference_id']) && !empty($value['reference_id']))
-            //     $data['a_member_no']=$value['reference_id'];
+    //         // if(isset($value['reference_id']) && !empty($value['reference_id']))
+    //         //     $data['a_member_no']=$value['reference_id'];
                 
-            if(isset($value['spiller_idrettsnr']) && !empty($value['spiller_idrettsnr']))
-                $data['a_sportsno']=$value['spiller_idrettsnr'];
+    //         if(isset($value['spiller_idrettsnr']) && !empty($value['spiller_idrettsnr']))
+    //             $data['a_sportsno']=$value['spiller_idrettsnr'];
                 
-            if(isset($value['spiller_adresse']) && !empty($value['spiller_adresse']))
-                $data['a_address']=$value['spiller_adresse'];
+    //         if(isset($value['spiller_adresse']) && !empty($value['spiller_adresse']))
+    //             $data['a_address']=$value['spiller_adresse'];
                 
-            if(isset($value['spiller_postnr']) && !empty($value['spiller_postnr']))
-                $data['a_code']=$value['spiller_postnr'];
+    //         if(isset($value['spiller_postnr']) && !empty($value['spiller_postnr']))
+    //             $data['a_code']=$value['spiller_postnr'];
                 
-            if(isset($value['spiller_poststed']) && !empty($value['spiller_poststed']))
-                $data['a_phone']=$value['spiller_poststed'];
+    //         if(isset($value['spiller_poststed']) && !empty($value['spiller_poststed']))
+    //             $data['a_phone']=$value['spiller_poststed'];
                 
-            if(isset($value['spiller_foresatt_navn']) && !empty($value['spiller_foresatt_navn']))
-                $data['a_guardian']=$value['spiller_foresatt_navn'];
+    //         if(isset($value['spiller_foresatt_navn']) && !empty($value['spiller_foresatt_navn']))
+    //             $data['a_guardian']=$value['spiller_foresatt_navn'];
                 
-            if(isset($value['spiller_telefon']) && !empty($value['spiller_telefon']))
-                $data['a_telephone']=$value['spiller_telefon'];
+    //         if(isset($value['spiller_telefon']) && !empty($value['spiller_telefon']))
+    //             $data['a_telephone']=$value['spiller_telefon'];
                 
-            if(isset($value['spiller_epost']) && !empty($value['spiller_epost']))
-                $data['a_epost']=$value['spiller_epost'];
+    //         if(isset($value['spiller_epost']) && !empty($value['spiller_epost']))
+    //             $data['a_epost']=$value['spiller_epost'];
                 
-            if(isset($value['spiller_mobiltelefon']) && !empty($value['spiller_mobiltelefon']))
-                $data['a_mobile_tel']=$value['spiller_mobiltelefon'];
+    //         if(isset($value['spiller_mobiltelefon']) && !empty($value['spiller_mobiltelefon']))
+    //             $data['a_mobile_tel']=$value['spiller_mobiltelefon'];
                 
-            if(isset($value['skade_hvordan']) && !empty($value['skade_hvordan']))
-                $data['injury_reason']=$value['skade_hvordan'];
+    //         if(isset($value['skade_hvordan']) && !empty($value['skade_hvordan']))
+    //             $data['injury_reason']=$value['skade_hvordan'];
                 
-            if($data['federation']=="6")    
-                if(isset($value['skade_meldtnlf']) && !empty($value['skade_meldtnlf']))
-                    $data['sento_nlf_hps']=$value['skade_meldtnlf'];
+    //         if($data['federation']=="6")    
+    //             if(isset($value['skade_meldtnlf']) && !empty($value['skade_meldtnlf']))
+    //                 $data['sento_nlf_hps']=$value['skade_meldtnlf'];
             
-            if($data['federation']=="7")
-                if(isset($value['skade_meldtnlf']) && !empty($value['skade_meldtnlf']))
-                    $data['sentto_shf']=$value['skade_meldtnlf'];
+    //         if($data['federation']=="7")
+    //             if(isset($value['skade_meldtnlf']) && !empty($value['skade_meldtnlf']))
+    //                 $data['sentto_shf']=$value['skade_meldtnlf'];
                 
-            if(isset($value['skade_beskrivelse']) && !empty($value['skade_beskrivelse']))
-                $data['damage_desc']=$value['skade_beskrivelse'];
+    //         if(isset($value['skade_beskrivelse']) && !empty($value['skade_beskrivelse']))
+    //             $data['damage_desc']=$value['skade_beskrivelse'];
                 
-            if(isset($value['skade_skadested']) && !empty($value['skade_skadested']))
-                $data['damage_part']=$value['skade_skadested'];
+    //         if(isset($value['skade_skadested']) && !empty($value['skade_skadested']))
+    //             $data['damage_part']=$value['skade_skadested'];
                 
-            if(isset($value['	skade_hoppfelt']) && !empty($value['	skade_hoppfelt']))
-                $data['jumping_feild']=$value['	skade_hoppfelt'];
+    //         if(isset($value['	skade_hoppfelt']) && !empty($value['	skade_hoppfelt']))
+    //             $data['jumping_feild']=$value['	skade_hoppfelt'];
                 
-            if(isset($value['valgt_idrett']) && !empty($value['valgt_idrett']))
-                $data['sport']=$value['valgt_idrett'];
+    //         if(isset($value['valgt_idrett']) && !empty($value['valgt_idrett']))
+    //             $data['sport']=$value['valgt_idrett'];
                 
-            if(isset($value['skade_naar']) && !empty($value['skade_naar']))
-                $data['place_of_damage']=$value['skade_naar'];
+    //         if(isset($value['skade_naar']) && !empty($value['skade_naar']))
+    //             $data['place_of_damage']=$value['skade_naar'];
                 
-            if(isset($value['skade_hvor']) && !empty($value['skade_hvor']))
-                $data['where_acc_occur']=$value['skade_hvor'];
+    //         if(isset($value['skade_hvor']) && !empty($value['skade_hvor']))
+    //             $data['where_acc_occur']=$value['skade_hvor'];
                 
-            if(isset($value['skade_sesong']) && !empty($value['skade_sesong']))
-                $data['season']=$value['skade_sesong'];
+    //         if(isset($value['skade_sesong']) && !empty($value['skade_sesong']))
+    //             $data['season']=$value['skade_sesong'];
                 
-                $data['damage_date']=$date;
-                $data['damage_time']=$time;
+    //             $data['damage_date']=$date;
+    //             $data['damage_time']=$time;
                 
-            if(isset($value['skade_underlag']) && !empty($value['skade_underlag']))
-                $data['basis']=$value['skade_underlag'];
+    //         if(isset($value['skade_underlag']) && !empty($value['skade_underlag']))
+    //             $data['basis']=$value['skade_underlag'];
                 
-            if(isset($value['skade_kamptrening']) && !empty($value['skade_kamptrening']))
-                $data['match_with']=$value['skade_kamptrening'];
+    //         if(isset($value['skade_kamptrening']) && !empty($value['skade_kamptrening']))
+    //             $data['match_with']=$value['skade_kamptrening'];
                 
-            if(isset($value['skade_leggbeskyttere']) && !empty($value['skade_leggbeskyttere']))
-                $data['leg_protector_used']=$value['skade_leggbeskyttere'];
+    //         if(isset($value['skade_leggbeskyttere']) && !empty($value['skade_leggbeskyttere']))
+    //             $data['leg_protector_used']=$value['skade_leggbeskyttere'];
                 
-            if(isset($value['forsikring_under']) && !empty($value['forsikring_under']))
-                $data['insurance_under']=$value['forsikring_under'];
+    //         if(isset($value['forsikring_under']) && !empty($value['forsikring_under']))
+    //             $data['insurance_under']=$value['forsikring_under'];
                 
-            if(isset($value['forsirking_utbetales']) && !empty($value['forsirking_utbetales']))
-                $data['claim_paidto']=$value['forsirking_utbetales'];
+    //         if(isset($value['forsirking_utbetales']) && !empty($value['forsirking_utbetales']))
+    //             $data['claim_paidto']=$value['forsirking_utbetales'];
                 
-            if(isset($value['forsikring_kontonr']) && !empty($value['forsikring_kontonr']))
-                $data['bank_account_no']=$value['forsikring_kontonr'];
+    //         if(isset($value['forsikring_kontonr']) && !empty($value['forsikring_kontonr']))
+    //             $data['bank_account_no']=$value['forsikring_kontonr'];
                 
-            if(isset($value['forsikring_kontonr_bic']) && !empty($value['forsikring_kontonr_bic']))
-                $data['bic_code']=$value['forsikring_kontonr_bic'];
+    //         if(isset($value['forsikring_kontonr_bic']) && !empty($value['forsikring_kontonr_bic']))
+    //             $data['bic_code']=$value['forsikring_kontonr_bic'];
                 
-            if(isset($value['forsikring_annen']) && !empty($value['forsikring_annen']))
-            {
-                if($value['forsikring_annen']=="0")
-                $data['other_insurance']="Ikke ulykkesforsikret ved annen forsikring";
-                else
-                $data['other_insurance']="Ulykkesforsikret ogs책 ved annen forsikring";
-            }
+    //         if(isset($value['forsikring_annen']) && !empty($value['forsikring_annen']))
+    //         {
+    //             if($value['forsikring_annen']=="0")
+    //             $data['other_insurance']="Ikke ulykkesforsikret ved annen forsikring";
+    //             else
+    //             $data['other_insurance']="Ulykkesforsikret ogs책 ved annen forsikring";
+    //         }
                 
-                $data['permission']="Ja";
-                $data['self']="Jai";
+    //             $data['permission']="Ja";
+    //             $data['self']="Jai";
                 
-            if(isset($value['entry_lastusersubmit']) && !empty($value['entry_lastusersubmit']))
-                $data['claim_datetime']=$value['entry_lastusersubmit'];
-                $data['status']="1";
-                $data['del_status']="0";
-                if($value['entry_status_code']=="1")
-                    $data['claim_stat']="Godkjent";
-                else if($value['entry_status_code']=="20")
-                    $data['claim_stat']="Avsl책tt";
-                else if($value['entry_status_code']=="25")
-                    $data['claim_stat']="Avsl책tt, Avventer";
-                else if($value['entry_status_code']=="30" || $value['entry_status_code']=="31")
-                    $data['claim_stat']="Ikke behandlet";
-                else if($value['entry_status_code']=="26")
-                    $data['claim_stat']="Avsluttet";
-                else
-                    $data['claim_stat']="Ikke behandlet";
-                $this->insert_into_specific_table($data,"claims");
+    //         if(isset($value['entry_lastusersubmit']) && !empty($value['entry_lastusersubmit']))
+    //             $data['claim_datetime']=$value['entry_lastusersubmit'];
+    //             $data['status']="1";
+    //             $data['del_status']="0";
+    //             if($value['entry_status_code']=="1")
+    //                 $data['claim_stat']="Godkjent";
+    //             else if($value['entry_status_code']=="20")
+    //                 $data['claim_stat']="Avsl책tt";
+    //             else if($value['entry_status_code']=="25")
+    //                 $data['claim_stat']="Avsl책tt, Avventer";
+    //             else if($value['entry_status_code']=="30" || $value['entry_status_code']=="31")
+    //                 $data['claim_stat']="Ikke behandlet";
+    //             else if($value['entry_status_code']=="26")
+    //                 $data['claim_stat']="Avsluttet";
+    //             else
+    //                 $data['claim_stat']="Ikke behandlet";
+    //             $this->insert_into_specific_table($data,"claims");
             
-        }
+    //     }
 
-    }
+    // }
  
     
       function all_claims(){
@@ -445,26 +445,26 @@ class Api extends MX_Controller {
         }	
     }
     
-     function payment_files()
-    {
-        $this->db2->where("form_id!=","1");
-        $this->db2->where("form_id!=","101");
-        $case=$this->db2->get('transactions')->result_array();
-        foreach($case as $key => $value)
-        {
-            $data['claim_count']=$value['number_of_claims'];
-            $data['form_count']=$value['number_of_forms'];
-            $data['insurer_count']=$value['number_of_insurers'];
-            $data['payment_count']=$value['number_of_transactions'];
-            $data['belop']=$value['amount_total'];
-            $data['period_from']=$value['date_added_firsttransaction'];
-            $data['period_to']=$value['date_added_lasttransaction'];
-            $data['datetime']=$value['date_generated'];
-            $data['performed_by']="1";
-            $data['mail_sent']=$value['mails_sent'];
-            $this->insert_into_specific_table($data,"payment_files");
-        }
-    }
+    //  function payment_files()
+    // {
+    //     $this->db2->where("form_id!=","1");
+    //     $this->db2->where("form_id!=","101");
+    //     $case=$this->db2->get('transactions')->result_array();
+    //     foreach($case as $key => $value)
+    //     {
+    //         $data['claim_count']=$value['number_of_claims'];
+    //         $data['form_count']=$value['number_of_forms'];
+    //         $data['insurer_count']=$value['number_of_insurers'];
+    //         $data['payment_count']=$value['number_of_transactions'];
+    //         $data['belop']=$value['amount_total'];
+    //         $data['period_from']=$value['date_added_firsttransaction'];
+    //         $data['period_to']=$value['date_added_lasttransaction'];
+    //         $data['datetime']=$value['date_generated'];
+    //         $data['performed_by']="1";
+    //         $data['mail_sent']=$value['mails_sent'];
+    //         $this->insert_into_specific_table($data,"payment_files");
+    //     }
+    // }
     
     
     function table_list()
