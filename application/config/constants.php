@@ -114,6 +114,7 @@ define('SMALL_WEBPAGES_IMAGE_PATH', 'uploads/webpages/small_images/');
 
 define('APP_IMAGES_PATH', 'uploads/app_images/');/*
 define('ACTUAL_WEBPAGES_IMAGE_PATH', 'uploads/web_pages/actual_images/');*/
+define('ACTUAL_BANNER_IMAGE_PATH', 'uploads/web_pages/actual_images/');
 
 
 define('OUTLET_DEFAULT_IMAGE', 'logo_default_dark.png');
