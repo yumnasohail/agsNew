@@ -12,7 +12,11 @@ class Mdl_reports extends CI_Model {
    
    function get_data_of_reports($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");
@@ -39,7 +43,11 @@ class Mdl_reports extends CI_Model {
     }
     function get_data_of_reports_bdx($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("federations","premiums.federation_id=federations.id","LEFT");
@@ -63,7 +71,11 @@ class Mdl_reports extends CI_Model {
         return $query;
     }
     function _get_specific_table_with_pagination_bdx_check($cols, $order_by,$table,$select,$page_number,$limit){
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select);
         $this->db->from($table);
         $this->db->join("policies","policy_period.policy_id=policies.id","LEFT");
@@ -90,7 +102,11 @@ class Mdl_reports extends CI_Model {
     }
     function get_data_of_reports_with_transactions($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");
@@ -117,7 +133,11 @@ class Mdl_reports extends CI_Model {
     }
     function get_period_amount($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
        // $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");
@@ -141,7 +161,11 @@ class Mdl_reports extends CI_Model {
     }
     function get_period_amount_reserve($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
        // $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");
@@ -164,7 +188,11 @@ class Mdl_reports extends CI_Model {
     }
     function get_policies_detail($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
       //  $this->db->join("process_claim","policy_period.id=process_claim.period_id","LEFT");
@@ -193,7 +221,11 @@ class Mdl_reports extends CI_Model {
     
      function get_policies_claims($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
       //  $this->db->join("process_claim","policy_period.id=process_claim.period_id","LEFT");
@@ -220,7 +252,11 @@ class Mdl_reports extends CI_Model {
     }
     
     function get_policy_wise_premiums($cols, $order_by,$table,$select,$page_number,$limit){
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select);
         $this->db->from($table);
         $this->db->join("policy_period","premiums.period_id=policy_period.id","LEFT");
@@ -236,7 +272,11 @@ class Mdl_reports extends CI_Model {
     
     function get_policies_premiums_detail($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("policy_period","policy_period.id=premiums.period_id","LEFT");

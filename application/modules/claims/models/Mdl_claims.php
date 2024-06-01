@@ -111,7 +111,11 @@ class Mdl_claims extends CI_Model {
         return $query;
     }
      function getClaimsWithFederation($cols, $order_by, $group_by, $select, $page_number, $limit, $or_where, $and_where, $having) {
-        $offset = ($page_number - 1) * $limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select, false);
         $this->db->from("claims");
         $this->db->join('federations','federations.id = claims.federation','LEFT');

@@ -10,7 +10,11 @@ class Mdl_logs extends CI_Model {
     }
     function get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        $offset=($page_number-1)*$limit;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+       $page_number=1;
+        if(!isset($limit) || $limit<1 || $limit=='')
+       $limit=0;
+        $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("claims","claims.id=$table.claim_id","LEFT");
