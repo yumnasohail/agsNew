@@ -43,18 +43,23 @@
                                     <td><?php echo number_format(round($value['total_insurances']), 0, ',', ''); ?></td>
                                     
                                         <td><?php echo number_format(round($value['paid']), 0, ',', '') ?></td>
-                                   
-                                    <?php if($with_claim_fee==1) {?>
+                                       
+                                    <?php
+                                     $glr=$nlr=0;
+                                    if($with_claim_fee==1) {?>
                                     <td><?php echo number_format(round($value['deduct']), 0, ',', ''); ?></td></td>
                                     <?php $total=number_format(round($value['paid']+$value['deduct']+$value['reserve']), 0, ',', '');
-                                    
+                                    if($value['prem_paid']>0)
                                     $glr=(($value['paid']+$value['deduct']+$value['reserve'])/$value['prem_paid'])*100; 
+                                    if($value['total_insurances']>0)
                                     $nlr=(($value['paid']+$value['deduct']+$value['reserve'])/$value['total_insurances'])*100;
                                     ?>
                                     
                                      <?php }else{
                                          $total=number_format(round($value['paid']+$value['reserve']), 0, ',', '');
+                                         if($value['prem_paid']>0)
                                         $glr=(($value['paid']+$value['reserve'])/$value['prem_paid'])*100;
+                                        if($value['total_insurances']>0)
                                         $nlr=(($value['paid']+$value['reserve'])/$value['total_insurances'])*100;
                                          
                                      } ?>

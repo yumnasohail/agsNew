@@ -8,7 +8,7 @@ class Mdl_godkjen extends CI_Model {
     function __construct() {
         parent::__construct();
     }
-    function get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         if(!isset($page_number) || $page_number<1 || $page_number=='')
        $page_number=1;

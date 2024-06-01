@@ -40,7 +40,7 @@
             <td><?php if($ttl>0 && $res['ttl']>0 ) { $lr=round((round($ttl)/round($res['ttl']))*100);  echo $lr.'%'; }?></td>
             <td><?php echo $value['profit_comission']; ?></td>
             <td><?php if($lr>=50) echo "NO"; else echo "YES"; ?></td>
-            <td><?php if($lr>=50){ echo  "0"; }else { echo number_format(round(round($res['ttl'])*(str_replace("%",'',$value['profit_comission'])/100)), 0, ',', '');  }?></td>
+            <td><?php if($lr>=50){ echo  "0"; }else { echo number_format(round(round($res['ttl'])*(floatval(str_replace("%",'',$value['profit_comission']))/100)), 0, ',', '');  }?></td>
         <?php endforeach; ?>
         </tr>
     </tbody>

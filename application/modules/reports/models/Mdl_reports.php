@@ -10,7 +10,7 @@ class Mdl_reports extends CI_Model {
     }
 
    
-   function get_data_of_reports($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+   function get_data_of_reports($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         if(!isset($page_number) || $page_number<1 || $page_number=='')
        $page_number=1;
@@ -87,7 +87,7 @@ class Mdl_reports extends CI_Model {
         $query=$this->db->get();
         return $query;
     }
-    function get_federation_policies($cols, $order_by,$group_by='',$table,$select)
+    function get_federation_policies($cols, $order_by,$group_by,$table,$select)
     {
         $this->db->select($select,false);
         $this->db->from($table);
@@ -100,7 +100,7 @@ class Mdl_reports extends CI_Model {
         $query=$this->db->get();
         return $query;
     }
-    function get_data_of_reports_with_transactions($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_data_of_reports_with_transactions($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         if(!isset($page_number) || $page_number<1 || $page_number=='')
        $page_number=1;
@@ -131,7 +131,7 @@ class Mdl_reports extends CI_Model {
         $query=$this->db->get();
         return $query;
     }
-    function get_period_amount($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_period_amount($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         if(!isset($page_number) || $page_number<1 || $page_number=='')
        $page_number=1;
@@ -159,7 +159,7 @@ class Mdl_reports extends CI_Model {
         $query=$this->db->get();
         return $query;
     }
-    function get_period_amount_reserve($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_period_amount_reserve($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         if(!isset($page_number) || $page_number<1 || $page_number=='')
        $page_number=1;

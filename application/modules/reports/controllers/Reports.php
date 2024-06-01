@@ -706,10 +706,10 @@ Modules::run('site_security/has_permission');
                 $data['result']=array();
         }
     }
-    function get_data_of_reports($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_data_of_reports($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         $this->load->model('mdl_reports');
-        $query = $this->mdl_reports->get_data_of_reports($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having);
+        $query = $this->mdl_reports->get_data_of_reports($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having);
         return $query;
     }
     function get_data_of_reports_bdx($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
@@ -718,29 +718,29 @@ Modules::run('site_security/has_permission');
         $query = $this->mdl_reports->get_data_of_reports_bdx($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having);
         return $query;
     }
-    function get_federation_policies($cols, $order_by,$group_by='',$table,$select)
+    function get_federation_policies($cols, $order_by,$group_by,$table,$select)
     {
         $this->load->model('mdl_reports');
-        $query = $this->mdl_reports->get_federation_policies($cols, $order_by,$group_by='',$table,$select);
+        $query = $this->mdl_reports->get_federation_policies($cols, $order_by,$group_by,$table,$select);
         return $query;
     }
     
-    function get_data_of_reports_with_transactions($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_data_of_reports_with_transactions($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         $this->load->model('mdl_reports');
-        $query = $this->mdl_reports->get_data_of_reports_with_transactions($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having);
+        $query = $this->mdl_reports->get_data_of_reports_with_transactions($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having);
         return $query;
     }
-    function get_period_amount($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_period_amount($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         $this->load->model('mdl_reports');
-        $query = $this->mdl_reports->get_period_amount($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having);
+        $query = $this->mdl_reports->get_period_amount($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having);
         return $query;
     }
-    function get_period_amount_reserve($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having)
+    function get_period_amount_reserve($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
         $this->load->model('mdl_reports');
-        $query = $this->mdl_reports->get_period_amount_reserve($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having);
+        $query = $this->mdl_reports->get_period_amount_reserve($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having);
         return $query;
     }
     

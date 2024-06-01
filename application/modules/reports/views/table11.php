@@ -28,7 +28,7 @@
             <td><?php echo date('Y-m-d',strtotime($value['end_date'])); ?></td>
             <td><?php echo $value['currency']; ?></td>
             <td><?php $res=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl",'','')->row_array(); echo round($res['ttl']); ?></td>
-            <td><?php echo round(round($res['ttl'])*(str_replace("%",'',$value['rib'])/100)); ?></td>
+            <td><?php echo round(round($res['ttl'])*(floatval(str_replace("%",'',$value['rib']))/100)); ?></td>
         <?php endforeach; ?>
         </tr>
     </tbody>

@@ -191,7 +191,7 @@ Modules::run('site_security/has_permission');
          echo "<article lang=''><text>".$text['bank_format']."</text></article>";
     }
 
-    function get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having){
+    function get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having){
         $this->load->model('mdl_godkjen');
         $query = $this->mdl_godkjen->get_specific_table_data_where_groupby_claims($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having='');
         return $query;
