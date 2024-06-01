@@ -11,7 +11,7 @@
  * @license		MIT
  * @version		2.1
  */
-
+#[\AllowDynamicProperties]
 class Cache
 {
 	private $_ci;

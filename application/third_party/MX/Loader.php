@@ -39,6 +39,18 @@ class MX_Loader extends CI_Loader
 
     public $_ci_plugins = [];
     public $_ci_cached_vars = [];
+    private $controller;
+    public $db;
+    
+
+
+    public function setController($controller) {
+        $this->controller = $controller;
+    }
+    
+    public function getController() {
+        return $this->controller;
+    }
 
     /**
      * [Initialize the loader variables]
@@ -134,6 +146,10 @@ class MX_Loader extends CI_Loader
 
         if ($return === true) {
             return DB($params, $query_builder);
+        }
+
+        if (!isset(CI::$APP->db)) {
+            CI::$APP->db = null; // Initialize the property if not already set
         }
 
         CI::$APP->db = DB($params, $query_builder);
@@ -253,7 +269,7 @@ class MX_Loader extends CI_Loader
             return $this;
         }
 
-        ($_alias = strtolower($object_name)) or $_alias = $class;
+        ($_alias = strtolower($object_name?? '')) or $_alias = $class;
 
         // Backward function
         // Before PHP 7.1.0, list() only worked on numerical arrays and assumes the numerical indices start at 0.

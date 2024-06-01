@@ -39,6 +39,9 @@ require_once __DIR__ .'/Base.php';
 class MX_Controller
 {
     public $autoload = [];
+    public $load;
+    public $db;
+
 
     /**
      * [__construct description]
@@ -47,7 +50,7 @@ class MX_Controller
      */
     public function __construct()
     {
-        $class = str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this));
+        $class = str_replace(CI::$APP->config->item('controller_suffix')?? '', '', get_class($this));
         log_message('debug', $class.' MX_Controller Initialized');
         Modules::$registry[strtolower($class)] = $this;
 

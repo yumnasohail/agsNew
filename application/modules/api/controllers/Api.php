@@ -643,7 +643,7 @@ class Api extends MX_Controller {
         $this->load->model('mdl_api');
         return $this->mdl_api->get_specific_table_data($where,$order,$select,$table_name,$page_number,$limit);
     }
-    function get_specific_table_with_pagination_where_groupby($cols, $order_by,$group_by='',$table,$select,$page_number,$limit,$or_where,$and_where,$having){
+    function get_specific_table_with_pagination_where_groupby($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having){
             $this->load->model('mdl_api');
         $query = $this->mdl_api->get_specific_table_with_pagination_where_groupby($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having='');
         return $query;
