@@ -80,7 +80,7 @@
                                                                                     Type:       <?php echo "lisensforsikring" ?><br>
                                                                                     Giver:      <?php echo $value['insurer_title']; ?><br>
                                                                                     Dekning:    <?php echo $value['insurance_under']; ?><br>
-                                                                                    Navn:       <?php echo $value['a_name']." ".$value['a_surname']; ?><br>
+                                                                                    Navn:       <?php echo $value['a_name']; ?><br>
                                                                                     Skadedato:  <?php echo date("Y-m-d",strtotime($value['damage_date']))." ".$value['damage_time']; ?><br>
                                                                                 </p>
                                                                             </td>
