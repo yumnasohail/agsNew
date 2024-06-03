@@ -16,6 +16,8 @@
         <th>CCY</th>
         <th>AGS Gross Premium</th>
         <th>RIB to client </th>
+        <th>AGS Comission in amount </th>
+        <th>AGS Comission in %</th>
     </tr>
     </thead>
     <tbody>
@@ -29,6 +31,8 @@
             <td><?php echo $value['currency']; ?></td>
             <td><?php $res=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl",'','')->row_array(); echo round($res['ttl']); ?></td>
             <td><?php echo round(round($res['ttl'])*(floatval(str_replace("%",'',$value['rib']))/100)); ?></td>
+             <td><?php $pre=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved",'','')->row_array(); echo  number_format(round($pre['ttl_recieved']), 0, ',', ''); ?></td>
+            <td><?php    if($pre['ttl']>0){ echo number_format(round($pre['ttl_recieved']/$pre['ttl']*100), 0, ',', '').'%';}else{ echo "0%";} ?></td>
         <?php endforeach; ?>
         </tr>
     </tbody>

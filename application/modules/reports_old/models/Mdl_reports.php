@@ -12,11 +12,7 @@ class Mdl_reports extends CI_Model {
    
    function get_data_of_reports($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
-        if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
-        $offset = ((int)$page_number - 1) *$limit;
+        $offset=($page_number-1)*$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");
@@ -55,11 +51,7 @@ class Mdl_reports extends CI_Model {
     }
     function get_data_of_reports_with_transactions($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where,$and_where,$having)
     {
-        if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
-        if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
-        $offset = ((int)$page_number - 1) *$limit;
+        $offset=($page_number-1)*$limit;
         $this->db->select($select,false);
         $this->db->from($table);
         $this->db->join("process_claim","claims.id=process_claim.claim_id","LEFT");

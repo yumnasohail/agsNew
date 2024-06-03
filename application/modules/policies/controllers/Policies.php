@@ -24,6 +24,13 @@ Modules::run('site_security/has_permission');
         $this->template->admin($data);
     }
     
+    function pc_og_rib() {
+        $data['pc_og_rib'] = Modules::run('api/_get_specific_table_with_pagination',array('del_status'=>0), "id desc","pc_rib","*","","")->result_array();
+        $data['view_file'] = 'pc_og_rib_list';
+        $this->load->module('template');
+        $this->template->admin($data);
+    }
+    
     function slips(){
         $data['news'] = Modules::run('federations/_get','id desc',array("del_status"=>"0"));
         $data['view_file'] = 'fed_list';
@@ -64,6 +71,18 @@ Modules::run('site_security/has_permission');
         $this->load->module('template');
         $this->template->admin($data);
     }
+    
+    function edit_pc_og_rib(){
+        $id=$this->uri->segment(4);
+        $data['policies']=Modules::run('api/_get_specific_table_with_pagination',array('del_status'=>"0"), "id desc","policies","id,policy_title","","")->result_array();
+        $data['res']=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$id), "id desc","pc_rib","*","","")->row_array();
+        $data['policy_periods']=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$res['policy_id']), "id desc","policy_period","id,start_date,end_date,contract_id","","")->row_array();
+
+        $data['update_id'] = $id;
+        $data['view_file'] = 'create_pc_og_rib';
+        $this->load->module('template');
+        $this->template->admin($data);
+    }
 
     function manage() {
         $update_id = $this->uri->segment(5);
@@ -101,6 +120,18 @@ Modules::run('site_security/has_permission');
         $data['view_file'] = 'create';    
         $this->load->module('template');
         $this->template->admin($data);
+    }
+    
+    function new_pc_og_rib(){
+        $data['policies']=Modules::run('api/_get_specific_table_with_pagination',array('del_status'=>"0"), "id desc","policies","id,policy_title","","")->result_array();
+        $data['view_file'] = 'create_pc_og_rib';    
+        $this->load->module('template');
+        $this->template->admin($data);
+    }
+    function get_policy_periods(){
+        $policy_id=$this->input->post('id');
+        $data['policy_periods']=Modules::run('api/_get_specific_table_with_pagination',array('del_status'=>"0",'policy_id'=>$policy_id), "id desc","policy_period","id,start_date,end_date,contract_id","","")->result_array();
+        $this->load->view('policy_periods', $data);
     }
     function period()
     {
@@ -355,11 +386,47 @@ Modules::run('site_security/has_permission');
         echo json_encode($array);
         exit;
     }
+    
+    function submit_pc_og_rib(){
+        $status=false;
+        $message="Manglende data";
+        $where=array();
+        $update_id =$this->input->post('update_id');
+        $form_data['policy_id']=$this->input->post('policy_id');
+        $form_data['period_id']=$this->input->post('period_id');
+        $form_data['pc']=$this->input->post('pc');
+        $form_data['rib']=$this->input->post('rib');
+        $form_data['date']=date("Y-m-d", strtotime($this->input->post('date')));
+        if(isset($form_data['policy_id']) && !empty($form_data['period_id']) && !empty($form_data['date'])){
+            $status=true;
+            $message="Vellykket lagret data";
+        }
+          
+        if($status==true)
+        {
+            if($update_id>0){
+                Modules::run('api/update_specific_table',array("id"=>$update_id),$form_data,"pc_rib");
+            }else{
+                Modules::run('api/insert_into_specific_table',$form_data,"pc_rib");
+            }
+
+        }
+        $array=array("status"=>$status,"message"=>$message);
+        header('Content-Type: application/json');
+        echo json_encode($array);
+        exit;
+    }
 
     function delete() {
         $delete_id = $this->input->post('id');
         $where['id'] = $delete_id;
         $this->_delete($where);
+    }
+    
+    function delete_pc_og_rib() {
+        $delete_id = $this->input->post('id');
+        Modules::run('api/insert_or_update',array("id"=>$delete_id),array('del_status'=>'1'),"pc_rib");
+
     }
 
     function set_publish() {

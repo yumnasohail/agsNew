@@ -81,7 +81,8 @@
                                         <td><?php echo date("d-F-y", strtotime($start_date)); ?></td>
                                         <td><?php echo $end_date; ?></td>
                                         <td><?php echo $value['contract_id']?></td>
-                                        <td><?php echo $year; ?></td>
+                                        <td><?php echo date("Y", strtotime($value['start_date'])); ?></td>
+
                                         <td>AGS Forsikring AS</td>
                                         <td>KG</td>
                                         <td>Commercial</td>

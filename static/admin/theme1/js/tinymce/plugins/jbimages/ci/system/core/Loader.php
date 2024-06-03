@@ -26,23 +26,7 @@
  * @category	Loader
  * @link		http://codeigniter.com/user_guide/libraries/loader.html
  */
-#[\AllowDynamicProperties]
-
 class CI_Loader {
-	public $load;
-    public $benchmark;
-    public $config;
-    public $log;
-    public $hooks;
-    public $utf8;
-    public $uri;
-    public $router;
-    public $exceptions;
-    public $output;
-    public $security;
-    public $input;
-    public $lang; 
-
 
 	// All these are set automatically. Don't mess with them.
 	/**
@@ -51,7 +35,6 @@ class CI_Loader {
 	 * @var int
 	 * @access protected
 	 */
-
 	protected $_ci_ob_level;
 	/**
 	 * List of paths to load views from

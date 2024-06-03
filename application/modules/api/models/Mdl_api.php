@@ -115,10 +115,10 @@ class Mdl_api extends CI_Model {
     }
 
     function get_specific_table_with_pagination_where_groupby($cols, $order_by,$group_by,$table,$select,$page_number,$limit,$or_where='',$and_where='',$having=''){
-       if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
+        if(!isset($page_number) || $page_number<1 || $page_number=='')
+            $page_number=1;
         if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
+            $limit=0;
         $offset = ((int)$page_number - 1) *$limit;
         $this->db->select($select,false);
         $this->db->from($table);

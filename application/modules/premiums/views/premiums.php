@@ -109,25 +109,27 @@ $(document).ready(function() {
     function keyup()
     {
         $('#paid,#comission').keyup(function(){
-            var recieved="0";
-            var total_insurances="0";
-            var paid=$(this).parent().parent().find('#paid').val();
-            var comission=$(this).parent().parent().find('#comission').val();
-            if(!paid)
-               paid="0";
-            if(!comission)
-               comission="0";
-            if(paid>"0" && comission>"0")
-            {
-                recieved=paid/100*comission;
-                total_insurances= paid-recieved;
-            }
-            recieved.toString().toLocaleString();
-            total_insurances.toString().toLocaleString();
-            $(this).parent().parent().find('#recieved').val(recieved);
-            $(this).parent().parent().find('#total_insurances').val(total_insurances);
+            var f_id='<?php echo $federation_id ?>';
+           // if(f_id!=5 && f_id!=6 ){
+                var recieved="0";
+                var total_insurances="0";
+                var paid=$(this).parent().parent().find('#paid').val();
+                var comission=$(this).parent().parent().find('#comission').val();
+                if(!paid)
+                   paid="0";
+                if(!comission)
+                   comission="0";
+                if(paid>"0" && comission>"0")
+                {
+                    recieved=Math.round(paid/100*comission);
+                    total_insurances= Math.round(paid-recieved);
+                }
+                recieved.toString().toLocaleString();
+                total_insurances.toString().toLocaleString();
+                $(this).parent().parent().find('#recieved').val(recieved);
+                $(this).parent().parent().find('#total_insurances').val(total_insurances);
             
-           
+           // }
         }); 
     }
     keyup();

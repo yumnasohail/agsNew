@@ -82,7 +82,7 @@ Modules::run('site_security/has_permission');
         {
             case "1":
                 $data['result']=array();
-                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND  `federations`.`status` = '1' AND  `policy_period`.`del_status` = '0'  AND";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet'  AND `claims`.`del_status` = '0' AND  `federations`.`status` = '1' AND  `policy_period`.`del_status` = '0'  AND";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
                     $where.="`claims`.`federation` = '$fed' AND ";
@@ -131,7 +131,7 @@ Modules::run('site_security/has_permission');
                     $s_start=$formdata['start_date'];
                 if(!empty($formdata['end_date']) && isset($formdata['end_date']))
                     $s_end=$formdata['end_date'];
-                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND  `federations`.`status` = '1' AND ";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND `claims`.`del_status` = '0'  AND  `federations`.`status` = '1' AND ";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
                     $where.="`claims`.`federation` = '$fed' AND ";
@@ -180,10 +180,10 @@ Modules::run('site_security/has_permission');
             break;
              case "3":
                 $data['result']=array();
-                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND `federations`.`status` = '1' AND ";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND `claims`.`del_status` = '0' AND `federations`.`status` = '1' AND ";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
-                    $where.="`claims`.`federations` = '$fed' AND   `federations`.`status` = '1' AND ";
+                    $where.="`claims`.`federation` = '$fed' AND   `federations`.`status` = '1' AND ";
                 }
                 if(!empty($formdata['policy']) && isset($formdata['policy'])){
                     $policy=$formdata['policy'];
@@ -331,7 +331,7 @@ Modules::run('site_security/has_permission');
             break;
              case "5":
                  $data['result']=array();
-                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND   `policy_period`.`del_status` = '0'  AND ";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND `claims`.`del_status` = '0' AND   `policy_period`.`del_status` = '0'  AND ";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
                     $where.="`claims`.`federation` = '$fed' AND ";
@@ -376,7 +376,7 @@ Modules::run('site_security/has_permission');
             break;
              case "6":
                  $data['result']=array();
-                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND  `federations`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet' AND `claims`.`del_status` = '0' AND   `federations`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
                     $where.="`claims`.`federation` = '$fed' AND ";
@@ -501,12 +501,19 @@ Modules::run('site_security/has_permission');
                 foreach($result as $keys => $value):
                      $result[$keys]['paid']=0.00;
                      $result[$keys]['reserve']=0.00;
-                     $period_amt=$this->get_period_amount(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid",1,'',"","","")->row();
-                     $period_res=$this->get_period_amount_reserve(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim",",SUM(claim_reservations.amount) as reserve",1,'',"","","")->row();
+                     $open_claims= Modules::run('api/_get_specific_table_with_pagination',array("process_claim.period_id"=>$value['id']),"id desc","process_claim","COUNT(CASE WHEN process_claim.status = '1' THEN process_claim.id END) as open_claims,SUM(process_claim.claim_fee) as sum_claim_fee","","")->row();
+                     $period_amt=$this->get_period_amount(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid, SUM(CASE WHEN trans_status = 'transferred' AND process_claim.status = '1' THEN belop END ) open_paid",1,'',"","","")->row();
+                     $period_res=$this->get_period_amount_reserve(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim",",SUM(claim_reservations.amount) as reserve, SUM(CASE WHEN  process_claim.status = '1' THEN claim_reservations.amount END) as open_reserve ",1,'',"","","")->row();
+                     $result[$keys]['open_claims']=$open_claims->open_claims;
+                     $result[$keys]['sum_claim_fee']=$open_claims->sum_claim_fee;
                      if(!empty($period_amt->paid))
                      $result[$keys]['paid']=$period_amt->paid;
                      if(!empty($period_res->reserve))
                      $result[$keys]['reserve']=$period_res->reserve;
+                     if(!empty($period_amt->open_paid))
+                     $result[$keys]['open_paid']=$period_amt->open_paid;
+                     if(!empty($period_res->open_reserve))
+                     $result[$keys]['open_reserve']=$period_res->open_reserve;
                 endforeach;
                 $data['result']=$result;
                 echo $this->load->view('table9',$data,TRUE);
@@ -622,7 +629,6 @@ Modules::run('site_security/has_permission');
                  $where="`federations`.`status` = '1' AND ";
                  $where="`policy_period`.`del_status` = '0' AND  `policy_period`.`del_status` = '0'  AND ";
                  $where="`policies`.`del_status` = '0' AND ";
-               
                 // if(!empty($formdata['federation']) && isset($formdata['federation'])){
                 //     $fed=$formdata['federation'];
                 //     $where.="`federations`.`id` = '$fed' AND ";
@@ -673,7 +679,7 @@ Modules::run('site_security/has_permission');
                     $check=$c_start;
                     for($i=0;$check<=$end;$i++){
                         $m_start=date("Y-m-01",strtotime($check));
-                        $m_end=date("Y-m-31",strtotime($check));
+                        $m_end=date("Y-m-t",strtotime($check));
                         $prem= Modules::run('reports/get_policy_wise_premiums',array("federation_id"=>$value['f_id'],'dato >= '=>$m_start, 'dato <= '=> $m_end,"policies.id"=>$value['policy_id'],"period_id"=>$value['id']),"premiums.id desc","premiums","SUM(premiums.paid) as paid,SUM(premiums.total_insurances) as total_insurance,SUM(recieved) as ags_comission","","")->row_array();
                         $val=0;
                         if($prem['paid']>0){
@@ -683,9 +689,12 @@ Modules::run('site_security/has_permission');
                             $ttl_ins=$ttl_ins+$prem['total_insurance'];
                         }
                         $amount[]=$val;
+                        
                         $month[]=date("F Y", strtotime($check));
+                        
                     
                          $check =date('Y-m-d',strtotime($check." +1 Months"));
+                         
                     }
                     $result[$res]['paid']=$ttl;
                     $result[$res]['amount']=$amount;
@@ -696,11 +705,100 @@ Modules::run('site_security/has_permission');
                     //     unset($result[$res]);
                     // }
                 endforeach;
+                
                 $data['result']=$result;
                 $data['month']=$month;
                 $data['rep_year']=$formdata['year'];
                 $data['rep_month']=$formdata['month'];
+
                 echo $this->load->view('table12',$data,TRUE);
+            break;
+            case "13":
+                $data['result']=array();
+                $c_start=$formdata['year'].'-'.$formdata['month'].'-01';
+                $c_end=date("Y-m-t", strtotime($c_start));
+                $formdata['start_date']=$formdata['year'].'-01-01';
+                $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
+                $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
+                if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
+                    $end=$formdata['end_date'];
+                    $where.="`premiums`.`dato` <= '$c_end' AND ";
+                }
+                // if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
+                //     $start=$formdata['start_date'];
+                //     $where.="`premiums`.`dato` >= '$c_start' AND ";
+                // }
+                if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
+                    $insurer=$formdata['insurer'];
+                    $where.="`insurers`.`id` = '$insurer' AND ";
+                }
+                    //  $where.="`premiums`.`dato` >= '$c_start' AND ";
+                    //  $where.="`premiums`.`dato` <= '$c_end' AND ";
+                $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
+                // $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND  '$c_end'  THEN premiums.paid END) as paid,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid, SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+                $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","  ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid,SUM( CASE WHEN premiums.dato <= '$c_end'  THEN premiums.paid END) as paid_new ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,premiums.period_id as id,policies.id as policy_id,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+
+                foreach($result as $res => $value):
+                    $ttl=$com=$ttl_ins=0;
+                     $open_claims= Modules::run('api/_get_specific_table_with_pagination',array("process_claim.period_id"=>$value['id']),"id desc","process_claim","COUNT(CASE WHEN process_claim.status = '1' THEN process_claim.id END) as open_claims,SUM(process_claim.claim_fee) as sum_claim_fee","","")->row();
+                     $period_amt=$this->get_period_amount(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid, SUM(CASE WHEN trans_status = 'transferred' AND process_claim.status = '1' THEN belop END ) open_paid",1,'',"","","")->row();
+                     $period_res=$this->get_period_amount_reserve(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim",",SUM(claim_reservations.amount) as reserve, SUM(CASE WHEN  process_claim.status = '1' THEN claim_reservations.amount END) as open_reserve ",1,'',"","","")->row();
+                     if(!empty($period_amt->paid))
+                     $result[$res]['paid_p']=$period_amt->paid;
+                     if(!empty($period_res->reserve))
+                     $result[$res]['reserve_r']=$period_res->reserve;
+                     $result[$res]['sum_claim_fee']=$open_claims->sum_claim_fee;
+                     
+                    $prem= Modules::run('reports/get_policy_wise_premiums',array("federation_id"=>$value['f_id'],"policies.id"=>$value['policy_id'],"period_id"=>$value['id']),"premiums.id desc","premiums","SUM(premiums.paid) as paid,SUM(premiums.total_insurances) as total_insurances,SUM(recieved) as recieved_rv","","")->row_array();
+                    if($prem['paid']>0){
+                        $result[$res]['paid']=$prem['paid'];
+                    }
+                    $result[$res]['recieved_rv']=$prem['recieved_rv'];
+                endforeach;
+                $data['result']=$result;
+                $data['end_date']=$c_end;
+                $data['start_date']=$c_start;
+                $data['year']=$formdata['year'];
+                echo $this->load->view('table13',$data,TRUE);
+            break;
+            case "14":
+                $data['result']=array();
+                $c_start=$formdata['year'].'-'.$formdata['month'].'-01';
+                $c_end=date("Y-m-t", strtotime($c_start));
+                $formdata['start_date']=$formdata['year'].'-01-01';
+                $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
+                $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
+                if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
+                    $end=$formdata['end_date'];
+                    $where.="`premiums`.`dato` <= '$c_end' AND ";
+                }
+                // if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
+                //     $start=$formdata['start_date'];
+                //     $where.="`premiums`.`dato` >= '$c_start' AND ";
+                // }
+                if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
+                    $insurer=$formdata['insurer'];
+                    $where.="`insurers`.`id` = '$insurer' AND ";
+                }
+                    //  $where.="`premiums`.`dato` >= '$c_start' AND ";
+                    //  $where.="`premiums`.`dato` <= '$c_end' AND ";
+                $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
+                // $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND  '$c_end'  THEN premiums.paid END) as paid,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid, SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+                $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","  ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid,SUM( CASE WHEN premiums.dato <= '$c_end'  THEN premiums.paid END) as paid_new ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,premiums.period_id as id,policies.id as policy_id,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+
+                foreach($result as $res => $value):
+                    $ttl=$com=$ttl_ins=0;
+                    $prem= Modules::run('reports/get_policy_wise_premiums',array("federation_id"=>$value['f_id'],"policies.id"=>$value['policy_id'],"period_id"=>$value['id']),"premiums.id desc","premiums","SUM(premiums.paid) as paid,SUM(premiums.total_insurances) as total_insurances,SUM(recieved) as recieved,rib","","")->row_array();
+                    if($prem['paid']>0){
+                        $result[$res]['paid']=$prem['paid'];
+                        $result[$res]['rib']= round(round($prem['paid'])*(floatval(str_replace("%",'',$prem['rib']))/100));
+                    }
+                endforeach;
+                $data['result']=$result;
+                $data['end_date']=$c_end;
+                $data['start_date']=$c_start;
+                $data['year']=$formdata['year'];
+                echo $this->load->view('table14',$data,TRUE);
             break;
             default: 
                 $data['result']=array();

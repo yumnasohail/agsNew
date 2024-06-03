@@ -3,6 +3,9 @@
      {
          background-color: #e2e2e2;
      }
+        .error{
+         color:red;
+     }
  </style>
  <main >
         <div class="container-fluid">
@@ -305,6 +308,36 @@
     
     
     <script>
+        $(document).ready(function(){
+
+   $("#form-step-3").validate({
+        rules: {
+            bank_account_no: {
+                required: true,
+                noSpecialChars: true,
+                noSpaces: true
+            }
+            // Add more rules as needed
+        },
+        messages: {
+            bank_account_no: {
+                required: "Bank Account Number is required",
+                noSpecialChars: "Bank Account Number cannot contain special characters",
+                noSpaces: "Bank Account Number cannot contain spaces"
+            }
+            // Add more messages as needed
+        }
+    });
+ // Custom validation method to disallow special characters
+    $.validator.addMethod("noSpecialChars", function(value, element) {
+        return this.optional(element) || /^[a-zA-Z0-9]*$/.test(value);
+    }, "Special characters are not allowed");
+
+    // Custom validation method to disallow spaces
+    $.validator.addMethod("noSpaces", function(value, element) {
+        return this.optional(element) || !/\s/.test(value);
+    }, "Spaces are not allowed");
+});
       var code;
         function createCaptcha() {
           document.getElementById('captcha').innerHTML = "";

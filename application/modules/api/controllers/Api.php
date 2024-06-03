@@ -11,8 +11,62 @@ class Api extends MX_Controller {
         $this->lang->load('english', 'english');
         parent::__construct();
         date_default_timezone_set("Asia/Karachi");
-     //   $this->db2 = $this->load->database('old_db', TRUE);
+        // $this->db2 = $this->load->database('old_db', TRUE);
     }
+    
+    
+    public function settlemet_cron_job(){
+        $this->load->library('email');
+        $port = 465;
+        $user = "reminder@agsasa.com";
+        $pass = "isaF3nAv-OaA";
+        $host = 'ssl://mail.agsasa.com';  
+        $config = Array(
+        'protocol' => 'smtp',
+        'smtp_host' => $host,
+        'smtp_port' => $port,
+        'smtp_user' =>  $user,
+        'smtp_pass' =>  $pass,
+        'mailtype'  => 'html', 
+        'starttls'  => true,
+        'newline'   => "\r\n"
+        );
+        $mailtitle="AGS Forsikring AS";
+         
+        $this->email->initialize($config);
+        $this->email->from($user, "AGS Forsikring AS");
+    	$this->email->to("lpm@agsforsikring.no");
+        $this->email->subject("Reminder Email");
+        $this->email->message("Remember to send out settlemet (avregning) request to all Sport clients");
+        $this->email->send();
+    } 
+    
+    public function cron_job(){
+        $this->load->library('email');
+        $port = 465;
+        $user = "reminder@agsasa.com";
+        $pass = "isaF3nAv-OaA";
+        $host = 'ssl://mail.agsasa.com';  
+        $config = Array(
+        'protocol' => 'smtp',
+        'smtp_host' => $host,
+        'smtp_port' => $port,
+        'smtp_user' =>  $user,
+        'smtp_pass' =>  $pass,
+        'mailtype'  => 'html', 
+        'starttls'  => true,
+        'newline'   => "\r\n"
+        );
+        $mailtitle="AGS Forsikring AS";
+         
+        $this->email->initialize($config);
+        $this->email->from($user, "AGS Forsikring AS");
+    	$this->email->to("lpm@agsforsikring.no");
+        $this->email->subject("Reminder Email");
+        $this->email->message("Remember to include RIB (RP) for all clients in Paid April Bdx renewing into this year-se Slip first");
+        $this->email->send();
+    }
+    
     // function set_period_id()
     // {
     //     $this->db2->where("form_id!=","1");

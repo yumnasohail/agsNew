@@ -205,6 +205,11 @@ $active="active";
                                         <i class="iconsminds-clock-forward"></i> <span class="d-inline-block">Ny Slip and Polise <br>Info</span>
                                     </a>
                                 </li>
+                                <li class="<?php if($curr_url == 'policies' && $first_curr_url=="pc_og_rib"){echo $active;} ?>">
+                                    <a href="<?php echo ADMIN_BASE_URL.'policies/pc_og_rib'; ?>">
+                                        <i class="iconsminds-letter-open"></i> <span class="d-inline-block">PC og RIB per policy</span>
+                                    </a>
+                                </li>
                                 <?php } ?>
                             </ul>
                         </div>

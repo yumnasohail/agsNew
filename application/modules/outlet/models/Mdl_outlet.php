@@ -432,9 +432,9 @@ function _get_station($distance=10, $longitude, $latitude) {
 	function _get_new_limited_outlets($where,$order_by,$select,$page_number,$limit) {
 		$table = $this->get_table();
 		if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
+            $page_number=1;
         if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
+            $limit=0;
         $offset = ((int)$page_number - 1) *$limit;
 		$this->db->select($select);
 		$this->db->from($table);
@@ -453,9 +453,9 @@ function _get_station($distance=10, $longitude, $latitude) {
 	function _get_last_delivery_limited_outlets($where,$order_by,$select,$page_number,$limit) {
 		$table = $this->get_table();
 		if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
+            $page_number=1;
         if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
+            $limit=0;
         $offset = ((int)$page_number - 1) *$limit;
 		$this->db->select($select);
 		$this->db->from('orders');
@@ -477,9 +477,9 @@ function _get_station($distance=10, $longitude, $latitude) {
 	function _get_best_deals_outlets($where,$order_by,$select,$page_number,$limit) {
 		$table = $this->get_table();
 		if(!isset($page_number) || $page_number<1 || $page_number=='')
-       $page_number=1;
+            $page_number=1;
         if(!isset($limit) || $limit<1 || $limit=='')
-       $limit=0;
+            $limit=0;
         $offset = ((int)$page_number - 1) *$limit;
 		$this->db->select($select);
 		$this->db->from('deals');

@@ -408,12 +408,14 @@ Modules::run('site_security/has_permission');
                 if(isset($formdata['insurance_type'])){
                     $total=count($formdata['insurance_type']);
                     if($total>0){
+                        $total_res=0;
                         for($a=0;$a<$total;$a++)
                         {
                             $attr_data['claim_id']=$data['claim_id'];
                             $attr_data['coverage_cat']=$formdata['insurance_type'][$a];
                             $amount_res=$formdata['reservation'.$formdata['insurance_type'][$a]];
                             $attr_data['amount']=$amount_res;
+                            $total_res=(int)$attr_data['amount']+$total_res;
                             $new=1;
                             $check=Modules::run('api/_get_specific_table_with_pagination',array("claim_id"=>$data['claim_id'],"coverage_cat"=>$formdata['insurance_type'][$a]),'id desc',"claim_reservations","amount",'','')->row_array();
                             if(!empty($check)){
@@ -447,6 +449,32 @@ Modules::run('site_security/has_permission');
                             if($new==1){
                                 Modules::run('api/insert_into_specific_table',$arr_attribute,'transaction');
                             }
+                        }
+                        if($total_res>200000)
+                        {
+                            $this->load->library('email');
+                            $port1 = 465;
+                            $user1 = "reminder@agsasa.com";
+                            $pass1 = "isaF3nAv-OaA";
+                            $host1 = 'ssl://mail.agsasa.com';  
+                            $config1 = Array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => $host1,
+                            'smtp_port' => $port1,
+                            'smtp_user' =>  $user1,
+                            'smtp_pass' =>  $pass1,
+                            'mailtype'  => 'html', 
+                            'starttls'  => true,
+                            'newline'   => "\r\n"
+                            );
+                            $this->email->initialize($config1);
+                            $this->email->from($user1, "AGS Forsikring AS");
+                            $this->email->to("lpm@agsforsikring.no");
+                        	$this->email->cc("yumnasohail04@gmail.com");
+                            $this->email->subject("System auto email on Reserve Registration");
+                            $this->email->message("A reserve above 200.000 NOK/SEK has been registered in the system on claim# ".$data['claim_id']);
+                            $this->email->send();
+
                         }
                     }
                 }

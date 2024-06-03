@@ -149,6 +149,10 @@ width: 12px!important;
                                     <option value="10">Report #10 (Premium Payments Specifications)</option>
                                     <option value="11">Report #11 (RIB to Client)</option>
                                     <option value="12">Report #12 Premiums and Commission - UMR</option>
+                                    <option value="13">Report #13 (Estimated PC to Client)</option>                                    
+                                    <option value="14">Report #14 (RIB to Client)</option>
+
+
                                 </select>
                                 <div class="input-group-append">
                                     <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -214,7 +218,7 @@ width: 12px!important;
     event.preventDefault();
     var number=$(this).val();
     $('.rpt_4').css('display', 'none');
-    if(number=="7" || number=="8")
+    if(number=="7" || number=="8" || number=="13" || number=="14")
         $('.rpt_7').css('display', 'block');
     else if(number=="10"){
         $('.rpt_7').css('display', 'block');
