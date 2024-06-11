@@ -163,10 +163,10 @@ Modules::run('site_security/has_permission');
           ),
         ));
         $result = curl_exec($curl);
-		if (curl_errno($ch)) {
-			echo 'Error:' . curl_error($ch);
+		if (curl_errno($curl)) {
+			echo 'Error:' . curl_error($curl);
 		}
-		curl_close($ch);
+		curl_close($curl);
 		if (!empty($result)) {
 			$result = json_decode($result);
 			if($result->count==0)
