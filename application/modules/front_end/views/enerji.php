@@ -56,9 +56,7 @@
 <!--Vi håper kombinasjonen av AEGIS’ ekspertise i London og AGS regionale kunnskaper vil tilføre meglerne et godt og nytt lokalt marked.-->
 <!--                        </p>-->
 <p class="blog__desc">
-AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer på vegne Lloyds Insurance Company, Bryssel som eies av Lloyd's of London.
-<br>
-Gjennom dette samarbeid kan AGS tilby omfattende utvalgt av forsikringsløsninger til meglere på vegne av deres kunder.
+AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tilbyr ulike tegner ulike energiforsikringer på vegne Lloyds Insurance Company, Bryssel som eies av Lloyd's of London.  Gjennom våre samarbeidepartnere dette samarbeid kan AGS tilby omfattende utvalgt av forsikringsløsninger til meglere på vegne av deres kunder.<br>
 <br>
 AGS ønsker å fremstå som åpne, inkluderende og med god tilgjengelighet. Vi håper vår kombinasjon av erfaring og regionale kunnskaper vil tilføre meglerne og deres kunder attraktive løsninger.
   </p>                      
