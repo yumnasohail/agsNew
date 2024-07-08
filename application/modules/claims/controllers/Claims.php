@@ -306,105 +306,107 @@ Modules::run('site_security/has_permission');
                 $claim_data = $this->_get_by_arr_id($where)->row();
                 $mail=Modules::run('api/get_specific_table_data',array('f_id'=>$claim_data->federation),'id desc',"username as smtp_username,password as smtp_password,host as smtp_host,port as smtp_port","maler",'','')->row_array();
 
-                // $this->load->library('email');
-                // if(empty($mail)){
-                //     $port = 465;
-                //     $user = "info@ags.hwryk.com";
-                //     $pass = "Dz#Eg.pxdN3s";
-                //     $host = 'ssl://ags.hwryk.com';  
-                //     $config = Array(
-                //     'protocol' => 'smtp',
-                //     'smtp_host' => $host,
-                //     'smtp_port' => $port,
-                //     'smtp_user' =>  $user,
-                //     'smtp_pass' =>  $pass,
-                //     'mailtype'  => 'html', 
-                //     'starttls'  => true,
-                //     'newline'   => "\r\n"
-                //     );
-                // }else
-                // {
-                //     $port = $mail['smtp_port'];
-                //     $user = $mail['smtp_username'];
-                //     $pass = $mail['smtp_password'];
-                //     $host = $mail['smtp_host'];
-                //     $config = Array(
-                //     'protocol' => 'mail',
-                //     'smtp_host' => $host,
-                //     'smtp_port' => $port,
-                //     'smtp_user' =>  $user,
-                //     'smtp_pass' =>  $pass,
-                //     'mailtype'  => 'html', 
-                //     'starttls'  => true,
-                //     'newline'   => "\r\n"
-                //     );
-                // }
+                $this->load->library('email');
+                if(empty($mail)){
+                    $port = 465;
+                    $user = "info@ags.hwryk.com";
+                    $pass = "Dz#Eg.pxdN3s";
+                    $host = 'ssl://ags.hwryk.com';  
+                    $config = Array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => $host,
+                    'smtp_port' => $port,
+                    'smtp_user' =>  $user,
+                    'smtp_pass' =>  $pass,
+                    'mailtype'  => 'html', 
+                    'starttls'  => true,
+                    'newline'   => "\r\n"
+                    );
+                }else
+                {
+                    $port = $mail['smtp_port'];
+                    $user = $mail['smtp_username'];
+                    $pass = $mail['smtp_password'];
+                    $host = $mail['smtp_host'];
+                    $config = Array(
+                    'protocol' => 'mail',
+                    'smtp_host' => $host,
+                    'smtp_port' => $port,
+                    'smtp_user' =>  $user,
+                    'smtp_pass' =>  $pass,
+                    'mailtype'  => 'html', 
+                    'starttls'  => true,
+                    'newline'   => "\r\n"
+                    );
+                }
                     $mailtitle="AGS Forsikring AS";
                      
-                // if(isset($formdata['approve_email_claimant']) &&  $formdata['approve_email_claimant']=="on")
-                // {
-                //     $mail_data['claim_id']=$data['claim_id'];
-                //     $mail_data['mail']['email']=$formdata['s_text'];
+                if(isset($formdata['approve_email_claimant']) &&  $formdata['approve_email_claimant']=="on")
+                {
+                    $mail_data['claim_id']=$data['claim_id'];
+                    $mail_data['mail']['email']=$formdata['s_text'];
                 
-                //     $this->email->initialize($config);
-                //     $this->email->from($user, $formdata['s_sendername']);
-                //     $this->email->to($claim_data->a_epost);
-                // //	$this->email->to("yumnasohail04@gmail.com");
-                //     $this->email->subject($formdata['s_subject']);
-                //     $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
-                //     $this->email->message($messages);
-                //     $this->email->send();
-                //     Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"Godkjent e-post sendt","date_time"=>date('Y-m-d H:i:s')),'logs');
+                    $this->email->initialize($config);
+                    $this->email->from($user, $formdata['s_sendername']);
+                    $this->email->to($claim_data->a_epost);
+                //	$this->email->to("yumnasohail04@gmail.com");
+                    $this->email->subject($formdata['s_subject']);
+                    $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
+                    $this->email->message($messages);
+                    $this->email->send();
+                    Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"Godkjent e-post sendt","date_time"=>date('Y-m-d H:i:s')),'logs');
 
-                // }
-                // if(isset($formdata['decline_email_claimant']) &&  $formdata['decline_email_claimant']=="on")
-                // {
-                //     $mail_data['claim_id']=$data['claim_id'];
-                //     $mail_data['mail']['email']=$formdata['d_text'];
-                //     $this->email->initialize($config);
-                //     $this->email->from($user, $formdata['d_sendername']);
-                //     $this->email->to($claim_data->a_epost);
-                // //	$this->email->to("yumnasohail04@gmail.com");
-                //     $this->email->subject($formdata['d_subject']);
-                //     $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
-                //     $this->email->message($messages);
-                //     $this->email->send();
-                //     Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"Avvist e-post sendt","date_time"=>date('Y-m-d H:i:s')),'logs');
+                }
+                if(isset($formdata['decline_email_claimant']) &&  $formdata['decline_email_claimant']=="on")
+                {
+                    $mail_data['claim_id']=$data['claim_id'];
+                    $mail_data['mail']['email']=$formdata['d_text'];
+                    $this->email->initialize($config);
+                    $this->email->from($user, $formdata['d_sendername']);
+                    $this->email->to($claim_data->a_epost);
+                //	$this->email->to("yumnasohail04@gmail.com");
+                    $this->email->subject($formdata['d_subject']);
+                    $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
+                    $this->email->message($messages);
+                    $this->email->send();
+                    Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"Avvist e-post sendt","date_time"=>date('Y-m-d H:i:s')),'logs');
 
-                // }
+                }
                 
-                // if($data['email_ihs']=="1"){
-                //     if($data['status']=="1"){
-                //         $mail_data['claim_id']=$data['claim_id'];
-                //         $mail_data['mail']['email']=$formdata['s_text'];
+                if($data['email_ihs']=="1"){
+                    if($data['status']=="1"){
+                        $mail_data['claim_id']=$data['claim_id'];
+                        $mail_data['mail']['email']=$formdata['s_text'];
                     
-                //         $this->email->initialize($config);
-                //         $this->email->from($user, $mailtitle);
-                //          $this->email->to("skade@idrettshelse.no");
-                //         $this->email->subject($formdata['s_subject']);
-                //         $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
-                //         $this->email->message($messages);
-                //         $this->email->send();
-                //         Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"E-post sendt til IHS","date_time"=>date('Y-m-d H:i:s')),'logs');
+                        $this->email->initialize($config);
+                        $this->email->from($user, $mailtitle);
+                       // $this->email->to("yumnasohail04@gmail.com");
+                        $this->email->to("skade@idrettshelse.no");
+                        $this->email->subject($formdata['s_subject']);
+                        $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
+                        $this->email->message($messages);
+                        $this->email->send();
+                        Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"E-post sendt til IHS","date_time"=>date('Y-m-d H:i:s')),'logs');
 
-                //     } 
-                //     else
-                //     {
-                //         $mail_data['claim_id']=$data['claim_id'];
-                //         $mail_data['mail']['email']=$formdata['d_text'];
+                    } 
+                    else
+                    {
+                        $mail_data['claim_id']=$data['claim_id'];
+                        $mail_data['mail']['email']=$formdata['d_text'];
                     
-                //         $this->email->initialize($config);
-                //         $this->email->from($user, $mailtitle);
-                //         $this->email->to("skade@idrettshelse.no");
-                //         $this->email->subject($formdata['d_subject']);
-                //         $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
-                //         $this->email->message($messages);
-                //         $this->email->send();
-                //         Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"E-post sendt til IHS","date_time"=>date('Y-m-d H:i:s')),'logs');
+                        $this->email->initialize($config);
+                        $this->email->from($user, $mailtitle);
+                        //$this->email->to("yumnasohail04@gmail.com");
+                        $this->email->to("skade@idrettshelse.no");
+                        $this->email->subject($formdata['d_subject']);
+                        $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
+                        $this->email->message($messages);
+                        $this->email->send();
+                        Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"E-post sendt til IHS","date_time"=>date('Y-m-d H:i:s')),'logs');
 
-                //     }
-                // }
-              //  print_r($messages);exit;
+                    }
+                }
+            //    print_r($messages);exit;
                 if(isset($formdata['insurance_type'])){
                     $total=count($formdata['insurance_type']);
                     if($total>0){
@@ -452,28 +454,28 @@ Modules::run('site_security/has_permission');
                         }
                         if($total_res>200000)
                         {
-                            // $this->load->library('email');
-                            // $port1 = 465;
-                            // $user1 = "reminder@agsasa.com";
-                            // $pass1 = "isaF3nAv-OaA";
-                            // $host1 = 'ssl://mail.agsasa.com';  
-                            // $config1 = Array(
-                            // 'protocol' => 'smtp',
-                            // 'smtp_host' => $host1,
-                            // 'smtp_port' => $port1,
-                            // 'smtp_user' =>  $user1,
-                            // 'smtp_pass' =>  $pass1,
-                            // 'mailtype'  => 'html', 
-                            // 'starttls'  => true,
-                            // 'newline'   => "\r\n"
-                            // );
-                            // $this->email->initialize($config1);
-                            // $this->email->from($user1, "AGS Forsikring AS");
-                            // $this->email->to("lpm@agsforsikring.no");
-                        	// $this->email->cc("yumnasohail04@gmail.com");
-                            // $this->email->subject("System auto email on Reserve Registration");
-                            // $this->email->message("A reserve above 200.000 NOK/SEK has been registered in the system on claim# ".$data['claim_id']);
-                            // $this->email->send();
+                            $this->load->library('email');
+                            $port1 = 465;
+                            $user1 = "reminder@agsasa.com";
+                            $pass1 = "isaF3nAv-OaA";
+                            $host1 = 'ssl://mail.agsasa.com';  
+                            $config1 = Array(
+                            'protocol' => 'smtp',
+                            'smtp_host' => $host1,
+                            'smtp_port' => $port1,
+                            'smtp_user' =>  $user1,
+                            'smtp_pass' =>  $pass1,
+                            'mailtype'  => 'html', 
+                            'starttls'  => true,
+                            'newline'   => "\r\n"
+                            );
+                            $this->email->initialize($config1);
+                            $this->email->from($user1, "AGS Forsikring AS");
+                            $this->email->to("lpm@agsforsikring.no");
+                        	$this->email->cc("yumnasohail04@gmail.com");
+                            $this->email->subject("System auto email on Reserve Registration");
+                            $this->email->message("A reserve above 200.000 NOK/SEK has been registered in the system on claim# ".$data['claim_id']);
+                            $this->email->send();
 
                         }
                     }
