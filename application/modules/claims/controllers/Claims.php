@@ -504,6 +504,7 @@ Modules::run('site_security/has_permission');
                 Modules::run('api/insert_or_update',array("id"=>$data['claim_id']),array("claim_stat"=>$claim_stat),"claims");  
         }
         
+        
         $array=array("status"=>$status,"message"=>$message);
         header('Content-Type: application/json');
         echo json_encode($array);
