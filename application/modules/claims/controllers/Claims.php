@@ -349,8 +349,8 @@ Modules::run('site_security/has_permission');
                 
                     $this->email->initialize($config);
                     $this->email->from($user, $formdata['s_sendername']);
-                //    $this->email->to($claim_data->a_epost);
-                	$this->email->to("yumnasohail04@gmail.com");
+                    $this->email->to($claim_data->a_epost);
+                //	$this->email->to("yumnasohail04@gmail.com");
                     $this->email->subject($formdata['s_subject']);
                     $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
                     $this->email->message($messages);
@@ -364,8 +364,8 @@ Modules::run('site_security/has_permission');
                     $mail_data['mail']['email']=$formdata['d_text'];
                     $this->email->initialize($config);
                     $this->email->from($user, $formdata['d_sendername']);
-                //    $this->email->to($claim_data->a_epost);
-                	$this->email->to("yumnasohail04@gmail.com");
+                    $this->email->to($claim_data->a_epost);
+                //	$this->email->to("yumnasohail04@gmail.com");
                     $this->email->subject($formdata['d_subject']);
                     $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
                     $this->email->message($messages);
@@ -381,8 +381,8 @@ Modules::run('site_security/has_permission');
                     
                         $this->email->initialize($config);
                         $this->email->from($user, $mailtitle);
-                        $this->email->to("yumnasohail04@gmail.com");
-                       // $this->email->to("skade@idrettshelse.no");
+                       // $this->email->to("yumnasohail04@gmail.com");
+                        $this->email->to("skade@idrettshelse.no");
                         $this->email->subject($formdata['s_subject']);
                         $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
                         $this->email->message($messages);
@@ -397,8 +397,8 @@ Modules::run('site_security/has_permission');
                     
                         $this->email->initialize($config);
                         $this->email->from($user, $mailtitle);
-                        $this->email->to("yumnasohail04@gmail.com");
-                        //$this->email->to("skade@idrettshelse.no");
+                        //$this->email->to("yumnasohail04@gmail.com");
+                        $this->email->to("skade@idrettshelse.no");
                         $this->email->subject($formdata['d_subject']);
                         $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
                         $this->email->message($messages);
@@ -472,8 +472,8 @@ Modules::run('site_security/has_permission');
                             );
                             $this->email->initialize($config1);
                             $this->email->from($user1, "AGS Forsikring AS");
-                           // $this->email->to("lpm@agsforsikring.no");
-                        	$this->email->to("yumnasohail04@gmail.com");
+                            $this->email->to("lpm@agsforsikring.no");
+                        	$this->email->cc("yumnasohail04@gmail.com");
                             $this->email->subject("System auto email on Reserve Registration");
                             $this->email->message("A reserve above 200.000 NOK/SEK has been registered in the system on claim# ".$data['claim_id']);
                             $this->email->send();
@@ -503,7 +503,6 @@ Modules::run('site_security/has_permission');
                 }
                 Modules::run('api/insert_or_update',array("id"=>$data['claim_id']),array("claim_stat"=>$claim_stat),"claims");  
         }
-        
         
         $array=array("status"=>$status,"message"=>$message);
         header('Content-Type: application/json');
