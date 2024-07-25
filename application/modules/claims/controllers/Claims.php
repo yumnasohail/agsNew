@@ -308,10 +308,11 @@ Modules::run('site_security/has_permission');
 
                 $this->load->library('email');
                 if(empty($mail)){
-                    $port = 465;
-                    $user = "info@ags.hwryk.com";
-                    $pass = "Dz#Eg.pxdN3s";
-                    $host = 'ssl://ags.hwryk.com';  
+                    $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
+                    $port = $mail_Out['smtp_port'];
+                    $user = $mail_Out['smtp_username'];
+                    $pass = $mail_Out['smtp_password'];
+                    $host = $mail_Out['smtp_host']; 
                     $config = Array(
                     'protocol' => 'smtp',
                     'smtp_host' => $host,
