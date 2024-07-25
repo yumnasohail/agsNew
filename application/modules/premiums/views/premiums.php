@@ -36,7 +36,7 @@
                                    if(!empty($premiums))
                                     {
                                         foreach($premiums as $p => $pm):?>
-                                        <div class=" row col-sm-12">
+                                        <div class=" row col-sm-12" >
                                             <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2">
                                             <label>HB Dato innbetalt til AGS</label>
                                                 <div class="input-group date">
@@ -68,12 +68,18 @@
                                             <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-1 to_end">
                                                 <button type="button" class="btn btn-sm btn-outline-primary del_premium" data-premium-id="<?php echo $pm['id']; ?>">Slett</button>
                                             </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-10 custom-control custom-checkbox ">
+                                                <input type="checkbox" class="custom-control-input a-check" id="customCheck<?php echo $p ?>" name="a-check" <?php if($pm['auto_cal']==1) echo "checked"; ?>>
+                                                <label class="custom-control-label" for="customCheck<?php echo $p ?>">Automatisk beregne</label>
+                                            </div>
                                             <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-10">
                                                 <textarea class="note form-control" placeholder="Note (optional)" name="note" id="note"><?php  echo  $pm['note']; ?></textarea>
                                             </div>
                                         </div>
                                         <hr>
                                         <?php   endforeach;
+                                        }else{
+                                            $p=0;
                                         }
                                     ?>
                         </div>
@@ -86,9 +92,12 @@
     </main>
 <script type="text/javascript">
 $(document).ready(function() {
-            var add_button      = $(".add_field_button");
-            hyTy = '<div class=" row col-sm-12"><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label>HB Dato innbetalt til AGS</label><div class="input-group date"> <input type="text" class="form-control" name="dato" id="dato" value=""> <span class="input-group-text input-group-append input-group-addon"> <i class="simple-icon-calendar"></i> </span></div></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp mottatt fra Federation (100%)</label> <input type="number" class="form-control" id="paid" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Provisjon til AGS i%</label> <input type="number" class="form-control" id="comission" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp betalt til AGS</label> <input type="number" class="form-control" id="recieved" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp betalt til forsikringsselskapet</label> <input type="number" class="form-control" id="total_insurances" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-1 to_end"> <button type="button" class="btn btn-sm btn-outline-primary fjren" data-premium-id="">Lagre</button></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-10"><textarea class="note form-control" placeholder="Note (optional)" name="note" id="note"></textarea></div></div><hr>';
+        var p='<?php echo $p; ?>';
+        var add_button      = $(".add_field_button");
             $(add_button).click(function(e){
+                p=parseInt(p) + 1;
+                hyTy = '<div class=" row col-sm-12"><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label>HB Dato innbetalt til AGS</label><div class="input-group date"> <input type="text" class="form-control" name="dato" id="dato" value=""> <span class="input-group-text input-group-append input-group-addon"> <i class="simple-icon-calendar"></i> </span></div></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp mottatt fra Federation (100%)</label> <input type="number" class="form-control" id="paid" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Provisjon til AGS i%</label> <input type="number" class="form-control" id="comission" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp betalt til AGS</label> <input type="number" class="form-control" id="recieved" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-2"> <label for="password">Beløp betalt til forsikringsselskapet</label> <input type="number" class="form-control" id="total_insurances" required value=""></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-1 to_end"> <button type="button" class="btn btn-sm btn-outline-primary fjren" data-premium-id="">Lagre</button></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-10 custom-control custom-checkbox "><input type="checkbox" class="custom-control-input a-check" id="customCheck'+p+'" name="underwriter" checked><label class="custom-control-label" for="customCheck'+p+'">Automatisk beregne</label></div><div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-10"><textarea class="note form-control" placeholder="Note (optional)" name="note" id="note"></textarea></div></div><hr>';
+            
                 e.preventDefault();
                      $(this).parent().parent().find('.rap_clone').append(hyTy);
                      $(".input-group.date").datepicker({
@@ -108,17 +117,18 @@ $(document).ready(function() {
     
     function keyup()
     {
-        $('#paid,#comission').keyup(function(){
+        function checkConditions(element) {
+
             var f_id='<?php echo $federation_id ?>';
-           // if(f_id!=5 && f_id!=6 ){
-                var recieved="0";
-                var total_insurances="0";
-                var paid=$(this).parent().parent().find('#paid').val();
-                var comission=$(this).parent().parent().find('#comission').val();
+            var recieved="0";
+            var total_insurances="0";
+            var paid=$(element).parent().parent().find('#paid').val();
+            var comission=$(element).parent().parent().find('#comission').val();
+            if ($(element).parent().parent().find('input[type=checkbox]').is(":checked")) {
                 if(!paid)
-                   paid="0";
+                paid="0";
                 if(!comission)
-                   comission="0";
+                comission="0";
                 if(paid>"0" && comission>"0")
                 {
                     recieved=Math.round(paid/100*comission);
@@ -126,18 +136,30 @@ $(document).ready(function() {
                 }
                 recieved.toString().toLocaleString();
                 total_insurances.toString().toLocaleString();
-                $(this).parent().parent().find('#recieved').val(recieved);
-                $(this).parent().parent().find('#total_insurances').val(total_insurances);
-            
-           // }
+                $(element).parent().parent().find('#recieved').val(recieved);
+                $(element).parent().parent().find('#total_insurances').val(total_insurances);
+            }
+        }
+        $('#paid,#comission').keyup(function(){
+            checkConditions(this);
         }); 
+        $(".a-check").click(function(){
+            checkConditions(this);
+        });
     }
     keyup();
+    
     $(document).off('click', '.fjren').on('click', '.fjren', function(e){
+
         var parent=$(this).parent().parent().parent().parent();
         var period_id = parent.attr('data-id');
         var federation_id = parent.attr('data_f_id');
         var premium_id = $(this).attr('data-premium-id');
+        var checkbox=0;
+        var check=$(this).closest('.row').find('.a-check').is(":checked");
+        if(check==true){
+            checkbox=1;
+        }
         var dato=$(this).closest('.row').find('#dato').val();
         var paid=$(this).closest('.row').find('#paid').val();
         var recieved=$(this).closest('.row').find('#recieved').val();
@@ -154,7 +176,8 @@ $(document).ready(function() {
                                 type: 'POST',
                                 url: "<?= ADMIN_BASE_URL?>premiums/save_premium",
                                 data: {'period_id': period_id,'federation_id':federation_id,'premium_id':premium_id,'dato':dato
-                                    ,'paid':paid,'recieved':recieved,'comission':comission,'total_insurances':total_insurances,'note':note},
+                                    ,'paid':paid,'recieved':recieved,'comission':comission,'total_insurances':total_insurances,'note':note,
+                                    'checkbox':checkbox},
                                 async: false,
                                 success: function(result) {
                                     if(result=="1"){

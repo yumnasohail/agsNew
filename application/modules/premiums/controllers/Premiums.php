@@ -105,6 +105,7 @@ Modules::run('site_security/has_permission');
         $data['comission']=$this->input->post('comission');
         $data['total_insurances']=$this->input->post('total_insurances');
         $data['note']=$this->input->post('note');
+        $data['auto_cal']=$this->input->post('checkbox');
         $id=$this->input->post('premium_id');
          Modules::run('api/insert_or_update',array("id"=>$id),$data,"premiums");
        //  Modules::run('api/insert_into_specific_table',$data,"premiums");
