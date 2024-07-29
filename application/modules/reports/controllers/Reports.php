@@ -31,6 +31,10 @@ Modules::run('site_security/has_permission');
         $data['policies'] = Modules::run('policies/get_policies_with_period',$where)->result_array();
         echo $this->load->view('policy',$data,TRUE);
     }
+    function selective_columns(){
+        $data['id']=$this->input->post('report');
+        echo $this->load->view('columns_list',$data,TRUE);
+    }
     function tabs_sheet(){
         require_once( APPPATH . 'third_party/PHPExcel/Classes/PHPExcel.php');
         require_once( APPPATH . 'third_party/PHPExcel/Classes/PHPExcel/IOFactory.php');
@@ -68,7 +72,12 @@ Modules::run('site_security/has_permission');
     }
     function report_result()
     {
+
         parse_str($_POST['data'], $formdata);
+        if(!isset($formdata['selective_col'])){
+            $formdata['selective_col']="off";
+        }
+       // print_r($formdata);exit;
         if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
             $formdata['start_date']=date("Y-m-d", strtotime($formdata['start_date']));
         }
@@ -176,6 +185,7 @@ Modules::run('site_security/has_permission');
                     $temp[]=$result;
                 }
                 $data['result']=$temp;
+                $data['columns']=$formdata;
                 echo $this->load->view('table2',$data,TRUE);
             break;
              case "3":

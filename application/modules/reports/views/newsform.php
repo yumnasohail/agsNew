@@ -165,6 +165,16 @@ width: 12px!important;
                                 <label class="custom-control-label" for="customCheck16">med skadegebyr</label>
                             </div>
                         </div>
+                        <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12 Velg" style="display:none;">
+                            <div class="custom-control custom-checkbox ">
+                                <input type="checkbox" class="custom-control-input " id="custCheck26" name="selective_col">
+                                <label class="custom-control-label" for="custCheck26">Velg rapportkolonner</label>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12 col_div" style="display:none;">
+                           <div class="row columns_list"  style="background-color: #f6f6f6;padding:15px 0 15px 0;">
+                            </div>
+                        </div>
                         <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 rpt_7" style="display:none;">
                              <label for="lastName">Reporting Month</label>
                             <div class="input-group mb-3">
@@ -232,11 +242,38 @@ width: 12px!important;
         $('.rpt_7').css('display', 'none');
     if(number=="4")
         $('.rpt_4').css('display', 'block');
+    if(number=="2"){
+        $('.Velg').css('display', 'block');
+    }else{
+        $('.Velg').css('display', 'none');
+    }
     });
     
+    
+    
+    
+$(document).ready(function() {   
+    $('#custCheck26').on('click', function(event) {
+        var check=$(this).is(":checked");
+        if(check==true){
+            $('.col_div').css('display', 'block');
+            var report = $('#report').val();
+            $.ajax({
+                type: 'post',
+                url: "<?php echo ADMIN_BASE_URL?>reports/selective_columns",
+                data: {'report':report},
+                async: true,
+                success: function(test_body) {
+                    $('.columns_list').html(test_body);
+                }
+            });
+        }else{
+            $('.col_div').css('display', 'none');
+        }
+    });
+});
 
-    
-    
+
     
     $('.gt_rpt').on('click', function(event) {
             event.preventDefault();
