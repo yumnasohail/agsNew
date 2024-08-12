@@ -1080,8 +1080,7 @@ function process_ajax(form_data,type)
                         showConfirmButton: false,
                         timer: 1500
                     })
-                    return false;
-                    //location.reload();
+                    location.reload();
                 }else
                 {
                     toastr.error(message);

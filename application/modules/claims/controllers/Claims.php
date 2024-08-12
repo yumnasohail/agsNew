@@ -309,7 +309,6 @@ Modules::run('site_security/has_permission');
                 $this->load->library('email');
                 if(empty($mail)){
                     $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
-                    print_r($mail_Out);
                     $port = $mail_Out['smtp_port'];
                     $user = $mail_Out['smtp_username'];
                     $pass = $mail_Out['smtp_password'];
@@ -356,13 +355,12 @@ Modules::run('site_security/has_permission');
                     $messages=$this->load->view('front/mail_format',$mail_data,TRUE);
                     $this->email->message($messages);
                     $this->email->send();
-                    if ($this->email->send()) {
-                        echo "Email has been sent successfully.";
-                    } else {
-                        echo "Failed to send the email.";
-                        // Print the debug message for more details
-                        echo $this->email->print_debugger();
-                    }
+                    // if ($this->email->send()) {
+                    //     echo "Email has been sent successfully.";
+                    // } else {
+                    //     echo "Failed to send the email.";
+                    //     echo $this->email->print_debugger();
+                    // }
                     Modules::run('api/insert_into_specific_table',array("claim_id"=>$data['claim_id'],"performed_by"=>$session['user_id'],"type"=>"3","description"=>$messages,"message"=>"Godkjent e-post sendt","date_time"=>date('Y-m-d H:i:s')),'logs');
 
                 }
