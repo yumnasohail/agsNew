@@ -4,13 +4,13 @@ if (!defined('BASEPATH'))
 //include_once APPPATH . 'modules/outlet/controllers/outlet.php';
 
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\Exception;
 
-// Include PHPMailer files
-require_once APPPATH . 'third_party\PHPMailer\src\Exception.php';
-require_once APPPATH . 'third_party\PHPMailer\src\PHPMailer.php';
-require_once APPPATH . 'third_party\PHPMailer\src\SMTP.php';
+// // Include PHPMailer files
+// require_once APPPATH . 'third_party\PHPMailer\src\Exception.php';
+// require_once APPPATH . 'third_party\PHPMailer\src\PHPMailer.php';
+// require_once APPPATH . 'third_party\PHPMailer\src\SMTP.php';
 
 
 class Api extends MX_Controller {
@@ -24,154 +24,154 @@ class Api extends MX_Controller {
         // $this->db2 = $this->load->database('old_db', TRUE);
     }
 
-    function mailerFunction(){
-        $mail_dta=Modules::run('api/get_specific_table_data',array('f_id'=>7),'id desc',"username as smtp_username,password as smtp_password,host as smtp_host,port as smtp_port","maler",'','')->row_array();
-        $mail = new PHPMailer(true);
+    // function mailerFunction(){
+    //     $mail_dta=Modules::run('api/get_specific_table_data',array('f_id'=>7),'id desc',"username as smtp_username,password as smtp_password,host as smtp_host,port as smtp_port","maler",'','')->row_array();
+    //     $mail = new PHPMailer(true);
 
-        try {
-            if(empty($mail_dta)){
-                $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
-                $port = $mail_Out['smtp_port'];
-                $user = $mail_Out['smtp_username'];
-                $pass = $mail_Out['smtp_password'];
-                $host = $mail_Out['smtp_host']; 
-                //Server settings
-                $mail->isSMTP();
-                $mail->Host = $host;  // Your SMTP host
-                $mail->SMTPAuth = true;
-                $mail->Username = $user;// Your SMTP username
-                $mail->Password = $pass; // Your SMTP password
-                $mail->SMTPSecure = 'ssl'; // Enable TLS encryption; `ssl` also accepted
-                $mail->Port = $port; // TCP port to connect to
-                $mail->SMTPDebug = 3; // Enable SMTP debugging
-                $mail->Debugoutput = 'html'; // Show debug output in HTML
-            }else{
-                $port = $mail_dta['smtp_port'];
-                $user = $mail_dta['smtp_username'];
-                $pass = $mail_dta['smtp_password'];
-                $host = $mail_dta['smtp_host'];
-                $mail->isSMTP();
-                $mail->Host = $host; // Your SMTP host
-                $mail->SMTPAuth = true;
-                $mail->Username = $user; // Your SMTP username
-                $mail->Password = $pass; // Your SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption, `ssl` also accepted
-                $mail->Port = $port; // TCP port to connect to
-                $mail->SMTPDebug = 3; // Enable SMTP debugging
-                $mail->Debugoutput = 'html'; // Show debug output in HTML
+    //     try {
+    //         if(empty($mail_dta)){
+    //             $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
+    //             $port = $mail_Out['smtp_port'];
+    //             $user = $mail_Out['smtp_username'];
+    //             $pass = $mail_Out['smtp_password'];
+    //             $host = $mail_Out['smtp_host']; 
+    //             //Server settings
+    //             $mail->isSMTP();
+    //             $mail->Host = $host;  // Your SMTP host
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = $user;// Your SMTP username
+    //             $mail->Password = $pass; // Your SMTP password
+    //             $mail->SMTPSecure = 'ssl'; // Enable TLS encryption; `ssl` also accepted
+    //             $mail->Port = $port; // TCP port to connect to
+    //             $mail->SMTPDebug = 3; // Enable SMTP debugging
+    //             $mail->Debugoutput = 'html'; // Show debug output in HTML
+    //         }else{
+    //             $port = $mail_dta['smtp_port'];
+    //             $user = $mail_dta['smtp_username'];
+    //             $pass = $mail_dta['smtp_password'];
+    //             $host = $mail_dta['smtp_host'];
+    //             $mail->isSMTP();
+    //             $mail->Host = $host; // Your SMTP host
+    //             $mail->SMTPAuth = true;
+    //             $mail->Username = $user; // Your SMTP username
+    //             $mail->Password = $pass; // Your SMTP password
+    //             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption, `ssl` also accepted
+    //             $mail->Port = $port; // TCP port to connect to
+    //             $mail->SMTPDebug = 3; // Enable SMTP debugging
+    //             $mail->Debugoutput = 'html'; // Show debug output in HTML
 
-            }
-
-
-            //Recipients
-            $mail->setFrom($user, "test");
-            $mail->addAddress('yumnasohail04@gmail.com');
-
-            //Content
-            $mail->isHTML(true); // Set email format to HTML
-            $mail->Subject = 'Email Test';
-            $mail->Body    = 'Testing PHPMailer with CodeIgniter.';
-
-            if(!$mail->send()) {
-                echo 'Message could not be sent.';
-                echo 'Mailer Error: ' . $mail->ErrorInfo;
-            } else {
-                echo 'Message has been sent';
-            }
-        } catch (Exception $e) {
-            echo "Failed to send the email. Mailer Error: {$mail->ErrorInfo}";
-        }
+    //         }
 
 
+    //         //Recipients
+    //         $mail->setFrom($user, "test");
+    //         $mail->addAddress('yumnasohail04@gmail.com');
+
+    //         //Content
+    //         $mail->isHTML(true); // Set email format to HTML
+    //         $mail->Subject = 'Email Test';
+    //         $mail->Body    = 'Testing PHPMailer with CodeIgniter.';
+
+    //         if(!$mail->send()) {
+    //             echo 'Message could not be sent.';
+    //             echo 'Mailer Error: ' . $mail->ErrorInfo;
+    //         } else {
+    //             echo 'Message has been sent';
+    //         }
+    //     } catch (Exception $e) {
+    //         echo "Failed to send the email. Mailer Error: {$mail->ErrorInfo}";
+    //     }
 
 
-        // $this->load->library('email');
-        //         if(empty($mail)){
-        //             $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
-        //             $port = $mail_Out['smtp_port'];
-        //             $user = $mail_Out['smtp_username'];
-        //             $pass = $mail_Out['smtp_password'];
-        //             $host = $mail_Out['smtp_host']; 
-        //             $config = Array(
-        //             'protocol' => 'smtp',
-        //             'smtp_host' => $host,
-        //             'smtp_port' => $port,
-        //             'smtp_user' =>  $user,
-        //             'smtp_pass' =>  $pass,
-        //             'mailtype'  => 'html', 
-        //             'starttls'  => true,
-        //             'newline'   => "\r\n"
-        //             );
-        //         }else
-        //         {
-        //             $port = $mail['smtp_port'];
-        //             $user = $mail['smtp_username'];
-        //             $pass = $mail['smtp_password'];
-        //             $host = $mail['smtp_host'];
-        //             $config = Array(
-        //             'protocol' => 'mail',
-        //             'smtp_host' => $host,
-        //             'smtp_port' => $port,
-        //             'smtp_user' =>  $user,
-        //             'smtp_pass' =>  $pass,
-        //             'mailtype'  => 'html', 
-        //             'starttls'  => true,
-        //             'newline'   => "\r\n"
-        //             );
-        //         }
-        //             $mailtitle="AGS Forsikring AS";
+
+
+    //     // $this->load->library('email');
+    //     //         if(empty($mail)){
+    //     //             $mail_Out=Modules::run('api/get_specific_table_data',array('id'=>DEFAULT_OUTLET),'id desc',"smtp_username,smtp_password,smtp_host,smtp_port","outlet",'','')->row_array();
+    //     //             $port = $mail_Out['smtp_port'];
+    //     //             $user = $mail_Out['smtp_username'];
+    //     //             $pass = $mail_Out['smtp_password'];
+    //     //             $host = $mail_Out['smtp_host']; 
+    //     //             $config = Array(
+    //     //             'protocol' => 'smtp',
+    //     //             'smtp_host' => $host,
+    //     //             'smtp_port' => $port,
+    //     //             'smtp_user' =>  $user,
+    //     //             'smtp_pass' =>  $pass,
+    //     //             'mailtype'  => 'html', 
+    //     //             'starttls'  => true,
+    //     //             'newline'   => "\r\n"
+    //     //             );
+    //     //         }else
+    //     //         {
+    //     //             $port = $mail['smtp_port'];
+    //     //             $user = $mail['smtp_username'];
+    //     //             $pass = $mail['smtp_password'];
+    //     //             $host = $mail['smtp_host'];
+    //     //             $config = Array(
+    //     //             'protocol' => 'mail',
+    //     //             'smtp_host' => $host,
+    //     //             'smtp_port' => $port,
+    //     //             'smtp_user' =>  $user,
+    //     //             'smtp_pass' =>  $pass,
+    //     //             'mailtype'  => 'html', 
+    //     //             'starttls'  => true,
+    //     //             'newline'   => "\r\n"
+    //     //             );
+    //     //         }
+    //     //             $mailtitle="AGS Forsikring AS";
                 
-        //             $this->email->initialize($config);
-        //             $this->email->from($user, "test");
-        //         	$this->email->to("yumnasohail04@gmail.com");
-        //             $this->email->subject("test mail");
-        //             $this->email->message("Test message");
-        //             if ($this->email->send()) {
-        //                 echo 'Email has been sent successfully.';
-        //             } else {
-        //                 echo 'Failed to send the email.';
-        //                 echo $this->email->print_debugger(array('headers'));
-        //             }
-    }
+    //     //             $this->email->initialize($config);
+    //     //             $this->email->from($user, "test");
+    //     //         	$this->email->to("yumnasohail04@gmail.com");
+    //     //             $this->email->subject("test mail");
+    //     //             $this->email->message("Test message");
+    //     //             if ($this->email->send()) {
+    //     //                 echo 'Email has been sent successfully.';
+    //     //             } else {
+    //     //                 echo 'Failed to send the email.';
+    //     //                 echo $this->email->print_debugger(array('headers'));
+    //     //             }
+    // }
 
-    function sanction_check(){
-        $name="Lars Petter Myklebost";
-		$name = str_replace(' ', '%20', $name);
-		$curl = curl_init();
+    // function sanction_check(){
+    //     $name="Lars Petter Myklebost";
+	// 	$name = str_replace(' ', '%20', $name);
+	// 	$curl = curl_init();
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.sanctions.io/search/?name=".$name,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-          CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
-          ),
-          CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
-        ));
-        $result = curl_exec($curl);
-		if (curl_errno($curl)) {
-			echo 'Error:' . curl_error($curl);
-		}
-		curl_close($curl);
-        print_r($result);exit;
-        $data['description']=$result;
-		if (!empty($result)) {
-			$result = json_decode($result);
-			if($result->count==0)
-			$data['res']="Secure";
-			else
-			$data['res']="Not secure";
+    //     curl_setopt_array($curl, array(
+    //       CURLOPT_URL => "https://api.sanctions.io/search/?name=".$name,
+    //       CURLOPT_RETURNTRANSFER => true,
+    //       CURLOPT_ENCODING => '',
+    //       CURLOPT_MAXREDIRS => 10,
+    //       CURLOPT_TIMEOUT => 0,
+    //       CURLOPT_FOLLOWLOCATION => true,
+    //       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //       CURLOPT_CUSTOMREQUEST => 'GET',
+    //       CURLOPT_HTTPHEADER => array(
+    //         'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+    //       ),
+    //       CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
+    //     ));
+    //     $result = curl_exec($curl);
+	// 	if (curl_errno($curl)) {
+	// 		echo 'Error:' . curl_error($curl);
+	// 	}
+	// 	curl_close($curl);
+    //     print_r($result);exit;
+    //     $data['description']=$result;
+	// 	if (!empty($result)) {
+	// 		$result = json_decode($result);
+	// 		if($result->count==0)
+	// 		$data['res']="Secure";
+	// 		else
+	// 		$data['res']="Not secure";
 			    
-		}else{
-		    $data['res']="No result found";
-		}
-        echo $curl;
-    }
+	// 	}else{
+	// 	    $data['res']="No result found";
+	// 	}
+    //     echo $curl;
+    // }
     
     
     public function settlemet_cron_job(){

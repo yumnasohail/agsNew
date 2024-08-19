@@ -78,7 +78,7 @@ if (strtolower($strHost) == '' || strtolower($strHost) == 'localhost'){
 	$hostname="localhost";
 	$username="root";
 	$password="";
-	$database="ags";
+	$database="ags_live";
 }
 else
 {
