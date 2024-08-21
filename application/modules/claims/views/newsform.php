@@ -856,7 +856,7 @@ th
                                                 <label for="lastName">Fyll ut felter</label>
                                                 <div class="input-group mb-3">
                                                     <select class="custom-select" id="addressbook" name="addressbook" >
-                                                    <option>Select</option>
+                                                    <option value="0">Select</option>
                                                     <option value="claimant">Skadelidt/foresatt</option>
                                                     <?php foreach($addressbook as $key => $val): ?>
                                                         <option value="<?php echo $val['id']; ?>"><?php echo $val['name']; ?> </option>
