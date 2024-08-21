@@ -581,20 +581,20 @@ Modules::run('site_security/has_permission');
                     Modules::run('api/insert_or_update',array("claim_id"=>$claim_id),array("total"=>$new_amt),"process_claim"); 
                 }
                 if(!empty($formdata['a_name']))
-                    $trans_data['a_name']=$formdata['a_name'];
+                    $trans_data['a_name']=$formdata['a_name']?? '';
                 if(!empty($formdata['a_address']))
-                    $trans_data['a_address']=$formdata['a_address'];
+                    $trans_data['a_address']=$formdata['a_address']?? '';
                 if(!empty($formdata['a_account']))
-                    $trans_data['a_account']=$formdata['a_account'];
+                    $trans_data['a_account']=$formdata['a_account']?? '';
                 if(!empty($formdata['a_postalcode']))
-                    $trans_data['a_postalcode']=$formdata['a_postalcode'];
+                    $trans_data['a_postalcode']=$formdata['a_postalcode']?? '';
                 if(!empty($formdata['a_place']))
-                    $trans_data['a_place']=$formdata['a_place'];
+                    $trans_data['a_place']=$formdata['a_place']?? '';
                 $trans_data['claim_id']=$claim_id;
                 $trans_data['recepient']=$formdata['recepient'][0]?? '';
                 $trans_data['payment']=$formdata['payment'][0] ?? '';
                 if($trans_data['payment']==2)
-                    $currency=$formdata['pay_currency'];
+                    $currency=$formdata['pay_currency']?? 'NOK';
                 $trans_data['international_currency']=$formdata['pay_currency']?? '';
                 $trans_data['coverage_cat']=$formdata['coverage_category']?? '';
                 $trans_data['addressbook']=$formdata['addressbook']?? '';
@@ -609,7 +609,8 @@ Modules::run('site_security/has_permission');
                 $trans_data['trans']="0";
                 $trans_data['user']=$session['user_id'];
                 $trans_data['due_date']=date('Y-m-d',strtotime ($formdata['due_date']));
-                $trans_data['kid']=$formdata['kid'];
+                $trans_data['kid']=$formdata['kid']?? '';
+                $trans_data['deduct']=0;
                 if($formdata['t_deduct']>0)
                     $trans_data['deduct']=$formdata['t_deduct'];
                 $trans_data['send']="0";
