@@ -594,8 +594,8 @@ Modules::run('site_security/has_permission');
                 $trans_data['recepient']=$formdata['recepient'][0]?? '';
                 $trans_data['payment']=$formdata['payment'][0] ?? '';
                 if($trans_data['payment']==2)
-                    $currency=$formdata['pay_currency']?? 'NOK';
-                $trans_data['international_currency']=$formdata['pay_currency']?? '';
+                    $currency=$formdata['pay_currency'];
+                $trans_data['international_currency']=$currency;
                 $trans_data['coverage_cat']=$formdata['coverage_category']?? '';
                 $trans_data['addressbook']=$formdata['addressbook']?? '';
                 if($formdata['addressbook']=="claimant")
