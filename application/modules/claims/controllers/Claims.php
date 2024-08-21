@@ -591,18 +591,18 @@ Modules::run('site_security/has_permission');
                 if(!empty($formdata['a_place']))
                     $trans_data['a_place']=$formdata['a_place'];
                 $trans_data['claim_id']=$claim_id;
-                $trans_data['recepient']=$formdata['recepient'][0];
-                $trans_data['payment']=$formdata['payment'][0];
+                $trans_data['recepient']=$formdata['recepient'][0]?? '';
+                $trans_data['payment']=$formdata['payment'][0] ?? '';
                 if($trans_data['payment']==2)
                     $currency=$formdata['pay_currency'];
-                $trans_data['international_currency']=$formdata['pay_currency'];
-                $trans_data['coverage_cat']=$formdata['coverage_category'];
-                $trans_data['addressbook']=$formdata['addressbook'];
+                $trans_data['international_currency']=$formdata['pay_currency']?? '';
+                $trans_data['coverage_cat']=$formdata['coverage_category']?? '';
+                $trans_data['addressbook']=$formdata['addressbook']?? '';
                 if($formdata['addressbook']=="claimant")
                     $trans_data['addressbook']="0";
-                $trans_data['description']=$formdata['description'];
-                $trans_data['belop']=$formdata['amount'];
-                $trans_data['message']=$formdata['message'];
+                $trans_data['description']=$formdata['description']?? '';
+                $trans_data['belop']=$formdata['amount']?? '';
+                $trans_data['message']=$formdata['message']?? '';
                 $trans_data['type']="Utbetaling[".$res['code']."]";
                 $trans_data['dato']=date('Y-m-d');
                 $trans_data['time']=date('H:i:s');
@@ -627,10 +627,10 @@ Modules::run('site_security/has_permission');
                 $status=true;
                 $message="Transaksjonen lagt til";
 
-                $ta_belop= $formdata['ta_belop'];
-                $ta_coverage_cat= $formdata['ta_coverage_cat'];
-                $ta_paidto= $formdata['ta_paidto'];
-                $ta_dato= $formdata['ta_dato'];
+                $ta_belop= $formdata['ta_belop']?? '';
+                $ta_coverage_cat= $formdata['ta_coverage_cat']?? '';
+                $ta_paidto= $formdata['ta_paidto']?? '';
+                $ta_dato= $formdata['ta_dato']?? '';
                 $total=count($ta_belop);
                 if(isset($ta_belop) && !empty($ta_belop)){
                     for ($i=0; $i <$total; $i++) {
