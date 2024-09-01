@@ -667,18 +667,21 @@ Modules::run('site_security/has_permission');
 		$curl = curl_init();
 
         curl_setopt_array($curl, array(
-          CURLOPT_URL => "https://api.sanctions.io/search/?name=".$name,
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'GET',
-          CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
-          ),
-        ));
+                  CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=".$name,
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_ENCODING => '',
+                  CURLOPT_MAXREDIRS => 10,
+                  CURLOPT_TIMEOUT => 0,
+                  CURLOPT_FOLLOWLOCATION => true,
+                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  CURLOPT_CUSTOMREQUEST => 'GET',
+                  CURLOPT_HTTPHEADER => array(
+                    'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+                  ),
+                  CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
+                ));
+
+        
         $result = curl_exec($curl);
 		if (curl_errno($curl)) {
 			echo 'Error:' . curl_error($curl);
