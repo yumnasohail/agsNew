@@ -120,7 +120,7 @@
                                                     id="a_nameValidation"  required> <?php  if(isset($new->injury_reason) && !empty($new->injury_reason))  echo $new->injury_reason; ?> </textarea>
                                             </div>
                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
-                                                <label for="lastName">Kort beskrivning av skadan</label>
+                                                <label for="lastName">Kort beskrivning av olyckshändelsen</label>
                                                 <textarea  class="form-control" name="damage_desc"
                                                     id="a_birthValidation"  required ><?php  if(isset($new->damage_desc) && !empty($new->damage_desc))  echo $new->damage_desc; ?></textarea>
                                             </div>
