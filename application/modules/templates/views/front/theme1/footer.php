@@ -1,4 +1,53 @@
 
+<style>
+    #cookieConsent {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background-color: #f1f1f1;
+    padding: 15px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    display: none;
+    z-index: 10000;
+}
+
+.cookie-popup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cookie-popup p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.cookie-popup a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.cookie-popup a:hover {
+    text-decoration: underline;
+}
+
+#acceptCookies, #declineCookies {
+    background-color: #900604;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-right: 15px;
+}
+
+#acceptCookies:hover ,#declineCookies:hover {
+    background-color: #b40b09;
+}
+</style>
 <section class="footer-area">
     <div class="container">
         <div class="box-icons">
@@ -125,6 +174,64 @@
 <script type="text/javascript" src="<?php ECHO STATIC_FRONT_JS?>revolution.extension.video.min.js"></script>
 <script type="text/javascript" src="<?php echo STATIC_FRONT_JS?>rev-slider-script.js"></script>
 
+
+
+
+<div id="cookieConsent">
+    <div class="cookie-popup">
+        <p>
+            This website uses cookies to ensure you get the best experience on our website. 
+            <!-- <a href="/privacy-policy" target="_blank">Learn more</a>. -->
+        </p>
+        <div class="row">
+            <button id="acceptCookies">Accept</button>
+            <button id="declineCookies">Don't Accept</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    // Check if the cookie consent has already been given
+    if (!getCookie("cookieConsent")) {
+        document.getElementById("cookieConsent").style.display = "block";
+    }
+
+    // Set the cookie consent when the button is clicked
+    document.getElementById("acceptCookies").addEventListener("click", function() {
+        setCookie("cookieConsent", "true", 365);
+        document.getElementById("cookieConsent").style.display = "none";
+    });
+
+    document.getElementById("declineCookies").addEventListener("click", function() {
+        setCookie("cookieConsent", "false", 365);
+        document.getElementById("cookieConsent").style.display = "none";
+    });
+});
+
+// Function to set a cookie
+function setCookie(name, value, days) {
+    var expires = "";
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+}
+
+// Function to get a cookie
+function getCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+</script>
 <!-- Slider Revolution core JavaScript files -->
 </body>
 
