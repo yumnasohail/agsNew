@@ -67,6 +67,7 @@ class Login extends MX_Controller{
 			'resource' => 'https://graph.microsoft.com', // Resource identifier for Microsoft Graph API
 		);
 		$response = $this->http_post($token_endpoint, $params); // Implement http_post function to make HTTP POST request
+		print_r($response);exit;
 		if ($response && isset($response['access_token'])) {
 			// Step 3: Parse Tokens
 			$access_token = $response['access_token'];
@@ -115,10 +116,9 @@ class Login extends MX_Controller{
 			}
 		} else {
 			// Error handling if tokens are not received
-			log_message('error', 'Error receiving Azure AD token: ' . json_encode($response));
 
-			//$logoutUrl = 'https://login.microsoftonline.com/'.$azure_tenant_id.'/oauth2/v2.0/logout?post_logout_redirect_uri='.$azure_logout_uri;
-			//redirect($logoutUrl);
+			$logoutUrl = 'https://login.microsoftonline.com/'.$azure_tenant_id.'/oauth2/v2.0/logout?post_logout_redirect_uri='.$azure_logout_uri;
+			redirect($logoutUrl);
 
 		}
     }
