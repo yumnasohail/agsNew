@@ -195,9 +195,8 @@
                                                 <div class="input-group mb-3">
                                                     <select class="custom-select" id="inputGroupSelect02" name="insurance_under" required>
                                                         <option value="">Select</option>
-                                                        <option value="Grund"  <?php if(isset($new->insurance_under) && !empty($new->insurance_under) && $new->insurance_under=="Grund") echo "selected"; ?>>Grund </option>
-                                                        <option value="Standard"  <?php if(isset($new->insurance_under) && !empty($new->insurance_under) && $new->insurance_under=="Standard") echo "selected"; ?>>Standard</option>
-                                                        <option value="Plus"  <?php if(isset($new->insurance_under) && !empty($new->insurance_under) && $new->insurance_under=="Plus") echo "selected"; ?>>Plus </option>
+                                                        <option value="Licensförsäkring"  <?php if(isset($new->insurance_under) && !empty($new->insurance_under) && $new->insurance_under=="Licensförsäkring") echo "selected"; ?>>Licensförsäkring </option>
+                                                        <option value="Utökad Försäkring"  <?php if(isset($new->insurance_under) && !empty($new->insurance_under) && $new->insurance_under=="Utökad Försäkring") echo "selected"; ?>>Utökad Försäkring</option>
                                                     </select>
                                                     <div class="input-group-append">
                                                         <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -211,12 +210,12 @@
                                                     <p>För att kunna överföra till ditt konto behöver vi ditt IBAN-kontonummer. Detta hittar du i nätbanken och på bankens webbsidor.</p>
                                             </div>
                                              <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
-                                                 <label for="lastName">Annan försäkring</label>
+                                                 <label for="lastName">Har ni olycksfallförsäkring i annat försäkringsbolag?</label>
                                                 <div class="input-group mb-3">
                                                     <select class="custom-select" id="inputGroupSelect02" name="other_insurance" required>
                                                         <option value="">Select</option>
-                                                        <option value="Ikke ulykkesforsikret ved annen forsikring" <?php if(isset($new->other_insurance) && !empty($new->other_insurance) && $new->other_insurance=="Ikke ulykkesforsikret ved annen forsikring") echo "selected"; ?>>Inte olycksfallsförsäkrad av annan försäkring</option>
-                                                        <option value="Ulykkesforsikret også ved annen forsikring" <?php if(isset($new->other_insurance) && !empty($new->other_insurance) && $new->other_insurance=="Ulykkesforsikret også ved annen forsikring") echo "selected"; ?>>Oavsiktligt försäkrad också med andra försäkringar</option>
+                                                        <option value="yes" <?php if(isset($new->other_insurance) && !empty($new->other_insurance) && $new->other_insurance=="yes") echo "selected"; ?>>Yes</option>
+                                                        <option value="no" <?php if(isset($new->other_insurance) && !empty($new->other_insurance) && $new->other_insurance=="no") echo "selected"; ?>>no</option>
                                                     </select>
                                                     <div class="input-group-append">
                                                         <label class="input-group-text" for="inputGroupSelect02">Options</label>

@@ -118,7 +118,7 @@
     </tr>
     
     <tr>
-        <td>Annen forsikring</td>
+        <td>Har ni olycksfallförsäkring i annat försäkringsbolag?</td>
         <td><?php echo $new->other_insurance; ?></td>
     </tr>
 
@@ -262,9 +262,8 @@
             <label for="lastName">Forsikring under</label>
         <div class="input-group mb-3">
             <select class="custom-select" id="inputGroupSelect02" name="insurance_under">
-                <option value="Grund" <?php if($new->insurance_under=="Grund") echo "selected"; ?>>Grund </option>
-                <option value="Standard" <?php if($new->insurance_under=="Standard") echo "selected"; ?>>Standard</option>
-                <option value="Plus" <?php if($new->insurance_under=="Plus") echo "selected"; ?>>Plus </option>
+                <option value="Försäkrad under" <?php if($new->insurance_under=="Försäkrad under") echo "selected"; ?>>Försäkrad under </option>
+                <option value="Licensförsäkring" <?php if($new->insurance_under=="Licensförsäkring") echo "selected"; ?>>Licensförsäkring</option>
             </select>
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -282,11 +281,11 @@
     <!--        id="bic_codeValidation"  required value="<?php echo $new->bic_code; ?>">-->
     <!--</div>-->
         <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
-            <label for="lastName">Annen forsikring</label>
+            <label for="lastName">Har ni olycksfallförsäkring i annat försäkringsbolag?</label>
         <div class="input-group mb-3">
             <select class="custom-select" id="inputGroupSelect02" name="other_insurance">
-                <option value="Ikke ulykkesforsikret ved annen forsikring" <?php if($new->other_insurance=="Ikke ulykkesforsikret ved annen forsikring") echo "selected"; ?>>Ikke ulykkesforsikret ved annen forsikring </option>
-                <option value="Ulykkesforsikret også ved annen forsikring" <?php if($new->other_insurance=="Ulykkesforsikret også ved annen forsikring") echo "selected"; ?>>Ulykkesforsikret også ved annen forsikring </option>
+                <option value="yes" <?php if($new->other_insurance=="yes") echo "selected"; ?>>Yes </option>
+                <option value="no" <?php if($new->other_insurance=="no") echo "selected"; ?>>No </option>
             </select>
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02">Options</label>

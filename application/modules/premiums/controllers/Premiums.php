@@ -42,7 +42,9 @@ Modules::run('site_security/has_permission');
             $sum_deductible=$sum_deductible+$period_amt->deductible;
             $sum_premiums=$sum_premiums+$paid->paid;
         endforeach;
+
         $data['totals']=Modules::run('api/get_specific_table_data',array("federation_id"=>$federation_id),"id asc","SUM(paid) as paid,SUM(total_insurances) as total_insurances,SUM(recieved) as recieved","premiums","","")->row_array();
+       // CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN
         $data['nlr']=0;
         if($data['totals']['recieved']>0)
             $data['nlr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$data['totals']['recieved'])*100);

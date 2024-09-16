@@ -14,7 +14,7 @@
             <div class="row">
                 <div class="col-6 mb-4 card-box">
                     <div class="card mb-6 col-md-6">
-                        <img src="https://thumbs.gfycat.com/ShyCautiousAfricanpiedkingfisher-size_restricted.gif">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/043/222/732/small/3d-tick-mark-symbol-of-achievement-and-success-png.png">
                     </div>
                     <div class="card mb-6 col-md-6">
                         <h1><?php echo 'Vellykket!'; ?></h1>
