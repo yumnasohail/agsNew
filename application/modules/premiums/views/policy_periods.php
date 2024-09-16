@@ -12,17 +12,21 @@
                     <div class="card">
                         <div class="card-body">
                            <?php
-                            foreach ($news->result() as
+                            foreach ($news as $key=>
                                     $new) { 
-                                    $currency=$new->currency;} ?> 
+                                    $currency=$new['currency'];} ?> 
             <p>Beløp mottatt fra Federation : <strong><?php if(!empty($totals['paid'])) echo  round($totals['paid']); else echo "0"; ?> <?php echo $currency; ?></strong></p>
             <p>Beløp betalt til AGS : <strong><?php if(!empty($totals['recieved'])) echo   round($totals['recieved']);  else echo "0";  ?> <?php echo $currency; ?></strong></p>
             <p>Beløp betalt til forsikringsselskapet : <strong><?php if(!empty($totals['total_insurances'])) echo  round($totals['total_insurances']); else echo "0"; ?> <?php echo $currency; ?></strong></p>
+            <p>GrossLossRatio% : <strong><?php if(!empty($glr)) echo  $glr.'%'; else echo "0%"; ?></strong></p>
+            <p>NetLossRatio% : <strong><?php if(!empty($nlr)) echo  $nlr.'%'; else echo "0%"; ?></strong></p>
+
                             <table class="data-table data-table-feature table table-bordered border-theme1">
                                 <thead class="bg-th background-theme1">
                                 <tr class="bg-col">
                                 <th class="sr">Ref.</th>
                                 <th>Policy</th>
+                                <th>GLR%</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th class="" style="width:300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling</th>
@@ -32,16 +36,16 @@
                                         <?php
                                         $i = 0;
                                         if (isset($news)) {
-                                            foreach ($news->result() as
-                                                    $new) {
+                                            foreach ($news as  $key=>$new) {
                                                 $i++;
-                                                $edit_url = ADMIN_BASE_URL . 'premiums/premium_list/'. $federation_id.'/'.$new->id ;
+                                                $edit_url = ADMIN_BASE_URL . 'premiums/premium_list/'. $federation_id.'/'.$new['id'] ;
                                                 ?>
-                                                <tr id="Row_<?=$new->id?>" class="odd gradeX " >
+                                                <tr id="Row_<?=$new['id']?>" class="odd gradeX " >
                                                 <td width='2%'><?php echo $i;?></td>
-                                                <td><?php echo $new->policy_title; ?></td>
-                                                <td><?php echo $new->start_date;  ?></td>
-                                                <td><?php echo $new->end_date; ?></td>
+                                                <td><?php echo $new['policy_title']; ?></td>
+                                                <td><?php echo $new['glr'].'%'; ?></td>
+                                                <td><?php echo $new['start_date'];  ?></td>
+                                                <td><?php echo $new['end_date']; ?></td>
                                                 <td class="table_action">
                                                 <?php
                                               

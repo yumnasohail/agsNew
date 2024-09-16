@@ -29,8 +29,27 @@ Modules::run('site_security/has_permission');
         $data['federation_id']=$federation_id = $this->uri->segment(4);
         $data['federation']=Modules::run('api/get_specific_table_data',array("id"=>$federation_id),"id desc","title","federations","","")->row_array();
         $where=array("policies.del_status"=>"0","policy_period.del_status"=>"0","policies.f_id"=>$federation_id);
-        $data['news'] = Modules::run('policies/get_policies_with_period',$where);
+        $news = Modules::run('policies/get_policies_with_period',$where)->result_array();
+        $sum_premiums=$sum_deductible=$sum_reserve=$sum_paid=0;
+        foreach($news as $key =>$value):
+            $period_amt=Modules::run('reports/get_period_amount',array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid, SUM(CASE WHEN trans = '1'  THEN belop END ) reserve,SUM(process_claim.deductible) as deductible",1,'',"","","")->row();
+            $paid=Modules::run('api/get_specific_table_data',array("period_id"=>$value['id']),"id asc","SUM(CASE WHEN status = '1' THEN paid END ) paid","premiums","","")->row();
+            $news[$key]['glr']=0;
+            if($paid->paid>0)
+                $news[$key]['glr']=round((($period_amt->paid+$period_amt->reserve+$period_amt->deductible)/$paid->paid)*100);
+            $sum_paid=$sum_paid+$period_amt->paid;
+            $sum_reserve=$sum_reserve+$period_amt->reserve;
+            $sum_deductible=$sum_deductible+$period_amt->deductible;
+            $sum_premiums=$sum_premiums+$paid->paid;
+        endforeach;
         $data['totals']=Modules::run('api/get_specific_table_data',array("federation_id"=>$federation_id),"id asc","SUM(paid) as paid,SUM(total_insurances) as total_insurances,SUM(recieved) as recieved","premiums","","")->row_array();
+        $data['nlr']=0;
+        if($data['totals']['recieved']>0)
+            $data['nlr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$data['totals']['recieved'])*100);
+        $data['glr']=0;
+        if($sum_premiums>0)
+            $data['glr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$sum_premiums)*100);
+        $data['news']=$news;
         $data['view_file'] = 'policy_periods';
         $this->load->module('template');
         $this->template->admin($data);
