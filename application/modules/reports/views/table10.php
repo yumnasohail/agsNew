@@ -33,9 +33,9 @@
             <td><?php echo date("m/d/Y", strtotime($value['end_date'])); ?></td> 
             <td><?php echo $value['policy_title']; ?></td> 
             <td><?php echo $value['currency'];?></td> 
-            <td><?php echo number_format(round($value['paid']), 0, ',', '');?></td> 
+            <td><?php echo number_format(round($value['paid']));?></td> 
                 <?php foreach($value['amount'] as $keys => $values): ?>
-                    <td><?php echo number_format(round($values), 0, ',', ''); ?></td>
+                    <td><?php echo number_format(round($values)); ?></td>
                 <?php endforeach; ?>
             <?php endforeach; ?>
         </tr>
