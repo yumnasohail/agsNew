@@ -88,7 +88,7 @@
                                         <td>Commercial</td>
                                         <td>Direct </td>
                                         <td><?php echo $value['currency'] ?></td>
-                                        <td><?php if($value['paid']>0) echo number_format(round($value['paid'])); else echo "Nil"; ?></td>
+                                        <td><?php if($value['paid']>0) echo round($value['paid']); else echo "Nil"; ?></td>
                                         <td>
                                             <?php $res=Modules::run('reports/_get_specific_table_with_pagination_bdx_check',array("f_id"=>$value['f_id'],'end_date <= '=>$value['start_date']),'policy_period.id desc',"policy_period","policy_period.id",'','')->num_rows();
                                             if($res>0) echo "Renewal"; else echo "New"; ?></td>
@@ -106,10 +106,10 @@
                                         <td><?php if($res>0) echo "Original Premium"; else echo "Additional Premium"; ?></td>
                                         <td></td>
                                         <td></td>
-                                        <td><?php  if($value['c_paid']>0) echo number_format(round($value['c_paid'])); else echo "Nil"; ?></td>
+                                        <td><?php  if($value['c_paid']>0) echo round($value['c_paid']); else echo "Nil"; ?></td>
                                         <td><?php echo $value['comission'].'%' ?></td>
-                                        <td><?php if($value['recieved']>0) echo $rec=number_format(round(($value['c_paid']/100*$value['comission']))); else echo "Nil"; ?></td>
-                                        <td><?php if($value['total_insurances']>0) echo $rec=number_format(round($value['c_paid']-($value['c_paid']/100*$value['comission']))); else echo "Nil"; ?></td>
+                                        <td><?php if($value['recieved']>0) echo $rec=round(($value['c_paid']/100*$value['comission'])); else echo "Nil"; ?></td>
+                                        <td><?php if($value['total_insurances']>0) echo $rec=round($value['c_paid']-($value['c_paid']/100*$value['comission'])); else echo "Nil"; ?></td>
                                         <td><?php echo $value['currency'] ?></td>
                                     </tr>
                             <?php } endforeach; ?>
