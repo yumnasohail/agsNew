@@ -42,5 +42,10 @@ protected $data = '';
 	    $data['view_file'] = 'om_ags';
 	    $this->templates->front($data);
 	}
+	function privacy_policy() {
+        $this->load->module('templates');
+	    $data['view_file'] = 'privacy_policy';
+	    $this->templates->front($data);
+	}
 }
 

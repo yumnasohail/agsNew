@@ -22,6 +22,82 @@
         .imgs{
             height: 50px;
         }
+        
+        body {
+            position: static !important; /* Override position */
+            min-height: auto !important; /* Override min-height */
+            top: auto !important; /* Override top */
+        }
+                /* Dropdown button style */
+        .language-dropdown {
+            float: right; /* Aligns the dropdown to the right */
+            position: relative; /* Needed for absolute positioning of the dropdown content */
+        }
+
+        .dropbtn {
+            background-color: transparent; /* Makes the background transparent */
+            color: white; /* Text color */
+            padding: 10px;
+            font-size: 16px;
+            border: none; /* Removes border */
+            cursor: pointer; /* Changes cursor to pointer */
+            display: flex; /* Allows flex alignment */
+            align-items: center; /* Aligns items vertically centered */
+        }
+
+        /* Selected flag */
+        #selected-flag {
+            width: 25px; /* Width of the flag */
+            height: 25px; /* Height should match width for a round shape */
+            margin-right: 10px; /* Space between flag and text */
+            border-radius: 50%; /* Makes the flag round */
+            object-fit: cover; /* Ensures flag image covers the area */
+        }
+
+        /* Dropdown content (hidden by default) */
+        .dropdown-content {
+            display: none; /* Hidden by default */
+            position: absolute; /* Positioned relative to the parent */
+            background-color: #f9f9f9; /* Background color of dropdown */
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); /* Shadow effect */
+            z-index: 1; /* Ensures dropdown appears above other elements */
+            border-radius: 5px; /* Slightly rounded corners for dropdown */
+        }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black; /* Text color */
+            padding: 12px 12px; /* Padding around the link */
+            text-decoration: none; /* Removes underline from links */
+            display: flex; /* Allows flex alignment */
+            align-items: center; /* Aligns items vertically centered */
+        }
+
+        /* Link hover effect */
+        .dropdown-content a:hover {
+            background-color: #f1f1f1; /* Background color on hover */
+            border-radius: 5px;
+        }
+
+        /* Flag icon style */
+        .dropdown-content img {
+            width: 25px; /* Width of the flag in dropdown */
+            height: 25px; /* Height should match width for a round shape */
+            border-radius: 50%; /* Makes the flag round */
+        }
+
+        /* Show the dropdown menu on button click */
+        .language-dropdown:hover .dropdown-content,
+        .language-dropdown .dropbtn:focus + .dropdown-content {
+            display: block; /* Shows dropdown when hovering or focused */
+        }
+
+        .VIpgJd-ZVi9od-ORHb-OEVmcd {
+            display: none; // add !important if required 
+        }
+
+
+
     </style>
 </head>
 
@@ -41,8 +117,29 @@
                             <li><i class="fa fa-map-marker"></i>Henrik Ibsens gate 90,0255 Oslo
                             </li>
                         </ul>
+                        
+
+
                     </div><!-- end header-top-info -->
                 </div><!-- end col-lg-6 -->
+
+                <div class="col-lg-6">
+                    <div class="language-dropdown" id="language-dropdown" style="display:none">
+                        <button class="dropbtn">
+                            <img id="selected-flag" src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Selected Language" />
+                        </button>
+                        <div class="dropdown-content">
+                            <!-- Norwegian Flag (Default) -->
+                            <a href="#" id="norwegian-option" onclick="translatePage('no', '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg')">
+                                <img src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Norwegian" />
+                            </a>
+                            <!-- English Flag (Initially Hidden) -->
+                            <a href="#" id="english-option" style="display: none;" onclick="translatePage('en', '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg')">
+                                <img src="<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg" alt="English" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-6">
                     <div class="header-top-info header-login-info">
                         <!-- <ul class="info-list">

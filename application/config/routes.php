@@ -58,6 +58,7 @@
 	$route['suksess']=$folder."success_page";
 	$route['kunst']="front_end/kunst";
 	$route['enerji']="front_end/enerji";
+	$route['privacy_policy']="front_end/privacy_policy";
 	$route['sport']="front_end/sport";
 // 	$route['ma']="front_end/ma";
 	$route['kontakt']="front_end/kontakt";
