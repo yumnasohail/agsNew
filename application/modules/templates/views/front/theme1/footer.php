@@ -321,6 +321,8 @@ function googleTranslateElementInit() {
 
 function translatePage(language, flagSrc) {
     const currentLang = getCookie('googtrans');
+    alert(currentLang)
+    alert(language)
     console.log('Language :', language);
     console.log('Current Language Cookie:', currentLang);
     // Determine the domain based on the environment
@@ -359,6 +361,7 @@ function translatePage(language, flagSrc) {
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
+    alert(value)
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
@@ -372,7 +375,7 @@ window.onload = function() {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
             document.getElementById('norwegian-option').style.display = 'none';
             document.getElementById('english-option').style.display = 'block';
-        } else if (lang === '/auto/en') {
+        } else if (lang === '/auto/en'  ) {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
             document.getElementById('norwegian-option').style.display = 'block';
             document.getElementById('english-option').style.display = 'none';
