@@ -305,22 +305,32 @@
 </div>
 
 <script type="text/javascript">
-    function googleTranslateElementInit() {
-        new google.translate.TranslateElement({
-            pageLanguage: 'no', // Set the default page language
-            includedLanguages: 'no,en', // Specify the languages available
-            autoDisplay: false, // Prevent the popup from showing
-            layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-        }, 'google_translate_element');
-    }
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'no', // Set the default page language
+        includedLanguages: 'no,en', // Specify the languages available
+        autoDisplay: false, // Prevent the popup from showing
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script type="text/javascript">
+
+<script>
+
+
 function translatePage(language, flagSrc) {
+    const currentLang = getCookie('googtrans');
+
+    // Determine the domain based on the environment
+    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
+
     // If Norwegian is selected, show the original content without Google Translate
     if (language === 'no') {
-        // Remove the Google Translate cookie
-        document.cookie = "googtrans=; path=/"; // Clear any existing translation cookie
+        if (currentLang !== '/auto/no') { // Check if already set
+            // Set Google Translate cookie to Norwegian
+            document.cookie = "googtrans=/auto/no; path=/; domain=" + domain; // Set domain based on environment
+        }
         document.getElementById('selected-flag').src = flagSrc;
 
         // Show/hide the dropdown options
@@ -330,8 +340,10 @@ function translatePage(language, flagSrc) {
         // Reload the page to show the original content
         location.reload();
     } else if (language === 'en') {
-        // Set Google Translate cookie for English
-        document.cookie = `googtrans=/auto/en; path=/`;
+        if (currentLang !== '/auto/en') { // Check if already set
+            // Set Google Translate cookie for English
+            document.cookie = "googtrans=/auto/en; path=/; domain=" + domain; // Set domain based on environment
+        }
         document.getElementById('selected-flag').src = flagSrc;
 
         // Show/hide the dropdown options
@@ -348,6 +360,30 @@ function getCookie(name) {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
+
+// Optional: Check for existing cookies on page load
+window.onload = function() {
+    const lang = getCookie('googtrans');
+    if (lang) {
+        // Logic to set flags and dropdowns based on existing cookie value
+        if (lang === '/auto/no') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
+            document.getElementById('norwegian-option').style.display = 'none';
+            document.getElementById('english-option').style.display = 'block';
+        } else if (lang === '/auto/en') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
+            document.getElementById('norwegian-option').style.display = 'block';
+            document.getElementById('english-option').style.display = 'none';
+        }
+    } else {
+        // Default to Norwegian if no cookie is set
+        document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
+        document.getElementById('norwegian-option').style.display = 'none';
+        document.getElementById('english-option').style.display = 'block';
+    }
+};
+
+
 
 window.onload = function() {
     checkCookieConsent();
