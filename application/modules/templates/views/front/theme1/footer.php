@@ -323,7 +323,7 @@ function translatePage(language, flagSrc) {
     const currentLang = getCookie('googtrans');
 
     // Determine the domain based on the environment
-    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
+    const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
 
     // If Norwegian is selected, show the original content without Google Translate
     if (language === 'no') {
