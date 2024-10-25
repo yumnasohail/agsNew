@@ -321,18 +321,16 @@ function googleTranslateElementInit() {
 
 function translatePage(language, flagSrc) {
     const currentLang = getCookie('googtrans');
-    alert(currentLang)
-    alert(language)
     console.log('Language :', language);
     console.log('Current Language Cookie:', currentLang);
     // Determine the domain based on the environment
+    const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
 
     // If Norwegian is selected, show the original content without Google Translate
     if (language === 'no') {
         if (currentLang !== '/auto/no') { // Check if already set
             // Set Google Translate cookie to Norwegian
-            console.log('Setting Language Cookie to: /auto/no');
-            document.cookie = "googtrans=/auto/no; path=/"; // Set domain based on environment
+            document.cookie = "googtrans=/auto/no; path=/; domain=" + domain+"; SameSite=None; Secure"; // Set domain based on environment
         }
         document.getElementById('selected-flag').src = flagSrc;
 
@@ -344,9 +342,8 @@ function translatePage(language, flagSrc) {
         location.reload();
     } else if (language === 'en') {
         if (currentLang !== '/auto/en') { // Check if already set
-            console.log('Setting Language Cookie to: /auto/en');
             // Set Google Translate cookie for English
-            document.cookie = "googtrans=/auto/en; path=/"; // Set domain based on environment
+            document.cookie = "googtrans=/auto/en; path=/; domain=" + domain+"; SameSite=None; Secure"; // Set domain based on environment
         }
         document.getElementById('selected-flag').src = flagSrc;
 
@@ -361,7 +358,6 @@ function translatePage(language, flagSrc) {
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
-    alert(value)
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
 }
@@ -375,7 +371,7 @@ window.onload = function() {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
             document.getElementById('norwegian-option').style.display = 'none';
             document.getElementById('english-option').style.display = 'block';
-        } else if (lang === '/auto/en'  ) {
+        } else if (lang === '/auto/en') {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
             document.getElementById('norwegian-option').style.display = 'block';
             document.getElementById('english-option').style.display = 'none';
