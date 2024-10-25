@@ -321,7 +321,8 @@ function googleTranslateElementInit() {
 
 function translatePage(language, flagSrc) {
     const currentLang = getCookie('googtrans');
-
+    console.log('Language :', language);
+    console.log('Current Language Cookie:', currentLang);
     // Determine the domain based on the environment
     const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
 
