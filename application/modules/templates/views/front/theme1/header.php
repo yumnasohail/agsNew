@@ -122,7 +122,7 @@
 
                     </div><!-- end header-top-info -->
                 </div><!-- end col-lg-6 -->
-<!-- 
+
                 <div class="col-lg-6">
                     <div class="language-dropdown" id="language-dropdown" style="display:none">
                         <button class="dropbtn">
@@ -137,7 +137,7 @@
                             </a>
                         </div>
                     </div>
-                </div> -->
+                </div>
                 <div class="col-lg-6">
                     <div class="header-top-info header-login-info">
                         <!-- <ul class="info-list">

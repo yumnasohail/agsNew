@@ -46,8 +46,8 @@ if (strpos($_SERVER['HTTP_HOST'], '.') > 0 && $_SERVER['HTTP_HOST'] != '192.168.
 else
 	$localname='agsNew/';
 
-$prefix = 'https';
-if ($strHost == 'agsasa.azurewebsites.net')
+$prefix = 'http';
+if ($strHost == 'agsasa.azurewebsites.net' || $strHost == 'agsasa.com' )
 	$prefix = 'https';
 if($strHost=='localhost')
 	define('WKHTMLTOPDF_FILE_PATH', APPPATH.'libraries/wkhtmltopdf/localhost/bin/wkhtmltopdf.exe');
