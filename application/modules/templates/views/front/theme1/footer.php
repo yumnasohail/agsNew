@@ -317,6 +317,8 @@ function googleTranslateElementInit() {
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
+
+
 function translatePage(language, flagSrc) {
     const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
 
@@ -329,17 +331,15 @@ function translatePage(language, flagSrc) {
         document.cookie = "googtrans=/auto/en; path=/; domain=" + domain + "; SameSite=None; Secure";
     }
 
-    // Store the language in localStorage as a backup
-    localStorage.setItem('selectedLanguage', language);
-
     // Update the flag and dropdowns
     document.getElementById('selected-flag').src = flagSrc;
     document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
     document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
 
     // Reload after setting cookie to ensure Google Translate reinitializes
-    setTimeout(() => location.reload(), 200);
+    location.reload();
 }
+
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
@@ -348,40 +348,63 @@ function getCookie(name) {
     return null;
 }
 
+// Optional: Check for existing cookies on page load
 window.onload = function() {
-    // Check for cookie consent
-    checkCookieConsent();
-
-    // Check if language was previously selected and stored in localStorage
-    const savedLanguage = localStorage.getItem('selectedLanguage');
     const lang = getCookie('googtrans');
-
-    // Determine the current language from cookie or localStorage
-    const currentLanguage = lang ? lang.split('/')[2] : savedLanguage || 'no';
-    
-    // Show the language dropdown
-    document.getElementById('language-dropdown').style.display = 'block';
-
-    // Set flag and dropdown visibility based on current language
-    if (currentLanguage === 'no') {
+    if (lang) {
+        // Logic to set flags and dropdowns based on existing cookie value
+        if (lang === '/auto/no') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
+            document.getElementById('norwegian-option').style.display = 'none';
+            document.getElementById('english-option').style.display = 'block';
+        } else if (lang === '/auto/en') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
+            document.getElementById('norwegian-option').style.display = 'block';
+            document.getElementById('english-option').style.display = 'none';
+        }
+    } else {
+        // Default to Norwegian if no cookie is set
         document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
         document.getElementById('norwegian-option').style.display = 'none';
         document.getElementById('english-option').style.display = 'block';
-    } else if (currentLanguage === 'en') {
-        document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
-        document.getElementById('norwegian-option').style.display = 'block';
-        document.getElementById('english-option').style.display = 'none';
     }
+};
 
-    // Redirect based on language if URL path and selected language don't match
+
+
+window.onload = function() {
+ //   checkCookieConsent();
+    const lang = getCookie('googtrans');
+    alert(lang)
+    if (lang) {
+        const selectedLang = lang.split('/')[2]; 
+        alert(selectedLang)
+        document.getElementById('language-dropdown').style.display = 'block';  
+
+        if (selectedLang === 'no') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg'; 
+            document.getElementById('norwegian-option').style.display = 'none'; 
+            document.getElementById('english-option').style.display = 'block'; 
+        } else if (selectedLang === 'en') {
+            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg'; 
+            document.getElementById('norwegian-option').style.display = 'block'; 
+            document.getElementById('english-option').style.display = 'none';
+        }
+    } else {
+        document.getElementById('language-dropdown').style.display = 'block';  
+
+        document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
+        document.getElementById('norwegian-option').style.display = 'none'; 
+        document.getElementById('english-option').style.display = 'block'; 
+    }
     if (document.cookie.includes('/auto/no') && window.location.pathname === '/en') {
         location.href = '/no';
     } else if (document.cookie.includes('/auto/en') && window.location.pathname === '/no') {
         location.href = '/en';
     }
 };
-</script>
 
+</script>
 
 
 
