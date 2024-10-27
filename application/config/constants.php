@@ -45,7 +45,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.') > 0 && $_SERVER['HTTP_HOST'] != '192.168.
 }
 else
 	$localname='agsNew/';
-
+print_r($strHost);exit;
 $prefix = 'http';
 if ($strHost == 'agsasa.azurewebsites.net' || $strHost == 'agsasa.com' )
 	$prefix = 'https';
