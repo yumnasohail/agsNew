@@ -327,8 +327,10 @@ function translatePage(language, flagSrc) {
 
     if (language === 'no') {
         document.cookie = "googtrans=/auto/no; path=/; domain=" + domain + "; SameSite=None; Secure";
+        console.log("Cookie set: /auto/no");
     } else if (language === 'en') {
         document.cookie = "googtrans=/auto/en; path=/; domain=" + domain + "; SameSite=None; Secure";
+        console.log("Cookie set: /auto/en");
     }
 
     // Update the flag and dropdowns
@@ -339,7 +341,6 @@ function translatePage(language, flagSrc) {
     // Reload after setting cookie to ensure Google Translate reinitializes
     location.reload();
 }
-
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
