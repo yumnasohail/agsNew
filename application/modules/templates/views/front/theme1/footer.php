@@ -341,7 +341,7 @@ function translatePage(language, flagSrc) {
         document.getElementById('english-option').style.display = 'block';
 
         // Reload the page to show the original content
-        setTimeout(() => location.reload(), 200);
+        location.reload();
     } else if (language === 'en') {
         if (currentLang !== '/auto/en') { // Check if already set
             // Set Google Translate cookie for English
@@ -356,7 +356,7 @@ function translatePage(language, flagSrc) {
         document.getElementById('english-option').style.display = 'none';
 
         // Reload the page to apply the translation
-        setTimeout(() => location.reload(), 200);
+        location.reload();
     }
 }
 
