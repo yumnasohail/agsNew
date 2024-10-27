@@ -337,7 +337,7 @@ function translatePage(language, flagSrc) {
     document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
 
     // Reload after setting cookie to ensure Google Translate reinitializes
-    setTimeout(() => console.log("Cookie after reload:", document.cookie), 300);
+    location.reload();
 }
 
 
