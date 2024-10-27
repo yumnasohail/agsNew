@@ -322,30 +322,22 @@ function googleTranslateElementInit() {
 function translatePage(language, flagSrc) {
     const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
 
-    // Clear existing cookie
+    // Clear any existing `googtrans` cookie before setting a new one
     document.cookie = "googtrans=; path=/; domain=" + domain + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
 
-    // Set new cookie based on language
     if (language === 'no') {
         document.cookie = "googtrans=/auto/no; path=/; domain=" + domain + "; SameSite=None; Secure";
-        console.log("Cookie set: /auto/no");
     } else if (language === 'en') {
         document.cookie = "googtrans=/auto/en; path=/; domain=" + domain + "; SameSite=None; Secure";
-        console.log("Cookie set: /auto/en");
     }
 
-    // Log current cookies
-    console.log("Current cookies after setting: ", document.cookie);
-
-    // Update flag and dropdowns
+    // Update the flag and dropdowns
     document.getElementById('selected-flag').src = flagSrc;
     document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
     document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
 
-    // Reload after a brief delay to ensure the cookie is recognized
-    setTimeout(() => {
-        location.reload();
-    }, 200); // Delay for 200 milliseconds
+    // Reload after setting cookie to ensure Google Translate reinitializes
+    location.reload();
 }
 
 
@@ -381,10 +373,11 @@ window.onload = function() {
 
 
 window.onload = function() {
- //   checkCookieConsent();
+    checkCookieConsent();
     const lang = getCookie('googtrans');
     if (lang) {
         const selectedLang = lang.split('/')[2]; 
+        
         document.getElementById('language-dropdown').style.display = 'block';  
 
         if (selectedLang === 'no') {
