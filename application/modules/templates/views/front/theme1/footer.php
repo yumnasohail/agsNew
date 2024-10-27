@@ -396,6 +396,11 @@ window.onload = function() {
         document.getElementById('norwegian-option').style.display = 'none'; 
         document.getElementById('english-option').style.display = 'block'; 
     }
+    if (document.cookie.includes('/auto/no') && window.location.pathname === '/en') {
+        location.href = '/no';
+    } else if (document.cookie.includes('/auto/en') && window.location.pathname === '/no') {
+        location.href = '/en';
+    }
 };
 
 </script>
