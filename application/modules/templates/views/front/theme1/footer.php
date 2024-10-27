@@ -320,42 +320,26 @@ function googleTranslateElementInit() {
 
 
 function translatePage(language, flagSrc) {
-    const currentLang = getCookie('googtrans');
-    console.log('Language :', language);
-    console.log('Current Language Cookie:', currentLang);
-    // Determine the domain based on the environment
-    alert(window.location.hostname)
-    const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
+    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
 
-    // If Norwegian is selected, show the original content without Google Translate
+    // Clear any existing `googtrans` cookie before setting a new one
+    document.cookie = "googtrans=; path=/; domain=" + domain + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+
     if (language === 'no') {
-        if (currentLang !== '/auto/no') { // Check if already set
-            // Set Google Translate cookie to Norwegian
-            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure"; // Set domain based on environment
-        }
-        document.getElementById('selected-flag').src = flagSrc;
-
-        // Show/hide the dropdown options
-        document.getElementById('norwegian-option').style.display = 'none';
-        document.getElementById('english-option').style.display = 'block';
-
-        // Reload the page to show the original content
-        location.reload();
+        document.cookie = "googtrans=/auto/no; path=/; domain=" + domain + "; SameSite=None; Secure";
     } else if (language === 'en') {
-        if (currentLang !== '/auto/en') { // Check if already set
-            // Set Google Translate cookie for English
-            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure"; // Set domain based on environment
-        }
-        document.getElementById('selected-flag').src = flagSrc;
-
-        // Show/hide the dropdown options
-        document.getElementById('norwegian-option').style.display = 'block';
-        document.getElementById('english-option').style.display = 'none';
-
-        // Reload the page to apply the translation
-        location.reload();
+        document.cookie = "googtrans=/auto/en; path=/; domain=" + domain + "; SameSite=None; Secure";
     }
+
+    // Update the flag and dropdowns
+    document.getElementById('selected-flag').src = flagSrc;
+    document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
+    document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
+
+    // Reload after setting cookie to ensure Google Translate reinitializes
+    setTimeout(() => console.log("Cookie after reload:", document.cookie), 300);
 }
+
 
 function getCookie(name) {
     const value = `; ${document.cookie}`;
