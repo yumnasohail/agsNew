@@ -324,15 +324,14 @@ function translatePage(language, flagSrc) {
     console.log('Language :', language);
     console.log('Current Language Cookie:', currentLang);
     // Determine the domain based on the environment
-    const domain = window.location.hostname === 'localhost' ? '' : 'example.com';
+    alert(window.location.hostname)
+    const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
 
     // If Norwegian is selected, show the original content without Google Translate
     if (language === 'no') {
         if (currentLang !== '/auto/no') { // Check if already set
             // Set Google Translate cookie to Norwegian
-            document.cookie = "googtrans=; path=/; domain=" + domain + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; // Clear cookie
-            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure";
-
+            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure"; // Set domain based on environment
         }
         document.getElementById('selected-flag').src = flagSrc;
 
@@ -345,9 +344,7 @@ function translatePage(language, flagSrc) {
     } else if (language === 'en') {
         if (currentLang !== '/auto/en') { // Check if already set
             // Set Google Translate cookie for English
-            document.cookie = "googtrans=; path=/; domain=" + domain + "; expires=Thu, 01 Jan 1970 00:00:00 UTC;"; // Clear cookie
-            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure";
-
+            document.cookie = "googtrans=/auto/" + language + "; path=/; domain=" + domain + "; SameSite=None; Secure"; // Set domain based on environment
         }
         document.getElementById('selected-flag').src = flagSrc;
 
