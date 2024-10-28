@@ -304,7 +304,7 @@
         </div>
 </div>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
         pageLanguage: 'no', // Set the default page language
@@ -403,8 +403,53 @@ window.onload = function() {
     }
 };
 
+</script> -->
+
+
+
+
+
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+        pageLanguage: 'no',
+        includedLanguages: 'no,en',
+        autoDisplay: false,
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+}
+
+function setLanguage(language, flagSrc) {
+    sessionStorage.setItem('preferredLanguage', language);
+
+    // Set Google Translate cookie for language switch
+    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
+    document.cookie = `googtrans=/auto/${language}; path=/; domain=${domain}; SameSite=None; Secure`;
+
+    document.getElementById('selected-flag').src = flagSrc;
+    document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
+    document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
+
+    // Trigger Google Translate reload to apply new language
+    location.reload();
+}
+
+window.onload = function() {
+    checkCookieConsent();
+    // Retrieve preferred language from session storage or default to 'no'
+    const language = sessionStorage.getItem('preferredLanguage') || 'no';
+
+    // Set flag and dropdown based on stored language
+    document.getElementById('selected-flag').src = language === 'no' ? '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg' : '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
+    document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
+    document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
+
+    document.getElementById('language-dropdown').style.display = 'block';
+};
 </script>
 
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 
 <script>
