@@ -124,15 +124,15 @@
                 </div><!-- end col-lg-6 -->
 
                 <div class="col-lg-6">
-                    <div class="language-dropdown" id="language-dropdown" style="display: none;">
+                    <div class="language-dropdown" id="language-dropdown" style="display:none">
                         <button class="dropbtn">
                             <img id="selected-flag" src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Selected Language" />
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" id="norwegian-option" onclick="setLanguage('no', '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg')">
+                            <a href="#" id="norwegian-option" onclick="translatePage('no', '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg')">
                                 <img src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Norwegian" />
                             </a>
-                            <a href="#" id="english-option" style="display: none;" onclick="setLanguage('en', '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg')">
+                            <a href="#" id="english-option" style="display: none;" onclick="translatePage('en', '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg')">
                                 <img src="<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg" alt="English" />
                             </a>
                         </div>
