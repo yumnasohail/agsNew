@@ -318,7 +318,7 @@ function googleTranslateElementInit() {
 
 <script>
 function deleteAllCookies(name) {
-    // Clear the cookie for both domain variations
+    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
     document.cookie = `${name}=; path=/; domain=agsasa.com; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
     document.cookie = `${name}=; path=/; domain=.agsasa.com; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
 }
@@ -360,7 +360,6 @@ window.onload = function() {
 
     const lang = getCookie('googtrans');
     document.getElementById('language-dropdown').style.display = 'block';
-alert(lang)
     if (lang) {
         const selectedLang = lang.split('/')[2];
         if (selectedLang === 'no') {
