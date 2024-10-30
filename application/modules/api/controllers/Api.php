@@ -137,44 +137,47 @@ class Api extends MX_Controller {
                     }
     }
 
-    // function sanction_check(){
-    //     $name="Lars Petter Myklebost";
-	// 	$name = str_replace(' ', '%20', $name);
-	// 	$curl = curl_init();
+    function sanction_check_test(){
+        $name="ASV Assistance";
+		$name = str_replace(' ', '%20', $name);
+		$curl = curl_init();
 
-    //     curl_setopt_array($curl, array(
-    //       CURLOPT_URL => "https://api.sanctions.io/search/?name=".$name,
-    //       CURLOPT_RETURNTRANSFER => true,
-    //       CURLOPT_ENCODING => '',
-    //       CURLOPT_MAXREDIRS => 10,
-    //       CURLOPT_TIMEOUT => 0,
-    //       CURLOPT_FOLLOWLOCATION => true,
-    //       CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //       CURLOPT_CUSTOMREQUEST => 'GET',
-    //       CURLOPT_HTTPHEADER => array(
-    //         'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
-    //       ),
-    //       CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
-    //     ));
-    //     $result = curl_exec($curl);
-	// 	if (curl_errno($curl)) {
-	// 		echo 'Error:' . curl_error($curl);
-	// 	}
-	// 	curl_close($curl);
-    //     print_r($result);exit;
-    //     $data['description']=$result;
-	// 	if (!empty($result)) {
-	// 		$result = json_decode($result);
-	// 		if($result->count==0)
-	// 		$data['res']="Secure";
-	// 		else
-	// 		$data['res']="Not secure";
-			    
-	// 	}else{
-	// 	    $data['res']="No result found";
-	// 	}
-    //     echo $curl;
-    // }
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=".$name,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+              'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+            ),
+            //CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
+             CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
+          ));
+
+  
+        $result = curl_exec($curl);
+        if (curl_errno($curl)) {
+            echo 'Error:' . curl_error($curl);
+        }
+        curl_close($curl);
+        print_r($_SERVER['DOCUMENT_ROOT'] );exit;
+        $data['description']=$result;
+        if (!empty($result)) {
+            $result = json_decode($result);
+            if($result->count==0)
+            $data['res']="Secure";
+            else
+            $data['res']="Not secure";
+                
+        }else{
+            $data['res']="No result found";
+        }
+        return $data;
+    }
     
     
     public function settlemet_cron_job(){

@@ -358,7 +358,7 @@ window.onload = function() {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
             document.getElementById('norwegian-option').style.display = 'none';
             document.getElementById('english-option').style.display = 'block';
-        } else if (lang === '/auto/en') {
+        } else if (lang === '/auto/en' || lang === '/no/en') {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
             document.getElementById('norwegian-option').style.display = 'block';
             document.getElementById('english-option').style.display = 'none';
@@ -376,6 +376,7 @@ window.onload = function() {
 window.onload = function() {
     checkCookieConsent();
     const lang = getCookie('googtrans');
+    alert(lang)
     if (lang) {
         const selectedLang = lang.split('/')[2]; 
         
@@ -392,16 +393,11 @@ window.onload = function() {
         }
     } else {
         document.getElementById('language-dropdown').style.display = 'block';  
-
         document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
         document.getElementById('norwegian-option').style.display = 'none'; 
         document.getElementById('english-option').style.display = 'block'; 
     }
-    if (document.cookie.includes('/auto/no') && window.location.pathname === '/en') {
-        location.href = '/no';
-    } else if (document.cookie.includes('/auto/en') && window.location.pathname === '/no') {
-        location.href = '/en';
-    }
+  
 };
 
 </script>
