@@ -1,4 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+header("Cache-Control: no-store, no-cache, must-revalidate, proxy-revalidate");
+header("Pragma: no-cache");
+header("Expires: 0");
 class Front_end extends MX_Controller {
 protected $data = '';
 	function __construct() {
