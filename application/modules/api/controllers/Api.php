@@ -164,7 +164,7 @@ class Api extends MX_Controller {
             echo 'Error:' . curl_error($curl);
         }
         curl_close($curl);
-        print_r($_SERVER['DOCUMENT_ROOT'] );exit;
+        print_r($result);exit;
         $data['description']=$result;
         if (!empty($result)) {
             $result = json_decode($result);
