@@ -155,7 +155,7 @@ class Api extends MX_Controller {
               'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
             ),
             //CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
-             CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
+             CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/cacert.pem', 
           ));
 
   
