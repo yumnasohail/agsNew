@@ -318,19 +318,23 @@ function googleTranslateElementInit() {
 
 <script>
 function deleteCookie(name, domain) {
+    console.log("Deleting cookies for domain:", domain);
     document.cookie = `${name}=; path=/; domain=${domain}; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
+    document.cookie = `${name}=; path=/; domain=.${domain}; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
 }
 
 function translatePage(language, flagSrc) {
-    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
-
-    // Clear any existing `googtrans` cookie before setting a new one
+    const domain = window.location.hostname === 'localhost' ? '' : 'agsasa.com';
+    
     deleteCookie('googtrans', domain);
-    if (language === 'no') {
-        document.cookie = "googtrans=/auto/no; path=/; domain=" + domain + "; SameSite=None; Secure";
-    } else if (language === 'en') {
-        document.cookie = "googtrans=/auto/en; path=/; domain=" + domain + "; SameSite=None; Secure";
-    }
+
+    // Set the new cookie based on the selected language
+    const langValue = language === 'no' ? '/auto/no' : '/no/en';
+    const cookieString = `googtrans=${langValue}; path=/; domain=${domain}; SameSite=None; Secure`;
+
+    // Log the cookie string for debugging
+    console.log("Setting cookie:", cookieString);
+    document.cookie = cookieString;
 
     // Update the flag and dropdowns
     document.getElementById('selected-flag').src = flagSrc;
@@ -341,7 +345,6 @@ function translatePage(language, flagSrc) {
     location.reload();
 }
 
-
 function getCookie(name) {
     let value = "; " + document.cookie;
     let parts = value.split("; " + name + "=");
@@ -349,18 +352,12 @@ function getCookie(name) {
     return null;
 }
 
-// Optional: Check for existing cookies on page load
 window.onload = function() {
-    checkCookieConsent(); // Call to check for cookie consent
-
     const lang = getCookie('googtrans');
-    document.getElementById('language-dropdown').style.display = 'block';  // Show the dropdown
-    alert(lang)
+    document.getElementById('language-dropdown').style.display = 'block';
 
     if (lang) {
-        const selectedLang = lang.split('/')[2]; 
-        alert(selectedLang)
-        // Set flags and display dropdown options based on cookie value
+        const selectedLang = lang.split('/')[2];
         if (selectedLang === 'no') {
             document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
             document.getElementById('norwegian-option').style.display = 'none';
@@ -371,12 +368,13 @@ window.onload = function() {
             document.getElementById('english-option').style.display = 'none';
         }
     } else {
-        // Default to Norwegian if no cookie is set
         document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
         document.getElementById('norwegian-option').style.display = 'none';
         document.getElementById('english-option').style.display = 'block';
     }
 };
+
+
 
 
 </script>
