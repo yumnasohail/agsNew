@@ -19,23 +19,27 @@ class Login extends MX_Controller{
 	///////////////////////////////////////////////////////////////////////////////////
 
 	function index(){
-		$azure_client_id = $this->config->item('azure_client_id');
-        $azure_redirect_uri = $this->config->item('azure_redirect_uri');
-		$azure_tenant_id = $this->config->item('azure_tenant_id');
 		
+
         
-        // Redirect users to Azure AD login page
-        $auth_url = 'https://login.microsoftonline.com/'.$azure_tenant_id.'/oauth2/authorize';
-        $auth_url .= "?client_id={$azure_client_id}";
-        $auth_url .= "&response_type=code";
-        $auth_url .= "&redirect_uri={$azure_redirect_uri}";
-        $auth_url .= "&response_mode=query";
-        // Add other required parameters
-
-        redirect($auth_url);
-
-		// $data['general_settings']=Modules::run('general_setting/_get_where', DEFAULT_OUTLET)->row_array();
-		// $this->load->view('login_form',$data);
+		if($_SERVER['SERVER_NAME']=="localhost"){
+			$data['general_settings']=Modules::run('general_setting/_get_where', DEFAULT_OUTLET)->row_array();
+			$this->load->view('login_form',$data);
+		}else{
+			$azure_client_id = $this->config->item('azure_client_id');
+			$azure_redirect_uri = $this->config->item('azure_redirect_uri');
+			$azure_tenant_id = $this->config->item('azure_tenant_id');
+			
+			
+			// Redirect users to Azure AD login page
+			$auth_url = 'https://login.microsoftonline.com/'.$azure_tenant_id.'/oauth2/authorize';
+			$auth_url .= "?client_id={$azure_client_id}";
+			$auth_url .= "&response_type=code";
+			$auth_url .= "&redirect_uri={$azure_redirect_uri}";
+			$auth_url .= "&response_mode=query";
+			// Add other required parameters
+			redirect($auth_url);
+		}
 	}
 
 

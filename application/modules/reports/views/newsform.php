@@ -223,6 +223,8 @@ width: 12px!important;
     </div>
   </div>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
 <script>
   $('#report').on('change', function(event) {
     event.preventDefault();
@@ -347,6 +349,75 @@ $(document).ready(function() {
             a.download = 'AGS_Report_' + postfix + '.xls';
             a.click();
     }
+
+    function exportSheet() {
+    var dt = new Date();
+    var day = dt.getDate();
+    var month = dt.getMonth() + 1;
+    var year = dt.getFullYear();
+    var postfix = year + "." + month + "." + day;
+
+    // Get data from the first table
+    var table1 = document.getElementById('tblReportData');
+    var table1Data = XLSX.utils.table_to_sheet(table1);
+
+    // Apply styles to the first sheet
+    applyBasicStyles(table1Data);
+
+    // Get data from the second table
+    var table2 = document.getElementById('tblAdditionalData');
+    var table2Data = XLSX.utils.table_to_sheet(table2);
+
+    // Apply styles to the second sheet
+    applyBasicStyles(table2Data);
+
+    // Create a new workbook and add both sheets
+    var wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, table1Data, "Per Client");
+    XLSX.utils.book_append_sheet(wb, table2Data, "Per Binder Year");
+
+    // Export the workbook to a file
+    XLSX.writeFile(wb, `AGS_Report_${postfix}.xlsx`);
+}
+
+function applyBasicStyles(sheet) {
+    const range = XLSX.utils.decode_range(sheet['!ref']);
+    for (let R = range.s.r; R <= range.e.r; ++R) {
+        for (let C = range.s.c; C <= range.e.c; ++C) {
+            const cell_address = { c: C, r: R };
+            const cell_ref = XLSX.utils.encode_cell(cell_address);
+            if (!sheet[cell_ref]) continue;
+
+            // Example of adding styles
+            if (R === 0) { // Header row
+                sheet[cell_ref].s = {
+                    font: {
+                        name: 'Arial',
+                        sz: 14,
+                        bold: true,
+                        color: { rgb: "FFFFFF" }
+                    },
+                    fill: {
+                        fgColor: { rgb: "0000FF" } // Header background color
+                    }
+                };
+            } else {
+                sheet[cell_ref].s = {
+                    font: {
+                        name: 'Arial',
+                        sz: 12,
+                        color: { rgb: "000000" }
+                    }
+                };
+            }
+        }
+    }
+}
+
+
+
+
+
 
 function datatable()
 {
