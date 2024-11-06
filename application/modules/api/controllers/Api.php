@@ -109,7 +109,7 @@ class Api extends MX_Controller {
              $pass = $mail['smtp_password'];
              $host = $mail['smtp_host'];
              $config = Array(
-             'protocol' => 'mail',
+             'protocol' => 'smtp',
              'smtp_host' => $host,
              'smtp_port' => $port,
              'smtp_user' =>  $user,
