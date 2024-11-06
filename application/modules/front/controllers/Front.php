@@ -287,7 +287,7 @@ protected $data = '';
         if(isset($mail['smtp_port']) && !empty($mail['smtp_username']) && isset($mail['smtp_password']) && !empty($mail['smtp_port']) && isset($mail['smtp_username']) && !empty($mail['smtp_password']) && isset($mail['smtp_host']) && !empty($mail['smtp_host']))
 		{
 		    $port = $mail['smtp_port'];
-            $user = $mail['smtp_username'];
+            $user = "affinity.no";
             $pass = $mail['smtp_password'];
 			$host = $mail['smtp_host']; 
 			$config = Array(

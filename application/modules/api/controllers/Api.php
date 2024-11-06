@@ -105,7 +105,7 @@ class Api extends MX_Controller {
          }else
          {
              $port = $mail['smtp_port'];
-             $user = $mail['smtp_username'];
+             $user = "affinity.no";
              $pass = $mail['smtp_password'];
              $host = $mail['smtp_host'];
              $config = Array(
@@ -125,7 +125,7 @@ class Api extends MX_Controller {
                     $mailtitle="AGS Forsikring AS";
                 
                     $this->email->initialize($config);
-                    $this->email->from($user, "test");
+                    $this->email->from("ssff@affinity.no", "test");
                 	$this->email->to("yumnasohail04@gmail.com");
                     $this->email->subject("test mail");
                     $this->email->message("Test message");

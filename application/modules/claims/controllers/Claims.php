@@ -326,7 +326,7 @@ Modules::run('site_security/has_permission');
                 }else
                 {
                     $port = $mail['smtp_port'];
-                    $user = $mail['smtp_username'];
+                    $user = "affinity.no";
                     $pass = $mail['smtp_password'];
                     $host = $mail['smtp_host'];
                     $config = Array(
