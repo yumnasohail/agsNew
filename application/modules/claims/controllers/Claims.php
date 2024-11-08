@@ -326,14 +326,14 @@ Modules::run('site_security/has_permission');
                 }else
                 {
                     $port = $mail['smtp_port'];
-                    $user = "affinity.no";
+                    $user = $mail['smtp_username'];
                     $pass = $mail['smtp_password'];
                     $host = $mail['smtp_host'];
                     $config = Array(
                     'protocol' => 'smtp',
                     'smtp_host' => $host,
                     'smtp_port' => $port,
-                    'smtp_user' =>  $user,
+                    'smtp_user' =>  "affinity.no",
                     'smtp_pass' =>  $pass,
                     'smtp_crypto'=>'tls',
                     'mailtype'  => 'html', 
