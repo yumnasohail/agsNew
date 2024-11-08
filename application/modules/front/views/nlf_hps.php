@@ -68,11 +68,11 @@
                                                 <input type="text" class="form-control" name="license"
                                                     id="licenseValidation"  required value="<?php  if(isset($new->license) && !empty($new->license)) echo $new->license; ?>">
                                             </div>
-                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                            <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="lastName">Idrettsnr.</label>
                                                 <input type="text" class="form-control" name="a_sportsno"
                                                     id="a_birthValidation"  required value="<?php if(isset($new->a_sportsno) && !empty($new->a_sportsno)) echo $new->a_sportsno; ?>">
-                                            </div>
+                                            </div> -->
                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="name">Etternavn</label>
                                                 <input type="text" class="form-control" name="a_surname"
@@ -84,7 +84,7 @@
                                                     id="nameValidation"  required  value="<?php  if(isset($new->a_birth) && !empty($new->a_birth)) echo $new->a_birth; ?>">
                                             </div>
                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
-                                                <label for="name">Medlemsnr.</label>
+                                                <label for="name">Person ID</label>
                                                 <input type="text" class="form-control" name="a_member_no"
                                                     id="nameValidation"  required  value="<?php  if(isset($new->a_member_no) && !empty($new->a_member_no)) echo $new->a_member_no; ?>">
                                             </div>

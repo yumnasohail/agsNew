@@ -31,7 +31,7 @@
         <td><?php echo $new->a_birth; ?></td>
     </tr>
     <tr>
-        <td>Medlemsnr.</td>
+        <td>Person ID</td>
         <td><?php echo $new->a_member_no; ?></td>
     </tr>
     <tr>

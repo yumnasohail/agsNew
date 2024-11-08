@@ -286,19 +286,22 @@ protected $data = '';
 
         if(isset($mail['smtp_port']) && !empty($mail['smtp_username']) && isset($mail['smtp_password']) && !empty($mail['smtp_port']) && isset($mail['smtp_username']) && !empty($mail['smtp_password']) && isset($mail['smtp_host']) && !empty($mail['smtp_host']))
 		{
-		    $port = $mail['smtp_port'];
-            $user = "affinity.no";
-            $pass = $mail['smtp_password'];
-			$host = $mail['smtp_host']; 
-			$config = Array(
-            'protocol' => 'mail',
-            'smtp_host' => $host,
-            'smtp_port' => $port,
-            'smtp_user' =>  $user,
-            'smtp_pass' =>  $pass,
-            'mailtype'  => 'html', 
-            'starttls'  => true,
-            'newline'   => "\r\n"
+			 $port = $mail['smtp_port'];
+             $user = "affinity.no";
+             $pass = $mail['smtp_password'];
+             $host = $mail['smtp_host'];
+             $config = Array(
+             'protocol' => 'smtp',
+             'smtp_host' => $host,
+             'smtp_port' => $port,
+             'smtp_user' =>  $user,
+             'smtp_pass' =>  $pass,
+             'smtp_crypto'=>'tls',
+             'mailtype'  => 'html', 
+             'starttls'  => true,
+             'wordwrap'  => true,
+             'charset'  => 'utf-8',
+             'newline'   => "\r\n"
             ); 
 		}
 		else
