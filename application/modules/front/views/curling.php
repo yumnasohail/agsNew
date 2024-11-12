@@ -91,11 +91,11 @@
                                                 <input type="text" class="form-control" name="a_birth"
                                                     id="nameValidation"  required  value="<?php  if(isset($new->a_birth) && !empty($new->a_birth)) echo $new->a_birth; ?>">
                                             </div>
-                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                            <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="lastName">Idrettsnr.</label>
                                                 <input type="text" class="form-control" name="a_sportsno"
                                                     id="la_sportsValidation"  required value="<?php if(isset($new->a_sportsno) && !empty($new->a_sportsno)) echo $new->a_sportsno; ?>">
-                                            </div>
+                                            </div> -->
                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="name">Adresse</label>
                                                 <input type="text" class="form-control" name="a_address"

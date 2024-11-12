@@ -75,11 +75,11 @@
                                                 <input type="text" class="form-control" name="a_name"
                                                     id="a_nameValidation"  required value="<?php if(isset($new->a_name) && !empty($new->a_name)) echo $new->a_name; ?>">
                                             </div>
-                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                            <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="lastName">Idrettsnr.</label>
                                                 <input type="text" class="form-control" name="a_sportsno"
                                                     id="a_birthValidation"  required value="<?php if(isset($new->a_sportsno) && !empty($new->a_sportsno)) echo $new->a_sportsno; ?>">
-                                            </div>
+                                            </div> -->
                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="name">Etternavn</label>
                                                 <input type="text" class="form-control" name="a_surname"
