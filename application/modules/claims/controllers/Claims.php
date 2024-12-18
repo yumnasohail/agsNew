@@ -757,8 +757,8 @@ Modules::run('site_security/has_permission');
             $data['new'] = $this->_get_by_arr_id($where)->row();
         }
         
-        $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title","","")->result_array();
-        $data['federation']=$res[0]['title'];
+        $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title,federation_slug","","")->result_array();
+        $data['federation']=$res[0]['federation_slug'];
         $data['editable']="0";
         $data['update_id'] = $update_id;
         $this->load->view(strtolower($data['federation']),$data);
@@ -771,8 +771,8 @@ Modules::run('site_security/has_permission');
             $where['id'] = $update_id;
             $data['new'] = $this->_get_by_arr_id($where)->row();
         }
-        $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title","","")->result_array();
-        $data['federation']=$res[0]['title'];
+        $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title,federation_slug","","")->result_array();
+        $data['federation']=$res[0]['federation_slug'];
         $data['editable']="1";
         $data['update_id'] = $update_id;
         $this->load->view(strtolower($data['federation']),$data);
