@@ -39,7 +39,7 @@ parent::__construct();
 	
 	function get_new_claims()
 	{
-		 echo $noti_count=Modules::run('api/_get_specific_table_with_pagination',array('claim_stat'=>'Ikke behandlet',"del_status"=>0), 'id desc','claims','id','','')->num_rows(); 
+		 echo $noti_count=Modules::run('api/_get_specific_table_with_pagination',array('claim_stat'=>'Ikke behandlet',"del_status"=>0,'federation !=' => null), 'id desc','claims','id','','')->num_rows(); 
 
 	} 
 

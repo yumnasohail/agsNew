@@ -758,10 +758,10 @@ Modules::run('site_security/has_permission');
         }
         
         $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title,federation_slug","","")->result_array();
-        $data['federation']=$res[0]['federation_slug'];
+        $data['federation']=$res[0]['title'];
         $data['editable']="0";
         $data['update_id'] = $update_id;
-        $this->load->view(strtolower($data['federation']),$data);
+        $this->load->view(strtolower($res[0]['federation_slug']),$data);
     }
 
     function get_editable_detail()
@@ -772,10 +772,10 @@ Modules::run('site_security/has_permission');
             $data['new'] = $this->_get_by_arr_id($where)->row();
         }
         $res=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['new']->federation), "id desc","federations","title,federation_slug","","")->result_array();
-        $data['federation']=$res[0]['federation_slug'];
+        $data['federation']=$res[0]['title'];
         $data['editable']="1";
         $data['update_id'] = $update_id;
-        $this->load->view(strtolower($data['federation']),$data);
+        $this->load->view(strtolower($res[0]['federation_slug']),$data);
     }
 
     function _get_data_from_post() {

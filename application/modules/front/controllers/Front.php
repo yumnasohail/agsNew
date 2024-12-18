@@ -87,7 +87,7 @@ protected $data = '';
 		$federation=$this->uri->segment(2);
 		$claim_id=$this->uri->segment(3);
 		$data['claim_id']=$claim_id;
-		$page=Modules::run('api/_get_specific_table_with_pagination',array('title'=>$federation), "id asc","federations","name","","")->row_array();
+		$page=Modules::run('api/_get_specific_table_with_pagination',array('federation_slug'=>$federation), "id asc","federations","name","","")->row_array();
 		$data['page_title']=$page['name'];
 		$federation = str_replace("-", "_", $federation);
 		$data['new']=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$claim_id), "id asc","claims","*","","")->row();
@@ -265,7 +265,7 @@ protected $data = '';
 		$unique = uniqid();
 		$data['code'] = substr($unique, 0, $desired_length);
 		if(empty($formdata['claim_id'])){
-			$federations=Modules::run('api/get_specific_table_data',array('title'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"id","federations",'','')->row();
+			$federations=Modules::run('api/get_specific_table_data',array('federation_slug'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"id,federation_slug","federations",'','')->row();
 			$data['federation']=$federations->id;
 			$claim_id=Modules::run('api/insert_into_specific_table',$data,"claims");
 			$maler=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation']),'id desc',"subject,email,name","maler",'','')->row_array();
@@ -278,8 +278,8 @@ protected $data = '';
 			Modules::run('api/insert_or_update',array("id"=>$claim_id),$data,"claims");		
 			$maler=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation']),'id desc',"subject_four as subject,email_four as email,name","maler",'','')->row_array();
 			Modules::run('api/insert_into_specific_table',array("type"=>"3","message"=>"Skjema sendt inn av brukeren","claim_id"=>$claim_id,"date_time"=>date('Y-m-d H:i:s')),"logs");
-			$federations=Modules::run('api/get_specific_table_data',array('id'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"title,id","federations",'','')->row();
-			$fed_title=strtolower($federations->title);
+			$federations=Modules::run('api/get_specific_table_data',array('id'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"title,id,federation_slug","federations",'','')->row();
+			$fed_title=strtolower($federations->federation_slug);
 		}
 		
 	    $mail=Modules::run('api/get_specific_table_data',array('f_id'=>$federations->id),'id desc',"username as smtp_username,password as smtp_password,host as smtp_host,port as smtp_port","maler",'','')->row_array();
