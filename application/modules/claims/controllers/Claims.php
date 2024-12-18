@@ -17,8 +17,10 @@ Modules::run('site_security/has_permission');
 
     function list() {
         $federation=$this->uri->segment(4);
+        $federationWithSpaces = urldecode($federation); // Replace %20 with space
+        $federationNoSpaces = str_replace(' ', '', $federationWithSpaces); // Remove spaces
         $data["searchId"] = urldecode(isset($_GET['search']) && !empty($_GET['search']) ? Modules::run('api/encryptor','decrypt', $_GET['search']) : "");
-        $data['news'] = $this->_get('id desc',$federation);
+        $data['news'] = $this->_get('id desc', $federationWithSpaces, $federationNoSpaces);
         $data['view_file'] = 'news';
         $this->load->module('template');
         $this->template->admin($data);
@@ -884,9 +886,9 @@ Modules::run('site_security/has_permission');
         $this->mdl_claims->_set_unpublish($arr_col);
     }
 
-    function _get($order_by,$where) {
+    function _get($order_by,$federationWithSpaces, $federationNoSpaces){
         $this->load->model('mdl_claims');
-        $query = $this->mdl_claims->_get($order_by,$where);
+        $query = $this->mdl_claims->_get($order_by,$federationWithSpaces, $federationNoSpaces);
         return $query;
     }
 

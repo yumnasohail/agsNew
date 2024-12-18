@@ -33,12 +33,14 @@ class Mdl_claims extends CI_Model {
         $this->db->where($arr_col);
         return $this->db->get($table);
     }
-    function _get($order_by,$where) {
+    function _get($order_by, $federationWithSpaces, $federationNoSpaces) { 
         $table = $this->get_table();
         $this->db->select('claims.*,federations.title as federation_title');
         $this->db->order_by($order_by);
         $this->db->join('federations','federations.id=claims.federation','LEFT');
-        $this->db->where('federations.title',$where);
+        $this->db->where("(federations.title = '$federationWithSpaces' OR REPLACE(federations.title, ' ', '') = '$federationNoSpaces')");
+
+      //  $this->db->where('federations.title',$where);
         $this->db->where('claims.del_status',0);
         $query = $this->db->get($table);
         return $query;
