@@ -287,7 +287,7 @@ th
                                             </div>
                                             <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="password">Emne</label>
-                                                <input type="text" class="form-control"  required name="s_subject" value="Skademelding er behandlet - <?php echo $fed->title; ?> [AGS_<?php echo strtolower($claim_id); ?>]">
+                                                <input type="text" class="form-control"  required name="s_subject" value="Skademelding er behandlet - <?php echo $fed->federation_slug; ?> [AGS_<?php echo strtolower($claim_id); ?>]">
                                             </div>
                                             <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="password">Avsendernavn</label>
@@ -298,7 +298,7 @@ th
                                                 <textarea  class="form-control ckeditor" name="s_text" required id="s_text">
                                                     Hei,<br><br><br>
 
-                                                    Ditt skadeskjema angående <?php echo $news->a_name." ".$news->a_surname; ?>  sendt inn via <?php echo BASE_URL.strtolower($fed->title); ?> er registrert og behandlet.
+                                                    Ditt skadeskjema angående <?php echo $news->a_name." ".$news->a_surname; ?>  sendt inn via <?php echo BASE_URL.strtolower($fed->federation_slug); ?> er registrert og behandlet.
                                                     <br>
                                                     TEKST HER
                                                     <br>
@@ -421,7 +421,7 @@ th
                                                 </div>
                                                 <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
                                                     <label for="password">Emne</label>
-                                                    <input type="text" class="form-control" name="d_subject" required value="Skademelding er behandlet - <?php echo $fed->title; ?> [AGS_<?php echo strtolower($claim_id); ?>]">
+                                                    <input type="text" class="form-control" name="d_subject" required value="Skademelding er behandlet - <?php echo $fed->federation_slug; ?> [AGS_<?php echo strtolower($claim_id); ?>]">
                                                 </div>
                                                 <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
                                                     <label for="password">Avsendernavn</label>
@@ -432,13 +432,13 @@ th
                                                     <textarea  class="form-control ckeditor" name="d_text" required id="d_text">
                                                     Hei,<br><br><br>
 
-                                                    Ditt skadeskjema angående <?php echo $news->a_name." ".$news->a_surname; ?>  sendt inn via <?php echo BASE_URL.strtolower($fed->title); ?> er behandlet.
+                                                    Ditt skadeskjema angående <?php echo $news->a_name." ".$news->a_surname; ?>  sendt inn via <?php echo BASE_URL.strtolower($fed->federation_slug); ?> er behandlet.
                                                     <br>
                                                     Før vi kan behandle saken videre må vi be deg rette opp følgende mangler: TEKST HER
                                                     <br>
                                                     Klikk på linken for å endre ditt skjema og sende på nytt:
                                                         <br>
-                                                            <?php echo BASE_URL."oppdater/".strtolower($fed->title)."/".$claim_id; ?>
+                                                            <?php echo BASE_URL."oppdater/".strtolower($fed->federation_slug)."/".$claim_id; ?>
                                                         <br>
                                                     Ditt passord for tilgang til skjemaet er: <?php echo $news->code; ?>
                                                     <br>

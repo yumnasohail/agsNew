@@ -550,7 +550,7 @@ Modules::run('site_security/has_permission');
         $data['transactions']=Modules::run('api/_get_specific_table_with_pagination',array('claim_id'=>$update_id), "id asc","transaction","*","","")->result_array();
         $data['per_cat']=Modules::run('api/get_specific_table_with_pagination_where_groupby',array('claim_id'=>$update_id,"trans"=>"0"), "id asc",'coverage_cat',"transaction","coverage_cat,SUM(belop) as belop","","","","","")->result_array();
         $data['note']=Modules::run('api/_get_specific_table_with_pagination',array('claim_id'=>$update_id), "id asc","notes","*","","")->result_array();
-        $data['fed']=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['federation_id']), "id asc","federations","title","","")->row();
+        $data['fed']=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$data['federation_id']), "id asc","federations","title,federation_slug","","")->row();
         $data['maler']=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation_id']),'id desc',"name","maler",'','')->row_array();
         $data['logs']=Modules::run('api/get_specific_table_data',array('claim_id'=>$update_id),'id desc',"performed_by,message,type,date_time,description,id","logs",'','')->result_array();
         $data['claim_id'] = $update_id;
