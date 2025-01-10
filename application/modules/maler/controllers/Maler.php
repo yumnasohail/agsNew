@@ -19,7 +19,8 @@ parent::__construct();
     function list() {
 
         $federation=$this->uri->segment(4);
-        $fed_id = Modules::run('api/get_specific_table_data',array("title"=>$federation),'id',"id","federations",'','')->row_array();
+        $federationWithSpaces = urldecode($federation);
+        $fed_id = Modules::run('api/get_specific_table_data',array("title"=>$federationWithSpaces),'id',"id","federations",'','')->row_array();
         $data['news'] = Modules::run('api/get_specific_table_data',array("f_id"=>$fed_id['id']),'id',"*","maler",'','')->row_array();
         $data['f_id']=$fed_id['id'];
          
