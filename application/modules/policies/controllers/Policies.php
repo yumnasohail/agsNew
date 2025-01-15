@@ -254,6 +254,39 @@ Modules::run('site_security/has_permission');
         $this->load->module('template');
         $this->template->admin($data);
     }
+
+
+    function save_policy_data(){
+        $policyId = $this->input->post('id');
+        $policyCheck = $this->input->post('policy_check');
+        $ribComment = $this->input->post('rib_comment');
+        $pcComment = $this->input->post('pc_comment');
+        $name = $this->input->post('name');
+
+        $policy_period=Modules::run('api/_get_specific_table_with_pagination',array('id'=>$policyId), "id desc","policy_period","*","","")->row_array();
+        if ($policy_period) {
+            $updateData = [];
+    
+            if (($policyCheck==0 || $policyCheck==1) && $name=="policy_check") {
+                $updateData['policy_check'] = $policyCheck;
+            }
+            if ($name=="rib_comment") {
+                $updateData['rib_comment'] = $ribComment;
+            }
+            if ($name=="pc_comment") {
+                $updateData['pc_comment'] = $pcComment;
+            }
+
+            Modules::run('api/insert_or_update',array("id"=>$policyId),$updateData,"policy_period");
+    
+            if ($policy_period) {
+                echo json_encode(['success' => true, 'message' => 'Policy Period updated successfully.']);
+                return;
+            }
+        }
+    
+        echo json_encode(['success' => false, 'message' => 'Policy Period not found or update failed.']);
+    }
     
     
     function preview_1(){

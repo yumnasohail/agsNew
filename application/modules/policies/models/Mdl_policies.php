@@ -38,7 +38,7 @@ class Mdl_policies extends CI_Model {
     }
     function get_policies_with_period($where)
     {
-        $this->db->select('federations.title,insurers.name,policies.policy_title,policy_period.start_date,policy_period.end_date,policy_period.contract_id,policy_period.ags_policy_no,policy_period.comission,policy_period.deductible,policy_period.currency,policy_period.status,policy_period.id,policy_period.rib,policy_period.profit_comission,policies.f_id');
+        $this->db->select('federations.title,insurers.name,policies.policy_title,policy_period.start_date,policy_period.end_date,policy_period.contract_id,policy_period.ags_policy_no,policy_period.comission,policy_period.deductible,policy_period.currency,policy_period.status,policy_period.id,policy_period.rib,policy_period.profit_comission,policies.f_id,policy_period.policy_check,policy_period.rib_comment,policy_period.pc_comment');
         $this->db->from('policies');
         $this->db->order_by('federations.id desc, policy_period.start_date asc');
         $this->db->join('policy_period','policies.id=policy_period.policy_id','LEFT');

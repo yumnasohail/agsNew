@@ -777,7 +777,7 @@ Modules::run('site_security/has_permission');
                 $c_end=date("Y-m-t", strtotime($c_start));
                 $formdata['start_date']=$formdata['year'].'-01-01';
                 $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
-                $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
+                $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND  `policy_period`.`policy_check` = '1' AND";
                 if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
                     $end=$formdata['end_date'];
                     $where.="`premiums`.`dato` <= '$c_end' AND ";
