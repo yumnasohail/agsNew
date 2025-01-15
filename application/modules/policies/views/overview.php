@@ -1,6 +1,7 @@
 <style>
     input{
         border:1px solid #b9b5b5;
+        color: #909090 !important;
     }
 </style>
 <main>
