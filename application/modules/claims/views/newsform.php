@@ -1003,7 +1003,7 @@ th
       }
     });
     var stat="<?php echo $news->claim_stat; ?>";
-    if(stat=="Ikke behandlet"){
+   // if(stat=="Ikke behandlet"){
     $.ajax({
       type: 'POST',
       url: "<?php echo ADMIN_BASE_URL?>claims/get_editable_detail",
@@ -1013,10 +1013,10 @@ th
         $('.editable_data').html(result);
       }
     });
-    }else
-    {
-        $('.editable_data').html("Skjemaet er "+stat+ ", og kan derfor ikke endres.");
-    }
+   // }else
+    //{
+     //   $('.editable_data').html("Skjemaet er "+stat+ ", og kan derfor ikke endres.");
+   // }
    
   });
   
