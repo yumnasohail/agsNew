@@ -300,7 +300,7 @@ Modules::run('site_security/has_permission');
                 else
                     $data['with_claim_fee']=0;
                 $data['result']=array();
-                 $where="`federations`.`status` = '1' AND  `policy_period`.`del_status` = '0'  AND";
+                 $where="`federations`.`status` = '1' AND  `policy_period`.`del_status` = '0'  AND `policy_period`.`policy_check` = '1' AND";
                 // if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
                 //     $start=$formdata['start_date'];
                 //     $where.="`policy_period`.`start_date` >= '$start' AND ";
@@ -609,7 +609,7 @@ Modules::run('site_security/has_permission');
             break;
             case "11":
                  $data['result']=array();
-                 $where="`federations`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND";
+                 $where="`federations`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND `policy_period`.`policy_check` = '1' AND";
                 if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
                     $insurer=$formdata['insurer'];
                     $where.="`insurers`.`id` = '$insurer' AND ";
