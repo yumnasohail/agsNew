@@ -265,7 +265,7 @@ protected $data = '';
 		$unique = uniqid();
 		$data['code'] = substr($unique, 0, $desired_length);
 		if(empty($formdata['claim_id'])){
-			$federations=Modules::run('api/get_specific_table_data',array('LOWER(federation_slug) ='=>strtolower($data['federation']),"status"=>"1","del_status"=>"0"),'id',"id,federation_slug","federations",'','')->row();
+			$federations=Modules::run('api/get_specific_table_data',array('LOWER(federation_slug) ='=>strtolower($data['federation']),"del_status"=>"0"),'id',"id,federation_slug","federations",'','')->row();
 			$data['federation']=$federations->id;
 			$claim_id=Modules::run('api/insert_into_specific_table',$data,"claims");
 			$maler=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation']),'id desc',"subject,email,name","maler",'','')->row_array();
@@ -278,7 +278,7 @@ protected $data = '';
 			Modules::run('api/insert_or_update',array("id"=>$claim_id),$data,"claims");		
 			$maler=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation']),'id desc',"subject_four as subject,email_four as email,name","maler",'','')->row_array();
 			Modules::run('api/insert_into_specific_table',array("type"=>"3","message"=>"Skjema sendt inn av brukeren","claim_id"=>$claim_id,"date_time"=>date('Y-m-d H:i:s')),"logs");
-			$federations=Modules::run('api/get_specific_table_data',array('id'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"title,id,federation_slug","federations",'','')->row();
+			$federations=Modules::run('api/get_specific_table_data',array('id'=>$data['federation'],"del_status"=>"0"),'id',"title,id,federation_slug","federations",'','')->row();
 			$fed_title=strtolower($federations->federation_slug);
 		}
 		
