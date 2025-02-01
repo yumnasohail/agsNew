@@ -162,7 +162,7 @@ width: 12px!important;
                         <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12 rpt_4" style="display:none;">
                             <div class="custom-control custom-checkbox ">
                                 <input type="checkbox" class="custom-control-input " id="customCheck16" name="with_claim_fee" checked>
-                                <label class="custom-control-label" for="customCheck16">med skadegebyr</label>
+                                <label class="custom-control-label" for="customCheck16">med skadegebyr (vises ikke til selskapet)</label>
                             </div>
                         </div>
                         <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12 Velg" style="display:none;">

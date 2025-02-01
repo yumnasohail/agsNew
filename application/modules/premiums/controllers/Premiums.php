@@ -30,24 +30,27 @@ Modules::run('site_security/has_permission');
         $data['federation']=Modules::run('api/get_specific_table_data',array("id"=>$federation_id),"id desc","title","federations","","")->row_array();
         $where=array("policies.del_status"=>"0","policy_period.del_status"=>"0","policies.f_id"=>$federation_id);
         $news = Modules::run('policies/get_policies_with_period',$where)->result_array();
-        $sum_premiums=$sum_deductible=$sum_reserve=$sum_paid=0;
+        $sum_premiums=$sum_deductible=$sum_reserve=$sum_paid=$sum_total_insurances=0;
         foreach($news as $key =>$value):
-            $period_amt=Modules::run('reports/get_period_amount',array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid, SUM(CASE WHEN trans = '1'  THEN belop END ) reserve,SUM(process_claim.deductible) as deductible",1,'',"","","")->row();
-            $paid=Modules::run('api/get_specific_table_data',array("period_id"=>$value['id']),"id asc","SUM(CASE WHEN status = '1' THEN paid END ) paid","premiums","","")->row();
+            $period_amt=Modules::run('reports/get_period_amount',array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid , SUM(claim_fee) as deduct",1,100000000,"","","")->row();
+            $period_res=Modules::run('reports/get_period_amount_reserve',array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim",",SUM(claim_reservations.amount) as reserve",1,100000000,"","","")->row();
+            $paid= Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['id']),"id desc","premiums","SUM(total_insurances) as total_insurances, SUM(paid) as paid","","")->row();
             $news[$key]['glr']=0;
             if($paid->paid>0)
-                $news[$key]['glr']=round((($period_amt->paid+$period_amt->reserve+$period_amt->deductible)/$paid->paid)*100);
+                $news[$key]['glr']=round((($period_amt->paid+$period_res->reserve+$period_amt->deduct)/$paid->paid)*100);
+            if($paid->total_insurances>0)
+                $news[$key]['nlr']=round((($period_amt->paid+$period_res->reserve+$period_amt->deduct)/$paid->total_insurances)*100);
             $sum_paid=$sum_paid+$period_amt->paid;
-            $sum_reserve=$sum_reserve+$period_amt->reserve;
-            $sum_deductible=$sum_deductible+$period_amt->deductible;
+            $sum_reserve=$sum_reserve+$period_res->reserve;
+            $sum_deductible=$sum_deductible+$period_amt->deduct;
             $sum_premiums=$sum_premiums+$paid->paid;
+            $sum_total_insurances=$sum_total_insurances+$paid->total_insurances;
         endforeach;
 
-        $data['totals']=Modules::run('api/get_specific_table_data',array("federation_id"=>$federation_id),"id asc","SUM(paid) as paid,SUM(total_insurances) as total_insurances,SUM(recieved) as recieved","premiums","","")->row_array();
        // CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN
         $data['nlr']=0;
-        if($data['totals']['recieved']>0)
-            $data['nlr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$data['totals']['recieved'])*100);
+        if($sum_total_insurances>0)
+            $data['nlr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$sum_total_insurances)*100);
         $data['glr']=0;
         if($sum_premiums>0)
             $data['glr']=round((($sum_paid+$sum_reserve+$sum_deductible)/$sum_premiums)*100);

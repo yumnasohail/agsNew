@@ -27,6 +27,7 @@
                                 <th class="sr">Ref.</th>
                                 <th>Policy</th>
                                 <th>GLR%</th>
+                                <th>NLR%</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
                                 <th class="" style="width:300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling</th>
@@ -43,7 +44,8 @@
                                                 <tr id="Row_<?=$new['id']?>" class="odd gradeX " >
                                                 <td width='2%'><?php echo $i;?></td>
                                                 <td><?php echo $new['policy_title']; ?></td>
-                                                <td><?php echo $new['glr'].'%'; ?></td>
+                                                <td><?php echo $new['glr'].'%'; ?>
+                                                <td><?php echo $new['nlr'].'%'; ?></td>
                                                 <td><?php echo $new['start_date'];  ?></td>
                                                 <td><?php echo $new['end_date']; ?></td>
                                                 <td class="table_action">
