@@ -175,7 +175,7 @@ Modules::run('site_security/has_permission');
 	function update_claim()
 	{
         $data=$this->post_form_data();
-		$federations=Modules::run('api/get_specific_table_data',array('title'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"id","federations",'','')->row();
+		$federations=Modules::run('api/get_specific_table_data',array('title'=>$data['federation'],"del_status"=>"0"),'id',"id","federations",'','')->row();
 		$data['federation']=$federations->id;
         Modules::run('api/insert_or_update',array("id"=>$data['id']),$data,"claims");
 		exit;
