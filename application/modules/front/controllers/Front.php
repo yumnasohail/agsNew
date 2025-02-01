@@ -265,7 +265,7 @@ protected $data = '';
 		$unique = uniqid();
 		$data['code'] = substr($unique, 0, $desired_length);
 		if(empty($formdata['claim_id'])){
-			$federations=Modules::run('api/get_specific_table_data',array('federation_slug'=>$data['federation'],"status"=>"1","del_status"=>"0"),'id',"id,federation_slug","federations",'','')->row();
+			$federations=Modules::run('api/get_specific_table_data',array('LOWER(federation_slug) ='=>strtolower($data['federation']),"status"=>"1","del_status"=>"0"),'id',"id,federation_slug","federations",'','')->row();
 			$data['federation']=$federations->id;
 			$claim_id=Modules::run('api/insert_into_specific_table',$data,"claims");
 			$maler=Modules::run('api/get_specific_table_data',array('f_id'=>$data['federation']),'id desc',"subject,email,name","maler",'','')->row_array();
