@@ -46,6 +46,7 @@
 	$route['table_list']= "api/table_list";
 	$folder="front/";
 	$route['curling']=$folder."curling";
+	$route['nrl']=$folder."nrl";
 	$route['tsff']=$folder."tsff";
 	$route['naif']=$folder."naif";
 	$route['judo']=$folder."judo";

@@ -13,6 +13,13 @@ protected $data = '';
 	    $this->template->front($data);
 	}
 
+	function nrl() {
+	    $data['page_title']="Rugby League Norway";
+        $this->load->module('template');
+	    $data['view_file'] = 'nrl';
+	    $this->template->front($data);
+	}
+
 
 	function curling() {
 	    $data['page_title']="Curlingforbundet";
