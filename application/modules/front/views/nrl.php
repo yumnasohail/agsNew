@@ -28,7 +28,7 @@
                                 <div id="step-0"  >
                                     <form id="form-step-0" class="tooltip-label-right" novalidate notvalidate>
                                         <div class="partner-image">
-                                            <!-- <img src="<?php echo STATIC_FRONT_IMAGE.'logo_naif.png'; ?>"> -->
+                                            <img src="<?php echo STATIC_FRONT_IMAGE.'logo_nrl.png'; ?>">
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12 col-xs-12 col-md-12">
@@ -158,10 +158,7 @@
                                                 <div class="input-group mb-3">
                                                     <select class="custom-select" id="inputGroupSelect02" name="sport" required>
                                                         <option value="">Select</option>
-                                                        <option value="Amerikansk fotball" <?php if(isset($new->sport) && !empty($new->sport) && $new->sport=="Amerikansk fotball") echo "selected"; ?>>Amerikansk fotball</option>
-                                                        <option value="Lacrosse" <?php if(isset($new->sport) && !empty($new->sport) && $new->sport=="Lacrosse") echo "selected"; ?>>Lacrosse </option>
-                                                        <option value="Frisbee" <?php if(isset($new->sport) && !empty($new->sport) && $new->sport=="Frisbee") echo "selected"; ?>>Frisbee </option>
-                                                        <option value="Cheerleading" <?php if(isset($new->sport) && !empty($new->sport) && $new->sport=="Cheerleading") echo "selected"; ?>>Cheerleading </option>
+                                                        <option value="Rugby" <?php if(isset($new->sport) && !empty($new->sport) && $new->sport=="Rugby") echo "selected"; ?>>Rugby </option>
                                                     </select>
                                                     <div class="input-group-append">
                                                         <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -233,7 +230,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                             <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                             <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                  <label for="lastName">Kamp/trening med utøvere i</label>
                                                 <div class="input-group mb-3">
                                                     <select class="custom-select" id="inputGroupSelect02" name="match_with" required>
@@ -245,7 +242,7 @@
                                                         <label class="input-group-text" for="inputGroupSelect02">Options</label>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </form>
                                     <!--<h4 class="text-center">Thank you for your feedback!</h4>-->

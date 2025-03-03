@@ -109,10 +109,10 @@
         <td>Underlag</td>
         <td><?php echo $new->basis; ?></td>
     </tr>
-    <tr>
+    <!-- <tr>
         <td>Kamp/trening med utøvere i</td>
         <td><?php echo $new->match_with; ?></td>
-    </tr>
+    </tr> -->
 
     </tbody>
 </table>
@@ -259,10 +259,7 @@
             <label for="lastName">Idrett</label>
         <div class="input-group mb-3">
             <select class="custom-select" id="inputGroupSelect02" name="sport">
-                <option value="Amerikansk fotball" <?php if($new->sport=="Amerikansk fotball") echo "selected"; ?>>Amerikansk fotball</option>
-                <option value="Lacrosse" <?php if($new->sport=="Lacrosse") echo "selected"; ?>>Lacrosse </option>
-                <option value="Frisbee" <?php if($new->sport=="Frisbee") echo "selected"; ?>>Frisbee </option>
-                <option value="Cheerleading" <?php if($new->sport=="Cheerleading") echo "selected"; ?>>Cheerleading </option>
+                <option value="Rugby" <?php if($new->sport=="Rugby") echo "selected"; ?>>Rugby </option>
             </select>
             <div class="input-group-append">
                 <label class="input-group-text" for="inputGroupSelect02">Options</label>
@@ -331,7 +328,7 @@
             </div>
         </div>
     </div>
-        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+        <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
             <label for="lastName">Kamp/trening med utøvere i</label>
         <div class="input-group mb-3">
             <select class="custom-select" id="inputGroupSelect02" name="match_with">
@@ -342,7 +339,7 @@
                 <label class="input-group-text" for="inputGroupSelect02">Options</label>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
             <label for="lastName">Forsikring under</label>
         <div class="input-group mb-3">
