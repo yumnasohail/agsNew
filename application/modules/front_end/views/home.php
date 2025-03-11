@@ -55,7 +55,7 @@
                                  data-paddingbottom="[0,0,0,0]"
                                  data-paddingleft="[0,0,0,0]">
                                 <p class="sec__desc">
-                              Coverholder for <br> Lloyd’s of London
+                              Coverholder for <br> Lloyd’s Insurance Company S.A
                                 </p>
                             </div><!-- end tp-caption -->
 
