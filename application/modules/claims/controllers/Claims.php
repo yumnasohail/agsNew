@@ -216,6 +216,7 @@ Modules::run('site_security/has_permission');
 		if(!empty($formdata['status']) && $formdata['status']!="Plukke ut" ){
             $data['status']= $formdata['status'];
             if($data['status']=="4"){
+                $formdata['s_text']=$this->input->post('v_text');
                 if(!empty($formdata['body_part'])){
                     $data['body_part']= $formdata['body_part'];
                     if(!empty($formdata['damage_type'])){
