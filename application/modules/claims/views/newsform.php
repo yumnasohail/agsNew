@@ -44,7 +44,7 @@ th
                             <a class="nav-link" id="sixth-tab_" data-toggle="tab" href="#sixthFull" role="tab" aria-controls="second" aria-selected="false">Notater</a>
                         </li>
                         <li class="nav-item text-center">
-                            <a class="nav-link" id="seventh-tab_" data-toggle="tab" href="#seventhFull" role="tab" aria-controls="second" aria-selected="false">Godkjenn/Avslå</a>
+                            <a class="nav-link" id="seventh-tab_" data-toggle="tab" href="#seventhFull" role="tab" aria-controls="second" aria-selected="false">Godkjenn/Avslå/Venter</a>
                         </li>
                         <li class="nav-item text-center">
                             <a class="nav-link" id="eight-tab_" data-toggle="tab" href="#eightFull" role="tab" aria-controls="second" aria-selected="false">Saksbehandling</a>
