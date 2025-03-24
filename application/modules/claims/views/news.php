@@ -40,7 +40,7 @@
                                             <td><?php echo $new->a_name." ".$new->a_surname;  ?></td>
                                             <td><?php echo $new->federation_title; ?></td>
                                             <td><?php echo $new->claim_datetime   ?></td>
-                                            <td style="<?php if($new->claim_stat=='Ikke behandlet'){ echo "background-color:rgb(254 255 214)";}elseif($new->claim_stat=='Godkjent') { echo "color:green"; }else if($new->claim_stat=='Avslått' ||  $new->claim_stat=='Avslått, Avventer' ){ echo "color:red;";} ?>"><?php echo $new->claim_stat;   ?></td>
+                                            <td style="<?php if($new->claim_stat=='Ikke behandlet'){ echo "background-color:rgb(254 255 214)";}elseif($new->claim_stat=='Godkjent') { echo "color:green"; }else if($new->claim_stat=='Avslått' ||  $new->claim_stat=='Avslått, Avventer' ){ echo "color:red;";}else if($new->claim_stat=='Venter på mer informasjon'){ echo "color:#a18d00;";} ?>"><?php echo $new->claim_stat;   ?></td>
                                             <td class="table_action">
                                             <a class=" yellow c-btn view_details" rel="<?=$new->id?>"><i class="iconsminds-receipt-4"  title="See Detail"></i></a>
                                             <?php
