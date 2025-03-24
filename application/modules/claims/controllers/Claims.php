@@ -211,10 +211,29 @@ Modules::run('site_security/has_permission');
         parse_str($_POST['data'], $formdata);
         $formdata['d_text']=$this->input->post('d_text');
         $formdata['s_text']=$this->input->post('s_text');
+        $formdata['v_text']=$this->input->post('v_text');
         $data['claim_id']=$this->input->post('claim_id');
 		if(!empty($formdata['status']) && $formdata['status']!="Plukke ut" ){
             $data['status']= $formdata['status'];
-            if($data['status']!="3"){
+            if($data['status']=="4"){
+                if(!empty($formdata['body_part'])){
+                    $data['body_part']= $formdata['body_part'];
+                    if(!empty($formdata['damage_type'])){
+                        $data['damage_type']= $formdata['damage_type'];
+                        if(!empty($formdata['side'])){
+                            $data['side']= $formdata['side'];
+                            $check="1";
+                        }
+                        else
+                        $message="Velg side";
+                    }
+                    else
+                    $message="Velg Skadetype";
+                }
+                else
+                $message="Velg Kroppsdel";
+            }
+            else if($data['status']!="3"){
                 if(!empty($formdata['body_part'])){
                     $data['body_part']= $formdata['body_part'];
                     if(!empty($formdata['damage_type'])){
@@ -267,6 +286,7 @@ Modules::run('site_security/has_permission');
         }
         else
             $message="Velg status";
+
         if($check=="1")
         {
             $data['period_id']=$formdata['period_id'];
@@ -284,7 +304,7 @@ Modules::run('site_security/has_permission');
             if(  isset($formdata['email_insurer']) && !empty($formdata['email_insurer']))
                 $data['email_insurer']="1";
             $data['email_ihs']="0";
-            if( isset($formdata['email_ihs']) && !empty($formdata['email_ihs']))
+            if( isset($formdata['email_ihs']) && !empty($formdata['email_ihs'])) 
                 $data['email_ihs']="1";
                 $data['underwriter']="0";
             if(  isset($formdata['underwriter']) && !empty($formdata['underwriter']))
@@ -498,6 +518,9 @@ Modules::run('site_security/has_permission');
                     $claim_stat="Avsluttet";
                     $t_date=date('Y-m-d H:i:s');
                     Modules::run('api/insert_or_update',array("claim_id"=>$data['claim_id']),array("closing_date"=>$t_date),"process_claim");
+                }
+                if($data['status']=="4"){
+                    $claim_stat="Venter på mer informasjon";
                 }
                 if($data['status']=="3"){
                     $claim_stat="Avslått";

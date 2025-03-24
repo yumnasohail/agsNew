@@ -456,6 +456,148 @@ th
                                         
                                     </div>
                                 </div>
+                                <div class="border " >
+                                    <button class="btn btn-link btn-full background-theme1 border-theme1" data-toggle="collapse" data-target="#collapseThree"
+                                        aria-expanded="false" aria-controls="collapseThree">
+                                        
+                                        Venter på mer informasjon        
+                                        
+                                    </button>
+
+                                    <div id="collapseThree" class="collapse" data-parent="#accordion">
+                                        <div class="p-4">
+                                            <?php if( $processed_data->status!="4" ){ ?>
+                                        <form id="Waiting_form">
+                                        <fieldset class="border-theme1">
+                                        <legend>Saksdata</legend>
+                                        <div class="contain_auto" >
+                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="lastName">Status sak</label>
+                                                <div class="input-group mb-3">
+                                                    <select class="custom-select" id="inputGroupSelect02" name="status" >
+                                                    <option >Plukke ut</option>
+                                                        <option value="4">Venter</option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <label class="input-group-text " for="inputGroupSelect02">Options</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="lastName">To the police</label>
+                                                <div class="input-group mb-3">
+                                                    <select class="custom-select policy_id" id="selected_period" name="period_id"  >
+                                                    <?php 
+                                                    $claim_datetime=date("Y-m-d", strtotime($news->claim_datetime));
+                                                    foreach($policies as $key => $value): ?>
+                                                        <option  <?php if($processed_data->period_id == $value['id']){ echo "selected";}else if($claim_datetime>=date("Y-m-d", strtotime($value['start_date'])) && $claim_datetime<=date("Y-m-d", strtotime($value['end_date']))){ echo "selected";} ?> value="<?php echo $value['id']; ?>"><?php echo date("Y-m-d", strtotime($value['start_date']))." / ".date("Y-m-d", strtotime($value['end_date']))." - ".$value['policy_title']; ?> </option>
+                                                    <?php endforeach; ?>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="password">Egenandel</label>
+                                                <input type="text" class="form-control" name="deductible" id="Egenandel" required>
+                                            </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="password">Regress</label>
+                                                <input type="text" class="form-control" name="regress" required value="<?php if(isset($processed_data->regress) && !empty($processed_data->regress)) echo $processed_data->regress ?>">
+                                            </div>
+                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="lastName">Kroppsdel</label>
+                                                <div class="input-group mb-3">
+                                                    <select class="custom-select" id="inputGroupSelect02" name="body_part" >
+                                                    <option></option>
+                                                    <?php foreach($body_parts as $key => $value): ?>
+                                                        <option value="<?php echo $value['part'] ?>" <?php if(isset($processed_data->body_part) && !empty($processed_data->body_part) && $processed_data->body_part==$value['part']) echo "selected"; ?>><?php echo $value['part'] ?> </option>
+                                                    <?php endforeach; ?>
+                                                    </select>
+                                                    <select class="custom-select" id="inputGroupSelect02" name="side" >
+                                                        <option></option>
+                                                        <option value="left" <?php if(isset($processed_data->side) && !empty($processed_data->side) && $processed_data->side=="left") echo "selected"; ?>>left </option>
+                                                        <option value="center" <?php if(isset($processed_data->side) && !empty($processed_data->side) && $processed_data->side=="center") echo "selected"; ?>>center </option>
+                                                        <option value="right" <?php if(isset($processed_data->side) && !empty($processed_data->side) && $processed_data->side=="right") echo "selected"; ?>>right </option>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="lastName">Skadetype</label>
+                                                <div class="input-group mb-3">
+                                                    <select class="custom-select" id="inputGroupSelect02" name="damage_type" >
+                                                    <option></option>
+                                                    <?php foreach($damage_type as $key => $value): ?>
+                                                        <option value="<?php echo $value['type'] ?>"  <?php if(isset($processed_data->damage_type) && !empty($processed_data->damage_type) && $processed_data->damage_type==$value['type']) echo "selected"; ?>><?php echo $value['type'] ?> </option>
+                                                    <?php endforeach; ?>
+                                                    </select>
+                                                    <div class="input-group-append">
+                                                        <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                            <!-- <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="password">Automatikk</label>
+                                                <div class="custom-control custom-checkbox ">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck_2" name="email_ihs">
+                                                    <label class="custom-control-label" for="customCheck_2">Gi IHS begrenset tilgang til denne saken</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox ">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck_3" name="underwriter">
+                                                    <label class="custom-control-label" for="customCheck_3">Marker som: Konsulter underwriter</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck_4" name="close_case_inactivity">
+                                                    <label class="custom-control-label" for="customCheck_4">Denne saken kan lukkes automatisk ved manglende aktivitet</label>
+                                                </div>
+                                            </div> -->
+                                            </div>
+                                            </fieldset>
+                                            <fieldset class="border-theme1">
+                                            <legend>Send e-post</legend>
+                                        <div class="contain_auto">
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
+                                                <div class="custom-control custom-checkbox ">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck_5" checked name="approve_email_claimant">
+                                                    <label class="custom-control-label" for="customCheck_5">Send e-post til skadelidt</label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
+                                                <label for="password">Emne</label>
+                                                <input type="text" class="form-control"  required name="s_subject" value="Skademelding er behandlet - <?php echo $fed->federation_slug; ?> [AGS_<?php echo strtolower($claim_id); ?>]">
+                                            </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-6">
+                                                <label for="password">Avsendernavn</label>
+                                                <input type="text" class="form-control" required name="s_sendername" value="<?php echo $maler['name']; ?>">
+                                            </div>
+                                            <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12">
+                                                <label for="password">Tekst</label>
+                                                <textarea  class="form-control ckeditor" name="v_text" required id="v_text">
+                                                    Hei,<br><br><br>
+
+                                                    Ditt skadeskjema angående <?php echo $news->a_name." ".$news->a_surname; ?>  sendt inn via <?php echo BASE_URL.strtolower($fed->federation_slug); ?> er registrert og behandlet.
+                                                    <br>
+                                                    TEKST HER
+                                                    <br>
+                                                    Har du spørsmål kan du ta kontakt med oss ved å svare på denne e-posten. Vennligst vis til vårt referansenummer; <?php echo $claim_id; ?> ved alle fremtidige henvendelser i forbindelse med skaden. Dersom du tar kontakt per e-post, vennligst ikke fjern koden som står i klammer i emnefeltet.
+                                                    <br><br><br>
+                                                    Med vennlig hilsen<br>
+                                                    AGS Forsikring AS<br>
+                                                    </textarea>
+                                            </div>
+                                            <button type="button" class="btn btn-sm btn-outline-primary waiting_btn" >Send inn skjemaet!</button>
+                                            </div>
+                                        </fieldset>
+                                        </form>
+                                        <?php } else echo  "Venter nå på mer informasjon";?>
+                                        </div>
+                                    </div>
+                                </div>
                            
                                 </div>
                             </div>
@@ -1038,6 +1180,13 @@ th
         var form_data=$('#Approve_form').serialize();
         process_ajax(form_data,"approve_btn");
     });
+
+    $('.waiting_btn').off('click').click(function(e){
+        e.preventDefault();
+        var form_data=$('#Waiting_form').serialize();
+        process_ajax(form_data,"waiting_btn");
+    });
+    
     
 
     $('.decline_btn').off('click').click(function(e){
@@ -1058,15 +1207,17 @@ th
 function process_ajax(form_data,type)
     {
         if(type!="update_btn"){
-            var s_text=d_text="";
+            var s_text=d_text=v_text="";
             if(type=="decline_btn")
-                 d_text=tinymce.get('d_text').getContent();
-            else
-                 s_text=tinymce.get('s_text').getContent();
+                d_text=tinymce.get('d_text').getContent();
+            else if(type=="waiting_btn")
+                v_text=tinymce.get('v_text').getContent();
+            else if(type=="approve_btn")
+                s_text=tinymce.get('s_text').getContent();
         $.ajax({
             type: 'POST',
             url: "<?= ADMIN_BASE_URL ?>claims/process_claim",
-            data: {'data': form_data,'claim_id':'<?php echo $this->uri->segment(5) ?>','d_text':d_text,'s_text':s_text},
+            data: {'data': form_data,'claim_id':'<?php echo $this->uri->segment(5) ?>','d_text':d_text,'s_text':s_text,'v_text':v_text},
             async: false,
             success: function(result){
                 var status= result.status;
