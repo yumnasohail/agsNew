@@ -109,7 +109,7 @@ Modules::run('site_security/has_permission');
                      $txt.='"CMNI","'.$insurer_acc_no.'","'.$acc_no.'","'.$amount.'","'.$date.'","'.$currency.'","F","U","","","","","","","","'.$name.'","'.$address.'","'.$code.'","'.$place.'","'.$ags_message.'","","","","","","","Money Transferred through AGS - '.$client_message.' ","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","'.$paymentid.'","AT",';
                 }
             }else{
-                $txt.='"CMUONO","'.$insurer_acc_no.'","'.$acc_no.'","'.$currency.'","'.$amount.'","'.$currency.'","","1","'.$name.'","'.$address.'","'.$code.'","'.$place.'","","","","","1","Money Transferred through AGS - '.$client_message.'","","","","'.$ags_message.'","","","","","","","","","","","","","","","","","'.$t_id.'","","","","","","","","","","","","DABADKKK","","","DK",';
+                $txt.='"CMUONO","'.$insurer_acc_no.'","'.$acc_no.'","'.$currency.'","'.$amount.'","'.$currency.'","","1","'.$name.'","'.$address.'","'.$code.'","'.$place.'","","","","","1","Money Transferred through AGS - '.$client_message.'","","","","'.$ags_message.'","","","","","","","","","","'.$ags_message.'","","","","","","","'.$t_id.'","","","","","","","","","","","","DABADKKK","","","DK","29",';
             }
             $txt.="\n";
             
