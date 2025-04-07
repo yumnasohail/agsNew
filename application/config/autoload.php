@@ -53,7 +53,6 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'cache', 'cart');
 
 /*
 | -------------------------------------------------------------------
@@ -97,7 +96,8 @@ $autoload['config'] = array('outlet_constants','general_constants','modules_icon
 |
 */
 
-$autoload['language'] = array('english');
+
+$autoload['language'] = array('norwegian'); // setting language to norwegian by default
 
 
 /*

@@ -64,7 +64,8 @@
 // 	$route['ma']="front_end/ma";
 	$route['kontakt']="front_end/kontakt";
 	$route['om_ags']="front_end/om_ags";
-	
+	$route['switch/(:any)'] = 'front_end/language/switch/$1';
+
 	$route['oppdater/(.+)/(.+)']=$folder."oppdater";
 	$route['admin/(.+)'] = "$1/$1";
 	

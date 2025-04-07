@@ -175,3 +175,143 @@ $lang['text_password_match'] = 'passwords did not match';
 $lang['text_select_station'] = 'Select Location';
 $lang['text_footer_quick_links'] = 'Quick Links';
 $lang['text_download_app'] = 'Download The App';
+
+
+
+
+// ------------Header
+
+$lang['text_hjem'] = 'HOME';
+$lang['text_segmenter'] = 'SEGMENTS';
+$lang['text_kunst'] = 'ART';
+$lang['text_energy'] = 'ENERGY';
+$lang['text_sport'] = 'SPORT';
+$lang['text_header_kontakt_oss'] = 'CONTACT US';
+$lang['text_om_ags'] = 'ABOUT AGS';
+
+// ------------Home
+
+$lang['text_AGS'] = 'AGS INSURANCE';
+$lang['text_heading1'] = 'Coverholder for';
+$lang['text_heading2'] = 'Lloyd’s Insurance Company S.A';
+$lang['text_vare_segmenter'] = 'Our Segments';
+$lang['text_type1'] = 'Art';
+$lang['text_type2'] = 'Energy';
+$lang['text_type3'] = 'Sport'; // NOTE: You have a duplicate key here - consider renaming one
+$lang['text_type1_desc'] = 'AGS Insurance is one of the few players that specialize in art insurance for museums, art halls, galleries, private and public collections.';
+$lang['text_type2_desc'] = 'AGS Insurance AS was approved as an agent in 2008 by the Financial Supervisory Authority of Norway and underwrites various energy insurances on behalf of Lloyd’s Insurance Company.';
+$lang['text_type3_desc'] = 'Since 2008, AGS has introduced more new coverages than any other player for the benefit of sports federations and their members in a cost-effective way:';
+$lang['text_read_more'] = 'Read more';
+
+// ------------Art
+
+$lang['text_kunst_heading'] = 'Art Insurance';
+$lang['text_kunst_sub_heading'] = 'Our experience and closeness to the art world – your security';
+$lang['text_interest'] = 'INTERESTED?';
+$lang['text_kontakt_oss'] = 'Contact us:';
+$lang['text_Seniorrådgiver'] = 'Senior Advisor, Art Insurance';
+$lang['text_Seniorkonsulent'] = 'Senior Consultant, Art Insurance';
+$lang['text_SKADEMELDING'] = 'CLAIM REPORT';
+$lang['text_Vennligst'] = 'Please fill out the form below and send it to:';
+$lang['text_last_ned'] = 'Download form (PDF)';
+$lang['text_kunst_line1'] = 'AGS Insurance is one of the few experts in art insurance for museums, art halls, galleries, private, and public collections. We insure most art museums in Norway and are well represented in art institutions in Denmark and Sweden.';
+$lang['text_kunst_line2'] = 'With many years of experience in the Scandinavian market, we know what our customers need. For us, "who" we insure is just as important as "what" we insure. Understanding the customers needs and criteria enables us to offer tailored insurance solutions.';
+
+// ------------Energy
+
+$lang['text_informasjon'] = 'Contact our consultant for more information:';
+$lang['text_energy_title'] = 'Energy – Onshore & Offshore';
+$lang['text_energy_sub_heading'] = 'AGS offers the best insurance so you can feel safe.';
+$lang['text_energy_line1'] = 'AGS Forsikring AS was approved as an agent in 2008 by the Norwegian Swedish Financial Supervisory Authority and underwrites various energy insurance policies on behalf of Lloyds Insurance Company. Through our partners, AGS offers a range of insurance solutions to brokers on behalf of their clients.';
+$lang['text_energy_line2'] = 'AGS aims to be open, inclusive, and highly accessible. We hope our combination of experience and regional knowledge will provide brokers and their clients with attractive solutions.';
+
+// ------------Sport
+
+$lang['text_sport_title'] = 'Sport';
+$lang['text_sport_sub_heading'] = 'AGS offers the best insurance so you can feel safe.';
+$lang['text_sport_info'] = 'Contact our consultant for more information';
+$lang['text_sport_line1'] = 'Since 2008, AGS has introduced more new coverages than any other player for the benefit of sports federations and their members in a cost-effective way:';
+$lang['text_sport_line2'] = '- Strain injuries';
+$lang['text_sport_line3'] = '- Combined symptoms';
+$lang['text_sport_line4'] = '- Eating disorders';
+$lang['text_sport_line5'] = '- Treatment guarantees';
+$lang['text_sport_line6'] = 'Different sports require customized insurance solutions. SPORT SECURE is our unique insurance concept for sports. We have handled over 25,000 claims under license insurance for athletes and ensure quality control of our healthcare providers. We cooperate with, among others, the Sports Health Center and the Injury Hotline and have settled over 25,000 claims with the athlete’s health in focus.';
+$lang['text_sport_line7'] = 'SPORT SECURE – the best service and conditions in the market from a team that gives equal attention to grassroots sports as well as the individual needs of elite athletes. AGS Insurance – the specialist company in Sport.';
+
+// ------------Team
+
+$lang['text_team'] = 'Team Members.';
+$lang['text_designation1'] = 'General Manager';
+$lang['text_designation2'] = 'Senior Advisor, Art Insurance';
+$lang['text_designation3'] = 'Consultant, Energy';
+$lang['text_designation4'] = 'Claims Handler';
+
+// ------------About Us
+
+$lang['text_about_title'] = 'About Us';
+$lang['text_about_line1'] = 'AGS Insurance AS was established in 2008 and is licensed by the Financial Supervisory Authority as an insurance intermediary in Norway, Sweden, and Denmark.';
+$lang['text_about_line2'] = 'AGS’s vision and business idea – to be a leading company perceived as one of the best in its segments.';
+$lang['text_about_line3'] = 'Insurance is associated with security. Our task is to anchor this security with our customers. It is a great and important responsibility that we are aware of. Our customers must feel confident that their insurance matches actual risks, that coverages are appropriately dimensioned, that terms and conditions appear as the "best in the market," that claims are handled smoothly and efficiently, and that our advice and administration are of high insurance expertise.';
+$lang['text_about_line4'] = 'Our employees have solid competence and experience within their business areas, and with the opportunities our customers give us, we aim to deliver “the market’s best service.”';
+$lang['text_about_line5'] = 'Welcome to safety, competence, and the best service in the market!';
+$lang['text_about_line6'] = 'AGS Insurance AS';
+
+// ------------Footer
+
+$lang['text_skadesenter'] = 'Claims Center';
+$lang['text_administrasjon'] = 'Administration';
+$lang['text_footer_link1'] = 'Art';
+$lang['text_footer_link2'] = 'Sports and Sporting Events';
+$lang['text_footer_link3'] = 'Energy, On- and Offshore';
+$lang['text_need_help'] = 'Need Help?';
+$lang['text_contact_us'] = 'CONTACT US';
+$lang['text_privacy_policy'] = 'PRIVACY POLICY';
+
+// ------------Privacy Policy
+
+$lang['text_pp_title'] = 'Privacy Policy';
+$lang['text_pp_sub_title'] = 'Processing and Registration of Personal Data';
+$lang['text_pp_desc'] = '<br>In accordance with applicable laws and guidelines, we collect and process personal data necessary for our operations. The specific information we collect depends on the nature of your interaction with us. Below is a list of the types of personal data we typically collect:
+                        <br>- Contact information
+                        <br>- Certificate and insurance details
+                        <br>- Claim data
+                        <br>- Payment information
+                        <br>- Health and medical information*
+                        <br>We collect this information to provide insurance offers and manage insurance products. Email addresses and phone numbers are primarily used for communication purposes.
+                        <br><br><h4>Disclosure of Personal Information</h4>
+                        <br>We handle your personal data with strict confidentiality. We only disclose it when necessary and in accordance with the law. AGS Insurance AS is an insurance intermediary, and we share your information with the insurance company(ies) linked to your insurance when needed. You will find the names of your insurers on your insurance certificate. Additionally, in the case of a claim, we may share information with loss adjusters. We are also legally required to disclose information to public authorities when necessary.
+                        <br><br><h4>How long do we keep your personal data?</h4>
+                        <br>We will retain your personal data as long as necessary. Usually, this means we keep the information while your insurance is active, in accordance with legal requirements. When the data is no longer needed, it will be deleted.
+                        <br><br><h4>Protection of Personal Information</h4>
+                        
+                        <br>Your personal data is protected throughout the process. We have implemented technical and organizational measures to ensure the security of your data, including:
+                        <br>- Data encryption during transmission and storage
+                        <br>- Antivirus protection on our servers
+                        <br>- Regular backup procedures
+                        <br>- Password-protected IT systems with user-specific credentials
+                        <br>- VPN and encryption for remote work and use of mobile devices
+                        <br>- Guidelines and procedures for handling and sharing personal data
+                        <br>- Employee training in data security best practices
+
+                        <br><br><h4>Data Processors</h4>
+                        <br>We use third-party data processors for services like software, hosting, security, and data disposal. While these processors may handle personal data on our behalf, they do not have direct access to your information. We have contracts with each IT provider to ensure they comply with our strict data security instructions. These contracts require processors to implement appropriate technical and organizational measures to prevent accidental or unlawful destruction, loss, or unauthorized disclosure of your data, in accordance with applicable laws.
+
+                        <br><br><h4>Your Rights</h4>
+                        <br>As a data subject, you have the right to exercise the following rights, with certain regulatory exceptions:
+                        <br>- Right to be informed (GDPR Article 12-14): You have the right to be informed about how your personal data is collected and used.
+
+                        <br>- Right of access (GDPR Article 15): You may request to view and obtain copies of your personal data.
+
+                        <br>- Right to rectification (GDPR Article 16): You may request corrections of inaccurate or outdated personal information.
+
+                        <br>- Right to withdraw consent (GDPR Article 7): If you have previously given consent for data processing, you may withdraw it at any time without affecting the lawfulness of past processing. For more details about your consent, contact us.
+
+                        <br>- Right to erasure (GDPR Article 17): You may request the deletion of your personal data. This right may be subject to exceptions, such as legal requirements. We only delete your data if you are no longer a customer and when no claims related to past incidents or insurance can be made against us.
+
+                        <br>- Right to data portability (GDPR Article 20): You may request that your data be transferred to another controller or provided to you in a machine-readable format.
+
+                        <br>- Right to restrict processing (GDPR Article 18): You may request the restriction or suppression of the processing of your personal data.
+
+                        <br>- Right to object (GDPR Article 21): You may object to the processing of your personal data.
+
+                        <br>- Right to object to automated processing (GDPR Article 22): You have the right to object to decisions made solely through automated processes or profiling.';

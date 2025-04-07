@@ -136,8 +136,8 @@
             <div class="col-lg-4">
                 <div class="footer-shared">
                     <ul class="footer-address-links">
-                        <li><a href="tel:906 18 401"><i class="fa fa-phone"></i>Skadesenter: 906 18 401</a></li>
-                        <li><a href="tel:484 04 100"><i class="fa fa-phone"></i>Administrasjon: 484 04 100</a></li>
+                        <li><a href="tel:906 18 401"><i class="fa fa-phone"></i><?= $this->lang->line('text_skadesenter'); ?>: 906 18 401</a></li>
+                        <li><a href="tel:484 04 100"><i class="fa fa-phone"></i><?= $this->lang->line('text_administrasjon'); ?>: 484 04 100</a></li>
                         <li>
                             <a href="mailto:post@agsforsikring.no" class="mail">
                                 <i class="fa fa-envelope"></i> post@agsforsikring.no
@@ -151,21 +151,21 @@
             </div><!-- end col-lg-3 -->
             <div class="col-lg-4">
                 <div class="footer-shared footer-widget">
-                    <h3 class="footer-title">SEGMENTER</h3>
+                    <h3 class="footer-title"><?= $this->lang->line('text_segmenter'); ?></h3>
                     <ul class="footer-link company-link">
-                        <li><a href="<?php echo BASE_URL.'kunst'; ?>">Kunst</a></li>
-                        <li><a href="<?php echo BASE_URL.'sport' ?>">Sport og idrettsarrangementer</a></li>
-                        <li><a href="<?php echo BASE_URL.'enerji'; ?>">Energy, On- and Offshore</a></li>
+                        <li><a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_footer_link1'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_footer_link2'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_footer_link3'); ?></a></li>
                         <!--<li><a href="<?php echo BASE_URL.'ma' ?>">M&A-forsikring</a></li>-->
                     </ul>
                 </div><!-- end footer-shared -->
             </div><!-- end col-lg-3 -->
             <div class="col-lg-4">
                 <div class="footer-shared footer-widget2">
-                    <h3 class="footer-title">Need Help?</h3>
+                    <h3 class="footer-title"><?= $this->lang->line('text_need_help'); ?> </h3>
                     <ul class="footer-link company-link">
-                        <li><a href="<?php echo BASE_URL.'kontakt' ?>">KONTAKT OSS</a></li>
-                        <li><a href="<?php echo BASE_URL.'privacy_policy' ?>">PRIVATLIV POLITIKK
+                        <li><a href="<?php echo BASE_URL.'kontakt' ?>"><?= $this->lang->line('text_contact_us'); ?> </a></li>
+                        <li><a href="<?php echo BASE_URL.'privacy_policy' ?>"><?= $this->lang->line('text_privacy_policy'); ?> 
                         </a></li>
 
                     </ul>
@@ -303,7 +303,7 @@
             </div>
         </div>
 </div>
-
+<!-- 
 <script type="text/javascript">
 function googleTranslateElementInit() {
     new google.translate.TranslateElement({
@@ -383,7 +383,7 @@ window.onload = function() {
 
 
 
-</script>
+</script> -->
 
 
 

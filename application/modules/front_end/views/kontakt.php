@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <div class="sec-heading">
                     <p class="sec__meta">Our dedicated team</p>
-                    <h2 class="sec__title">Team Members.</h2>
+                    <h2 class="sec__title"><?= $this->lang->line('text_team'); ?></h2>
                 </div><!-- end sec-heading -->
             </div><!-- end col-lg-12 -->
         </div><!-- end row -->
@@ -16,7 +16,7 @@
                     </div>
                     <div class="team-content footer-shared">
                         <h3 class="team__title">Lars-Petter Myklebost</h3>
-                        <span class="team__meta">Daglig leder</span>
+                        <span class="team__meta"><?= $this->lang->line('text_designation1'); ?></span>
                       
                         <div class="team-read-btn">
                             <ul class="footer-address-links">
@@ -36,7 +36,7 @@
                     </div>
                     <div class="team-content footer-shared">
                         <h3 class="team__title">Camilla B. Myhre</h3>
-                        <span class="team__meta">Seniorrådgiver, kunstforsikring</span>
+                        <span class="team__meta"><?= $this->lang->line('text_designation2'); ?></span>
                         
                         <div class="team-read-btn">
                             <ul class="footer-address-links">
@@ -56,7 +56,7 @@
                     </div>
                     <div class="team-content footer-shared">
                         <h3 class="team__title">Kerstin Wollan</h3>
-                        <span class="team__meta">Konsulent, energi</span>
+                        <span class="team__meta"><?= $this->lang->line('text_designation3'); ?></span>
                         
                         <div class="team-read-btn">
                             <ul class="footer-address-links">
@@ -76,7 +76,7 @@
                     </div>
                     <div class="team-content footer-shared">
                         <h3 class="team__title">Birgitte Junker</h3>
-                        <span class="team__meta">Skadebehandler</span>
+                        <span class="team__meta"><?= $this->lang->line('text_designation4'); ?></span>
                         
                         <div class="team-read-btn">
                             <ul class="footer-address-links">

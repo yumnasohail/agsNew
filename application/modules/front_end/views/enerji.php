@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-content" style="text-align:center;">
-                    <h2 class="breadcrumb__title">Energy – Onshore & Offshore</h2>
-                    <p>AGS tilbyr de beste forsikringene for at du skal være trygg.</p>
+                    <h2 class="breadcrumb__title"><?= $this->lang->line('text_energy_title'); ?></h2>
+                    <p><?= $this->lang->line('text_energy_sub_heading'); ?></p>
                 </div><!-- end breadcrumb-content -->
             </div><!-- end col-lg-12 -->
         </div><!-- end row -->
@@ -17,8 +17,8 @@
                 
                 <div class="sidebar mt-0">
                     <div class="sidebar-widget contact-widget">
-                        <h3 class="widget__title">INTERESSERT?</h3>
-                        <p>Ta kontakt med vår konsulent for mer informasjon:</p>
+                        <h3 class="widget__title"><?= $this->lang->line('text_interest'); ?></h3>
+                        <p><?= $this->lang->line('text_informasjon'); ?></p>
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-user"></i>
@@ -46,20 +46,9 @@
                         </div>
                     </div><!-- end blog-post-img -->
                     <div class="blog-post-body">
-<!--                        <p class="blog__desc">-->
-<!--                        AGS Forsikring AS er godkjent som assurandør for Lloyd’s of London og tegner energiforsikringer på vegne av Lloyd’s Syndicate 1225 (AEGIS London).-->
-<!--<br>-->
-<!--Gjennom dette samarbeid kan AGS tilby omfattende utvalgt av forsikringsløsninger til meglere på vegne av deres kunder i hele verden.-->
-<!--<br>-->
-<!--AGS ønsker å fremstå som åpne, inkluderende og med god tilgjengelighet.-->
-<!--<br>-->
-<!--Vi håper kombinasjonen av AEGIS’ ekspertise i London og AGS regionale kunnskaper vil tilføre meglerne et godt og nytt lokalt marked.-->
-<!--                        </p>-->
 <p class="blog__desc">
-AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer, både offshore og onshore. Gjennom våre samarbeidspartnere tilbyr AGS en rekke forsikringsløsninger til meglere på vegne av deres kunder.<br>
-<br>
-AGS ønsker å fremstå som åpne, inkluderende og med god tilgjengelighet. Vi håper vår kombinasjon av erfaring og regionale kunnskaper vil tilføre meglerne og deres kunder attraktive løsninger.
-  </p>                      
+<?= $this->lang->line('text_energy_line1'); ?><br>
+<?= $this->lang->line('text_energy_line2'); ?>  </p>                      
                     </div><!-- end blog-post-body -->
                 </div><!-- end blog-post-item -->
             </div><!-- end col-lg-8 -->

@@ -8,9 +8,23 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 class Templates extends MX_Controller 
 {
 
-function __construct() {
-parent::__construct();
-}
+	public function __construct() {
+		parent::__construct();
+		$this->load->library('session');
+		$this->load->helper(['url', 'language']);
+
+		// Check if the language session is already set
+		if (!$this->session->userdata('site_lang')) {
+			// First time: Set to default language
+			$this->session->set_userdata('site_lang', 'norwegian');
+		}
+
+		// Now use the session value
+		$lang = $this->session->userdata('site_lang');
+
+		// Load the appropriate language file
+		$this->lang->load($lang . '_lang', $lang);
+	}
 
 
 	

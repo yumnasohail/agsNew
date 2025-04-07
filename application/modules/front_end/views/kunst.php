@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-content" style="text-align:center;">
-                    <h2 class="breadcrumb__title">Kunstforsikring</h2>
-                    <p>Vår erfaring og nærhet til kunstverdenen – din trygghet</p>
+                    <h2 class="breadcrumb__title"><?= $this->lang->line('text_kunst_heading'); ?> </h2>
+                    <p><?= $this->lang->line('text_kunst_sub_heading'); ?></p>
                 </div><!-- end breadcrumb-content -->
             </div><!-- end col-lg-12 -->
         </div><!-- end row -->
@@ -17,12 +17,12 @@
                 
                 <div class="sidebar mt-0">
                     <div class="sidebar-widget contact-widget">
-                        <h3 class="widget__title">INTERESSERT?</h3>
-                        <p>Ta kontakt med oss:</p>
+                        <h3 class="widget__title"><?= $this->lang->line('text_interest'); ?></h3>
+                        <p><?= $this->lang->line('text_kontakt_oss'); ?></p>
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-user"></i>
-                                Camilla B. Myhre<br>Seniorrådgiver, kunstforsikring
+                                Camilla B. Myhre<br><?= $this->lang->line('text_Seniorrådgiver'); ?>
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
@@ -39,7 +39,7 @@
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-user"></i>
-                                Kerstin Wollan<br>Seniorkonsulent, kunstforsikring
+                                Kerstin Wollan<br><?= $this->lang->line('text_Seniorkonsulent'); ?>
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
@@ -50,8 +50,8 @@
                                 <a href="mailto:kw@agsforsikring.no"> kw@agsforsikring.no</a>
                             </li>
                         </ul>
-                        <h3 class="widget__title">SKADEMELDING</h3>
-                        <p>Vennligst fyll ut skjemaet under, og send dette til:</p>
+                        <h3 class="widget__title"><?= $this->lang->line('text_SKADEMELDING'); ?></h3>
+                        <p><?= $this->lang->line('text_Vennligst'); ?></p>
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-map-marker"></i>
@@ -71,7 +71,7 @@
                             </li>
                         </ul>
                         <br>
-                        <p><a href="<?php echo STATIC_FRONT_IMAGE.'Fine Art Claims Form.docx'?>" target="_blank" >Last ned skjema (PDF)</a></p>
+                        <p><a href="<?php echo STATIC_FRONT_IMAGE.'Fine Art Claims Form.docx'?>" target="_blank" ><?= $this->lang->line('text_last_ned'); ?></a></p>
                     </div>
                 </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->
@@ -86,10 +86,8 @@
                     </div><!-- end blog-post-img -->
                     <div class="blog-post-body">
                         <p class="blog__desc">
-                        AGS Forsikring er en av få aktører som er eksperter på kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger. Vi forsikrer de fleste kunstmuseer i Norge, og er godt representert i kunstinstitusjoner i Danmark og Sverige.
-<br>
-Med mange års erfaring fra det skandinaviske markedet vet vi hva våre kunder trenger. For oss er «hvem» vi forsikrer vel så viktig som «hva» vi forsikrer. Forståelse for kundens behov og kriterier gjør det mulig for oss å tilby skreddersydde forsikringsløsninger.
-                        </p>
+                        <?= $this->lang->line('text_kunst_line1'); ?><br>
+                        <?= $this->lang->line('text_kunst_line2'); ?></p>
                         
                     </div><!-- end blog-post-body -->
                 </div><!-- end blog-post-item -->

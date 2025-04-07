@@ -175,3 +175,152 @@ $lang['text_password_match'] = 'Passordet stemmer ikke';
 $lang['text_select_station'] = 'Velg Sted';
 $lang['text_footer_quick_links'] = 'Hurtigkoblinger';
 $lang['text_download_app'] = 'Last ned appen';
+
+
+
+
+// ------------header
+
+
+$lang['text_hjem']='HJEM';
+$lang['text_segmenter']='SEGMENTER';
+$lang['text_kunst']='KUNST';
+$lang['text_energy']='ENERGY';
+$lang['text_sport']='SPORT';
+$lang['text_header_kontakt_oss']='KONTAKT OSS';
+$lang['text_om_ags']='OM AGS';
+
+// ------------Home
+
+
+$lang['text_AGS']='AGS FORSIKRING';
+$lang['text_heading1']='Coverholder for';
+$lang['text_heading2']='Lloyd’s Insurance Company S.A';
+$lang['text_vare_segmenter']='Våre segmenter';
+$lang['text_type1']='Kunst';
+$lang['text_type2']='Energi';
+$lang['text_type3']='Sport';
+$lang['text_type1_desc']='AGS Forsikring er en av få aktører som er eksperter på kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger.';
+$lang['text_type2_desc']='AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer på vegne Lloyds Insurance Company,';
+$lang['text_type3_desc']='Siden 2008 har AGS innført flere nye dekninger enn noen andre aktører til fordel for idrettsforbundene og deres medlemmer på en kostnadseffektiv måte:';
+$lang['text_read_more']='read more';
+
+// ------------Kunst
+
+
+$lang['text_kunst_heading']='Kunstforsikring';
+$lang['text_kunst_sub_heading']='Vår erfaring og nærhet til kunstverdenen – din trygghet';
+$lang['text_interest']='INTERESSERT?';
+$lang['text_kontakt_oss']='Ta kontakt med oss:';
+$lang['text_Seniorrådgiver']='Seniorrådgiver, kunstforsikring';
+$lang['text_Seniorkonsulent']='Seniorkonsulent, kunstforsikring';
+$lang['text_SKADEMELDING']='SKADEMELDING';
+$lang['text_Vennligst']='Vennligst fyll ut skjemaet under, og send dette til:';
+$lang['text_last_ned']='Last ned skjema (PDF)';
+$lang['text_kunst_line1']='AGS Forsikring er en av få aktører som er eksperter på kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger. Vi forsikrer de fleste kunstmuseer i Norge, og er godt representert i kunstinstitusjoner i Danmark og Sverige.';
+$lang['text_kunst_line2']='Med mange års erfaring fra det skandinaviske markedet vet vi hva våre kunder trenger. For oss er «hvem» vi forsikrer vel så viktig som «hva» vi forsikrer. Forståelse for kundens behov og kriterier gjør det mulig for oss å tilby skreddersydde forsikringsløsninger.';
+
+
+//------------Energy
+
+$lang['text_informasjon']='Ta kontakt med vår konsulent for mer informasjon:';
+$lang['text_energy_title']='Energy – Onshore & Offshore';
+$lang['text_energy_sub_heading']='AGS tilbyr de beste forsikringene for at du skal være trygg.';
+$lang['text_energy_line1']='AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer, både offshore og onshore. Gjennom våre samarbeidspartnere tilbyr AGS en rekke forsikringsløsninger til meglere på vegne av deres kunder.';
+$lang['text_energy_line2']='AGS ønsker å fremstå som åpne, inkluderende og med god tilgjengelighet. Vi håper vår kombinasjon av erfaring og regionale kunnskaper vil tilføre meglerne og deres kunder attraktive løsninger.';
+
+
+//-----------Sport
+
+
+$lang['text_sport_title']='Sport';
+$lang['text_sport_sub_heading']='AGS tilbyr de beste forsikringene for at du skal være trygg.';
+$lang['text_sport_info']='Ta kontakt med vår konsulent for mer informasjon';
+$lang['text_sport_line1']='Siden 2008 har AGS innført flere nye dekninger enn noen andre aktører til fordel for idrettsforbundene og deres medlemmer på en kostnadseffektiv måte:';
+$lang['text_sport_line2']='- Belastningslidelser';
+$lang['text_sport_line3']='- Sammensatte symptomer';
+$lang['text_sport_line4']='- Spiseforstyrrelser';
+$lang['text_sport_line5']='- Behandlingsgarantier';
+$lang['text_sport_line6']='Ulike idretter krever tilpassede forsikringsløsninger. SPORT SECURE er vårt unike forsikringskonsept for idretten. Vi har utført over 25.000 skadeoppgjør innen Lisensforsikringer for idrettsutøvere og kvalitetssikrer våre behandlere. Vi samarbeider blant annet med Idrettens Helsesenter og Skadetelefonen og har utført over 25.000 skadeoppgjør hvor idrettsutøverens helse står i fokus.';
+$lang['text_sport_line7']='SPORT SECURE – markedets beste service og betingelser hos et team som gir like stor oppmerksomhet til breddeidretten så vel som til eliteutøverens individuelle behov. AGS Forsikring – spesialistselskapet innen Sport.';
+
+
+//------------  Team
+
+$lang['text_team']='Team Members.';
+$lang['text_designation1']='Daglig leder';
+$lang['text_designation2']='Seniorrådgiver, kunstforsikring';
+$lang['text_designation3']='Konsulent, energi';
+$lang['text_designation4']='Skadebehandler';
+
+//----------- Om oss
+
+$lang['text_about_title']='Om oss';
+$lang['text_about_line1']='AGS Forsikring AS ble etablert i 2008 og har konsesjon fra Finanstilsynet som forsikringsformidler i Norge, Sverige og Danmark.';
+$lang['text_about_line2']='AGS visjon og forretningsidè – å være et ledende selskap som oppfattes å være blant de fremste innen sine segmenter.';
+$lang['text_about_line3']='Forsikring er assosiert med trygghet. Vår oppgave er å forankre denne tryggheten hos våre kunder. Det er et stort og viktig ansvar vi er oss bevisst. Våre kunder skal ha trygghet for at deres forsikringer samsvarer med reell risiki, at dekninger er riktig dimensjonert, at vilkår og betingelser fremstår som de ”beste i markedet”, at forsikringsoppgjør behandles smidig og effektivt, at vår rådgivning og administrasjon er forsikringsfaglig av høy kvalitet.';
+$lang['text_about_line4']='Våre medarbeidere har god kompetanse og erfaring innen sine forretningsområder, og med de mulighetene kundene gir oss, skal vi levere ”markedets beste service”.';
+$lang['text_about_line5']='Velkommen til trygghet, kompetanse og markedets beste service!';
+$lang['text_about_line6']='AGS Forsikring AS';
+
+//----------- Footer
+
+$lang['text_skadesenter']='Skadesenter';
+$lang['text_administrasjon']='Administrasjon';
+$lang['text_footer_link1']='Kunst';
+$lang['text_footer_link2']='Sport og idrettsarrangementer';
+$lang['text_footer_link3']='Energy, On- and Offshore';
+$lang['text_need_help']='Need Help?';
+$lang['text_contact_us']='KONTAKT OSS';
+$lang['text_privacy_policy']='PRIVATLIV POLITIKK';
+
+
+//----------- Privacy Policy
+
+$lang['text_pp_title']='Privatliv Politikk';
+$lang['text_pp_sub_title']='Behandling og registrering av personopplysninger';
+$lang['text_pp_desc']='<br>I samsvar med gjeldende lover og retningslinjer samler vi inn og behandler personopplysninger som er nødvendige for vår virksomhet. Den spesifikke informasjonen vi samler inn avhenger av arten av din interaksjon med oss. Nedenfor er en liste over typene personopplysninger vi vanligvis samler inn:
+                        <br>- Kontaktinformasjon
+                        <br>- Sertifikat og forsikringsdetaljer
+                        <br>- Kravdata
+                        <br>- Betalingsinformasjon
+                        <br>- Helse og medisinsk informasjon*
+                        <br>Vi samler inn denne informasjonen for å gi forsikringstilbud og administrere forsikringsprodukter. E-postadresser og telefonnumre brukes primært til kommunikasjonsformål.
+                        <br><br><h4>Utlevering av personlig informasjon</h4>
+                        <br>Vi behandler dine personopplysninger med streng konfidensialitet. Vi avslører det bare når det er nødvendig og i samsvar med loven. AGS Forsikring AS er en forsikringsformidler, vi deler informasjonen din med forsikringsselskapet(e) knyttet til din forsikring ved behov. Du finner navnene på forsikringsselskapene dine på forsikringsbeviset ditt. I tillegg, i tilfelle et krav, kan vi dele informasjon med tapsjusterere. Vi er også juridisk forpliktet til å utlevere informasjon til offentlige myndigheter når det er nødvendig.
+                        <br><br><h4>Hvor lenge oppbevarer vi personopplysningene dine?</h4>
+                        <br>Vi vil beholde dine personopplysninger så lenge det er nødvendig. Vanligvis betyr dette at vi beholder informasjonen mens forsikringen din er aktiv, i samsvar med gjeldende lovkrav. Når dataene ikke lenger er nødvendige, vil de bli slettet.
+                        <br><br><h4>Beskyttelse av personlig informasjon</h4>
+                        
+                        <br>Dine personopplysninger er ivaretatt gjennom hele behandlingen. Vi har implementert tekniske og organisatoriske tiltak for å sikre sikkerheten til dine data, inkludert:
+                        <br>- Datakryptering under overføring og lagring
+                        <br>- Antivirusbeskyttelse på våre servere
+                        <br>- Regelmessige sikkerhetskopieringsprosedyrer
+                        <br>- Passordbeskyttede IT-systemer med brukerspesifikk legitimasjon
+                        <br>- VPN og kryptering for eksternt arbeid og bruk av mobilenheter
+                        <br>- Retningslinjer og prosedyrer for håndtering og deling av personopplysninger
+                        <br>- Opplæring av ansatte i beste praksis for datasikkerhet
+
+
+                        <br><br><h4>Databehandlere</h4>
+                        <br>Vi bruker tredjeparts databehandlere for tjenester som programvare, hosting, sikkerhet og dataavhending. Selv om disse behandlerne kan håndtere personopplysninger på våre vegne, har de ikke direkte tilgang til informasjonen din. Vi har kontrakter med hver IT-leverandør for å sikre at de overholder våre strenge datasikkerhetsinstruksjoner. Disse kontraktene krever at databehandlere implementerer passende tekniske og organisatoriske tiltak for å forhindre utilsiktet eller ulovlig ødeleggelse, tap eller uautorisert utlevering av dataene dine, i samsvar med gjeldende lover.
+
+                        <br><br><h4>Dine rettigheter</h4>
+                        <br>Som datasubjekt har du rett til å utøve følgende rettigheter, med visse regulatoriske unntak:
+                        <br>- Rett til å bli informert (GDPR artikkel 12-14): Du har rett til å bli informert om hvordan personopplysningene dine samles inn og brukes.
+
+                        <br>- Rett til tilgang (GDPR artikkel 15): Du kan be om å se og få kopier av dine personopplysninger.
+
+                        <br>- Rett til retting (GDPR artikkel 16): Du kan be om korrigeringer av unøyaktig eller utdatert personlig informasjon.
+
+                        <br>- Rett til å trekke tilbake samtykke (GDPR artikkel 7): Hvis du tidligere har gitt samtykke til databehandling, kan du når som helst trekke tilbake samtykket uten å påvirke lovligheten av tidligere behandling. For ytterligere detaljer om omfanget av ditt samtykke, kontakt oss.
+
+                        <br>- Rett til sletting (GDPR artikkel 17): Du kan be om sletting av dine personopplysninger. Denne retten kan være gjenstand for unntak, for eksempel juridiske krav. Vi sletter kun dataene dine hvis du ikke lenger er kunde, og når krav knyttet til tidligere skader eller forsikringer ikke lenger kan rettes mot oss.
+
+                        <br>- Rett til dataportabilitet (GDPR artikkel 20): Du kan be om at dataene dine overføres til en annen behandlingsansvarlig eller leveres til deg i et maskinlesbart format.
+
+                        <br>- Rett til å begrense behandlingen (GDPR artikkel 18): Du kan be om at behandlingen av dine personopplysninger begrenses eller undertrykkes.
+
+                        <br>- Rett til å protestere (GDPR artikkel 21): Du kan protestere mot behandlingen av dine personopplysninger.
+
+                        <br>- Rett til å protestere mot automatisert behandling (GDPR artikkel 22): Du har rett til å protestere mot avgjørelser tatt utelukkende gjennom automatiserte prosesser eller profilering.';

@@ -4,22 +4,18 @@
             <div class="col-lg-12">
                 <div class="about-item">
                     <div class="sec-heading">
-                        <h2 class="sec__title">Om oss</h2>
+                        <h2 class="sec__title"><?= $this->lang->line('text_about_title'); ?></h2>
                         <p class="sec__desc mb-3">
-                        AGS Forsikring AS ble etablert i 2008 og har konsesjon fra Finanstilsynet som forsikringsformidler i Norge, Sverige og Danmark.
+                        <?= $this->lang->line('text_about_line1'); ?>
                         <br>
-AGS visjon og forretningsidè – å være et ledende selskap som oppfattes å være blant de fremste innen sine segmenter.
+                        <?= $this->lang->line('text_about_line2'); ?>
 <br>
-Forsikring er assosiert med trygghet. Vår oppgave er å forankre denne tryggheten hos våre kunder. Det er et stort og viktig ansvar vi er oss bevisst. Våre kunder skal ha trygghet for at deres forsikringer samsvarer med reell risiki, at dekninger er riktig dimensjonert, at vilkår og betingelser fremstår som de ”beste i markedet”, at forsikringsoppgjør behandles smidig og effektivt, at vår rådgivning og administrasjon er forsikringsfaglig av høy kvalitet.
-<br>
-Våre medarbeidere har god kompetanse og erfaring innen sine forretningsområder, og med de mulighetene kundene gir oss, skal vi levere ”markedets beste service”.
-<br>
-Velkommen til trygghet, kompetanse og markedets beste service!
-<br>
-AGS Forsikring AS<br>
+<?= $this->lang->line('text_about_line3'); ?><br>
+<?= $this->lang->line('text_about_line4'); ?><br>
+<?= $this->lang->line('text_about_line5'); ?><br>
+<?= $this->lang->line('text_about_line6'); ?><br>
 Lars-Petter Myklebost<br>
-Daglig leder
-                        </p>
+<?= $this->lang->line('text_designation1'); ?>                        </p>
                     </div><!-- end sec-heading -->
                 </div><!-- end about-item -->
             </div><!-- end col-lg-6 -->

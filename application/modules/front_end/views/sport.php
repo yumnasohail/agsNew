@@ -3,8 +3,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-content" style="text-align:center;">
-                    <h2 class="breadcrumb__title">Sport</h2>
-                    <p>AGS tilbyr de beste forsikringene for at du skal være trygg.</p>
+                    <h2 class="breadcrumb__title">                        <?= $this->lang->line('text_sport_title'); ?></h2>
+                    <p>                        <?= $this->lang->line('text_sport_sub_heading'); ?></p>
                 </div><!-- end breadcrumb-content -->
             </div><!-- end col-lg-12 -->
         </div><!-- end row -->
@@ -17,8 +17,8 @@
                 
                 <div class="sidebar mt-0">
                     <div class="sidebar-widget contact-widget">
-                        <h3 class="widget__title">INTERESSERT?</h3>
-                        <p>Ta kontakt med vår konsulent for mer informasjon</p>
+                        <h3 class="widget__title"><?= $this->lang->line('text_interest'); ?></h3>
+                        <p><?= $this->lang->line('text_sport_info'); ?></p>
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-user"></i>
@@ -47,16 +47,13 @@
                     </div><!-- end blog-post-img -->
                     <div class="blog-post-body">
                         <p class="blog__desc">
-                        Siden 2008 har AGS innført flere nye dekninger enn noen andre aktører til fordel for idrettsforbundene og deres medlemmer på en kostnadseffektiv måte:
-<br>
-- Belastningslidelser<br>
-- Sammensatte symptomer<br>
-- Spiseforstyrrelser<br>
-- Behandlingsgarantier<br>
- Ulike idretter krever tilpassede forsikringsløsninger. SPORT SECURE er vårt unike forsikringskonsept for idretten. Vi har utført over 25.000 skadeoppgjør innen Lisensforsikringer for idrettsutøvere og kvalitetssikrer våre behandlere. Vi samarbeider blant annet med Idrettens Helsesenter og Skadetelefonen og har utført over 25.000 skadeoppgjør hvor idrettsutøverens helse står i fokus.
-<br>
-SPORT SECURE – markedets beste service og betingelser hos et team som gir like stor oppmerksomhet til breddeidretten så vel som til eliteutøverens individuelle behov. AGS Forsikring – spesialistselskapet innen Sport.
-                        </p>
+                        <?= $this->lang->line('text_sport_line1'); ?><br>
+                        <?= $this->lang->line('text_sport_line2'); ?><br>
+                        <?= $this->lang->line('text_sport_line3'); ?><br>
+                        <?= $this->lang->line('text_sport_line4'); ?><br>
+                        <?= $this->lang->line('text_sport_line5'); ?><br>
+                        <?= $this->lang->line('text_sport_line6'); ?><br>
+                        <?= $this->lang->line('text_sport_line7'); ?>                        </p>
                         
                     </div><!-- end blog-post-body -->
                 </div><!-- end blog-post-item -->

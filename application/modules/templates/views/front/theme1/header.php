@@ -100,7 +100,14 @@
 
     </style>
 </head>
-
+<?php
+    $selected_lang = $this->session->userdata('site_lang') ?? 'norwegian';
+    $flags = [
+        'norwegian' => STATIC_FRONT_IMAGE . 'no.jpg',
+        'english'   => STATIC_FRONT_IMAGE . 'flag.jpg',
+    ];
+    $selected_flag = $flags[$selected_lang];
+?>
 <header class="header-area">
     <div class="header-top">
         <div class="container">
@@ -124,20 +131,27 @@
                 </div><!-- end col-lg-6 -->
 
                 <div class="col-lg-6">
-                    <div class="language-dropdown" id="language-dropdown" style="display:none">
+                    <div class="language-dropdown" id="language-dropdown">
                         <button class="dropbtn">
-                            <img id="selected-flag" src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Selected Language" />
+                            <img id="selected-flag" src="<?php echo $selected_flag; ?>" alt="Selected Language" />
                         </button>
                         <div class="dropdown-content">
-                            <a href="#" id="norwegian-option" onclick="translatePage('no', '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg')">
-                                <img src="<?php echo STATIC_FRONT_IMAGE; ?>no.jpg" alt="Norwegian" />
-                            </a>
-                            <a href="#" id="english-option" style="display: none;" onclick="translatePage('en', '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg')">
-                                <img src="<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg" alt="English" />
-                            </a>
+                            <?php if ($selected_lang != 'norwegian'): ?>
+                                <a href="<?php echo base_url('switch/norwegian'); ?>">
+                                    <img src="<?php echo $flags['norwegian']; ?>" alt="Norwegian" />
+                                </a>
+                            <?php endif; ?>
+                            <?php if ($selected_lang != 'english'): ?>
+                                <a href="<?php echo base_url('switch/english'); ?>">
+                                    <img src="<?php echo $flags['english']; ?>" alt="English" />
+                                </a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
+
+
+
                 <div class="col-lg-6">
                     <div class="header-top-info header-login-info">
                         <!-- <ul class="info-list">
@@ -163,15 +177,15 @@
                         <nav>
                             <ul>
                                 <li>
-                                    <a href="<?php echo BASE_URL ?>">HJEM</a>
+                                    <a href="<?php echo BASE_URL ?>"><?= $this->lang->line('text_hjem'); ?> </a>
                                    
                                 </li>
                                 <li>
-                                    <a >SEGMENTER <i class="fa fa-angle-down"></i></a>
+                                    <a ><?= $this->lang->line('text_segmenter'); ?>  <i class="fa fa-angle-down"></i></a>
                                     <ul class="dropdown-menu-item">
-                                        <li><a href="<?php echo BASE_URL.'kunst'; ?>">KUNST</a></li>
-                                        <li><a href="<?php echo BASE_URL.'enerji'; ?>">ENERGY</a></li>
-                                        <li><a href="<?php echo BASE_URL.'sport' ?>">SPORT</a></li>
+                                        <li><a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_kunst'); ?> </a></li>
+                                        <li><a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_energy'); ?> </a></li>
+                                        <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_sport'); ?> </a></li>
                                         <!--<li>-->
                                         <!--    <a href="<?php echo BASE_URL.'ma' ?>">M&A </a>-->
                                            
@@ -180,10 +194,10 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL.'kontakt' ?>">KONTAKT OSS</a>
+                                    <a href="<?php echo BASE_URL.'kontakt' ?>"><?= $this->lang->line('text_header_kontakt_oss'); ?> </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo BASE_URL.'om_ags' ?>">OM AGS</a>
+                                    <a href="<?php echo BASE_URL.'om_ags' ?>"><?= $this->lang->line('text_om_ags'); ?> </a>
                                 </li>
                                 
                              
@@ -203,23 +217,23 @@
         <div class="side-menu-wrap">
             <ul class="side-menu-ul">
                 <li class="sidenav__item">
-                    <a href="<?php echo BASE_URL ?>">HJEM</a>
+                    <a href="<?php echo BASE_URL ?>"><?= $this->lang->line('text_hjem'); ?></a>
                 </li>
                 <li class="sidenav__item">
-                    <a >SEGMENTER</a>
+                    <a ><?= $this->lang->line('text_segmenter'); ?></a>
                     <span class="menu-plus-icon"></span>
                     <ul class="side-sub-menu">
-                        <li><a href="<?php echo BASE_URL.'kunst'; ?>">KUNST</a></li>
-                        <li><a href="<?php echo BASE_URL.'enerji'; ?>">ENERGY</a></li>
-                        <li><a href="<?php echo BASE_URL.'sport' ?>">SPORT</a></li>
+                        <li><a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_kunst'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_energy'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_sport'); ?></a></li>
                         <!--<li><a href="<?php echo BASE_URL.'ma' ?>">M&A</a></li>-->
                     </ul>
                 </li>
                 <li class="sidenav__item">
-                    <a href="<?php echo BASE_URL.'kontakt' ?>">KONTAKT OSS</a>
+                    <a href="<?php echo BASE_URL.'kontakt' ?>"><?= $this->lang->line('text_header_kontakt_oss'); ?></a>
                 </li>
                 <li class="sidenav__item">
-                    <a href="<?php echo BASE_URL.'om_ags' ?>">OM AGS</a>
+                    <a href="<?php echo BASE_URL.'om_ags' ?>"><?= $this->lang->line('text_om_ags'); ?></a>
                 </li>
             </ul>
         </div><!-- end side-menu-wrap -->

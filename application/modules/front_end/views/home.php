@@ -33,7 +33,7 @@
                                  data-paddingright="[0,0,0,0]"
                                  data-paddingbottom="[0,0,0,0]"
                                  data-paddingleft="[0,0,0,0]">
-                                <h2 class="sec__title">AGS FORSIKRING  </h2>
+                                <h2 class="sec__title"><?= $this->lang->line('text_AGS'); ?> </h2>
                             </div><!-- end tp-caption -->
 
                             <!-- LAYER NR. 2 -->
@@ -55,7 +55,7 @@
                                  data-paddingbottom="[0,0,0,0]"
                                  data-paddingleft="[0,0,0,0]">
                                 <p class="sec__desc">
-                              Coverholder for <br> Lloyd’s Insurance Company S.A
+                                <?= $this->lang->line('text_heading1'); ?> <br><?= $this->lang->line('text_heading2'); ?>
                                 </p>
                             </div><!-- end tp-caption -->
 
@@ -89,7 +89,7 @@
                                  data-paddingright="[0,0,0,0]"
                                  data-paddingbottom="[0,0,0,0]"
                                  data-paddingleft="[0,0,0,0]">
-                                <h2 class="sec__title"> AGS FORSIKRING </h2>
+                                <h2 class="sec__title"><?= $this->lang->line('text_AGS'); ?>  </h2>
                             </div><!-- end tp-caption -->
 
                             <!-- LAYER NR. 5 -->
@@ -111,7 +111,7 @@
                                  data-paddingbottom="[0,0,0,0]"
                                  data-paddingleft="[0,0,0,0]">
                                 <p class="sec__desc">
-                                Coverholder for <br> Lloyd’s Insurance Company S.A
+                                <?= $this->lang->line('text_heading1'); ?> <br><?= $this->lang->line('text_heading2'); ?>
                                 </p>
                             </div><!-- end tp-caption -->
 
@@ -137,7 +137,7 @@
             <div class="col-lg-8">
                 <div class="sec-heading">
                     <h2 class="sec__title">
-                    Våre segmenter
+                    <?= $this->lang->line('text_vare_segmenter'); ?> 
                     </h2>
                 </div><!-- end sec-heading -->
             </div><!-- end col-lg-8 -->
@@ -148,13 +148,13 @@
                     <span class="info__number">01</span>
                     <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'kunst.jpg'; ?>" >
                     <h3 class="info__title">
-                        <a href="<?php echo BASE_URL.'kunst'; ?>">Kunst</a>
+                        <a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_type1'); ?> </a>
                     </h3>
                     <p class="info__desc">
-                    AGS Forsikring er en av få aktører som er eksperter på kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger. 
+                    <?= $this->lang->line('text_type1_desc'); ?>
                     </p>
                     <a href="<?php echo BASE_URL.'kunst'; ?>" class="text-btn">
-                            read more <i class="fa fa-angle-right"></i>
+                    <?= $this->lang->line('text_read_more'); ?> <i class="fa fa-angle-right"></i>
                         </a>
                 </div><!-- end info-item -->
             </div><!-- end col-lg-4 -->
@@ -163,13 +163,12 @@
                     <span class="info__number">02</span>
                     <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'energy.jpg'; ?>" >
                     <h3 class="info__title">
-                        <a href="<?php echo BASE_URL.'enerji'; ?>">Energi</a>
+                        <a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_type2'); ?></a>
                     </h3>
                     <p class="info__desc">
-                    AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer på vegne Lloyds Insurance Company,
-                    </p>
+                    <?= $this->lang->line('text_type2_desc'); ?>                    </p>
                     <a href="<?php echo BASE_URL.'enerji'; ?>" class="text-btn">
-                            read more <i class="fa fa-angle-right"></i>
+                    <?= $this->lang->line('text_read_more'); ?><i class="fa fa-angle-right"></i>
                         </a>
                 </div><!-- end info-item -->
             </div><!-- end col-lg-4 -->
@@ -178,13 +177,12 @@
                     <span class="info__number">03</span>
                     <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'sport.jpg'; ?>" >
                     <h3 class="info__title">
-                        <a href="<?php echo BASE_URL.'sport' ?>">Sport</a>
+                        <a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_type3'); ?></a>
                     </h3>
                     <p class="info__desc">
-                    Siden 2008 har AGS innført flere nye dekninger enn noen andre aktører til fordel for idrettsforbundene og deres medlemmer på en kostnadseffektiv måte:
-                    </p>
+                    <?= $this->lang->line('text_type3_desc'); ?>                      </p>
                     <a href="<?php echo BASE_URL.'sport' ?>" class="text-btn">
-                            read more <i class="fa fa-angle-right"></i>
+                    <?= $this->lang->line('text_read_more'); ?><i class="fa fa-angle-right"></i>
                         </a>
                 </div><!-- end info-item -->
             </div><!-- end col-lg-4 -->

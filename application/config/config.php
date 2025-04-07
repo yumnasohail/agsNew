@@ -27,7 +27,7 @@ if (strpos($_SERVER['HTTP_HOST'], '.') > 0 && $_SERVER['HTTP_HOST'] != '192.168.
 	$localname='';
 }
 else
-	$localname='Fajira';
+	$localname='agsNew';
 //	echo $localname; exit;
 $prefix='http';
 if ( $_SERVER['HTTP_HOST'] == 'agsasa.azurewebsites.net')
@@ -90,7 +90,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']	= 'norwegian';
 
 /*
 |--------------------------------------------------------------------------
