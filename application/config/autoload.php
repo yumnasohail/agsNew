@@ -97,7 +97,7 @@ $autoload['config'] = array('outlet_constants','general_constants','modules_icon
 */
 
 
-$autoload['language'] = array('norwegian'); // setting language to norwegian by default
+$autoload['language'] = array('english'); // setting language to norwegian by default
 
 
 /*
