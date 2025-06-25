@@ -88,7 +88,7 @@
                                         <td>Commercial</td>
                                         <td>Direct </td>
                                         <td><?php echo $value['currency'] ?></td>
-                                        <td><?php if($value['paid']>0) echo round($value['paid']); else echo "Nil"; ?></td>
+                                        <td><?php if($value['paid_new']>0) echo round($value['paid_new']); else echo "Nil"; ?></td>
                                         <td>
                                             <?php $res=Modules::run('reports/_get_specific_table_with_pagination_bdx_check',array("f_id"=>$value['f_id'],'end_date <= '=>$value['start_date']),'policy_period.id desc',"policy_period","policy_period.id",'','')->num_rows();
                                             if($res>0) echo "Renewal"; else echo "New"; ?></td>
