@@ -471,10 +471,10 @@ Modules::run('site_security/has_permission');
                     $end=$formdata['end_date'];
                     $where.="`premiums`.`dato` <= '$c_end' AND ";
                 }
-                if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
-                    $start=$formdata['start_date'];
-                    $where.="`premiums`.`dato` >= '$c_start' AND ";
-                }
+                // if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
+                //     $start=$formdata['start_date'];
+                //     $where.="`premiums`.`dato` >= '$c_start' AND ";
+                // }
                 if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
                     $insurer=$formdata['insurer'];
                     $where.="`insurers`.`id` = '$insurer' AND ";
