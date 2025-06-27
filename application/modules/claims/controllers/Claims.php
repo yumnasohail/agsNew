@@ -649,9 +649,9 @@ Modules::run('site_security/has_permission');
                 {
                     $trans_data['send']="1";
                 }
-                $sanction=$this->sanction_check($trans_data['a_name']);
-                $trans_data['sanction_result']=$sanction['res'];
-                $trans_data['sanction_detail']=$sanction['description'];
+                // $sanction=$this->sanction_check($trans_data['a_name']);
+                // $trans_data['sanction_result']=$sanction['res'];
+                // $trans_data['sanction_detail']=$sanction['description'];
                 $id=Modules::run('api/insert_into_specific_table',$trans_data,"transaction");  
                 $log_amount=$formdata['amount'];
                 Modules::run('api/insert_into_specific_table',array("claim_id"=>$claim_id,"performed_by"=>$session['user_id'],"type"=>"2","message"=>" New payment: $currency $log_amount","date_time"=>date('Y-m-d H:i:s')),'logs');
@@ -708,6 +708,7 @@ Modules::run('site_security/has_permission');
                   CURLOPT_HTTPHEADER => array(
                     'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
                   ),
+               //   CURLOPT_CAINFO =>  $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
                   CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/cacert.pem', 
                 ));
 
