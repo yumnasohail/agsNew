@@ -746,7 +746,7 @@ Modules::run('site_security/has_permission');
             $curl = curl_init();
 
             // Adjust the path to your actual cacert.pem file
-            $certPath = $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem';
+            $certPath = $_SERVER['DOCUMENT_ROOT'] . '/cert/cacert.pem';
 
             if (!file_exists($certPath)) {
                 // If certificate not found, fail gracefully
