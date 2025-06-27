@@ -649,9 +649,7 @@ Modules::run('site_security/has_permission');
                 {
                     $trans_data['send']="1";
                 }
-                // $sanction=$this->sanction_check($trans_data['a_name']);
-                // $trans_data['sanction_result']=$sanction['res'];
-                // $trans_data['sanction_detail']=$sanction['description'];
+               
                 $id=Modules::run('api/insert_into_specific_table',$trans_data,"transaction");  
                 $log_amount=$formdata['amount'];
                 Modules::run('api/insert_into_specific_table',array("claim_id"=>$claim_id,"performed_by"=>$session['user_id'],"type"=>"2","message"=>" New payment: $currency $log_amount","date_time"=>date('Y-m-d H:i:s')),'logs');
@@ -675,6 +673,10 @@ Modules::run('site_security/has_permission');
                         Modules::run('api/insert_into_specific_table',$arr_attribute,'sub_amounts');
                     }
                 }
+                $sanction=$this->sanction_check($trans_data['a_name']);
+                $sanc_data['sanction_result']=$sanction['res'];
+                $sanc_data['sanction_detail']=$sanction['description'];
+                Modules::run('api/insert_or_update',array("id"=>$id),$sanc_data,"transaction"); 
             }else
             {
                 $status=FALSE;
@@ -692,43 +694,103 @@ Modules::run('site_security/has_permission');
 
     }
     
-    function sanction_check($name){
-		$name = str_replace(' ', '%20', $name);
-		$curl = curl_init();
+    // function sanction_check($name){
+	// 	$name = str_replace(' ', '%20', $name);
+	// 	$curl = curl_init();
 
-        curl_setopt_array($curl, array(
-                  CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=".$name,
-                  CURLOPT_RETURNTRANSFER => true,
-                  CURLOPT_ENCODING => '',
-                  CURLOPT_MAXREDIRS => 10,
-                  CURLOPT_TIMEOUT => 0,
-                  CURLOPT_FOLLOWLOCATION => true,
-                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                  CURLOPT_CUSTOMREQUEST => 'GET',
-                  CURLOPT_HTTPHEADER => array(
-                    'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
-                  ),
-               //   CURLOPT_CAINFO =>  $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
-                  CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/cacert.pem', 
-                ));
+    //     curl_setopt_array($curl, array(
+    //               CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=".$name,
+    //               CURLOPT_RETURNTRANSFER => true,
+    //               CURLOPT_ENCODING => '',
+    //               CURLOPT_MAXREDIRS => 10,
+    //               CURLOPT_TIMEOUT => 0,
+    //               CURLOPT_FOLLOWLOCATION => true,
+    //               CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //               CURLOPT_CUSTOMREQUEST => 'GET',
+    //               CURLOPT_HTTPHEADER => array(
+    //                 'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+    //               ),
+    //            //   CURLOPT_CAINFO =>  $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem', 
+    //               CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/cacert.pem', 
+    //             ));
 
         
-        $result = curl_exec($curl);
-		if (curl_errno($curl)) {
-			echo 'Error:' . curl_error($curl);
-		}
-		curl_close($curl);
-        $data['description']=$result;
-		if (!empty($result)) {
-			$result = json_decode($result);
-			if($result->count==0)
-			$data['res']="Secure";
-			else
-			$data['res']="Not secure";
+    //     $result = curl_exec($curl);
+	// 	if (curl_errno($curl)) {
+	// 		echo 'Error:' . curl_error($curl);
+	// 	}
+	// 	curl_close($curl);
+    //     $data['description']=$result;
+	// 	if (!empty($result)) {
+	// 		$result = json_decode($result);
+	// 		if($result->count==0)
+	// 		$data['res']="Secure";
+	// 		else
+	// 		$data['res']="Not secure";
 			    
-		}else{
-		    $data['res']="No result found";
-		}
+	// 	}else{
+	// 	    $data['res']="No result found";
+	// 	}
+    //     return $data;
+    // }
+
+    function sanction_check($name)
+    {
+        $data = [
+            'res' => 'failed',         // default status
+            'description' => ''         // will store raw result or error
+        ];
+
+        try {
+            $name = str_replace(' ', '%20', $name);
+            $curl = curl_init();
+
+            // Adjust the path to your actual cacert.pem file
+            $certPath = $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cacert.pem';
+
+            if (!file_exists($certPath)) {
+                // If certificate not found, fail gracefully
+                $data['res'] = 'Certificate file missing';
+                return $data;
+            }
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=" . $name,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => [
+                    'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+                ],
+                CURLOPT_CAINFO => $certPath,
+            ]);
+
+            $result = curl_exec($curl);
+
+            if (curl_errno($curl)) {
+                $data['description'] = 'cURL Error: ' . curl_error($curl);
+                $data['res'] = 'Request failed';
+            } else {
+                $data['description'] = $result;
+                $decoded = json_decode($result);
+                if (isset($decoded->count)) {
+                    $data['res'] = ($decoded->count == 0) ? "Secure" : "Not secure";
+                } else {
+                    $data['res'] = "Invalid response";
+                }
+            }
+
+            curl_close($curl);
+        } catch (Exception $e) {
+            // In case something unexpected goes wrong
+            $data['res'] = 'Exception caught';
+            $data['description'] = $e->getMessage();
+        }
+
         return $data;
     }
     function note()
