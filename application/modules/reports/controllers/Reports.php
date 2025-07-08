@@ -810,6 +810,132 @@ Modules::run('site_security/has_permission');
                 $data['year']=$formdata['year'];
                 echo $this->load->view('table14',$data,TRUE);
             break;
+            case "15":
+                $data['result'] = [];
+                if (!empty($formdata['check_by_year']) && $formdata['check_by_year'] == "on") {
+                    $start_year = (int)$formdata['start_year'];
+                    $end_year = (int)$formdata['end_year'];
+                    $start = $start_year . '-01-01';
+                    $end = $end_year . '-12-31';
+                    $is_year_based = true;
+                } else {
+                    $start = date('Y-m-d', strtotime($formdata['start_date']));
+                    $end = date('Y-m-d', strtotime($formdata['end_date']));
+                    $start_year = (int)date('Y', strtotime($start));
+                    $end_year = (int)date('Y', strtotime($end));
+                    $is_year_based = false;
+                }
+
+                $federations = Modules::run(
+                    'api/_get_specific_table_with_pagination',
+                    ['del_status' => 0],
+                    'id desc',
+                    'federations',
+                    'id,name',
+                    '',
+                    ''
+                )->result_array();
+
+                foreach ($federations as $fed) {
+                    $federation_id = $fed['id'];
+                    $federation_name = $fed['name'];
+                    $yearly_premiums = [];
+
+                    if ($is_year_based) {
+                        for ($year = $start_year; $year <= $end_year; $year++) {
+                            $year_start = $year . '-01-01';
+                            $year_end = $year . '-12-31';
+
+                            $cols = [
+                                "policies.f_id" => $federation_id,
+                                "premiums.status" => 1,
+                                "policy_period.del_status" => 0,
+                                "policies.del_status" => 0,
+                                "policy_period.start_date >= " => $year_start,
+                                "policy_period.start_date <= " => $year_end
+                            ];
+
+                            $select = "SUM(premiums.paid) AS total_premium,SUM(premiums.recieved) AS total_comission";
+
+                            $premium_result = Modules::run(
+                                'reports/get_policy_wise_premiums',
+                                $cols,
+                                '', // order_by
+                                'premiums',
+                                $select,
+                                '', '', // page, limit
+                                '' // group_by
+                            )->row_array();
+
+                            $yearly_premiums[] = [
+                                'year' => $year,
+                                'total_premium' => (float)($premium_result['total_premium'] ?? 0),
+                                'total_comission' => (float)($premium_result['total_comission'] ?? 0)
+                            ];
+                        }
+                    } else {
+                        $cols = [
+                            "policies.f_id" => $federation_id,
+                            "premiums.status" => 1,
+                            "policy_period.del_status" => 0,
+                            "policy_period.policy_check" => 1,
+                            "policies.del_status" => 0,
+                            "policy_period.start_date >= " => $start,
+                            "policy_period.start_date <= " => $end
+                        ];
+
+                        $select = "SUM(premiums.paid) AS total_premium,SUM(premiums.recieved) AS total_comission";
+
+                        $premium_result = Modules::run(
+                            'reports/get_policy_wise_premiums',
+                            $cols,
+                            '',
+                            'premiums',
+                            $select,
+                            '', '',
+                            ''
+                        )->row_array();
+
+                        $yearly_premiums[] = [
+                            'from_date' => $start,
+                            'to_date' => $end,
+                            'total_premium' => (float)($premium_result['total_premium'] ?? 0),
+                            'total_comission' => (float)($premium_result['total_comission'] ?? 0)
+                        ];
+                    }
+
+                    $data['result'][] = [
+                        'federation_id' => $federation_id,
+                        'federation_name' => $federation_name,
+                        'premiums_by_year' => $yearly_premiums
+                    ];
+                }
+                $federations_pivot = [];   
+                $years_pivot = [];         
+                $table_data = [];         
+
+                foreach ($data['result'] as $fed) {
+                    $fid = $fed['federation_id'];
+                    $federations_pivot[$fid] = $fed['federation_name'];
+
+                    foreach ($fed['premiums_by_year'] as $row) {
+                        $year = $row['year'] ?? date('Y', strtotime($row['from_date']));
+                        $years_pivot[$year] = true;
+                        $table_data[$fid][$year]['paid'] = $row['total_premium'];
+                        $table_data[$fid][$year]['comission'] = $row['total_comission'];
+                    }
+                }
+
+                ksort($years_pivot);
+
+                $data['federation_table'] = [
+                    'federations' => $federations_pivot,
+                    'years' => array_keys($years_pivot),
+                    'table_data' => $table_data
+                ];
+
+                echo $this->load->view('table15',$data,TRUE);
+            break;
             default: 
                 $data['result']=array();
         }
@@ -879,6 +1005,11 @@ Modules::run('site_security/has_permission');
     function get_policy_wise_premiums($cols, $order_by,$table,$select,$page_number,$limit){
          $this->load->model('mdl_reports');
         $query = $this->mdl_reports->get_policy_wise_premiums($cols, $order_by,$table,$select,$page_number,$limit);
+        return $query;
+    }
+    function get_year_wise_premiums($cols, $order_by, $table, $select, $page_number, $limit, $group_by){
+        $this->load->model('mdl_reports');
+        $query = $this->mdl_reports->get_year_wise_premiums($cols, $order_by,$table,$select,$page_number,$limit, $group_by);
         return $query;
     }
    

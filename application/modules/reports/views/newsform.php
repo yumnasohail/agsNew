@@ -151,6 +151,7 @@ width: 12px!important;
                                     <option value="12">Report #12 Premiums and Commission - UMR</option>
                                     <option value="13">Report #13 (Estimated PC to Client)</option>                                    
                                     <option value="14">Report #14 (RIB to Client)</option>
+                                    <option value="15">Report #15 (AGS Commission and Premium Report)</option>
 
 
                                 </select>
@@ -205,6 +206,38 @@ width: 12px!important;
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12  rpt_15" style="display:none;">
+                            <div class="custom-control custom-checkbox ">
+                                <input type="checkbox" class="custom-control-input " id="custCheck29" name="check_by_year">
+                                <label class="custom-control-label" for="custCheck29">Sjekk etter år</label>
+                            </div>
+                        </div>
+                        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 check_by_year" style="display:none;">
+                             <label for="lastName"> Reporting Year Start</label>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="start_year" name="start_year" >
+                                    <?php
+                                         for($m=date('Y'); $m>=2016; $m--){
+                                           echo '<option value="'.date($m, strtotime('-1 years')).'">'.date($m, strtotime('-1 years')).'</option>';
+                                         }
+                                       ?>
+                                </select>
+                                <div class="input-group-append">
+                                    <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 check_by_year" style="display:none;">
+                             <label for="lastName"> Reporting Year End</label>
+                            <div class="input-group mb-3">
+                                <select class="custom-select" id="end_year" name="end_year" >
+                                </select>
+                                <div class="input-group-append">
+                                    <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-md-offset-12 col-md-12" style="padding-bottom:15px;">
                             <button  class="btn btn-outline-primary gt_rpt"  style="width: 100%;">
@@ -249,6 +282,19 @@ width: 12px!important;
     }else{
         $('.Velg').css('display', 'none');
     }
+    if(number=="15"){
+        $('.rpt_15').css('display', 'block');
+        var check=$('#custCheck29').is(":checked");
+        if(check==true){
+            $('.check_by_year').css('display', 'block');
+        }else{
+            $('.check_by_year').css('display', 'none');
+        }
+    }else{
+        $('.rpt_15').css('display', 'none');
+        $('.check_by_year').css('display', 'none');
+        $('.check_by_year').css('display', 'none');
+    }
     });
     
     
@@ -273,6 +319,33 @@ $(document).ready(function() {
             $('.col_div').css('display', 'none');
         }
     });
+    $('#custCheck29').on('click', function(event) {
+        var check=$(this).is(":checked");
+        if(check==true){
+            $('.check_by_year').css('display', 'block');
+        }else{
+            $('.check_by_year').css('display', 'none');
+        }
+    });
+
+    function populateEndYears() {
+        var startYear = parseInt($('#start_year').val());
+        var currentYear = new Date().getFullYear();
+
+        var options;
+
+        if (!isNaN(startYear)) {
+            for (var y = startYear; y <= currentYear; y++) {
+                options += '<option value="' + y + '">' + y + '</option>';
+            }
+        }
+
+        $('#end_year').html(options);
+    }
+
+    $('#start_year').on('change', populateEndYears);
+
+    $('#custCheck29').on('click', populateEndYears);
 });
 
 
@@ -283,6 +356,18 @@ $(document).ready(function() {
             var valid=true;
             var report=$('#report').val();
             var insurer=$('#insurer').val();
+            if(report=="15"){
+                var check=$('#custCheck29').is(":checked");
+                if(check==true){
+                    var startYear=$('#start_year').val();
+                    var endYear=$('#end_year').val();
+                    if(startYear==null || endYear==null){
+                        valid=false;
+                        toastr.info('Please Select start and end year');
+                        $("#loader_report").attr("style", "display:none");
+                    }
+                }
+            }
             if(  (report=="9" && insurer==""))
             {
                 valid=false;

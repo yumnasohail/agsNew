@@ -300,4 +300,33 @@ class Mdl_reports extends CI_Model {
         return $query;
     }
 
+
+    function get_year_wise_premiums($cols, $order_by, $table, $select, $page_number, $limit, $group_by = null) {
+        if (!isset($page_number) || $page_number < 1 || $page_number == '')
+            $page_number = 1;
+        if (!isset($limit) || $limit < 1 || $limit == '')
+            $limit = 0;
+    
+        $offset = ((int)$page_number - 1) * $limit;
+    
+        $this->db->select($select);
+        $this->db->from($table);
+        $this->db->join("policy_period", "premiums.period_id = policy_period.id", "LEFT");
+        $this->db->join("policies", "policy_period.policy_id = policies.id", "LEFT");
+    
+        if (!empty($cols))
+            $this->db->where($cols);
+    
+        if ($group_by !== null)
+            $this->db->group_by($group_by);
+    
+        if ($limit != 0)
+            $this->db->limit($limit, $offset);
+    
+        if ($order_by)
+            $this->db->order_by($order_by);
+    
+        return $this->db->get();
+    }
+
 }
