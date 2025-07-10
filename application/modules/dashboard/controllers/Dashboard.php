@@ -82,6 +82,103 @@ class Dashboard extends MX_Controller{
 		$records= array('data' => $data, 'columns' =>$colums);
 		echo json_encode($records);
 	}
+
+	function searchComission(){
+        $formdata['startDate'] = $this->input->post('startDate');
+		$formdata['endDate']   = $this->input->post('endDate');
+        $data=array();
+        $where=array();
+
+		$data['result'] = [];
+		$start_year = (int)$formdata['startDate'];
+		$end_year = (int)$formdata['endDate'];
+		$start = $start_year . '-01-01';
+		$end = $end_year . '-12-31';
+
+		$federations = Modules::run(
+			'api/_get_specific_table_with_pagination',
+			['del_status' => 0],
+			'id desc',
+			'federations',
+			'id,name',
+			'',
+			''
+		)->result_array();
+
+		foreach ($federations as $fed) {
+			$federation_id = $fed['id'];
+			$federation_name = $fed['name'];
+			$yearly_premiums = [];
+
+			for ($year = $start_year; $year <= $end_year; $year++) {
+				$year_start = $year . '-01-01';
+				$year_end = $year . '-12-31';
+
+				$cols = [
+					"policies.f_id" => $federation_id,
+					"premiums.status" => 1,
+					"policy_period.del_status" => 0,
+					"policies.del_status" => 0,
+					"policy_period.start_date >= " => $year_start,
+					"policy_period.start_date <= " => $year_end
+				];
+
+				$select = "SUM(premiums.paid) AS total_premium,SUM(premiums.recieved) AS total_comission";
+
+				$premium_result = Modules::run(
+					'reports/get_policy_wise_premiums',
+					$cols,
+					'', // order_by
+					'premiums',
+					$select,
+					'', '', // page, limit
+					'' // group_by
+				)->row_array();
+
+				$yearly_premiums[] = [
+					'year' => $year,
+					'total_premium' => (float)($premium_result['total_premium'] ?? 0),
+					'total_comission' => (float)($premium_result['total_comission'] ?? 0)
+				];
+			}
+			
+
+			$data['result'][] = [
+				'federation_id' => $federation_id,
+				'federation_name' => $federation_name,
+				'premiums_by_year' => $yearly_premiums
+			];
+		}
+		$federations_pivot = [];   // federation_id => name
+		$years_pivot = [];         // collect all years
+		$table_data = [];          // [federation_id][year] => [paid, commission]
+
+		foreach ($data['result'] as $fed) {
+			$fid = $fed['federation_id'];
+			$federations_pivot[$fid] = $fed['federation_name'];
+
+			foreach ($fed['premiums_by_year'] as $row) {
+				$year = $row['year'];
+				$years_pivot[$year] = true;
+
+				$table_data[$fid][$year] = [
+					'paid'      => $row['total_premium'],
+					'comission' => $row['total_comission']
+				];
+			}
+		}
+
+		ksort($years_pivot); // Ensure years are in order
+
+		echo json_encode([
+			'federations' => $federations_pivot,
+			'years'       => array_keys($years_pivot),
+			'table_data'  => $table_data
+		]);
+		exit;
+	}
+
+
     function getPendingClaims() {
 		$last_valid_date=date('Y-m-d', strtotime("-6 month"))." 23:59:59";
 		$logs = $this->getPendingClaimsFromDb(array(), "claims.id asc", "claims.id", "logs.claim_id as claimId,MAX(logs.date_time) as date_time, DATE_SUB(now(), INTERVAL 6 MONTH) as last", "1", "0", "(logs.date_time <'$last_valid_date' AND del_status = '0'  )", "", "")->result_array();

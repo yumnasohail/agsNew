@@ -1,7 +1,11 @@
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.10/lodash.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-  <main>
+<?php 
+  $user_data = $this->session->userdata('route_user_data');
+  if (isset($user_data['user_id']) && !empty($user_data['user_id']))
+		$user_id = $user_data['user_id'];?> 
+<main>
         <div class="container-fluid">
             
             <div class="row">
@@ -93,6 +97,73 @@
                         </a>
                     </div>
                 </div>
+                <?php 
+                
+                if( $user_id=="1" || $user_id=="14"){
+                ?>
+                <div class="col-lg-12 col-md-12 mb-4">
+                  <div class="card">
+                    <div class="card-body">
+                      <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
+                        <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
+                          <h5 class="card-title">AGS Commission and Premium</h5>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
+                          <div class="input-daterange input-daterange-year input-group" id="datepicker">
+                            <input type="text" class="input-sm form-control graphStartDate" name="graphStart" placeholder="Start" />
+                            <span class="input-group-addon"></span>
+                            <input type="text" class="input-sm form-control graphEndDate" name="graphEnd" placeholder="End" />
+                            <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search_comission">&nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="graph">
+                        <canvas id="lineChart" height="100"></canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-sm-12 mb-4">
+                  <div class="card dashboard-filled-line-chart">
+                      <div class="card-body ">
+                          <div class="float-left float-none-xs">
+                              <div class="d-inline-block">
+                                  <h5 class="d-inline">Ukentlige krav</h5>
+                                  <span class="text-muted text-small d-block">Krav sendt inn</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="chart card-body pt-0">
+                          <canvas id="conversionChart"></canvas>
+                      </div>
+                  </div>
+                </div>
+                <div class="col-md-8 col-sm-12 mb-4">
+                    <div class="card">
+                      <div class="card-body">
+                        <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
+                          <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
+                            <h5 class="card-title">Invoiced Amount Per Policy</h5>
+                          </div>
+                          <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
+                            <div class="input-daterange input-daterange-year input-group" id="datepicker">
+                              <input type="text" class="input-sm form-control startDate" name="start" placeholder="Start" />
+                              <span class="input-group-addon"></span>
+                              <input type="text" class="input-sm form-control endDate" name="end" placeholder="End" />
+                              <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search">&nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search</div>
+                            </div>
+                          </div>
+                        </div>
+                        <table class="table" id="dataTable9">
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                
+
+
+
+                <?php }else{?>
                 <div class="col-lg-12 col-xl-6">
 
                     <div class="icon-cards-row">
@@ -137,120 +208,17 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-xl-6 col-lg-12 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h5 class="card-title">Kalender</h5>
-                            <div class="calendar"></div>
-                        </div>
-                    </div>
-                </div>
+                
+                  <div class="col-xl-6 col-lg-12 mb-4">
+                      <div class="card h-100">
+                          <div class="card-body">
+                              <h5 class="card-title">Kalender</h5>
+                              <div class="calendar"></div>
+                          </div>
+                      </div>
+                  </div>
             </div>
-            <!-- <div class="row">
-                <div class="col-md-12 col-lg-6 col-xl-4 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Monthly Claims</h5>
-                            <div class="chart-container chart">
-                                <canvas id="polarChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-12 col-lg-6 col-xl-4 mb-4">
-                    <div class="card dashboard-search">
-                        <div class="card-body">
-                            <h5 class="text-white mb-3">Advanced Search</h5>
-                            <div class="form-container">
-                                <form>
-                                    <div class="form-group">
-                                        <label>Federation</label>
-                                        <select class="form-control select2-single" data-width="100%">
-                                            <option label="&nbsp;">&nbsp;</option>
-                                            <option value="TPZ">Judo</option>
-                                            <option value="TTZ">Rugby</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group mb-5">
-                                        <label>Date</label>
-                                        <div class="input-group date">
-                                            <input type="text" class="form-control">
-                                            <span class="input-group-text input-group-append input-group-addon">
-
-                                                <i class="simple-icon-calendar"></i>
-                                            </span>
-                                        </div> 
-                                    </div>
-                                    <div class="form-group mb-5">
-                                        <label>Claim Range</label>
-                                        <div>
-                                            <div class="slider" id="dashboardPriceRange"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group text-center">
-                                        <button type="submit" class="btn btn-primary btn-lg mt-3">Search</button>
-                                    </div>
-                                </form>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12 col-lg-12 col-xl-4">
-                    <div class="row">
-                        <div class="col-6 mb-4">
-                            <div class="card dashboard-small-chart-analytics">
-                                <div class="card-body">
-                                    <p class="lead color-theme-1 mb-1 value"></p>
-                                    <p class="mb-0 label text-small"></p>
-                                    <div class="chart">
-                                        <canvas id="smallChart1"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 mb-4">
-                            <div class="card dashboard-small-chart-analytics">
-                                <div class="card-body">
-                                    <p class="lead color-theme-1 mb-1 value"></p>
-                                    <p class="mb-0 label text-small"></p>
-                                    <div class="chart">
-                                        <canvas id="smallChart2"></canvas>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="col-6 mb-4">
-                            <div class="card dashboard-small-chart-analytics">
-                                <div class="card-body">
-                                    <p class="lead color-theme-1 mb-1 value"></p>
-                                    <p class="mb-0 label text-small"></p>
-                                    <div class="chart">
-                                        <canvas id="smallChart3"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-6 mb-4">
-                            <div class="card dashboard-small-chart-analytics">
-                                <div class="card-body">
-                                    <p class="lead color-theme-1 mb-1 value"></p>
-                                    <p class="mb-0 label text-small"></p>
-                                    <div class="chart">
-                                        <canvas id="smallChart4"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div> -->
             <div class="row">
               <div class="col-xl-12 col-lg-12 mb-12">
                 <div class="row">
@@ -258,6 +226,7 @@
                   </div>
                 </div>
                 <div class="row">
+
                   <div class="col-lg-12 col-md-12 mb-4">
                     <div class="card">
                       <div class="card-body">
@@ -279,9 +248,35 @@
                       </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
+
+            <?php } ?>
+
+
+
+
+
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
 
 
 
@@ -291,6 +286,9 @@
     </main>
     <script src="<?php echo STATIC_ADMIN_JS?>vendor/Chart.bundle.min.js"></script>
     <script src="<?php echo STATIC_ADMIN_JS?>vendor/chartjs-plugin-datalabels.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
   <script>
 window.addEventListener("load", function(){
      
@@ -512,4 +510,145 @@ window.addEventListener("load", function(){
   });
   let currentYear = new Date().getFullYear();
   getDateWiseRecord("'"+currentYear+"'","'"+currentYear+"'");
+  getDateWiseComission("'"+currentYear+"'","'"+currentYear+"'");
+
+
+
+  $(document).on('click', function(e) {
+    var btnSearch = $(".btn_search_comission");
+    if (!$(e.target).closest(btnSearch).length) {
+      $('.graphStartDate').removeClass('errorClass');
+      $('.graphEndDate').removeClass('errorClass');
+    }
+  });
+  $(document).off("click", ".btn_search_comission").on("click", ".btn_search_comission", function(event) {
+    let startDate = $('.graphStartDate').val();
+    let endDate = $('.graphEndDate').val();
+    getDateWiseComission(startDate, endDate);
+  });
+
+  let lineChartInstance = null;
+
+  function getDateWiseComission(startDate, endDate) {
+    if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
+      $('.graphStartDate, .graphEndDate').removeClass('errorClass');
+      $.ajax({
+        type: "POST",
+        url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchComission/",
+        data: {
+          "startDate": startDate,
+          "endDate": endDate
+        },
+        dataType: "json",
+        success: function(response) {
+          const years = response.years;
+          const federations = response.federations;
+          const table_data = response.table_data;
+
+          const datasets_paid = [];
+          const datasets_commission = [];
+
+          Object.keys(federations).forEach((fid, index) => {
+            const paid_data = [];
+            const commission_data = [];
+
+            years.forEach(year => {
+              paid_data.push(table_data[fid]?.[year]?.paid || 0);
+              commission_data.push(table_data[fid]?.[year]?.comission || 0);
+            });
+
+            datasets_paid.push({
+              label: federations[fid] + ' - Paid',
+              data: paid_data,
+              borderColor: getColor(index),
+              fill: false
+            });
+
+            datasets_commission.push({
+              label: federations[fid] + ' - Commission',
+              data: commission_data,
+              borderColor: getColor(index + 10),
+              borderDash: [5, 5],
+              fill: false
+            });
+          });
+
+          renderLineChart(years, datasets_paid.concat(datasets_commission));
+        },
+        error: function() {
+          alert("Error while fetching Data");
+        }
+      });
+    } else {
+      // Error handling for empty dates
+      $('.graphStartDate').toggleClass('errorClass', _.isEmpty(startDate));
+      $('.graphEndDate').toggleClass('errorClass', _.isEmpty(endDate));
+    }
+  }
+
+
+
+  function getColor(i) {
+    const colors = ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8', '#6f42c1', '#fd7e14', '#20c997', '#6610f2', '#e83e8c'];
+    return colors[i % colors.length];
+  }
+
+  function renderLineChart(labels, datasets) {
+    const ctx = document.createElement('canvas');
+    const container = document.querySelector('.graph');
+    container.innerHTML = ''; // Clear previous chart
+    container.appendChild(ctx);
+
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels, // X-axis (years)
+        datasets: datasets // Federation-wise datasets
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'top'
+          },
+          title: {
+            display: true,
+            text: 'Federation-wise Premiums and Commissions'
+          },
+          tooltip: {
+            callbacks: {
+              label: function (context) {
+                const value = context.parsed.y;
+                return `${context.dataset.label}: ${value.toLocaleString('en-US', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2
+                })}`;
+              }
+            }
+          }
+        },
+        scales: {
+          y: {
+            ticks: {
+              callback: function (value) {
+                return value.toLocaleString('en-US');
+              }
+            },
+            title: {
+              display: true,
+              text: 'Amount'
+            }
+          },
+          x: {
+            title: {
+              display: true,
+              text: 'Year'
+            }
+          }
+        }
+      }
+    });
+
+  }
+
   </script>
