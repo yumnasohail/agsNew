@@ -163,8 +163,8 @@ class Dashboard extends MX_Controller{
 				$years_pivot[$year] = true;
 
 				$table_data[$fid][$year] = [
-					'paid'      => $row['total_premium'],
-					'comission' => $row['total_comission']
+					'paid'      => round($row['total_premium'],2),
+					'comission' => round($row['total_comission'],2)
 				];
 			}
 		}

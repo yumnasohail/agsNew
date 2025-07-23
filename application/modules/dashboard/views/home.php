@@ -101,14 +101,14 @@
                 
                 if( $user_id=="1" || $user_id=="14"){
                 ?>
-                <div class="col-lg-12 col-md-12 mb-4">
+                <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
-                        <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
+                        <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
                           <h5 class="card-title">AGS Commission and Premium</h5>
                         </div>
-                        <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
+                        <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
                           <div class="input-daterange input-daterange-year input-group" id="datepicker">
                             <select class="input-sm form-control selected_federation">
                               <?php foreach($fd as $key => $value): ?>
@@ -128,8 +128,8 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-4 col-sm-12 mb-4">
-                  <div class="card dashboard-filled-line-chart">
+                <div class="col-md-6 col-sm-12 mb-4">
+                  <div class="card dashboard-filled-line-chart" style="height: 100%;">
                       <div class="card-body ">
                           <div class="float-left float-none-xs">
                               <div class="d-inline-block">
@@ -143,7 +143,7 @@
                       </div>
                   </div>
                 </div>
-                <div class="col-md-8 col-sm-12 mb-4">
+                <div class="col-md-12 col-sm-12 mb-4">
                     <div class="card">
                       <div class="card-body">
                         <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
@@ -259,34 +259,6 @@
             </div>
 
             <?php } ?>
-
-
-
-
-
-
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-            
         </div>
     </main>
     <script src="<?php echo STATIC_ADMIN_JS?>vendor/Chart.bundle.min.js"></script>
@@ -429,20 +401,36 @@ window.addEventListener("load", function(){
         });
       }
     });
-      $(document).on('click', function(e) {
-    var btnSearch = $(".btn_search");
-    if (!$(e.target).closest(btnSearch).length) {
-      $('.startDate').removeClass('errorClass');
-      $('.endDate').removeClass('errorClass');
-    }
-  });
-  $(document).off("click", ".btn_search").on("click", ".btn_search", function(event) {
-    let startDate = $('.startDate').val();
-    let endDate = $('.endDate').val();
-    getDateWiseRecord(startDate, endDate);
-  });
+    $(document).on('click', function(e) {
+      var btnSearch = $(".btn_search");
+      if (!$(e.target).closest(btnSearch).length) {
+        $('.startDate').removeClass('errorClass');
+        $('.endDate').removeClass('errorClass');
+      }
+    });
+
+
+    $(document).ready(function() {
+      const currentYear = new Date().getFullYear();
+      const start = currentYear - 2;
+      $('.startDate').val(start.toString());
+      $('.endDate').val(currentYear.toString());
+      getDateWiseRecord(start, currentYear);
+
+    });
+
+
+    $(document).off("click", ".btn_search").on("click", ".btn_search", function(event) {
+      let startDate = $('.startDate').val();
+      let endDate = $('.endDate').val();
+      getDateWiseRecord(startDate, endDate);
+    });
+
+
   function getDateWiseRecord(startDate, endDate) {
-    if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
+
+    if (startDate !== "" && endDate!== "") {
+      
       $.ajax({
         type: "POST",
         url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchIncome/",
@@ -452,6 +440,7 @@ window.addEventListener("load", function(){
         },
         dataType: "json",
         success: function(json) {
+
           if ($.fn.dataTable && $.fn.DataTable.isDataTable('#dataTable9')) {
               $('#dataTable9').DataTable().destroy();
               $('#dataTable9').empty();
@@ -512,8 +501,6 @@ window.addEventListener("load", function(){
     theme: 'modern',
     lazyOpen: true,
   });
-  let currentYear = new Date().getFullYear();
-  getDateWiseRecord("'"+currentYear+"'","'"+currentYear+"'");
 
 
 
@@ -561,8 +548,8 @@ window.addEventListener("load", function(){
           years.forEach(year => {
             Object.entries(federations).forEach(([fid, fname]) => {
               const row = table_data[fid]?.[year] || { paid: 0, comission: 0 };
-              labels.push(`${fname} - ${year}`);
-              paidData.push(row.paid - row.comission);
+              labels.push(`${year}`);
+              paidData.push(row.paid);
               commissionData.push(row.comission);
             });
           });
@@ -657,6 +644,7 @@ window.addEventListener("load", function(){
 
   // Call your function with startYear and currentYear
   getDateWiseComission(startYear.toString(), currentYear.toString(), "3");
+
 });
 
   </script>
