@@ -412,7 +412,7 @@ window.addEventListener("load", function(){
 
     $(document).ready(function() {
       const currentYear = new Date().getFullYear();
-      const start = currentYear - 2;
+      const start = currentYear - 5;
       $('.startDate').val(start.toString());
       $('.endDate').val(currentYear.toString());
       getDateWiseRecord(start, currentYear);
