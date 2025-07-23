@@ -86,6 +86,7 @@ class Dashboard extends MX_Controller{
 	function searchComission(){
         $formdata['startDate'] = $this->input->post('startDate');
 		$formdata['endDate']   = $this->input->post('endDate');
+		$f_id   = $this->input->post('f_id');
         $data=array();
         $where=array();
 
@@ -97,7 +98,7 @@ class Dashboard extends MX_Controller{
 
 		$federations = Modules::run(
 			'api/_get_specific_table_with_pagination',
-			['del_status' => 0],
+			['del_status' => 0 ,'id' =>$f_id],
 			'id desc',
 			'federations',
 			'id,name',

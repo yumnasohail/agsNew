@@ -110,6 +110,11 @@
                         </div>
                         <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
                           <div class="input-daterange input-daterange-year input-group" id="datepicker">
+                            <select class="input-sm form-control selected_federation">
+                              <?php foreach($fd as $key => $value): ?>
+                                  <option value="<?php echo $value['id']; ?>"  <?php if($value['title']=="NAIF") echo "selected"; ?>><?php echo $value['title']; ?></option>
+                              <?php endforeach; ?>
+                            </select>
                             <input type="text" class="input-sm form-control graphStartDate" name="graphStart" placeholder="Start" />
                             <span class="input-group-addon"></span>
                             <input type="text" class="input-sm form-control graphEndDate" name="graphEnd" placeholder="End" />
@@ -447,10 +452,9 @@ window.addEventListener("load", function(){
         },
         dataType: "json",
         success: function(json) {
-          if ($.fn.DataTable.isDataTable('#dataTable9')) {
-            table = $('#dataTable9').DataTable();
-            table.destroy();
-            $('#dataTable9').empty();
+          if ($.fn.dataTable && $.fn.DataTable.isDataTable('#dataTable9')) {
+              $('#dataTable9').DataTable().destroy();
+              $('#dataTable9').empty();
           }
           $("#dataTable9").css({
             display: "block"
@@ -510,7 +514,6 @@ window.addEventListener("load", function(){
   });
   let currentYear = new Date().getFullYear();
   getDateWiseRecord("'"+currentYear+"'","'"+currentYear+"'");
-  getDateWiseComission("'"+currentYear+"'","'"+currentYear+"'");
 
 
 
@@ -524,12 +527,17 @@ window.addEventListener("load", function(){
   $(document).off("click", ".btn_search_comission").on("click", ".btn_search_comission", function(event) {
     let startDate = $('.graphStartDate').val();
     let endDate = $('.graphEndDate').val();
-    getDateWiseComission(startDate, endDate);
+    let f_id = $('.selected_federation').val();
+    getDateWiseComission(startDate, endDate ,f_id);
   });
 
-  let lineChartInstance = null;
+  
+  function getColor(i) {
+    const colors = ['#ddf5f5', '#ccffe8', '#ffc107', '#dc3545', '#17a2b8', '#6f42c1', '#fd7e14', '#20c997', '#6610f2', '#e83e8c'];
+    return colors[i % colors.length];
+  }
 
-  function getDateWiseComission(startDate, endDate) {
+  function getDateWiseComission(startDate, endDate ,f_id) {
     if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
       $('.graphStartDate, .graphEndDate').removeClass('errorClass');
       $.ajax({
@@ -537,7 +545,8 @@ window.addEventListener("load", function(){
         url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchComission/",
         data: {
           "startDate": startDate,
-          "endDate": endDate
+          "endDate": endDate,
+          "f_id":f_id
         },
         dataType: "json",
         success: function(response) {
@@ -545,35 +554,34 @@ window.addEventListener("load", function(){
           const federations = response.federations;
           const table_data = response.table_data;
 
-          const datasets_paid = [];
-          const datasets_commission = [];
+          const labels = [];
+          const paidData = [];
+          const commissionData = [];
 
-          Object.keys(federations).forEach((fid, index) => {
-            const paid_data = [];
-            const commission_data = [];
-
-            years.forEach(year => {
-              paid_data.push(table_data[fid]?.[year]?.paid || 0);
-              commission_data.push(table_data[fid]?.[year]?.comission || 0);
-            });
-
-            datasets_paid.push({
-              label: federations[fid] + ' - Paid',
-              data: paid_data,
-              borderColor: getColor(index),
-              fill: false
-            });
-
-            datasets_commission.push({
-              label: federations[fid] + ' - Commission',
-              data: commission_data,
-              borderColor: getColor(index + 10),
-              borderDash: [5, 5],
-              fill: false
+          years.forEach(year => {
+            Object.entries(federations).forEach(([fid, fname]) => {
+              const row = table_data[fid]?.[year] || { paid: 0, comission: 0 };
+              labels.push(`${fname} - ${year}`);
+              paidData.push(row.paid - row.comission);
+              commissionData.push(row.comission);
             });
           });
 
-          renderLineChart(years, datasets_paid.concat(datasets_commission));
+          const datasets = [
+            {
+              label: 'Paid',
+              data: paidData,
+              backgroundColor: getColor(0)
+            },
+            {
+              label: 'Commission',
+              data: commissionData,
+              backgroundColor: getColor(1)
+            }
+          ];
+
+          drawChart(labels, datasets);
+          
         },
         error: function() {
           alert("Error while fetching Data");
@@ -588,67 +596,67 @@ window.addEventListener("load", function(){
 
 
 
-  function getColor(i) {
-    const colors = ['#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8', '#6f42c1', '#fd7e14', '#20c997', '#6610f2', '#e83e8c'];
-    return colors[i % colors.length];
-  }
+  
+  let chartInstance = null;
 
-  function renderLineChart(labels, datasets) {
-    const ctx = document.createElement('canvas');
+  function drawChart(labels, datasets) {
     const container = document.querySelector('.graph');
-    container.innerHTML = ''; // Clear previous chart
-    container.appendChild(ctx);
 
-    new Chart(ctx, {
-      type: 'line',
+    // Destroy existing chart if any
+    if (chartInstance) {
+      chartInstance.destroy();
+      chartInstance = null;
+    }
+
+    // Clear container completely
+    container.innerHTML = '';
+
+    // Create new canvas
+    const canvas = document.createElement('canvas');
+    container.appendChild(canvas);
+
+    // Create new Chart
+    chartInstance = new Chart(canvas.getContext('2d'), {
+      type: 'bar',
       data: {
-        labels: labels, // X-axis (years)
-        datasets: datasets // Federation-wise datasets
+        labels: labels,
+        datasets: datasets
       },
       options: {
         responsive: true,
         plugins: {
-          legend: {
-            position: 'top'
-          },
-          title: {
-            display: true,
-            text: 'Federation-wise Premiums and Commissions'
-          },
-          tooltip: {
-            callbacks: {
-              label: function (context) {
-                const value = context.parsed.y;
-                return `${context.dataset.label}: ${value.toLocaleString('en-US', {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2
-                })}`;
-              }
-            }
-          }
+          legend: { position: 'top' },
+          title: { display: true, text: 'Federation-wise Premiums and Commissions' }
         },
         scales: {
-          y: {
+          x: {
+            stacked: true,
+            display: false,
             ticks: {
-              callback: function (value) {
-                return value.toLocaleString('en-US');
-              }
+              display: false
             },
-            title: {
-              display: true,
-              text: 'Amount'
+            grid: {
+              display: false
             }
           },
-          x: {
-            title: {
-              display: true,
-              text: 'Year'
-            }
+          y: {
+            stacked: true
           }
         }
       }
     });
-
   }
+
+  $(document).ready(function() {
+  const currentYear = new Date().getFullYear();
+  const startYear = currentYear - 5;
+
+  // Set the input fields
+  $('.graphStartDate').val(startYear.toString());
+  $('.graphEndDate').val(currentYear.toString());
+
+  // Call your function with startYear and currentYear
+  getDateWiseComission(startYear.toString(), currentYear.toString(), "3");
+});
 
   </script>
