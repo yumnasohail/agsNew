@@ -9,7 +9,7 @@ class Language extends MX_Controller {
     }
 
     public function switch($lang = 'norwegian') {
-        $allowed = ['english', 'norwegian'];
+        $allowed = ['english', 'norwegian','danish','swedish'];
         if (!in_array($lang, $allowed)) {
             $lang = 'norwegian';
         }

@@ -105,6 +105,8 @@
     $flags = [
         'norwegian' => STATIC_FRONT_IMAGE . 'no.jpg',
         'english'   => STATIC_FRONT_IMAGE . 'flag.jpg',
+        'danish'   => STATIC_FRONT_IMAGE . 'Denmark.png',
+        'swedish'   => STATIC_FRONT_IMAGE . 'swedish.png',
     ];
     $selected_flag = $flags[$selected_lang];
 ?>
@@ -144,6 +146,16 @@
                             <?php if ($selected_lang != 'english'): ?>
                                 <a href="<?php echo base_url('switch/english'); ?>">
                                     <img src="<?php echo $flags['english']; ?>" alt="English" />
+                                </a>
+                            <?php endif; ?>
+                            <?php if ($selected_lang != 'danish'): ?>
+                                <a href="<?php echo base_url('switch/danish'); ?>">
+                                    <img src="<?php echo $flags['danish']; ?>" alt="Danish" />
+                                </a>
+                            <?php endif; ?>
+                            <?php if ($selected_lang != 'swedish'): ?>
+                                <a href="<?php echo base_url('switch/swedish'); ?>">
+                                    <img src="<?php echo $flags['swedish']; ?>" alt="Swedish" />
                                 </a>
                             <?php endif; ?>
                         </div>
