@@ -156,6 +156,8 @@
                         <li><a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_footer_link1'); ?></a></li>
                         <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_footer_link2'); ?></a></li>
                         <li><a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_footer_link3'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'cyber'; ?>"><?= $this->lang->line('text_footer_link4'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'corporate'; ?>"><?= $this->lang->line('text_footer_link5'); ?></a></li>
                         <!--<li><a href="<?php echo BASE_URL.'ma' ?>">M&A-forsikring</a></li>-->
                     </ul>
                 </div><!-- end footer-shared -->

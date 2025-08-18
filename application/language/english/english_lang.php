@@ -186,6 +186,8 @@ $lang['text_segmenter'] = 'SEGMENTS';
 $lang['text_kunst'] = 'ART';
 $lang['text_energy'] = 'ENERGY';
 $lang['text_sport'] = 'SPORT';
+$lang['text_cyber'] = 'CYBER INSURANCE';
+$lang['text_corporate'] = 'CORPORATE CLIENTS';
 $lang['text_header_kontakt_oss'] = 'CONTACT US';
 $lang['text_om_ags'] = 'ABOUT AGS';
 $lang['text_nyheter'] = 'NEWS';
@@ -200,9 +202,13 @@ $lang['text_vare_segmenter'] = 'Our Segments';
 $lang['text_type1'] = 'Art';
 $lang['text_type2'] = 'Energy';
 $lang['text_type3'] = 'Sport'; // NOTE: You have a duplicate key here - consider renaming one
+$lang['text_type4'] = 'Cyber Insurance';
+$lang['text_type5'] = 'Corporate Clients';
 $lang['text_type1_desc'] = 'AGS Insurance is one of the few players that specialize in art insurance for museums, art halls, galleries, private and public collections.';
 $lang['text_type2_desc'] = 'AGS Insurance AS was approved as an agent in 2008 by the Financial Supervisory Authority of Norway and underwrites various energy insurances on behalf of Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Since 2008, AGS has introduced more new coverages than any other player for the benefit of sports federations and their members in a cost-effective way:';
+$lang['text_type4_desc'] = 'Cybersecurity does not have to create fear – but it requires preparation. Together with our partners with over 20 years of experience and thousands of managed cyber incidents, we know that companies with integrated cybersecurity stand stronger.';
+$lang['text_type5_desc'] = 'Trusted protection for modern businesses.Comprehensive coverage designed to match your corporate needs.';
 $lang['text_read_more'] = 'Read more';
 
 // ------------Art
@@ -266,6 +272,8 @@ $lang['text_administrasjon'] = 'Administration';
 $lang['text_footer_link1'] = 'Art';
 $lang['text_footer_link2'] = 'Sports and Sporting Events';
 $lang['text_footer_link3'] = 'Energy, On- and Offshore';
+$lang['text_footer_link4'] = 'Cyber Insurance';
+$lang['text_footer_link5'] = 'Corporate Clients';
 $lang['text_need_help'] = 'Need Help?';
 $lang['text_contact_us'] = 'CONTACT US';
 $lang['text_privacy_policy'] = 'PRIVACY POLICY';
@@ -320,3 +328,53 @@ $lang['text_pp_desc'] = '<br>In accordance with applicable laws and guidelines, 
                         <br>- Right to object to automated processing (GDPR Article 22): You have the right to object to decisions made solely through automated processes or profiling.';
 
 $lang['text_no_news'] = 'No news yet.';
+
+//----------- Cyber
+
+$lang['text_cyber_title'] = 'Cyber Insurance';
+$lang['text_cyber_sub_heading'] = 'Full Spectrum Cyber – The Future of Cybersecurity';
+$lang['text_cyber_line1'] = 'Cybersecurity does not have to create fear – but it requires preparation.<br>
+Together with our partners with over 20 years of experience and thousands of managed cyber incidents, we know that companies with integrated cybersecurity stand stronger. Therefore, we offer a comprehensive solution that strengthens your ability to anticipate, handle, and adapt to digital threats.
+<br>
+Full coverage with Full Spectrum Cyber
+<br>
+We combine the renowned Beazley Breach Response product with additional security services from Beazley Security. The result? Increased resilience through access to technology, training, and support – all in one solution.
+<br>
+Who is it for?
+<br>
+Medium-sized and complex businesses in various industries worldwide.
+<br>
+What do we cover?
+<br>
+Up to 15 million euros in standard coverage – with the option to extend to 25 million euros
+<br>
+Breach response: legal assistance, IT forensics, notification, call centers, credit and ID monitoring, PR and crisis management
+<br>
+Tailored support in meeting regulatory requirements and class actions
+<br>
+Our three-part approach
+<br>
+<strong>1. Preventive measures</strong><br>
+We strengthen cybersecurity through:<br>
+-Anti-phishing campaigns and training<br>
+-Microsoft 365 security assessment<br>
+-Ransomware readiness<br>
+-MFA keys and simulations
+<br>
+<strong>2. Incident response</strong><br>
+In the event of an attack, our experts immediately provide:<br>
+-Crisis management and legal advice<br>
+-Forensics and data recovery<br>
+-Negotiation with ransomware criminals<br>
+-PR and reputation support
+<br>
+<strong>3. Adaptation and development</strong><br>
+We offer continuous threat analysis, webinars, training, and access to resources – ensuring your business always stays one step ahead.';
+
+
+//-------------- Corporate Clients
+
+
+$lang['text_corporate_title'] = 'Corporate Clients';
+$lang['text_corporate_sub_heading'] = 'AGS offers the best insurance to keep you safe.';
+$lang['text_corporate_line1'] = '';

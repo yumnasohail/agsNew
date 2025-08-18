@@ -186,6 +186,8 @@ $lang['text_segmenter'] = 'SEGMENTER';
 $lang['text_kunst'] = 'KUNST';
 $lang['text_energy'] = 'ENERGI';
 $lang['text_sport'] = 'SPORT';
+$lang['text_cyber'] = 'CYBERFORSIKRING';
+$lang['text_corporate'] = 'ERHVERVSKUNDER';
 $lang['text_header_kontakt_oss'] = 'KONTAKT OS';
 $lang['text_om_ags'] = 'OM AGS';
 $lang['text_nyheter'] = 'NYHEDER';
@@ -200,9 +202,13 @@ $lang['text_vare_segmenter'] = 'Vores segmenter';
 $lang['text_type1'] = 'Kunst';
 $lang['text_type2'] = 'Energi';
 $lang['text_type3'] = 'Sport';
+$lang['text_type4'] = 'Cyberforsikring';
+$lang['text_type5'] = 'Erhvervskunder';
 $lang['text_type1_desc'] = 'AGS Forsikring er en af de få aktører, der specialiserer sig i kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger.';
 $lang['text_type2_desc'] = 'AGS Forsikring AS blev godkendt som agent i 2008 af Finanstilsynet i Norge og tegner forskellige energiforsikringer på vegne af Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Siden 2008 har AGS introduceret flere nye dækninger end nogen anden aktør til gavn for idrætsforbund og deres medlemmer på en omkostningseffektiv måde:';
+$lang['text_type4_desc'] = 'Cybersikkerhed behøver ikke at skabe frygt – men det kræver forberedelse. Sammen med vores partnere med over 20 års erfaring og tusindvis af håndterede cyberhændelser ved vi, at virksomheder med integreret cybersikkerhed står stærkere.';
+$lang['text_type5_desc'] = 'Pålidelig beskyttelse til moderne virksomheder. Omfattende dækning designet til at matche din virksomheds behov.';
 $lang['text_read_more'] = 'Læs mere';
 
 // ------------Art
@@ -266,6 +272,8 @@ $lang['text_administrasjon'] = 'Administration';
 $lang['text_footer_link1'] = 'Kunst';
 $lang['text_footer_link2'] = 'Sport og sportsbegivenheder';
 $lang['text_footer_link3'] = 'Energi, on- og offshore';
+$lang['text_footer_link4'] = 'Cyberforsikring';
+$lang['text_footer_link5'] = 'Erhvervskunder';
 $lang['text_need_help'] = 'Brug for hjælp?';
 $lang['text_contact_us'] = 'KONTAKT OS';
 $lang['text_privacy_policy'] = 'PRIVATLIVSPOLITIK';
@@ -319,3 +327,55 @@ $lang['text_pp_desc'] = '<br>I overensstemmelse med gældende love og retningsli
 
     <br>- Ret til at gøre indsigelse mod automatiseret behandling (GDPR artikel 22): Du har ret til at gøre indsigelse mod beslutninger, der udelukkende træffes ved hjælp af automatiserede processer eller profilering.';
     $lang['text_no_news'] = 'Ingen nyheder endnu.';
+
+//----------- Cyber
+
+
+    $lang['text_cyber_title'] = 'Cyberforsikring';
+$lang['text_cyber_sub_heading'] = 'Full Spectrum Cyber – Fremtidens cybersikkerhed';
+$lang['text_cyber_line1'] = 'Cybersikkerhed behøver ikke at skabe frygt – men det kræver forberedelse.<br>
+Sammen med vores partnere med over 20 års erfaring og tusindvis af håndterede cyberhændelser ved vi, at virksomheder med integreret cybersikkerhed står stærkere. Derfor tilbyder vi en helhedsløsning, der styrker din evne til at forudse, håndtere og tilpasse dig digitale trusler.
+<br>
+Fuld dækning med Full Spectrum Cyber
+<br>
+Vi kombinerer det anerkendte Beazley Breach Response-produkt med ekstra sikkerhedstjenester fra Beazley Security. Resultatet? Øget robusthed gennem adgang til teknologi, træning og support – alt i én løsning.
+<br>
+Hvem passer det til?
+<br>
+Mellemstore og komplekse virksomheder i forskellige brancher over hele verden.
+<br>
+Hvad dækker vi?
+<br>
+Op til 15 millioner euro i standarddækning – mulighed for udvidelse til 25 millioner euro
+<br>
+Breach response: juridisk bistand, IT-forensik, varsling, kundecentre, kredit- og ID-overvågning, PR og krisehåndtering
+<br>
+Skræddersyet støtte i mødet med regulatoriske krav og gruppesøgsmål
+<br>
+Vores tredelte tilgang
+<br>
+<strong>1. Forebyggende tiltag</strong><br>
+Vi styrker cybersikkerheden gennem:<br>
+-Anti-phishing-kampagner og træning<br>
+-Sikkerhedsvurdering af Microsoft 365<br>
+-Ransomware-parathed<br>
+-MFA-nøgler og simuleringer
+<br>
+<strong>2. Respons ved hændelser</strong><br>
+Ved et angreb stiller vores eksperter straks op med:<br>
+-Krisehåndtering og juridisk rådgivning<br>
+-Forensik og gendannelse af data<br>
+-Forhandling med ransomwarekriminelle<br>
+-PR- og omdømmestøtte
+<br>
+<strong>3. Tilpasning og udvikling</strong><br>
+Vi tilbyder løbende trusselsanalyse, webinarer, træning og adgang til ressourcer – så din virksomhed altid ligger et skridt foran.';
+
+
+//-------------- Corporate Clients
+
+
+
+$lang['text_corporate_title'] = 'Erhvervskunder';
+$lang['text_corporate_sub_heading'] = 'AGS tilbyder de bedste forsikringer for at holde dig tryg.';
+$lang['text_corporate_line1'] = '';

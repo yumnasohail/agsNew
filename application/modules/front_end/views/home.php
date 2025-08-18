@@ -200,6 +200,34 @@
             <!--            </a>-->
             <!--    </div>-->
             <!--</div>-->
+            <div class="col-lg-4">
+                <div class="info-item">
+                    <span class="info__number">04</span>
+                    <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'cyber.png'; ?>" >
+                    <h3 class="info__title">
+                        <a href="<?php echo BASE_URL.'cyber' ?>"><?= $this->lang->line('text_type4'); ?></a>
+                    </h3>
+                    <p class="info__desc">
+                    <?= $this->lang->line('text_type4_desc'); ?>                      </p>
+                    <a href="<?php echo BASE_URL.'cyber' ?>" class="text-btn">
+                    <?= $this->lang->line('text_read_more'); ?><i class="fa fa-angle-right"></i>
+                        </a>
+                </div><!-- end info-item -->
+            </div><!-- end col-lg-4 -->
+            <div class="col-lg-4">
+                <div class="info-item">
+                    <span class="info__number">05</span>
+                    <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'corporate1.jpg'; ?>" >
+                    <h3 class="info__title">
+                        <a href="<?php echo BASE_URL.'corporate' ?>"><?= $this->lang->line('text_type5'); ?></a>
+                    </h3>
+                    <p class="info__desc">
+                    <?= $this->lang->line('text_type5_desc'); ?>                      </p>
+                    <a href="<?php echo BASE_URL.'corporate' ?>" class="text-btn">
+                    <?= $this->lang->line('text_read_more'); ?><i class="fa fa-angle-right"></i>
+                        </a>
+                </div><!-- end info-item -->
+            </div><!-- end col-lg-4 -->
         </div><!-- end row -->
     </div><!-- end container -->
 </section><!-- end feature-area -->

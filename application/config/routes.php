@@ -58,6 +58,8 @@
 	$route['styrkeloft']=$folder."styrkeloft";
 	$route['suksess']=$folder."success_page";
 	$route['kunst']="front_end/kunst";
+	$route['cyber']="front_end/cyber";
+	$route['corporate']="front_end/corporate";
 	$route['nyheter']="front_end/news_list";
 	$route['enerji']="front_end/enerji";
 	$route['privacy_policy']="front_end/privacy_policy";
