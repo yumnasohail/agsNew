@@ -207,7 +207,7 @@ $lang['text_type1_desc'] = 'AGS Försäkring är en av få aktörer som speciali
 $lang['text_type2_desc'] = 'AGS Försäkring AS blev godkänt som agent 2008 av Finanstilsynet i Norge och tecknar olika energiförsäkringar på uppdrag av Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Sedan 2008 har AGS introducerat fler nya försäkringar än någon annan aktör för idrottsförbund och deras medlemmar på ett kostnadseffektivt sätt:';
 $lang['text_type4_desc'] = 'Cybersäkerhet behöver inte skapa rädsla – men det kräver förberedelse. Tillsammans med våra partners med över 20 års erfarenhet och tusentals hanterade cyberincidenter vet vi att företag med integrerad cybersäkerhet står starkare.';
-$lang['text_type5_desc'] = 'AGS Försäkring erbjuder skräddarsydda försäkringsengagemang för företagskunder via mäklare. Vårt fokus ligger på att tillhandahålla överskottskapacitet och stödja välrenommerade ledande försäkringsgivare, särskilt där captive-retentioner är betydande.';
+$lang['text_type5_desc'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.';
 $lang['text_read_more'] = 'Läs mer';
 
 // ------------Art
@@ -366,21 +366,24 @@ Vi erbjuder kontinuerlig hotanalys, webbinarier, utbildning och tillgång till r
 
 $lang['text_corporate_title'] = 'Företagskunder';
 $lang['text_corporate_info'] = 'Kontakta vår konsult för mer information';
-$lang['text_corporate_sub_heading'] = 'AGS Försäkring – Företagsförsäkringslösningar via mäklare';
-$lang['text_corporate_line1'] = 'AGS Försäkring erbjuder skräddarsydda försäkringsengagemang för företagskunder via mäklare. Vårt fokus ligger på att tillhandahålla överskottskapacitet och stödja välrenommerade ledande försäkringsgivare, särskilt där captive-retentioner är betydande.
+$lang['text_corporate_sub_heading'] = 'AGS Forsikring ? Corporate Insurance Solutions via Brokers';
+$lang['text_corporate_line1'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.
 <br>
-<h2>Nyckelsektorer och möjligheter:</h2>
+<h2>Key Sectors & Opportunities:</h2>
 <br>
-<strong>Fastighet / Ansvar:</strong>
+<strong>Property / Casualty: </strong>
 <br>
-- Vattenkraft, nationellt elnät, livsmedel och mejeri, avfallshantering – möjligheter till överskottsplaceringar ovanför captive-lager och bakom ledande försäkringsgivare.
+- Hydro Power, National Grid, Food & Dairy, Waste Management ? opportunities for excess placements above captive layers and behind leading carriers.
 <br>
-<strong>Konstruktion:</strong>
+<strong>Construction:</strong>
 <br>
-- Storskaliga infrastrukturprojekt inklusive metrotunnlar, vattenreningsverk och kontorsutveckling, samt nya vätefabriker.
+- Large-scale infrastructure projects including metro tunnels, water treatment plants, and office developments, as well as emerging hydrogen factory sites.
 <br>
-<strong>Riskaptit:</strong>
+
+<strong>Risk Appetite:</strong>
 <br>
-- AGS Försäkring har bred aptit över branscher som smält metall, extrudering, fisk, livsmedel, massa och papper, offshore supply, undervattenskablar, förnybar energi (vind, vattenkraft), infrastruktur och järnvägar.
+
+- AGS Forsikring has a broad appetite across industries including molten metal, extrusion, fish, food, pulp & paper, offshore supply, subsea cables, renewable energy (wind, hydro), infrastructure, and railways.
 <br>
-Vi är engagerade i att samarbeta med mäklare för att stödja komplexa risker och erbjuda flexibla överskottsförsäkringslösningar.';
+
+We are committed to partnering with brokers to support complex risks and provide flexible excess insurance solutions.';
