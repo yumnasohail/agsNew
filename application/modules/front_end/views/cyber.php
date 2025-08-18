@@ -18,19 +18,19 @@
                 <div class="sidebar mt-0">
                     <div class="sidebar-widget contact-widget">
                         <h3 class="widget__title"><?= $this->lang->line('text_interest'); ?></h3>
-                        <p><?= $this->lang->line('text_informasjon'); ?></p>
+                        <p><?= $this->lang->line('text_corporate_info'); ?></p>
                         <ul class="contact__links">
                             <li>
                                 <i class="fa fa-user"></i>
-                                Lars-Petter Myklebost
+                                Morten Wang
                             </li>
                             <li>
                                 <i class="fa fa-phone"></i>
-                                <a href="tel:484 04 100">484 04 100</a>
+                                <a href="tel:47 482 49 090">+47 482 49 090</a>
                             </li>
                             <li>
                                 <i class="fa fa-envelope"></i>
-                                <a href="mailto: lpm@agsforsikring.no"> lpm@agsforsikring.no</a>
+                                <a href="mailto: morten.wang@agsforsikring.no"> Morten.wang@agsforsikring.no</a>
                             </li>
                         </ul>
                     </div>

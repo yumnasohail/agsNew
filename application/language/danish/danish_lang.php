@@ -208,7 +208,7 @@ $lang['text_type1_desc'] = 'AGS Forsikring er en af de få aktører, der special
 $lang['text_type2_desc'] = 'AGS Forsikring AS blev godkendt som agent i 2008 af Finanstilsynet i Norge og tegner forskellige energiforsikringer på vegne af Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Siden 2008 har AGS introduceret flere nye dækninger end nogen anden aktør til gavn for idrætsforbund og deres medlemmer på en omkostningseffektiv måde:';
 $lang['text_type4_desc'] = 'Cybersikkerhed behøver ikke at skabe frygt – men det kræver forberedelse. Sammen med vores partnere med over 20 års erfaring og tusindvis af håndterede cyberhændelser ved vi, at virksomheder med integreret cybersikkerhed står stærkere.';
-$lang['text_type5_desc'] = 'Pålidelig beskyttelse til moderne virksomheder. Omfattende dækning designet til at matche din virksomheds behov.';
+$lang['text_type5_desc'] = 'AGS Forsikring tilbyder skræddersyede forsikringsdeltagelser til erhvervskunder gennem mæglere. Vores fokus er at levere overskudskapacitet og støtte velrenommerede ledende forsikringsselskaber, især hvor captive-retentioner er betydelige.';
 $lang['text_read_more'] = 'Læs mere';
 
 // ------------Art
@@ -377,5 +377,22 @@ Vi tilbyder løbende trusselsanalyse, webinarer, træning og adgang til ressourc
 
 
 $lang['text_corporate_title'] = 'Erhvervskunder';
-$lang['text_corporate_sub_heading'] = 'AGS tilbyder de bedste forsikringer for at holde dig tryg.';
-$lang['text_corporate_line1'] = '';
+$lang['text_corporate_info'] = 'Kontakt vores konsulent for mere information';
+$lang['text_corporate_sub_heading'] = 'AGS Forsikring – Erhvervsforsikringsløsninger via mæglere';
+$lang['text_corporate_line1'] = 'AGS Forsikring tilbyder skræddersyede forsikringsdeltagelser til erhvervskunder gennem mæglere. Vores fokus er at levere overskudskapacitet og støtte velrenommerede ledende forsikringsselskaber, især hvor captive-retentioner er betydelige.
+<br>
+<h2>Nøglesektorer og muligheder:</h2>
+<br>
+<strong>Ejendom / Ansvar:</strong>
+<br>
+- Vandkraft, nationalt elnet, fødevarer og mejeri, affaldshåndtering – muligheder for overskudsplaceringer over captive-lag og bag ledende forsikringsselskaber.
+<br>
+<strong>Konstruktion:</strong>
+<br>
+- Store infrastrukturprojekter inklusiv metrotunneler, vandbehandlingsanlæg og kontorbyggeri, samt nye hydrogenfabrikker.
+<br>
+<strong>Risikoprofil:</strong>
+<br>
+- AGS Forsikring har en bred appetit på tværs af industrier inklusiv smeltet metal, ekstrudering, fisk, fødevarer, papirmasse og papir, offshore supply, undersøiske kabler, vedvarende energi (vind, vandkraft), infrastruktur og jernbaner.
+<br>
+Vi er engagerede i at samarbejde med mæglere for at støtte komplekse risici og tilbyde fleksible overskudsforsikringsløsninger.';

@@ -208,7 +208,7 @@ $lang['text_type1_desc'] = 'AGS Insurance is one of the few players that special
 $lang['text_type2_desc'] = 'AGS Insurance AS was approved as an agent in 2008 by the Financial Supervisory Authority of Norway and underwrites various energy insurances on behalf of Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Since 2008, AGS has introduced more new coverages than any other player for the benefit of sports federations and their members in a cost-effective way:';
 $lang['text_type4_desc'] = 'Cybersecurity does not have to create fear – but it requires preparation. Together with our partners with over 20 years of experience and thousands of managed cyber incidents, we know that companies with integrated cybersecurity stand stronger.';
-$lang['text_type5_desc'] = 'Trusted protection for modern businesses.Comprehensive coverage designed to match your corporate needs.';
+$lang['text_type5_desc'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.';
 $lang['text_read_more'] = 'Read more';
 
 // ------------Art
@@ -376,5 +376,25 @@ We offer continuous threat analysis, webinars, training, and access to resources
 
 
 $lang['text_corporate_title'] = 'Corporate Clients';
-$lang['text_corporate_sub_heading'] = 'AGS offers the best insurance to keep you safe.';
-$lang['text_corporate_line1'] = '';
+$lang['text_corporate_info'] = 'Contact our consultant for more information';
+$lang['text_corporate_sub_heading'] = 'AGS Forsikring ? Corporate Insurance Solutions via Brokers';
+$lang['text_corporate_line1'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.
+<br>
+<h2>Key Sectors & Opportunities:</h2>
+<br>
+<strong>Property / Casualty: </strong>
+<br>
+- Hydro Power, National Grid, Food & Dairy, Waste Management ? opportunities for excess placements above captive layers and behind leading carriers.
+<br>
+<strong>Construction:</strong>
+<br>
+- Large-scale infrastructure projects including metro tunnels, water treatment plants, and office developments, as well as emerging hydrogen factory sites.
+<br>
+
+<strong>Risk Appetite:</strong>
+<br>
+
+- AGS Forsikring has a broad appetite across industries including molten metal, extrusion, fish, food, pulp & paper, offshore supply, subsea cables, renewable energy (wind, hydro), infrastructure, and railways.
+<br>
+
+We are committed to partnering with brokers to support complex risks and provide flexible excess insurance solutions.';
