@@ -239,6 +239,7 @@ $lang['text_sport_line4'] = '- Spiseforstyrrelser';
 $lang['text_sport_line5'] = '- Behandlingsgarantier';
 $lang['text_sport_line6'] = 'Forskellige sportsgrene kræver skræddersyede forsikringsløsninger. SPORT SECURE er vores unikke forsikringskoncept for sport. Vi har håndteret over 25.000 skader under licensforsikring for atleter og sikrer kvalitetskontrol af vores sundhedsudbydere. Vi samarbejder bl.a. med Idrætsmedicinsk Center og Skadehotline og har afgjort over 25.000 skader med fokus på atleternes helbred.';
 $lang['text_sport_line7'] = 'SPORT SECURE – den bedste service og de bedste vilkår på markedet fra et team, der giver lige stor opmærksomhed til breddeidræt og de individuelle behov hos eliteatleter. AGS Forsikring – specialistselskabet inden for sport.';
+$lang['text_sports_skade']='Åbn idrætsforeningens hjemmeside og søg efter AGS Forsikring, hvorefter du finder en elektronisk formular, som du udfylder. Efter indsendelse modtager du et automatisk svar, hvorfra du kan fortsætte dialogen med den tildelte skadesbehandler.';
 
 // ------------Team
 

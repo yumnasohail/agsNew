@@ -33,6 +33,8 @@
                                 <a href="mailto: lpm@agsforsikring.no"> lpm@agsforsikring.no</a>
                             </li>
                         </ul>
+                        <h3 style="margin-top:4%" class="widget__title"><?= $this->lang->line('text_SKADEMELDING'); ?></h3>
+                        <p><?= $this->lang->line('text_sports_skade'); ?></p>
                     </div>
                 </div><!-- end sidebar -->
             </div><!-- end col-lg-4 -->

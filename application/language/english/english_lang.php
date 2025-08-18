@@ -239,7 +239,8 @@ $lang['text_sport_line4'] = '- Eating disorders';
 $lang['text_sport_line5'] = '- Treatment guarantees';
 $lang['text_sport_line6'] = 'Different sports require customized insurance solutions. SPORT SECURE is our unique insurance concept for sports. We have handled over 25,000 claims under license insurance for athletes and ensure quality control of our healthcare providers. We cooperate with, among others, the Sports Health Center and the Injury Hotline and have settled over 25,000 claims with the athlete’s health in focus.';
 $lang['text_sport_line7'] = 'SPORT SECURE – the best service and conditions in the market from a team that gives equal attention to grassroots sports as well as the individual needs of elite athletes. AGS Insurance – the specialist company in Sport.';
-
+$lang['text_sports_skade']="Open the sports association's website and search for AGS Forsikring and you will find an electronic form that you fill in. After submitting, you will receive an automatic response from which you can continue the dialogue with the assigned claims handler.";
+ 
 // ------------Team
 
 $lang['text_team'] = 'Team Members.';

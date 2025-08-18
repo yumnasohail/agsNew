@@ -238,6 +238,7 @@ $lang['text_sport_line4'] = '- Ätstörningar';
 $lang['text_sport_line5'] = '- Behandlingsgarantier';
 $lang['text_sport_line6'] = 'Olika sporter kräver anpassade försäkringslösningar. SPORT SECURE är vårt unika försäkringskoncept för sport. Vi har hanterat över 25 000 skadeärenden under licensförsäkring för idrottare och säkerställer kvalitetskontroll av våra vårdgivare. Vi samarbetar bland annat med Sports Health Center och Skadehotline och har avslutat över 25 000 ärenden med idrottarens hälsa i fokus.';
 $lang['text_sport_line7'] = 'SPORT SECURE – bästa service och villkor på marknaden från ett team som ger lika stor uppmärksamhet åt breddidrott som de individuella behoven hos elitidrottare. AGS Försäkring – specialistföretaget inom sport.';
+$lang['text_sports_skade']='Öppna idrottsföreningens webbplats och sök efter AGS Forsikring så hittar du ett elektroniskt formulär som du fyller i. Efter inskick får du ett automatiskt svar från vilket du kan fortsätta dialogen med den tilldelade skadehanteraren.';
 
 // ------------Team
 
