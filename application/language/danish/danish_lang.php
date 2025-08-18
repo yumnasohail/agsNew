@@ -188,6 +188,8 @@ $lang['text_energy'] = 'ENERGI';
 $lang['text_sport'] = 'SPORT';
 $lang['text_header_kontakt_oss'] = 'KONTAKT OS';
 $lang['text_om_ags'] = 'OM AGS';
+$lang['text_nyheter'] = 'NYHEDER';
+
 
 // ------------Home
 
@@ -315,4 +317,4 @@ $lang['text_pp_desc'] = '<br>I overensstemmelse med gældende love og retningsli
     <br>- Ret til indsigelse (GDPR artikel 21): Du kan gøre indsigelse mod behandlingen af dine personoplysninger.
 
     <br>- Ret til at gøre indsigelse mod automatiseret behandling (GDPR artikel 22): Du har ret til at gøre indsigelse mod beslutninger, der udelukkende træffes ved hjælp af automatiserede processer eller profilering.';
-
+    $lang['text_no_news'] = 'Ingen nyheder endnu.';

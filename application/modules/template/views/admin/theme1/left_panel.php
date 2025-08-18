@@ -64,6 +64,11 @@ $active="active";
                         </a>
                     </li>
                     <?php } ?>
+                    <li class="<?php if($curr_url == 'news'){echo $active;} ?>">
+                        <a href="<?php echo ADMIN_BASE_URL.'news'; ?>">
+                            <i class="iconsminds-align-justify-all"></i>Nyheter
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -301,8 +306,10 @@ $active="active";
                         </div>
                     </li>
 
-                </ul>
+                    
 
+                </ul>
+            
 
             </div>
         </div>

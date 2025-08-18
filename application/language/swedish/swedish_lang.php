@@ -188,6 +188,7 @@ $lang['text_energy'] = 'ENERGI';
 $lang['text_sport'] = 'SPORT';
 $lang['text_header_kontakt_oss'] = 'KONTAKTA OSS';
 $lang['text_om_ags'] = 'OM AGS';
+$lang['text_nyheter'] = 'NYHETER';
 
 // ------------Home
 
@@ -304,3 +305,4 @@ $lang['text_pp_desc'] = '<br>I enlighet med tillämpliga lagar och riktlinjer sa
                         <br>- Rätt att begränsa behandling (GDPR Artikel 18): Du kan begära begränsning eller suppression av behandling av dina personuppgifter.
                         <br>- Rätt att göra invändning (GDPR Artikel 21): Du kan motsätta dig behandlingen av dina personuppgifter.
                         <br>- Rätt att göra invändning mot automatiserat beslutsfattande (GDPR Artikel 22): Du har rätt att motsätta dig beslut som fattas enbart genom automatiserade processer eller profilering.';
+$lang['text_no_news'] = 'Inga nyheter än.';  

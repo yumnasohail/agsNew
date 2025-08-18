@@ -211,6 +211,9 @@
                                 <li>
                                     <a href="<?php echo BASE_URL.'om_ags' ?>"><?= $this->lang->line('text_om_ags'); ?> </a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo BASE_URL.'nyheter' ?>"><?= $this->lang->line('text_nyheter'); ?> </a>
+                                </li>
                                 
                              
                             
@@ -246,6 +249,9 @@
                 </li>
                 <li class="sidenav__item">
                     <a href="<?php echo BASE_URL.'om_ags' ?>"><?= $this->lang->line('text_om_ags'); ?></a>
+                </li>
+                <li class="sidenav__item">
+                    <a href="<?php echo BASE_URL.'nyheter' ?>"><?= $this->lang->line('text_nyheter'); ?></a>
                 </li>
             </ul>
         </div><!-- end side-menu-wrap -->

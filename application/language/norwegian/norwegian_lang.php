@@ -189,7 +189,7 @@ $lang['text_energy']='ENERGY';
 $lang['text_sport']='SPORT';
 $lang['text_header_kontakt_oss']='KONTAKT OSS';
 $lang['text_om_ags']='OM AGS';
-
+$lang['text_nyheter'] = 'NYHETER';
 // ------------Home
 
 
@@ -324,3 +324,4 @@ $lang['text_pp_desc']='<br>I samsvar med gjeldende lover og retningslinjer samle
                         <br>- Rett til å protestere (GDPR artikkel 21): Du kan protestere mot behandlingen av dine personopplysninger.
 
                         <br>- Rett til å protestere mot automatisert behandling (GDPR artikkel 22): Du har rett til å protestere mot avgjørelser tatt utelukkende gjennom automatiserte prosesser eller profilering.';
+$lang['text_no_news'] = 'Ingen nyheter ennå.';                   

@@ -58,6 +58,7 @@
 	$route['styrkeloft']=$folder."styrkeloft";
 	$route['suksess']=$folder."success_page";
 	$route['kunst']="front_end/kunst";
+	$route['nyheter']="front_end/news_list";
 	$route['enerji']="front_end/enerji";
 	$route['privacy_policy']="front_end/privacy_policy";
 	$route['sport']="front_end/sport";
@@ -65,7 +66,7 @@
 	$route['kontakt']="front_end/kontakt";
 	$route['om_ags']="front_end/om_ags";
 	$route['switch/(:any)'] = 'front_end/language/switch/$1';
-
+	$route['nyheter/(.+)']='front_end/news_detail';
 	$route['oppdater/(.+)/(.+)']=$folder."oppdater";
 	$route['admin/(.+)'] = "$1/$1";
 	

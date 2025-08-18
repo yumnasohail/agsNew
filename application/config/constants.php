@@ -67,6 +67,8 @@ define('STATIC_FRONT_CSS', $prefix.'://'.$_SERVER['HTTP_HOST'].'/'.$localname.'s
 define('STATIC_FRONT_JS', $prefix.'://'.$_SERVER['HTTP_HOST'].'/'.$localname.'static/front/theme1/js/');
 define('STATIC_FRONT_IMAGE', $prefix.'://'.$_SERVER['HTTP_HOST'].'/'.$localname.'static/front/theme1/images/');
 
+define('UPLOAD_FRONT_NEWS', $prefix.'://'.$_SERVER['HTTP_HOST'].'/'.$localname.'uploads/news/');
+
 define('API_KEY', "3ec00dddc00e1dec3115457b0e317c9fb1c34db2");
 define('API_CONTENT_TYPE', "Content-Type:application/x-www-form-urlencoded");
 define('API_DATETIME', "dateTime:123");

@@ -188,6 +188,8 @@ $lang['text_energy'] = 'ENERGY';
 $lang['text_sport'] = 'SPORT';
 $lang['text_header_kontakt_oss'] = 'CONTACT US';
 $lang['text_om_ags'] = 'ABOUT AGS';
+$lang['text_nyheter'] = 'NEWS';
+
 
 // ------------Home
 
@@ -315,3 +317,5 @@ $lang['text_pp_desc'] = '<br>In accordance with applicable laws and guidelines, 
                         <br>- Right to object (GDPR Article 21): You may object to the processing of your personal data.
 
                         <br>- Right to object to automated processing (GDPR Article 22): You have the right to object to decisions made solely through automated processes or profiling.';
+
+$lang['text_no_news'] = 'No news yet.';

@@ -43,6 +43,19 @@ protected $data = '';
 	    $data['view_file'] = 'kunst';
 	    $this->templates->front($data);
 	}
+	function news_list() {
+		$data['list']=Modules::run('api/get_specific_table_data',array('del_status'=>0,'status'=>1),'id desc',"id,title,date,short_desc,long_desc,image,author,url_slug","news",'','')->result_array();
+		$this->load->module('templates');
+	    $data['view_file'] = 'news_list';
+	    $this->templates->front($data);
+	}
+	function news_detail(){
+		$url=$this->uri->segment(2);
+		$data['news'] = Modules::run('api/get_specific_table_data',array('del_status' => 0, 'status' => 1, 'url_slug' => $url),'id desc',"id,title,date,short_desc,long_desc,image,author","news",'','')->row_array();
+		$this->load->module('templates');
+	    $data['view_file'] = 'news_detail';
+	    $this->templates->front($data);
+	}
 	function enerji() {
         $this->load->module('templates');
 	    $data['view_file'] = 'enerji';
