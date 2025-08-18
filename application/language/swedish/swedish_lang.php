@@ -187,7 +187,7 @@ $lang['text_kunst'] = 'KONST';
 $lang['text_energy'] = 'ENERGI';
 $lang['text_sport'] = 'SPORT';
 $lang['text_cyber'] = 'CYBERFÖRSÄKRING';
-$lang['text_corporate'] = 'FÖRETAGSKUNDER';
+$lang['text_corporate'] = 'CORPORATE CLIENTS';
 $lang['text_header_kontakt_oss'] = 'KONTAKTA OSS';
 $lang['text_om_ags'] = 'OM AGS';
 $lang['text_nyheter'] = 'NYHETER';
@@ -202,7 +202,7 @@ $lang['text_type1'] = 'Konst';
 $lang['text_type2'] = 'Energi';
 $lang['text_type3'] = 'Sport';
 $lang['text_type4'] = 'Cyberförsäkring';
-$lang['text_type5'] = 'Företagskunder';
+$lang['text_type5'] = 'Corporate Clients';
 $lang['text_type1_desc'] = 'AGS Försäkring är en av få aktörer som specialiserar sig på konstförsäkring för museer, konsthallar, gallerier samt privata och offentliga samlingar.';
 $lang['text_type2_desc'] = 'AGS Försäkring AS blev godkänt som agent 2008 av Finanstilsynet i Norge och tecknar olika energiförsäkringar på uppdrag av Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Sedan 2008 har AGS introducerat fler nya försäkringar än någon annan aktör för idrottsförbund och deras medlemmar på ett kostnadseffektivt sätt:';
@@ -272,7 +272,7 @@ $lang['text_footer_link1'] = 'Konst';
 $lang['text_footer_link2'] = 'Sport och idrottsevenemang';
 $lang['text_footer_link3'] = 'Energi, Onshore & Offshore';
 $lang['text_footer_link4'] = 'Cyberförsäkring';
-$lang['text_footer_link5'] = 'Företagskunder';
+$lang['text_footer_link5'] = 'Corporate Clients';
 $lang['text_need_help'] = 'Behöver du hjälp?';
 $lang['text_contact_us'] = 'KONTAKTA OSS';
 $lang['text_privacy_policy'] = 'INTEGRITETSPOLICY';
@@ -364,7 +364,7 @@ Vi erbjuder kontinuerlig hotanalys, webbinarier, utbildning och tillgång till r
 
 
 
-$lang['text_corporate_title'] = 'Företagskunder';
+$lang['text_corporate_title'] = 'Corporate Clients';
 $lang['text_corporate_info'] = 'Kontakta vår konsult för mer information';
 $lang['text_corporate_sub_heading'] = 'AGS Forsikring ? Corporate Insurance Solutions via Brokers';
 $lang['text_corporate_line1'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.

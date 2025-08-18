@@ -188,7 +188,7 @@ $lang['text_kunst']='KUNST';
 $lang['text_energy']='ENERGY';
 $lang['text_sport']='SPORT';
 $lang['text_cyber']='CYBER FORSIKRING';
-$lang['text_corporate']='BEDRIFTSKUNDER';
+$lang['text_corporate']='CORPORATE CLIENTS';
 $lang['text_header_kontakt_oss']='KONTAKT OSS';
 $lang['text_om_ags']='OM AGS';
 $lang['text_nyheter'] = 'NYHETER';
@@ -203,7 +203,7 @@ $lang['text_type1']='Kunst';
 $lang['text_type2']='Energi';
 $lang['text_type3']='Sport';
 $lang['text_type4']='Cyber forsikring';
-$lang['text_type5']='Bedriftskunder';
+$lang['text_type5']='Corporate Clients';
 $lang['text_type1_desc']='AGS Forsikring er en av få aktører som er eksperter på kunstforsikring for museer, kunsthaller, gallerier, private og offentlige samlinger.';
 $lang['text_type2_desc']='AGS Forsikring AS ble godkjent som agent i 2008 av Finanstilsynet og tegner ulike energiforsikringer på vegne Lloyds Insurance Company,';
 $lang['text_type3_desc']='Siden 2008 har AGS innført flere nye dekninger enn noen andre aktører til fordel for idrettsforbundene og deres medlemmer på en kostnadseffektiv måte:';
@@ -276,7 +276,7 @@ $lang['text_footer_link1']='Kunst';
 $lang['text_footer_link2']='Sport og idrettsarrangementer';
 $lang['text_footer_link3']='Energy, On- and Offshore';
 $lang['text_footer_link4']='Cyber forsikring';
-$lang['text_footer_link5']='Bedriftskunder';
+$lang['text_footer_link5']='Corporate Clients';
 $lang['text_need_help']='Need Help?';
 $lang['text_contact_us']='KONTAKT OSS';
 $lang['text_privacy_policy']='PRIVATLIV POLITIKK';
@@ -389,7 +389,7 @@ Vi tilbyr kontinuerlig trusselanalyse, webinarer, opplæring og tilgang til ress
 
 //-------------- Corporate Clients
 
-$lang['text_corporate_title']='Bedriftskunder';
+$lang['text_corporate_title']='Corporate Clients';
 $lang['text_corporate_info'] = 'Kontakt vår konsulent for mer informasjon';
 $lang['text_corporate_sub_heading'] = 'AGS Forsikring ? Corporate Insurance Solutions via Brokers';
 $lang['text_corporate_line1'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.
