@@ -242,6 +242,10 @@ Modules::run('site_security/has_permission');
     {
         $where=array("policies.del_status"=>"0","policy_period.del_status"=>"0");
         $data['policies'] = Modules::run('policies/get_policies_with_period',$where)->result_array();
+        foreach($data['policies'] as $key => $value):
+            $res= Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['id']),"id desc","premiums","SUM(paid) as paid","","")->row_array();
+            $data['policies'][$key]['gwp']=$res['paid'];
+        endforeach;
         $data['total_policies']=Modules::run('api/get_specific_table_data',array('del_status'=>"0",'status'=>"1"),"id desc","id","policies","","")->num_rows();
         $data['total_periods']=Modules::run('api/get_specific_table_data',array('del_status'=>"0",'status'=>"1"),"id desc","id","policy_period","","")->num_rows();
         $data['view_file'] = 'overview';    

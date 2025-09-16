@@ -17,6 +17,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group position-relative error-l-100 col-sm-12 col-xs-12 col-md-12">
+                        <button id="exportExcel" class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right mb-3" style="float:right">
+                            Export to Excel
+                        </button>
                             <table class=" table-bordered border-theme1 table table-responsive">
                                 <thead class="border-theme1 background-theme1">
                                     <tr>
@@ -26,6 +29,7 @@
                                         <th>Forsikringsselskapet</th>
                                         <th>Kontrakts-ID</th>
                                         <th>AGS-policynummer</th>
+                                        <th>GWP</th>
                                         <th>Kommisjon</th>
                                         <th>Egenandel</th>
                                         <th>Valuta</th>
@@ -33,8 +37,8 @@
                                         <th>RIB Comment</th>
                                         <th>Profit comission</th>
                                         <th>PC Comment</th>
-                                        <th>Status</th>
-                                        <th>Update</th>
+                                        <th class="noExl">Status</th>
+                                        <th class="noExl">Update</th>
                                     </tr>
                                 </thead>
                                 <?php 
@@ -70,6 +74,9 @@
                                             <p class="text-muted"><?php echo $value['ags_policy_no'] ?></p>
                                         </td>
                                         <td>
+                                            <p class="text-muted"><?php echo number_format(round($value['gwp']), 0, '', ','); ?></p>
+                                        </td>
+                                        <td>
                                             <p class="text-muted"><?php echo $value['comission'] ?></p>
                                         </td>
                                         <td>
@@ -90,7 +97,7 @@
                                         <td>
                                         <input type="text" data-name="pc_comment" data-id="<?php echo  $value['id']; ?>" class="pc_comment" value="<?php echo  $value['pc_comment']; ?>" >
                                         </td>
-                                        <td>
+                                        <td class="noExl">
                                         <?php
                                                 $publish_class = ' table_action_publish';
                                                 $publis_title = 'Set Un-Publish';
@@ -106,7 +113,7 @@
                                                 'title' => $publis_title,'rel' =>  $value['id'], 'status' => $value['status']));
                                                 ?>
                                         </td>
-                                        <td>
+                                        <td class="noExl">
                                             <a href="<?php echo ADMIN_BASE_URL.'policies/edit_policy/'.$value['id']; ?>"><i style="cursor:pointer;" class="iconsminds-file-edit"></i></a>
                                         </td>
                                     </tr>
@@ -125,6 +132,7 @@
         </div>
     </div>
 </main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
      $(document).off("click",".action_publish").on("click",".action_publish", function(event) {
             event.preventDefault();
@@ -230,4 +238,60 @@
                 }
             });
 
+</script>
+
+<script>
+document.getElementById("exportExcel").addEventListener("click", function () {
+    var table = document.querySelector(".table-bordered");
+
+    // Convert HTML table to SheetJS workbook
+    var wb = XLSX.utils.table_to_book(table, { sheet: "Oversikt" });
+
+    var ws = wb.Sheets["Oversikt"];
+
+    // Exclude columns with "noExl" class
+    var range = XLSX.utils.decode_range(ws["!ref"]);
+    for (let C = range.s.c; C <= range.e.c; ++C) {
+        let cellAddress = XLSX.utils.encode_cell({ r: 0, c: C }); // first row (header)
+        let headerCell = document.querySelector("thead tr th:nth-child("+(C+1)+")");
+        if (headerCell && headerCell.classList.contains("noExl")) {
+            for (let R = range.s.r; R <= range.e.r; ++R) {
+                delete ws[XLSX.utils.encode_cell({ r: R, c: C })];
+            }
+        }
+    }
+
+    // Set column widths
+    ws["!cols"] = [
+        { wch: 5 },   // Checkbox col
+        { wch: 20 },  // Policy
+        { wch: 20 },  // Periode
+        { wch: 25 },  // Company
+        { wch: 20 },  // Contract ID
+        { wch: 20 },  // AGS policy no
+        { wch: 15 },  // GWP
+        { wch: 15 },  // Commission
+        { wch: 15 },  // Deductible
+        { wch: 10 },  // Currency
+        { wch: 15 },  // RIB
+        { wch: 25 },  // RIB Comment
+        { wch: 20 },  // Profit Commission
+        { wch: 25 },  // PC Comment
+    ];
+
+    // Style headers (row 1)
+    for (let C = range.s.c; C <= range.e.c; ++C) {
+        let cellAddress = XLSX.utils.encode_cell({ r: 0, c: C });
+        if (ws[cellAddress]) {
+            ws[cellAddress].s = {
+                font: { bold: true, color: { rgb: "FFFFFF" } },
+                fill: { fgColor: { rgb: "4CAF50" } }, // green header
+                alignment: { horizontal: "center" }
+            };
+        }
+    }
+
+    // Export file
+    XLSX.writeFile(wb, "Policies overview.xlsx");
+});
 </script>

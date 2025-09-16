@@ -275,124 +275,37 @@
 
 <div id="cookie-consent-banner" class="cookie-banner">
         <div class="col9">    
-            <p>
-            We use cookies to ensure proper functionality, gather analytics, and support marketing activities. 
-            <br>By clicking <strong>“Accept All”</strong>, you agree to the use of these technologies for all purposes. 
-            <br>Alternatively, you can customize your preferences by selecting the relevant checkboxes and clicking <strong>“Save Settings”</strong>.
-            </p>
+            <p><?= $this->lang->line('text_cookies_para'); ?></p>
         </div>
         <div class="col3">   
             <div class=" cookie-buttons">
-                <button class="col-md-12" id="accept-all-btn" onclick="acceptAllCookies()">Accept All</button>
-                <button class="col-md-12" id="cookie-settings-btn" onclick="toggleCookieSettings()">Cookie Settings</button>
+                <button class="col-md-12" id="accept-all-btn" onclick="acceptAllCookies()"><?= $this->lang->line('text_cookies_accept'); ?></button>
+                <button class="col-md-12" id="cookie-settings-btn" onclick="toggleCookieSettings()"><?= $this->lang->line('text_cookies_settings'); ?></button>
             </div>
             <div id="cookie-settings" class=" cookie-settings" style="display: none;">
                 <form id="cookie-preferences-form">
                     <label>
                         <input type="checkbox" id="functional-cookies" checked>
-                        Functional Cookies
+                        <?= $this->lang->line('text_cookies_functional'); ?>
                     </label>
                     <label>
                         <input type="checkbox" id="analytics-cookies" checked>
-                        Analytics Cookies
+                        <?= $this->lang->line('text_cookies_analytics'); ?>
                     </label>
                     <label>
                         <input type="checkbox" id="marketing-cookies" checked>
-                        Marketing Cookies
+                        <?= $this->lang->line('text_cookies_marketing'); ?>
                     </label>
-                    <button type="button" class="saveCookie" onclick="saveCookieSettings()">Save Settings</button>
+                    <button type="button" class="saveCookie" onclick="saveCookieSettings()"><?= $this->lang->line('text_cookies_save'); ?></button>
                 </form>
             </div>
         </div>
 </div>
-<!-- 
-<script type="text/javascript">
-function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
-        pageLanguage: 'no', // Set the default page language
-        includedLanguages: 'no,en', // Specify the languages available
-        autoDisplay: false, // Prevent the popup from showing
-        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
-function deleteAllCookies(name) {
-    document.cookie = `${name}=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
-    document.cookie = `${name}=; path=/; domain=agsasa.com; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
-    document.cookie = `${name}=; path=/; domain=.agsasa.com; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure`;
-}
-
-function setLanguageCookie(language) {
-    const domain = window.location.hostname === 'localhost' ? '' : '.agsasa.com';
-
-    // First, delete any existing `googtrans` cookie to prevent duplicates
-    deleteAllCookies('googtrans');
-
-    // Set the new `googtrans` cookie based on the chosen language
-    const cookieValue = language === 'no' ? "/auto/no" : "/auto/en";
-    document.cookie = `googtrans=${cookieValue}; path=/; domain=${domain}; SameSite=None; Secure`;
-
-    // Immediate verification (optional, for debugging purposes)
-    console.log("New Cookie Value:", getCookie('googtrans')); // This should log the new value to confirm
-    location.reload(); // Reload to apply changes
-}
-
-function translatePage(language, flagSrc) {
-    setLanguageCookie(language);
-
-    // Update the flag and dropdown display
-    document.getElementById('selected-flag').src = flagSrc;
-    document.getElementById('norwegian-option').style.display = language === 'no' ? 'none' : 'block';
-    document.getElementById('english-option').style.display = language === 'en' ? 'none' : 'block';
-}
-
-function getCookie(name) {
-    let value = "; " + document.cookie;
-    let parts = value.split("; " + name + "=");
-    if (parts.length === 2) return parts.pop().split(";").shift();
-    return null;
-}
-
-// Check for existing cookies on page load and apply the appropriate flag
-window.onload = function() {
-    checkCookieConsent(); // Ensure consent is obtained
-
-    const lang = getCookie('googtrans');
-    document.getElementById('language-dropdown').style.display = 'block';
-    if (lang) {
-        const selectedLang = lang.split('/')[2];
-        if (selectedLang === 'no') {
-            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
-            document.getElementById('norwegian-option').style.display = 'none';
-            document.getElementById('english-option').style.display = 'block';
-        } else if (selectedLang === 'en') {
-            document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>flag.jpg';
-            document.getElementById('norwegian-option').style.display = 'block';
-            document.getElementById('english-option').style.display = 'none';
-        }
-    } else {
-        // Default to Norwegian
-        document.getElementById('selected-flag').src = '<?php echo STATIC_FRONT_IMAGE; ?>no.jpg';
-        document.getElementById('norwegian-option').style.display = 'none';
-        document.getElementById('english-option').style.display = 'block';
-    }
-};
-
-
-
-
-
-</script> -->
-
-
-
-
-
-<script>
-
+document.addEventListener("DOMContentLoaded", function () {
+    checkCookieConsent();
+});
 // Function to toggle the cookie settings display
 function toggleCookieSettings() {
     var settings = document.getElementById('cookie-settings');

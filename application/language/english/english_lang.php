@@ -398,3 +398,15 @@ $lang['text_corporate_line1'] = 'AGS Forsikring offers tailored insurance partic
 <br>
 
 We are committed to partnering with brokers to support complex risks and provide flexible excess insurance solutions.';
+
+
+//---------------cookies
+$lang['text_cookies_para'] = "We use cookies to ensure proper functionality, gather analytics, and support marketing activities. 
+                            <br>By clicking <strong>“Accept All”</strong>, you agree to the use of these technologies for all purposes. 
+                            <br>Alternatively, you can customize your preferences by selecting the relevant checkboxes and clicking <strong>“Save Settings”</strong>.";
+$lang['text_cookies_accept'] = "Accept All";
+$lang['text_cookies_settings'] = "Cookie Settings";
+$lang['text_cookies_save'] = "Save Settings";
+$lang['text_cookies_functional'] = "Functional Cookies";
+$lang['text_cookies_analytics'] = "Analytics Cookies";
+$lang['text_cookies_marketing'] = "Marketing Cookies";
