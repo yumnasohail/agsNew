@@ -42,7 +42,7 @@
                     <div class="blog-post-img single-case-slider">
                         <div class="single-case-item">
                             <a >
-                                <img src="<?php echo STATIC_FRONT_IMAGE.'forbundog.png' ?>" alt="blog image" class="blog__img">
+                                <img src="<?php echo STATIC_FRONT_IMAGE.'forbund.png' ?>" alt="blog image" class="blog__img">
                             </a>
                         </div>
                     </div><!-- end blog-post-img -->
