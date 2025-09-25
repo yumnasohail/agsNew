@@ -188,6 +188,7 @@ $lang['text_energy'] = 'ENERGI';
 $lang['text_sport'] = 'SPORT';
 $lang['text_cyber'] = 'CYBERFÖRSÄKRING';
 $lang['text_corporate'] = 'CORPORATE CLIENTS';
+$lang['text_forbund'] = 'FÖRBUND OCH FÖRENINGAR';
 $lang['text_header_kontakt_oss'] = 'KONTAKTA OSS';
 $lang['text_om_ags'] = 'OM AGS';
 $lang['text_nyheter'] = 'NYHETER';
@@ -203,11 +204,13 @@ $lang['text_type2'] = 'Energi';
 $lang['text_type3'] = 'Sport';
 $lang['text_type4'] = 'Cyberförsäkring';
 $lang['text_type5'] = 'Corporate Clients';
+$lang['text_type6'] = 'Förbund och Föreningar';
 $lang['text_type1_desc'] = 'AGS Försäkring är en av få aktörer som specialiserar sig på konstförsäkring för museer, konsthallar, gallerier samt privata och offentliga samlingar.';
 $lang['text_type2_desc'] = 'AGS Försäkring AS blev godkänt som agent 2008 av Finanstilsynet i Norge och tecknar olika energiförsäkringar på uppdrag av Lloyd’s Insurance Company.';
 $lang['text_type3_desc'] = 'Sedan 2008 har AGS introducerat fler nya försäkringar än någon annan aktör för idrottsförbund och deras medlemmar på ett kostnadseffektivt sätt:';
 $lang['text_type4_desc'] = 'Cybersäkerhet behöver inte skapa rädsla – men det kräver förberedelse. Tillsammans med våra partners med över 20 års erfarenhet och tusentals hanterade cyberincidenter vet vi att företag med integrerad cybersäkerhet står starkare.';
 $lang['text_type5_desc'] = 'AGS Forsikring offers tailored insurance participations for corporate clients through brokers. Our focus is on providing excess capacity and supporting reputable lead insurers, particularly where captive retentions are significant.';
+$lang['text_type6_desc'] = 'AGS Forsikring AS levererar skräddarsydda försäkringslösningar till förbund och föreningar. Med lång erfarenhet och starka referenser skapar vi trygghet genom professionella och anpassade lösningar.';
 $lang['text_read_more'] = 'Läs mer';
 
 // ------------Art
@@ -273,6 +276,7 @@ $lang['text_footer_link2'] = 'Sport och idrottsevenemang';
 $lang['text_footer_link3'] = 'Energi, Onshore & Offshore';
 $lang['text_footer_link4'] = 'Cyberförsäkring';
 $lang['text_footer_link5'] = 'Corporate Clients';
+$lang['text_footer_link6'] = 'Förbund och Föreningar';
 $lang['text_need_help'] = 'Behöver du hjälp?';
 $lang['text_contact_us'] = 'KONTAKTA OSS';
 $lang['text_privacy_policy'] = 'INTEGRITETSPOLICY';
@@ -400,3 +404,12 @@ $lang['text_cookies_save'] = "Spara inställningar";
 $lang['text_cookies_functional'] = "Funktionella cookies";
 $lang['text_cookies_analytics'] = "Analyscookies";
 $lang['text_cookies_marketing'] = "Marknadsföringscookies";
+
+
+
+//-------------- Federations and Associations
+$lang['text_forbund_title'] = 'Förbund och Föreningar';
+$lang['text_forbund_info'] = 'Kontakta oss:';
+$lang['text_forbund_sub_heading'] = 'Din trygghet är vår erfarenhet';
+$lang['text_forbund_line1'] = 'AGS Forsikring AS levererar skräddarsydda försäkringslösningar till förbund och föreningar. Med lång erfarenhet och starka referenser skapar vi trygghet genom professionella och anpassade lösningar. Vi använder endast försäkringsbolag med högsta internationella ratingar, så att ni kan vara säkra på högsta kvalitet. Hos oss möter ni kompetens, förutsägbarhet och personlig uppföljning – alltid med kundens bästa i fokus.';
+$lang['text_daglig'] = 'Verkställande Direktör';

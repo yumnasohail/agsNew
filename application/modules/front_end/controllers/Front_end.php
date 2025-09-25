@@ -52,6 +52,11 @@ protected $data = '';
 	    $data['view_file'] = 'corporate';
 	    $this->templates->front($data);
 	}
+	function forbund(){
+		$this->load->module('templates');
+	    $data['view_file'] = 'forbund';
+	    $this->templates->front($data);
+	}
 	function news_list() {
 		$data['list']=Modules::run('api/get_specific_table_data',array('del_status'=>0,'status'=>1),'id desc',"id,title,date,short_desc,long_desc,image,author,url_slug","news",'','')->result_array();
 		$this->load->module('templates');

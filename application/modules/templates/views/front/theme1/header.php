@@ -200,6 +200,7 @@
                                         <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_sport'); ?> </a></li>
                                         <li><a href="<?php echo BASE_URL.'cyber' ?>"><?= $this->lang->line('text_cyber'); ?> </a></li>
                                         <li><a href="<?php echo BASE_URL.'corporate ' ?>"><?= $this->lang->line('text_corporate'); ?> </a></li>
+                                        <li><a href="<?php echo BASE_URL.'forbund_og_foreninger ' ?>"><?= $this->lang->line('text_forbund'); ?> </a></li>
                                         <!--<li>-->
                                         <!--    <a href="<?php echo BASE_URL.'ma' ?>">M&A </a>-->
                                            
@@ -243,6 +244,10 @@
                         <li><a href="<?php echo BASE_URL.'kunst'; ?>"><?= $this->lang->line('text_kunst'); ?></a></li>
                         <li><a href="<?php echo BASE_URL.'enerji'; ?>"><?= $this->lang->line('text_energy'); ?></a></li>
                         <li><a href="<?php echo BASE_URL.'sport' ?>"><?= $this->lang->line('text_sport'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'cyber' ?>"><?= $this->lang->line('text_cyber'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'corporate' ?>"><?= $this->lang->line('text_corporate'); ?></a></li>
+                        <li><a href="<?php echo BASE_URL.'forbund_og_foreninger' ?>"><?= $this->lang->line('text_forbund'); ?></a></li>
+
                         <!--<li><a href="<?php echo BASE_URL.'ma' ?>">M&A</a></li>-->
                     </ul>
                 </li>

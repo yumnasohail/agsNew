@@ -228,6 +228,20 @@
                         </a>
                 </div><!-- end info-item -->
             </div><!-- end col-lg-4 -->
+            <div class="col-lg-4">
+                <div class="info-item">
+                    <span class="info__number">06</span>
+                    <img style="height: 140px;" src="<?php echo STATIC_FRONT_IMAGE.'forbundog.png'; ?>" >
+                    <h3 class="info__title">
+                        <a href="<?php echo BASE_URL.'forbund_og_foreninger' ?>"><?= $this->lang->line('text_type6'); ?></a>
+                    </h3>
+                    <p class="info__desc">
+                    <?= $this->lang->line('text_type6_desc'); ?>                      </p>
+                    <a href="<?php echo BASE_URL.'forbund_og_foreninger' ?>" class="text-btn">
+                    <?= $this->lang->line('text_read_more'); ?><i class="fa fa-angle-right"></i>
+                        </a>
+                </div><!-- end info-item -->
+            </div><!-- end col-lg-4 -->
         </div><!-- end row -->
     </div><!-- end container -->
 </section><!-- end feature-area -->
