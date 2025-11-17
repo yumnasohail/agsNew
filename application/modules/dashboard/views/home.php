@@ -101,24 +101,51 @@
                 
                 if( $user_id=="1" || $user_id=="14"){
                 ?>
-                <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+                <div class="col-lg-8 col-md-8 col-sm-12 mb-4">
                   <div class="card">
                     <div class="card-body">
                       <div class="col-xl-12 col-lg-12 col-md-12 mb-4" style="display: inline-flex;">
                         <div class="col-xl-4 col-lg-4 mb-4" style="margin: 0px !important;">
                           <h5 class="card-title">AGS Commission and Premium</h5>
                         </div>
+
+                          <!-- <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
+                            <div class="input-daterange input-daterange-year input-group" id="datepicker">
+                              <select class="input-sm form-control selected_federation">
+                                <option value="">All</option>
+                                <?php foreach($fd as $key => $value): ?>
+                                    <option value="<?php echo $value['id']; ?>"  <?php if($value['title']=="NAIF") echo "selected"; ?>><?php echo $value['title']; ?></option>
+                                <?php endforeach; ?>
+                              </select>
+                              <input type="text" class="input-sm form-control graphStartDate" name="graphStart" placeholder="Start" />
+                              <span class="input-group-addon"></span>
+                              <input type="text" class="input-sm form-control graphEndDate" name="graphEnd" placeholder="End" />
+                              <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search_comission">&nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search</div>
+                            </div>
+                          </div> -->
+
+
                         <div class="col-xl-8 col-lg-8 mb-8" style="margin: 0px !important;">
                           <div class="input-daterange input-daterange-year input-group" id="datepicker">
                             <select class="input-sm form-control selected_federation">
+                              <option value="">All</option>
                               <?php foreach($fd as $key => $value): ?>
-                                  <option value="<?php echo $value['id']; ?>"  <?php if($value['title']=="NAIF") echo "selected"; ?>><?php echo $value['title']; ?></option>
+                                  <option value="<?php echo $value['id']; ?>" <?php if($value['title']=="NAIF") echo "selected"; ?>>
+                                      <?php echo $value['title']; ?>
+                                  </option>
                               <?php endforeach; ?>
                             </select>
+
+                            <!-- Normal date range -->
                             <input type="text" class="input-sm form-control graphStartDate" name="graphStart" placeholder="Start" />
-                            <span class="input-group-addon"></span>
                             <input type="text" class="input-sm form-control graphEndDate" name="graphEnd" placeholder="End" />
-                            <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search_comission">&nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search</div>
+
+                            <!-- Year-only input (hidden by default) -->
+                            <input type="number" class="input-sm form-control singleYearInput" name="singleYear" placeholder="Year" style="display:none;" />
+
+                            <div class="btn btn-sm btn-outline-primary ml-3 d-none d-md-inline-block btn-right btn_search_comission">
+                              &nbsp;&nbsp;&nbsp;<i class="iconsminds-reset mr-2 text-white align-text-bottom d-inline-block"></i> Search
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -128,7 +155,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-md-6 col-sm-12 mb-4">
+                <div class="col-md-4 col-sm-12 mb-4">
                   <div class="card dashboard-filled-line-chart" style="height: 100%;">
                       <div class="card-body ">
                           <div class="float-left float-none-xs">
@@ -504,82 +531,186 @@ window.addEventListener("load", function(){
 
 
 
+  // $(document).on('click', function(e) {
+  //   var btnSearch = $(".btn_search_comission");
+  //   if (!$(e.target).closest(btnSearch).length) {
+  //     $('.graphStartDate').removeClass('errorClass');
+  //     $('.graphEndDate').removeClass('errorClass');
+  //   }
+  // });
+  // $(document).off("click", ".btn_search_comission").on("click", ".btn_search_comission", function(event) {
+  //   let startDate = $('.graphStartDate').val();
+  //   let endDate = $('.graphEndDate').val();
+  //   let f_id = $('.selected_federation').val();
+  //   getDateWiseComission(startDate, endDate ,f_id);
+  // });
+
+
   $(document).on('click', function(e) {
-    var btnSearch = $(".btn_search_comission");
-    if (!$(e.target).closest(btnSearch).length) {
-      $('.graphStartDate').removeClass('errorClass');
-      $('.graphEndDate').removeClass('errorClass');
-    }
-  });
-  $(document).off("click", ".btn_search_comission").on("click", ".btn_search_comission", function(event) {
-    let startDate = $('.graphStartDate').val();
-    let endDate = $('.graphEndDate').val();
-    let f_id = $('.selected_federation').val();
-    getDateWiseComission(startDate, endDate ,f_id);
+      const btnSearch = $(".btn_search_comission");
+      if (!$(e.target).closest(btnSearch).length) {
+          $('.graphStartDate, .graphEndDate, .singleYearInput').removeClass('errorClass');
+      }
   });
 
+  // Handle search button click
+  $(document).off("click", ".btn_search_comission").on("click", ".btn_search_comission", function(event) {
+      const f_id = $('.selected_federation').val();
+      let startDate = '';
+      let endDate = '';
+
+      if (f_id === "") {
+          // If "All" selected → use single year
+          const year = $('.singleYearInput').val();
+          if (!year) {
+              $('.singleYearInput').addClass('errorClass');
+              return;
+          }
+          startDate =year;
+          endDate = year;
+      } else {
+          // Federation selected → use date range
+          startDate = $('.graphStartDate').val();
+          endDate = $('.graphEndDate').val();
+
+          if (!startDate || !endDate) {
+              $('.graphStartDate, .graphEndDate').addClass('errorClass');
+              return;
+          }
+      }
+
+      // 🔥 Call your existing function
+      getDateWiseComission(startDate, endDate, f_id);
+  });
   
   function getColor(i) {
     const colors = ['#ddf5f5', '#ccffe8', '#ffc107', '#dc3545', '#17a2b8', '#6f42c1', '#fd7e14', '#20c997', '#6610f2', '#e83e8c'];
     return colors[i % colors.length];
   }
 
-  function getDateWiseComission(startDate, endDate ,f_id) {
-    if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
-      $('.graphStartDate, .graphEndDate').removeClass('errorClass');
-      $.ajax({
-        type: "POST",
-        url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchComission/",
-        data: {
-          "startDate": startDate,
-          "endDate": endDate,
-          "f_id":f_id
-        },
-        dataType: "json",
-        success: function(response) {
-          const years = response.years;
-          const federations = response.federations;
-          const table_data = response.table_data;
+  // function getDateWiseComission(startDate, endDate ,f_id) {
+  //   if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
+  //     $('.graphStartDate, .graphEndDate').removeClass('errorClass');
+  //     $.ajax({
+  //       type: "POST",
+  //       url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchComission/",
+  //       data: {
+  //         "startDate": startDate,
+  //         "endDate": endDate,
+  //         "f_id":f_id
+  //       },
+  //       dataType: "json",
+  //       success: function(response) {
+  //         const years = response.years;
+  //         const federations = response.federations;
+  //         const table_data = response.table_data;
 
-          const labels = [];
-          const paidData = [];
-          const commissionData = [];
+  //         const labels = [];
+  //         const paidData = [];
+  //         const commissionData = [];
 
-          years.forEach(year => {
-            Object.entries(federations).forEach(([fid, fname]) => {
-              const row = table_data[fid]?.[year] || { paid: 0, comission: 0 };
-              labels.push(`${year}`);
-              paidData.push(row.paid);
-              commissionData.push(row.comission);
-            });
-          });
+  //         years.forEach(year => {
+  //           Object.entries(federations).forEach(([fid, fname]) => {
+  //             const row = table_data[fid]?.[year] || { paid: 0, comission: 0 };
+  //             labels.push(`${year}`);
+  //             paidData.push(row.paid);
+  //             commissionData.push(row.comission);
+  //           });
+  //         });
 
-          const datasets = [
-            {
-              label: 'Paid',
-              data: paidData,
-              backgroundColor: getColor(0)
-            },
-            {
-              label: 'Commission',
-              data: commissionData,
-              backgroundColor: getColor(1)
-            }
-          ];
+  //         const datasets = [
+  //           {
+  //             label: 'Paid',
+  //             data: paidData,
+  //             backgroundColor: getColor(0)
+  //           },
+  //           {
+  //             label: 'Commission',
+  //             data: commissionData,
+  //             backgroundColor: getColor(1)
+  //           }
+  //         ];
 
-          drawChart(labels, datasets);
+  //         drawChart(labels, datasets);
           
-        },
-        error: function() {
-          alert("Error while fetching Data");
-        }
-      });
+  //       },
+  //       error: function() {
+  //         alert("Error while fetching Data");
+  //       }
+  //     });
+  //   } else {
+  //     // Error handling for empty dates
+  //     $('.graphStartDate').toggleClass('errorClass', _.isEmpty(startDate));
+  //     $('.graphEndDate').toggleClass('errorClass', _.isEmpty(endDate));
+  //   }
+  // }
+
+  function getDateWiseComission(startDate, endDate, f_id) {
+    if (!_.isEmpty(startDate) && !_.isEmpty(endDate)) {
+        $('.graphStartDate, .graphEndDate').removeClass('errorClass');
+        $.ajax({
+            type: "POST",
+            url: "<?php echo ADMIN_BASE_URL ?>dashboard/searchComission/",
+            data: {
+                "startDate": startDate,
+                "endDate": endDate,
+                "f_id": f_id
+            },
+            dataType: "json",
+            success: function(response) {
+                const years = response.years;
+                const federations = response.federations;
+                const table_data = response.table_data;
+
+                const labels = [];
+                const paidData = [];
+                const commissionData = [];
+
+                if (years.length === 1) {
+                    // ✅ Only 1 year selected → X-axis = federations
+                    Object.entries(federations).forEach(([fid, fname]) => {
+                        const row = table_data[fid]?.[years[0]] || { paid: 0, comission: 0 };
+                        labels.push(fname);            // X-axis = federation name
+                        paidData.push(row.paid);
+                        commissionData.push(row.comission);
+                    });
+                } else {
+                    // Multiple years → X-axis = years
+                    years.forEach(year => {
+                        Object.entries(federations).forEach(([fid, fname]) => {
+                            const row = table_data[fid]?.[year] || { paid: 0, comission: 0 };
+                            labels.push(`${year}`);      // X-axis = years
+                            paidData.push(row.paid);
+                            commissionData.push(row.comission);
+                        });
+                    });
+                }
+
+                const datasets = [
+                    {
+                        label: 'Paid',
+                        data: paidData,
+                        backgroundColor: getColor(0)
+                    },
+                    {
+                        label: 'Commission',
+                        data: commissionData,
+                        backgroundColor: getColor(1)
+                    }
+                ];
+
+                drawChart(labels, datasets);
+            },
+            error: function() {
+                alert("Error while fetching Data");
+            }
+        });
     } else {
-      // Error handling for empty dates
-      $('.graphStartDate').toggleClass('errorClass', _.isEmpty(startDate));
-      $('.graphEndDate').toggleClass('errorClass', _.isEmpty(endDate));
+        $('.graphStartDate').toggleClass('errorClass', _.isEmpty(startDate));
+        $('.graphEndDate').toggleClass('errorClass', _.isEmpty(endDate));
     }
-  }
+}
+
 
 
 
@@ -635,16 +766,34 @@ window.addEventListener("load", function(){
   }
 
   $(document).ready(function() {
-  const currentYear = new Date().getFullYear();
-  const startYear = currentYear - 5;
+    const currentYear = new Date().getFullYear();
+    const startYear = currentYear - 5;
 
-  // Set the input fields
-  $('.graphStartDate').val(startYear.toString());
-  $('.graphEndDate').val(currentYear.toString());
+    // Set the input fields
+    $('.graphStartDate').val(startYear.toString());
+    $('.graphEndDate').val(currentYear.toString());
 
-  // Call your function with startYear and currentYear
-  getDateWiseComission(startYear.toString(), currentYear.toString(), "3");
+    // Call your function with startYear and currentYear
+    getDateWiseComission(startYear.toString(), currentYear.toString(), "3");
 
-});
+
+    $(document).on('change', '.selected_federation', function() {
+        const selected = $(this).val();
+
+        if (selected === "") { 
+            // "All" selected → show single year input
+            $('.graphStartDate, .graphEndDate').hide();
+            $('.singleYearInput').show();
+        } else {
+            // Federation selected → show start & end range
+            $('.singleYearInput').hide();
+            $('.graphStartDate, .graphEndDate').show();
+        }
+    });
+
+    // Trigger change on load
+    $('.selected_federation').trigger('change');
+
+  });
 
   </script>
