@@ -199,11 +199,45 @@
         <input type="text" class="form-control" name="a_surname"
             id="nameValidation"   value="<?php echo $new->a_surname; ?>">
     </div>
-     <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+     <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
         <label for="name">Fødselsnr.</label>
-        <input type="text" class="form-control" name="a_birth"
-            id="nameValidation"   value="<?php echo $new->a_birth; ?>">
+        <input type="text" class="form-control" name="a_birth" id="nameValidation"   value="<?php echo $new->a_birth; ?>">
+    </div> -->
+    <?php
+        $value = isset($new->a_birth) ? trim($new->a_birth) : '';
+        $inputType = 'date';
+        if (!empty($value)) {
+            if (preg_match('/^\d{1,2}-\d{1,2}-\d{4}$/', $value)) {
+                $parts = explode('-', $value);
+                $day = $parts[0];
+                $month = $parts[1];
+                $year = $parts[2];
+                if (checkdate($month, $day, $year)) {
+                    $inputType = 'date';
+                }
+            } else {
+                $inputType = 'text';
+            }
+        } else {
+            $inputType = 'date';
+        }
+        if($inputType=="date"){
+    ?>
+    <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+        <label>Fødselsdato</label>
+        <div class="input-group date">
+            <input type="text" class="form-control" name="a_birth" id="nameValidation" value="<?php echo $new->a_birth; ?>">
+            <span class="input-group-text input-group-append input-group-addon">
+                <i class="simple-icon-calendar"></i>
+            </span>
+        </div>
     </div>
+    <?php }else{?>
+        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+            <label for="name">Fødselsdato</label>
+            <input type="number" class="form-control" name="a_birth" id="nameValidation" value="<?php echo $new->a_birth; ?>">
+        </div>
+    <?php } ?>
     <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
         <label for="lastName">Idrettsnr.</label>
         <input type="text" class="form-control" name="a_sportsno"
@@ -358,7 +392,7 @@
         <div class="mb-4">
             <div class="custom-control custom-radio">
                 <input type="radio" id="customRadio1" name="permission"
-                    class="custom-control-input" value="Ja" <?php if($new->permission=="Ja") echo "checked"; ?>>
+                    class="custom-control-input" value="Ja" <?php if($new->permission=="Ja" || $new->permission=="Jai") echo "checked"; ?>>
                 <label class="custom-control-label" for="customRadio1">Ja </label>
             </div>
             <div class="custom-control custom-radio">
@@ -373,7 +407,7 @@
         <div class="mb-4">
             <div class="custom-control custom-radio">
                 <input type="radio" id="customRadio3" name="self"
-                    class="custom-control-input" value="Jai" <?php if($new->self=="Jai") echo "checked"; ?>>  
+                    class="custom-control-input" value="Jai" <?php if($new->self=="Jai" || $new->self=="Ja") echo "checked"; ?>>  
                 <label class="custom-control-label" for="customRadio3">Ja</label>
             </div>
             <div class="custom-control custom-radio">

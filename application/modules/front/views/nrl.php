@@ -80,11 +80,51 @@
                                                 <input type="text" class="form-control" name="a_surname"
                                                     id="nameValidation"  required  value="<?php  if(isset($new->a_surname) && !empty($new->a_surname)) echo $new->a_surname; ?>">
                                             </div>
-                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                            <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="name">Fødselsdato</label>
                                                 <input type="number" class="form-control" name="a_birth"
                                                     id="nameValidation"  required  value="<?php  if(isset($new->a_birth) && !empty($new->a_birth)) echo $new->a_birth; ?>">
+                                            </div> -->
+
+                                            <?php
+                                                $value = isset($new->a_birth) ? trim($new->a_birth) : '';
+                                                $inputType = 'date';
+                                                $displayValue = $value;
+                                                if (!empty($value)) {
+                                                    if (preg_match('/^\d{1,2}-\d{1,2}-\d{4}$/', $value)) {
+                                                        $parts = explode('-', $value);
+                                                        $day = $parts[0];
+                                                        $month = $parts[1];
+                                                        $year = $parts[2];
+                                                        if (checkdate($month, $day, $year)) {
+                                                            $inputType = 'date';
+                                                            $displayValue = "$year-$month-$day"; // correct HTML5 format
+                                                        }
+                                                    } else {
+                                                        $inputType = 'text';
+                                                        $displayValue = $value;
+                                                    }
+                                                } else {
+                                                    $inputType = 'date';
+                                                    $displayValue = '';
+                                                }
+                                                if($inputType=="date"){
+                                            ?>
+                                            <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                                <label>Fødselsdato</label>
+                                                <div class="input-group date">
+                                                    <input type="text" class="form-control" name="a_birth" id="nameValidation"  required value="<?php  if(isset($new->a_birth) && !empty($new->a_birth)) echo $new->a_birth; ?>">
+                                                    <span class="input-group-text input-group-append input-group-addon">
+                                                        <i class="simple-icon-calendar"></i>
+                                                    </span>
+                                                </div>
                                             </div>
+                                            <?php }else{?>
+                                                <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
+                                                    <label for="name">Fødselsdato</label>
+                                                    <input type="number" class="form-control" name="a_birth" id="nameValidation"  required  value="<?php  if(isset($new->a_birth) && !empty($new->a_birth)) echo $new->a_birth; ?>">
+                                                </div>
+                                            <?php } ?>
                                             <!-- <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-6">
                                                 <label for="lastName">Idrettsnr.</label>
                                                 <input type="text" class="form-control" name="a_sportsno"
