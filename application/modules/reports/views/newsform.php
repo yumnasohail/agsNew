@@ -152,6 +152,7 @@ width: 12px!important;
                                     <option value="13">Report #13 (Estimated PC to Client)</option>                                    
                                     <option value="14">Report #14 (RIB to Client)</option>
                                     <option value="15">Report #15 (AGS Commission and Premium Report)</option>
+                                    <option value="16">Report #16 (Paid Bdx - Based on Underwriting year)</option>
 
 
                                 </select>
@@ -294,6 +295,11 @@ width: 12px!important;
         $('.rpt_15').css('display', 'none');
         $('.check_by_year').css('display', 'none');
         $('.check_by_year').css('display', 'none');
+    }
+    if(number=="16"){
+        $('.rpt_10').css('display', 'block');
+    }else{
+        $('.rpt_10').css('display', 'none');
     }
     });
     

@@ -629,7 +629,7 @@ Modules::run('site_security/has_permission');
                 $data['result']=$result;
                 echo $this->load->view('table11',$data,TRUE);
             break;
-              case "12":
+            case "12":
                 $data['result']=array();
                  $c_start=$formdata['year'].'-m-01';
                 $c_end=date("Y-m-t", strtotime($c_start));
@@ -663,7 +663,7 @@ Modules::run('site_security/has_permission');
                 //     $where.=" AND  `policy_period`.`start_date` >= '$start' ) ";
 
                 // }
-              //  print_r($where);exit;
+                //  print_r($where);exit;
                 $result=$this->get_policies_detail($where,"policy_period.start_date desc","policy_period.id","policy_period","policy_period.id,policies.id as policy_id,policies.f_id,policies.policy_title,policy_period.contract_id,policy_period.start_date,policy_period.end_date,policy_period.ags_policy_no,federations.name as fed_name,policy_period.currency,MAX(policy_period.start_date) as max_st,MAX(policy_period.end_date) as max_ed",1,10000,"","","")->result_array();
                 // $result=$this->get_policies_premiums_detail($where,"policy_period.start_date desc","policy_period.id","premiums","premiums.id as premium_id,policy_period.id,policies.id as policy_id,policies.f_id,policies.policy_title,policy_period.contract_id,policy_period.start_date,policy_period.end_date,policy_period.ags_policy_no,federations.name as fed_name,policy_period.currency,MAX(policy_period.start_date) as max_st,MAX(policy_period.end_date) as max_ed",1,"","","","")->result_array();
 
@@ -935,6 +935,42 @@ Modules::run('site_security/has_permission');
                 ];
 
                 echo $this->load->view('table15',$data,TRUE);
+            break;
+            case "16":
+                $data['result']=array();
+                $c_start=$formdata['year'].'-01-01';
+                $c_end=$formdata['year'].'-12-31';
+                $formdata['start_date']=$formdata['year'].'-01-01';
+                $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
+                $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
+                if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
+                    $end=$formdata['end_date'];
+                    $where.="`premiums`.`dato` <= '$c_end' AND ";
+                }
+                if(!empty($formdata['federation']) && isset($formdata['federation'])){
+                    $fed=$formdata['federation'];
+                    $where.="`premiums`.`federation_id` = '$fed' AND ";
+                }
+                
+                if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
+                    $insurer=$formdata['insurer'];
+                    $where.="`insurers`.`id` = '$insurer' AND ";
+                }
+                $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
+                $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","  ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid,SUM( CASE WHEN premiums.dato <= '$c_end'  THEN premiums.paid END) as paid_new ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,premiums.period_id as id,policies.id as policy_id,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+
+                foreach($result as $res => $value):
+                    $ttl=$com=$ttl_ins=0;
+                    $prem= Modules::run('reports/get_policy_wise_premiums',array("federation_id"=>$value['f_id'],"policies.id"=>$value['policy_id'],"period_id"=>$value['id']),"premiums.id desc","premiums","SUM(premiums.paid) as paid,SUM(premiums.total_insurances) as total_insurances,SUM(recieved) as recieved","","")->row_array();
+                    if($prem['paid']>0){
+                        $result[$res]['paid']=$prem['paid'];
+                    }
+                endforeach;
+                $data['result']=$result;
+                $data['end_date']=$c_end;
+                $data['start_date']=$c_start;
+                $data['year']=$formdata['year'];
+                echo $this->load->view('table7',$data,TRUE);
             break;
             default: 
                 $data['result']=array();
