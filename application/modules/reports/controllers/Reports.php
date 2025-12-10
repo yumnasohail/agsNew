@@ -943,9 +943,8 @@ Modules::run('site_security/has_permission');
                 $formdata['start_date']=$formdata['year'].'-01-01';
                 $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
                 $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";
-                if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
-                    $end=$formdata['end_date'];
-                    $where.="`premiums`.`dato` <= '$c_end' AND ";
+                if(!empty($formdata['end_date']) && isset($formdata['end_date']) && !empty($formdata['start_date']) && isset($formdata['start_date'])){
+                    $where.="`policy_period`.`start_date` <= '$c_end' AND `policy_period`.`end_date` >= '$c_start' AND ";
                 }
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
@@ -957,7 +956,7 @@ Modules::run('site_security/has_permission');
                     $where.="`insurers`.`id` = '$insurer' AND ";
                 }
                 $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
-                $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","  ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.paid END) as c_paid,SUM( CASE WHEN premiums.dato <= '$c_end'  THEN premiums.paid END) as paid_new ,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.recieved END) as recieved ,premiums.comission,SUM( CASE WHEN premiums.dato BETWEEN '$c_start' AND '$c_end'  THEN premiums.total_insurances END) as total_insurances,premiums.period_id as id,policies.id as policy_id,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
+                $result=$this->get_data_of_reports_bdx($where, "policy_period.start_date desc","premiums.period_id","premiums","SUM( premiums.paid) as c_paid,SUM(premiums.paid ) as paid_new ,SUM( premiums.recieved) as recieved ,premiums.comission,SUM(premiums.total_insurances) as total_insurances,premiums.period_id as id,policies.id as policy_id,policy_period.contract_id,policy_period.ags_policy_no,policy_period.currency,policy_period.deductible,policy_period.claim_fee,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,insurers.name,federations.name as f_name,federations.id as f_id,policy_period.policy_id as p_id,policies.name as p_name","","","","","")->result_array();
 
                 foreach($result as $res => $value):
                     $ttl=$com=$ttl_ins=0;
