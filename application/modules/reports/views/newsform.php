@@ -153,6 +153,7 @@ width: 12px!important;
                                     <option value="14">Report #14 (RIB to Client)</option>
                                     <option value="15">Report #15 (AGS Commission and Premium Report)</option>
                                     <option value="16">Report #16 (Paid Bdx - Based on Underwriting year)</option>
+                                    <option value="17">Report #17 (PC calc in Paid Bdx format)</option>
 
 
                                 </select>
@@ -374,7 +375,7 @@ $(document).ready(function() {
                     }
                 }
             }
-            if(  (report=="9" && insurer==""))
+            if(  (report=="9" && insurer=="" || report=="17" && insurer==""))
             {
                 valid=false;
                 toastr.info('Please Select a insurer first');

@@ -971,6 +971,35 @@ Modules::run('site_security/has_permission');
                 $data['year']=$formdata['year'];
                 echo $this->load->view('table7',$data,TRUE);
             break;
+            case "17":
+                 $data['result']=array();
+                 $where="`federations`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND";
+                if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
+                    $insurer=$formdata['insurer'];
+                    $where.="`insurers`.`id` = '$insurer' AND ";
+                }
+                $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
+                $result=$this->get_policies_claims($where,"federations.id desc,policy_period.start_date desc","policy_period.id","policy_period","policy_period.id,policy_period.contract_id,policy_period.start_date,policy_period.end_date,policy_period.insured_amt,policy_period.deductible,policy_period.ags_policy_no,insurers.name,federations.id as f_id,federations.name as fed_name,policies.name as p_name,policy_period.profit_comission,policy_period.currency, policy_period.id as period_id",1,10000,"","","")->result_array();
+                foreach($result as $keys => $value):
+                     $result[$keys]['paid']=0.00;
+                     $result[$keys]['reserve']=0.00;
+                     $open_claims= Modules::run('api/_get_specific_table_with_pagination',array("process_claim.period_id"=>$value['id']),"id desc","process_claim","COUNT(CASE WHEN process_claim.status = '1' THEN process_claim.id END) as open_claims,SUM(process_claim.claim_fee) as sum_claim_fee","","")->row();
+                     $period_amt=$this->get_period_amount(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim","SUM(CASE WHEN trans_status = 'transferred' THEN belop END ) paid, SUM(CASE WHEN trans_status = 'transferred' AND process_claim.status = '1' THEN belop END ) open_paid",1,'',"","","")->row();
+                     $period_res=$this->get_period_amount_reserve(array("process_claim.period_id"=>$value['id']),"process_claim.id desc","","process_claim",",SUM(claim_reservations.amount) as reserve, SUM(CASE WHEN  process_claim.status = '1' THEN claim_reservations.amount END) as open_reserve ",1,'',"","","")->row();
+                     $result[$keys]['open_claims']=$open_claims->open_claims;
+                     $result[$keys]['sum_claim_fee']=$open_claims->sum_claim_fee;
+                     if(!empty($period_amt->paid))
+                     $result[$keys]['paid']=$period_amt->paid;
+                     if(!empty($period_res->reserve))
+                     $result[$keys]['reserve']=$period_res->reserve;
+                     if(!empty($period_amt->open_paid))
+                     $result[$keys]['open_paid']=$period_amt->open_paid;
+                     if(!empty($period_res->open_reserve))
+                     $result[$keys]['open_reserve']=$period_res->open_reserve;
+                endforeach;
+                $data['result']=$result;
+                echo $this->load->view('table17',$data,TRUE);
+            break;
             default: 
                 $data['result']=array();
         }
