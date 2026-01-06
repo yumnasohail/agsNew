@@ -310,7 +310,8 @@
                                         <td>Commercial</td>
                                         <td>Direct </td>
                                         <td><?php echo $value['currency'] ?></td>
-                                        <td><?php if($value['paid']>0) echo round($value['paid']); else echo "Nil"; ?></td>
+                                        <?php $pre=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved,total_insurances",'','')->row_array(); ?>
+                                        <td><?php if($pre['ttl']>0) echo round($pre['ttl']); else echo "Nil"; ?></td>
                                         <td>
                                             <?php $res=Modules::run('reports/_get_specific_table_with_pagination_bdx_check',array("f_id"=>$value['f_id'],'end_date <= '=>$value['start_date']),'policy_period.id desc',"policy_period","policy_period.id",'','')->num_rows();
                                             if($res>0) echo "Renewal"; else echo "New"; ?></td>
@@ -328,7 +329,6 @@
                                         <td><?php if($res>0) echo "Original Premium"; else echo "Additional Premium"; ?></td>
                                         <td></td>
                                         <td></td>
-                                        <?php $pre=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved,total_insurances",'','')->row_array(); ?>
                                         <td><?php if($pre['ttl']>0) { echo  "-".number_format(round($pre['ttl']), 0, ',', ''); } ?></td>
                                         <td><?php if($pre['ttl']>0){ echo  number_format(round($pre['ttl_recieved']/$pre['ttl']*100), 0, ',', '').'%';}else{ echo "0%";} ?></td>
                                         <td><?php if($pre['ttl_recieved']>0) { echo  "-".number_format(round($pre['ttl_recieved']), 0, ',', ''); } ?></td>
