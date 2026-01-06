@@ -265,26 +265,19 @@ width: 12px!important;
     event.preventDefault();
     var number=$(this).val();
     $('.rpt_4').css('display', 'none');
-    if(number=="7" || number=="8" || number=="13" || number=="14")
+    if(number=="7" || number=="8" || number=="13" || number=="14"){
         $('.rpt_7').css('display', 'block');
-    else if(number=="10"){
+    }else if(number=="10"){
         $('.rpt_7').css('display', 'block');
         $('.rpt_10').css('display', 'block');
-    }else if(number=="12")
-    {
+    }else if(number=="12"){
         $('.rpt_7').css('display', 'none');
         $('.rpt_12').css('display', 'block');
-    }
-    else
-        $('.rpt_7').css('display', 'none');
-    if(number=="4")
+    }else if(number=="4"){
         $('.rpt_4').css('display', 'block');
-    if(number=="2"){
+    }else if(number=="2"){
         $('.Velg').css('display', 'block');
-    }else{
-        $('.Velg').css('display', 'none');
-    }
-    if(number=="15"){
+    }else if(number=="15"){
         $('.rpt_15').css('display', 'block');
         var check=$('#custCheck29').is(":checked");
         if(check==true){
@@ -292,14 +285,14 @@ width: 12px!important;
         }else{
             $('.check_by_year').css('display', 'none');
         }
+    }else if(number=="16"){
+        $('.rpt_10').css('display', 'block');
     }else{
+        $('.Velg').css('display', 'none');
+        $('.rpt_7').css('display', 'none');
         $('.rpt_15').css('display', 'none');
         $('.check_by_year').css('display', 'none');
         $('.check_by_year').css('display', 'none');
-    }
-    if(number=="16"){
-        $('.rpt_10').css('display', 'block');
-    }else{
         $('.rpt_10').css('display', 'none');
     }
     });
