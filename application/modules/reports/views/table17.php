@@ -330,7 +330,8 @@
                                         <td></td>
                                         <td></td>
                                          <?php
-            
+                                            $ttl=$value['reserve']+$value['paid'];
+                                            if($ttl>0 && $res['ttl']>0 ) { $lr=round((round($ttl)/round($res['ttl']))*100); }
                                             $total_sumout=ceil($res['ttl_recieved'])+ceil($value['sum_claim_fee'])+ceil($res['ttl']/100*10)+ceil($value['paid'])+ceil($value['reserve']);
                                             $PC_basis=round($res['ttl'])-round($total_sumout);
                                             $pc_per_client=0;
