@@ -310,11 +310,11 @@
                                         <td>Commercial</td>
                                         <td>Direct </td>
                                         <td><?php echo $value['currency'] ?></td>
-                                        <?php $pre=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved,total_insurances",'','')->row_array(); ?>
-                                        <td><?php if($pre['ttl']>0) echo round($pre['ttl']); else echo "Nil"; ?></td>
+                                        <td><?php $res=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved",'','')->row_array(); echo  number_format(round($res['ttl']), 0, ',', ''); ?>
+
                                         <td>
-                                            <?php $res=Modules::run('reports/_get_specific_table_with_pagination_bdx_check',array("f_id"=>$value['f_id'],'end_date <= '=>$value['start_date']),'policy_period.id desc',"policy_period","policy_period.id",'','')->num_rows();
-                                            if($res>0) echo "Renewal"; else echo "New"; ?></td>
+                                            <?php $dur=Modules::run('reports/_get_specific_table_with_pagination_bdx_check',array("f_id"=>$value['f_id'],'end_date <= '=>$value['start_date']),'policy_period.id desc',"policy_period","policy_period.id",'','')->num_rows();
+                                            if($dur>0) echo "Renewal"; else echo "New"; ?></td>
                                         <td><?php echo $value['ags_policy_no'] ?></td>
                                         <td><?php echo date("d/m/y", strtotime($value['start_date'])) ?></td>
                                         <td><?php echo date("d/m/y", strtotime($value['end_date'])) ?></td>
@@ -326,13 +326,27 @@
                                         <td><?php echo $value['currency'] ?></td>
                                         <td><?php echo $value['deductible'] ?></td>
                                         <td>Any one accident or occurrence</td>
-                                        <td><?php if($res>0) echo "Original Premium"; else echo "Additional Premium"; ?></td>
+                                        <td><?php if($dur>0) echo "Original Premium"; else echo "Additional Premium"; ?></td>
                                         <td></td>
                                         <td></td>
-                                        <td><?php if($pre['ttl']>0) { echo  "-".number_format(round($pre['ttl']), 0, ',', ''); } ?></td>
+                                         <?php
+            
+                                            $total_sumout=ceil($res['ttl_recieved'])+ceil($value['sum_claim_fee'])+ceil($res['ttl']/100*10)+ceil($value['paid'])+ceil($value['reserve']);
+                                            $PC_basis=round($res['ttl'])-round($total_sumout);
+                                            $pc_per_client=0;
+                                            if($PC_basis>0){
+                                                if($lr<50){
+                                                    $pc_per_client=round($PC_basis/100*5);
+                                                }
+                                            }
+                                        ?>
+                                        <td><?php if($lr>=50){ echo  "0"; }else { if($pc_per_client>0) echo "-"; echo number_format($pc_per_client, 0, ',', '');}     ?></td>
+                                        <?php $pre=Modules::run('api/_get_specific_table_with_pagination',array("period_id"=>$value['period_id']),'id desc',"premiums","SUM(paid) as ttl, SUM(recieved) as ttl_recieved",'','')->row_array();?>
                                         <td><?php if($pre['ttl']>0){ echo  number_format(round($pre['ttl_recieved']/$pre['ttl']*100), 0, ',', '').'%';}else{ echo "0%";} ?></td>
-                                        <td><?php if($pre['ttl_recieved']>0) { echo  "-".number_format(round($pre['ttl_recieved']), 0, ',', ''); } ?></td>
-                                        <td><?php if($pre['total_insurances']>0) { echo  "-".number_format(round($pre['total_insurances']), 0, ',', ''); } ?></td>
+                                        <!-- <td><?php if($pre['ttl_recieved']>0) { echo  "-".number_format(round($pre['ttl_recieved']), 0, ',', ''); } ?></td>
+                                        <td><?php if($pre['total_insurances']>0) { echo  "-".number_format(round($pre['total_insurances']), 0, ',', ''); } ?></td> -->
+                                        <td><?php if($lr>=50){ echo  "0"; }else { if($pc_per_client>0) echo "-"; echo number_format($pc_per_client, 0, ',', '');}     ?></td>
+                                        <td><?php if($lr>=50){ echo  "0"; }else { if($pc_per_client>0) echo "-"; echo number_format($pc_per_client, 0, ',', '');}     ?></td>
                                         <td><?php echo $value['currency'] ?></td>
                                         <td></td>
                                         <td></td>
