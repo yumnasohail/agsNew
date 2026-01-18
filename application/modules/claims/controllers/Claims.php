@@ -167,8 +167,13 @@ Modules::run('site_security/has_permission');
 		if(!empty($formdata['self']))
 			$data['self']=$formdata['self'];
 		$data['federation']=$this->input->post('federation');
-        $data['claim_datetime']=date('Y-m-d H:i:s');
         $data['id']= $formdata['c_id'];
+        if($data['id']>0){
+            $data['update_datetime']=date('Y-m-d H:i:s');
+        }else{
+            $data['claim_datetime']=date('Y-m-d H:i:s');
+        }
+        
 		return $data;
 	}
 
