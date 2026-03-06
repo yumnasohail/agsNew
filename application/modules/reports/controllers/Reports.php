@@ -462,8 +462,9 @@ Modules::run('site_security/has_permission');
             break;
             case "8":
                 $data['result']=array();
-                $c_start=$formdata['year'].'-'.$formdata['month'].'-01';
-                $c_end=date("Y-m-t", strtotime($c_start));
+                $c_start=$formdata['s_year'].'-'.$formdata['s_month'].'-01';
+                $end_duration=$formdata['e_year'].'-'.$formdata['e_month'].'-01';
+                $c_end=date("Y-m-t", strtotime($end_duration));
                 $formdata['start_date']=$formdata['year'].'-01-01';
                 $formdata['end_date']=date("Y-m-t", strtotime($formdata['start_date']));
                 $where="`premiums`.`status` = '1' AND   `policy_period`.`del_status` = '0'  AND ";

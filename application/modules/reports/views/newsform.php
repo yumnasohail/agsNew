@@ -240,6 +240,88 @@ width: 12px!important;
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 written_bdx" style="display:none;">
+                        <?php
+                            $start_month = date('m', strtotime('-1 month'));
+                            $start_year  = date('Y', strtotime('-1 month'));
+                            $end_month   = date('m');
+                            $end_year    = date('Y');
+                        ?>
+
+                        <label for="lastName">Reporting Duration Start</label>
+                        <div class="row">
+                            <!-- Month Select - 6 cols -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="s_month" name="s_month">
+                                        <?php
+                                            for($m = 01; $m <= 12; $m++){
+                                                $selected = (sprintf("%02d", $m) == $start_month) ? 'selected' : '';
+                                                echo '<option value="'.sprintf("%02d", $m).'" '.$selected.'>'.date('F', mktime(0, 0, 0, $m)).'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="s_month">Month</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Year Select - 6 cols -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="s_year" name="s_year">
+                                        <?php
+                                            for($y = date('Y'); $y >= 2016; $y--){
+                                                $selected = ($y == $start_year) ? 'selected' : '';
+                                                echo '<option value="'.$y.'" '.$selected.'>'.$y.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="s_year">Year</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <label for="lastName">Reporting Duration End</label>
+                        <div class="row">
+                            <!-- Month Select - 6 cols -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="e_month" name="e_month">
+                                        <?php
+                                            for($m = 01; $m <= 12; $m++){
+                                                $selected = (sprintf("%02d", $m) == $end_month) ? 'selected' : '';
+                                                echo '<option value="'.sprintf("%02d", $m).'" '.$selected.'>'.date('F', mktime(0, 0, 0, $m)).'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="e_month">Month</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Year Select - 6 cols -->
+                            <div class="col-md-6 col-sm-6">
+                                <div class="input-group mb-3">
+                                    <select class="custom-select" id="e_year" name="e_year">
+                                        <?php
+                                            for($y = date('Y'); $y >= 2016; $y--){
+                                                $selected = ($y == $end_year) ? 'selected' : '';
+                                                echo '<option value="'.$y.'" '.$selected.'>'.$y.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                    <div class="input-group-append">
+                                        <label class="input-group-text" for="e_year">Year</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                         <div class="col-md-offset-12 col-md-12" style="padding-bottom:15px;">
                             <button  class="btn btn-outline-primary gt_rpt"  style="width: 100%;">
@@ -265,7 +347,8 @@ width: 12px!important;
     event.preventDefault();
     var number=$(this).val();
     $('.rpt_4').css('display', 'none');
-    if(number=="7" || number=="8" || number=="13" || number=="14"){
+    $('.written_bdx').css('display', 'none');
+    if(number=="7" || number=="13" || number=="14"){
         $('.rpt_7').css('display', 'block');
     }else if(number=="10"){
         $('.rpt_7').css('display', 'block');
@@ -287,6 +370,8 @@ width: 12px!important;
         }
     }else if(number=="16"){
         $('.rpt_10').css('display', 'block');
+    }else if(number=="8"){
+            $('.written_bdx').css('display', 'block')
     }else{
         $('.Velg').css('display', 'none');
         $('.rpt_7').css('display', 'none');
@@ -294,6 +379,7 @@ width: 12px!important;
         $('.check_by_year').css('display', 'none');
         $('.check_by_year').css('display', 'none');
         $('.rpt_10').css('display', 'none');
+        $('.written_bdx').css('display', 'none');
     }
     });
     
@@ -373,6 +459,22 @@ $(document).ready(function() {
                 valid=false;
                 toastr.info('Please Select a insurer first');
                   $("#loader_report").attr("style", "display:none");
+            }
+             if(report == "8"){
+                var sMonth = parseInt($('#s_month').val());
+                var sYear  = parseInt($('#s_year').val());
+                var eMonth = parseInt($('#e_month').val());
+                var eYear  = parseInt($('#e_year').val());
+
+                // Compare by building date values: year * 100 + month (e.g. 202502)
+                var startDate = (sYear * 100) + sMonth;
+                var endDate   = (eYear * 100) + eMonth;
+
+                if(endDate < startDate){
+                    valid = false;
+                    toastr.info('Reporting end duration must be greater than start duration');
+                    $("#loader_report").attr("style", "display:none");
+                }
             }
             if(valid){
                 $.ajax({
