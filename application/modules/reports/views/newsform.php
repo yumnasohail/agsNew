@@ -46,9 +46,9 @@ width: 12px!important;
                              <label for="lastName">Skjema</label>
                             <div class="input-group mb-3">
                                 <select class="custom-select" id="federation" name="federation" >
-                                    <option value="">Alle</option>
+                                    <option value="" selected>Alle</option>
                                     <?php foreach($fed as $key => $val):?>
-                                    <option value="<?php echo $val['id']; ?>" <?php if($val['id']==3) echo "selected"; ?>><?php echo $val['name']; ?></option>
+                                    <option value="<?php echo $val['id']; ?>"><?php echo $val['name']; ?></option>
                                     <?php endforeach; ?>
                                 </select>
                                 <div class="input-group-append">
@@ -240,7 +240,7 @@ width: 12px!important;
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 written_bdx" style="display:none;">
+                        <div class="form-group position-relative error-l-75 col-sm-12 col-xs-12 col-md-12 written_bdx">
                         <?php
                             $start_month = date('m', strtotime('-1 month'));
                             $start_year  = date('Y', strtotime('-1 month'));
@@ -347,7 +347,14 @@ width: 12px!important;
     event.preventDefault();
     var number=$(this).val();
     $('.rpt_4').css('display', 'none');
+    $('.Velg').css('display', 'none');
+    $('.rpt_7').css('display', 'none');
+    $('.rpt_15').css('display', 'none');
+    $('.check_by_year').css('display', 'none');
+    $('.check_by_year').css('display', 'none');
+    $('.rpt_10').css('display', 'none');
     $('.written_bdx').css('display', 'none');
+
     if(number=="7" || number=="13" || number=="14"){
         $('.rpt_7').css('display', 'block');
     }else if(number=="10"){
@@ -370,17 +377,10 @@ width: 12px!important;
         }
     }else if(number=="16"){
         $('.rpt_10').css('display', 'block');
-    }else if(number=="8"){
+    }else if(number=="8" || number=="1"){
             $('.written_bdx').css('display', 'block')
-    }else{
-        $('.Velg').css('display', 'none');
-        $('.rpt_7').css('display', 'none');
-        $('.rpt_15').css('display', 'none');
-        $('.check_by_year').css('display', 'none');
-        $('.check_by_year').css('display', 'none');
-        $('.rpt_10').css('display', 'none');
-        $('.written_bdx').css('display', 'none');
     }
+        
     });
     
     
@@ -460,7 +460,7 @@ $(document).ready(function() {
                 toastr.info('Please Select a insurer first');
                   $("#loader_report").attr("style", "display:none");
             }
-             if(report == "8"){
+             if(report == "8" || report == "1"){
                 var sMonth = parseInt($('#s_month').val());
                 var sYear  = parseInt($('#s_year').val());
                 var eMonth = parseInt($('#e_month').val());

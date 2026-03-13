@@ -100,14 +100,21 @@ Modules::run('site_security/has_permission');
                     $policy=$formdata['policy'];
                     $where.="`process_claim`.`period_id` = '$policy' AND ";
                 }
-                if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
-                    $start=$formdata['start_date'];
-                    $where.="`claims`.`claim_datetime` >= '$start' AND ";
-                }
-                if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
-                    $end=$formdata['end_date'];
-                    $where.="`claims`.`claim_datetime` <= '$end' AND ";
-                }  
+
+                $start=$formdata['s_year'].'-'.$formdata['s_month'].'-01';
+                $end_duration=$formdata['e_year'].'-'.$formdata['e_month'].'-01';
+                $end=date("Y-m-t", strtotime($end_duration));
+                $where.="`claims`.`claim_datetime` >= '$start' AND ";
+                $where.="`claims`.`claim_datetime` <= '$end' AND ";
+
+                // if(!empty($formdata['start_date']) && isset($formdata['start_date'])){
+                //     $start=$formdata['start_date'];
+                //     $where.="`claims`.`claim_datetime` >= '$start' AND ";
+                // }
+                // if(!empty($formdata['end_date']) && isset($formdata['end_date'])){
+                //     $end=$formdata['end_date'];
+                //     $where.="`claims`.`claim_datetime` <= '$end' AND ";
+                // }  
                  if(!empty($formdata['insurer']) && isset($formdata['insurer'])){
                     $insurer=$formdata['insurer'];
                     $where.="`insurers`.`id` = '$insurer' AND ";
