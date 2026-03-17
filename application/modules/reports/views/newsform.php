@@ -521,21 +521,32 @@ $(document).ready(function() {
 </script>
 
 <script>
-    function export_to_CSV(filename) {
-            var dt = new Date();
-            var day = dt.getDate();
-            var month = dt.getMonth() + 1;
-            var year = dt.getFullYear();
-            var postfix = year + "." + month + "." + day;
-            var a = document.createElement('a');
-            var data_type = 'data:application/vnd.ms-excel;charset=utf-8';
-            var table_html = $('#tblReportData')[0].outerHTML;
-            table_html = table_html.replace(/<tfoot[\s\S.]*tfoot>/gmi, '');
-            var css_html = '<style>td {border: 0.5pt solid #c0c0c0} .tRight { text-align:right} .tLeft { text-align:left} </style>';
-            a.href = data_type + ',' + encodeURIComponent('<html><head>' + css_html + '</' + 'head><body>' + table_html + '</body></html>');
-            a.download = 'AGS_Report_' + postfix + '.xls';
-            a.click();
-    }
+    function export_to_CSV(filename) { 
+    var dt = new Date();
+    var day = dt.getDate();
+    var month = dt.getMonth() + 1;
+    var year = dt.getFullYear();
+    var postfix = year + "." + month + "." + day;
+
+    var a = document.createElement('a');
+
+    var table_html = $('#tblReportData')[0].outerHTML;
+    table_html = table_html.replace(/<tfoot[\s\S.]*tfoot>/gmi, '');
+
+    var css_html = '<style>td {border: 0.5pt solid #c0c0c0} .tRight { text-align:right} .tLeft { text-align:left} </style>';
+
+    // ✅ ADD BOM HERE
+    var blob = new Blob(
+        ['\ufeff', '<html><head>' + css_html + '</head><body>' + table_html + '</body></html>'],
+        { type: 'application/vnd.ms-excel;charset=utf-8;' }
+    );
+
+    var url = URL.createObjectURL(blob);
+
+    a.href = url;
+    a.download = 'AGS_Report_' + postfix + '.xls';
+    a.click();
+}
 
     function exportSheet() {
     var dt = new Date();

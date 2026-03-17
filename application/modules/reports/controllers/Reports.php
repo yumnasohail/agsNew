@@ -91,7 +91,7 @@ Modules::run('site_security/has_permission');
         {
             case "1":
                 $data['result']=array();
-                $where="`claims`.`claim_stat` != 'Ikke behandlet'  AND `claims`.`del_status` = '0' AND  `federations`.`status` = '1' AND  `policy_period`.`del_status` = '0'  AND";
+                $where="`claims`.`claim_stat` != 'Ikke behandlet'  AND `claims`.`del_status` = '0'  AND  `policy_period`.`del_status` = '0'  AND";
                 if(!empty($formdata['federation']) && isset($formdata['federation'])){
                     $fed=$formdata['federation'];
                     $where.="`claims`.`federation` = '$fed' AND ";
@@ -119,26 +119,26 @@ Modules::run('site_security/has_permission');
                     $insurer=$formdata['insurer'];
                     $where.="`insurers`.`id` = '$insurer' AND ";
                 }
-                $or_where="(";
-                if($formdata['godkjent']=="on" && isset($formdata['godkjent']))
-                    $or_where.="`claims`.`claim_stat` = 'Godkjent' OR ";
-                if($formdata['avslatt']=="on" && isset($formdata['avslatt']))
-                    $or_where.="`claims`.`claim_stat` = 'Avslått' OR ";
-                if($formdata['update']=="on" && isset($formdata['update']))
-                    $or_where.="`claims`.`claim_stat` = 'Avslått, Avventer' OR ";
-                if($formdata['apen']=="on" && isset($formdata['apen']))
-                    $or_where.="`process_claim`.`status` = '1' OR ";
-                if($formdata['avsluttet']=="on" && isset($formdata['avsluttet']))
-                    $or_where.="`process_claim`.`status` = '2' OR ";
-                if($formdata['avvist']=="on" && isset($formdata['avvist']))
-                    $or_where.="`process_claim`.`status` = '3' OR ";
-                $or_where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $or_where);
-                $or_where.=")";
+                // $or_where="(";
+                // if($formdata['godkjent']=="on" && isset($formdata['godkjent']))
+                //     $or_where.="`claims`.`claim_stat` = 'Godkjent' OR ";
+                // if($formdata['avslatt']=="on" && isset($formdata['avslatt']))
+                //     $or_where.="`claims`.`claim_stat` = 'Avslått' OR ";
+                // if($formdata['update']=="on" && isset($formdata['update']))
+                //     $or_where.="`claims`.`claim_stat` = 'Avslått, Avventer' OR ";
+                // if($formdata['apen']=="on" && isset($formdata['apen']))
+                //     $or_where.="`process_claim`.`status` = '1' OR ";
+                // if($formdata['avsluttet']=="on" && isset($formdata['avsluttet']))
+                //     $or_where.="`process_claim`.`status` = '2' OR ";
+                // if($formdata['avvist']=="on" && isset($formdata['avvist']))
+                //     $or_where.="`process_claim`.`status` = '3' OR ";
+                // $or_where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $or_where);
+                // $or_where.=")";
                 $where= preg_replace('/\W\w+\s*(\W*)$/', '$1', $where);
                 $data['result']=$this->get_data_of_reports($where,"claims.id desc","","claims","claims.id,policy_period.contract_id,policy_period.ags_policy_no,CONCAT(claims.damage_date,' ',
                 claims.damage_time) AS report_datetime,claims.claim_datetime,process_claim.process_datetime,CONCAT(claims.a_name,' ',claims.a_surname) AS claimant_name,claims.a_birth,claims.a_phone as district,claims.c_name,claims.a_sportsno,
                 claims.insurance_under,process_claim.body_part,process_claim.side,process_claim.damage_type,claims.sport,claims.place_of_damage,claims.season,claim_status.name as stat_name,process_claim.closing_date,
-                process_claim.date_denied","","",$or_where,"","")->result_array();
+                process_claim.date_denied","","","","","")->result_array();
                 echo $this->load->view('table1',$data,TRUE);
             break;
             case "2":
