@@ -23,7 +23,7 @@ class Api extends MX_Controller {
         date_default_timezone_set("Asia/Karachi");
         // $this->db2 = $this->load->database('old_db', TRUE);
     }
-
+   
     function mailerFunction(){
         // $mail_dta=Modules::run('api/get_specific_table_data',array('f_id'=>7),'id desc',"username as smtp_username,password as smtp_password,host as smtp_host,port as smtp_port","maler",'','')->row_array();
         // $mail = new PHPMailer(true);
@@ -138,45 +138,63 @@ class Api extends MX_Controller {
     }
 
     function sanction_check_test(){
-        $name="ASV Assistance";
-		$name = str_replace(' ', '%20', $name);
-		$curl = curl_init();
+        $name="Svenska Skärmflygförbundet";
+		$data = [
+            'res' => 'failed',         // default status
+            'description' => ''         // will store raw result or error
+        ];
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=".$name,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-              'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
-            ),
-            //CURLOPT_CAINFO => 'D:\wamp64\www\agsNew\cacert.pem', 
-             CURLOPT_CAINFO => $_SERVER['DOCUMENT_ROOT'] . '/cacert.pem', 
-          ));
+        try {
+            $name = str_replace(' ', '%20', $name);
+            $curl = curl_init();
 
-  
-        $result = curl_exec($curl);
-        if (curl_errno($curl)) {
-            echo 'Error:' . curl_error($curl);
+            // Adjust the path to your actual cacert.pem file
+            $certPath = $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cert/cacert.pem';
+
+            if (!file_exists($certPath)) {
+                // If certificate not found, fail gracefully
+                $data['res'] = 'Certificate file missing';
+                return $data;
+            }
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=" . $name,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => [
+                    'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+                ],
+                CURLOPT_CAINFO => $certPath,
+            ]);
+
+            $result = curl_exec($curl);
+print_r($result);
+            if (curl_errno($curl)) {
+                $data['description'] = 'cURL Error: ' . curl_error($curl);
+                $data['res'] = 'Request failed';
+            } else {
+                $data['description'] = $result;
+                $decoded = json_decode($result);
+
+                if (isset($decoded->count)) {
+                    $data['res'] = ($decoded->count == 0) ? "Secure" : "Not secure";
+                } else {
+                    $data['res'] = "Invalid response";
+                }
+            }exit;
+            curl_close($curl);
+        } catch (Exception $e) {
+            // In case something unexpected goes wrong
+            $data['res'] = 'Exception caught';
+            $data['description'] = $e->getMessage();
         }
-        curl_close($curl);
-        print_r($result);exit;
-        $data['description']=$result;
-        if (!empty($result)) {
-            $result = json_decode($result);
-            if($result->count==0)
-            $data['res']="Secure";
-            else
-            $data['res']="Not secure";
-                
-        }else{
-            $data['res']="No result found";
-        }
-        return $data;
+
+        echo $data;
     }
     
     

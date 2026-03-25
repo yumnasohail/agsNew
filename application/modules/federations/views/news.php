@@ -19,6 +19,7 @@
                                 <th class="sr">Ref.</th>
                                 <th>Navn</th>
                                 <th>kort tittel</th>
+                                <th>Sanction Status</th>
                                 <th class="" style="width:300px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Handling</th>
                                 </tr>
                                 </thead>
@@ -38,6 +39,7 @@
                                                 <td width='2%'><?php echo $i;?></td>
                                                 <td><?php echo $new->name;  ?></td>
                                                 <td><?php echo $new->title; ?></td>
+                                                <td><?php echo $new->sanction_status; ?></td>
                                                 <td class="table_action">
                                                 <!-- <a class=" yellow c-btn view_details" rel="<?=$new->id?>"><i class="iconsminds-receipt-4"  title="See Detail"></i></a> -->
                                                 <?php

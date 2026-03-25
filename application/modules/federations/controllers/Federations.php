@@ -65,6 +65,8 @@ Modules::run('site_security/has_permission');
         foreach ($query->result() as $row) {
             $data['name'] = $row->name;
             $data['title'] = $row->title;
+            $data['sanction_name'] = $row->sanction_name;
+            $data['sanction_status'] = $row->sanction_status;
             $data['status'] = $row->status;
         }
         return $data;
@@ -81,27 +83,140 @@ Modules::run('site_security/has_permission');
         $data['update_id'] = $update_id;
         $this->load->view($data['federation'],$data);
     }
-    function _get_data_from_post() {
-        $data['name'] = $this->input->post('name');
-        $data['title'] = $this->input->post('title');
+    function _get_data_from_post()
+    {
+        $sanction_name = $this->input->post('sanction_name');
+        $sanction_name = $sanction_name ? htmlspecialchars(strip_tags(trim($sanction_name))) : '';
+
+        $data['name']          = $this->input->post('name');
+        $data['title']         = $this->input->post('title');
+        $data['sanction_name'] = $sanction_name;
+
         return $data;
     }
 
-    function submit() {
+    function submit()
+    {
         $update_id = $this->uri->segment(4);
-        $data = $this->_get_data_from_post();
+        $data      = $this->_get_data_from_post();
+
+        // ── Sanction status logic ────────────────────────────────────────
+        $force_submit  = ($this->input->post('force_submit') === '1');
+        $sanction_status = 'unchecked';
+
+        if (!empty($data['sanction_name'])) {
+
+            $check = $this->sanction_check($data['sanction_name']);
+
+            if ($check['res'] === 'Secure' || ($check['is_false_positive'] ?? false)) {
+                $sanction_status = 'Secure';
+
+            } elseif ($check['res'] === 'Not secure') {
+                if ($force_submit) {
+                    $sanction_status = 'bypassed'; // warned but user chose to proceed
+                } else {
+                    // Safety net — JS should have blocked this, but just in case
+                    $this->session->set_flashdata('message', 'Federation is on a sanctions list and was not saved.');
+                    $this->session->set_flashdata('status', 'error');
+                    redirect(ADMIN_BASE_URL . 'federations');
+                    return;
+                }
+            }
+            // API error / timeout → stays 'unchecked', don't block save
+        }
+
+        $data['sanction_status'] = $sanction_status;
+        // ────────────────────────────────────────────────────────────────
+
         if (is_numeric($update_id) && $update_id != 0) {
             $where['id'] = $update_id;
             $this->_update($where, $data);
-            $this->session->set_flashdata('message', 'Federation'.' '.DATA_UPDATED);										
+            $this->session->set_flashdata('message', 'Federation' . ' ' . DATA_UPDATED);
             $this->session->set_flashdata('status', 'success');
         }
+
         if (is_numeric($update_id) && $update_id == 0) {
             $id = $this->_insert($data);
-            $this->session->set_flashdata('message', 'Federation'.' '.DATA_SAVED);										
+            $this->session->set_flashdata('message', 'Federation' . ' ' . DATA_SAVED);
             $this->session->set_flashdata('status', 'success');
         }
+
         redirect(ADMIN_BASE_URL . 'federations');
+    }
+
+    public function sanction_check_ajax()
+    {
+        header('Content-Type: application/json');
+
+        $name = $this->input->post('name', TRUE);
+
+        if (empty($name)) {
+            echo json_encode(['res' => 'failed', 'description' => 'No name provided.']);
+            return;
+        }
+
+        $result = $this->sanction_check($name); // your existing function
+        echo json_encode($result);
+    }
+
+    function sanction_check($name)
+    {
+        $data = [
+            'res' => 'failed',         // default status
+            'description' => ''         // will store raw result or error
+        ];
+
+        try {
+            $name = str_replace(' ', '%20', $name);
+            $curl = curl_init();
+
+            // Adjust the path to your actual cacert.pem file
+            $certPath = $_SERVER['DOCUMENT_ROOT'] . '/agsNew/cert/cacert.pem';
+
+            if (!file_exists($certPath)) {
+                // If certificate not found, fail gracefully
+                $data['res'] = 'Certificate file missing';
+                return $data;
+            }
+
+            curl_setopt_array($curl, [
+                CURLOPT_URL => "https://api.sanctions.io/search/?min_score=0.88&country=NO,SE&data_source=CFSP&name=" . $name,
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => '',
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 10,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => 'GET',
+                CURLOPT_HTTPHEADER => [
+                    'Authorization: Bearer a209a7c7cbb44305b0d16ade423cced5'
+                ],
+                CURLOPT_CAINFO => $certPath,
+            ]);
+
+            $result = curl_exec($curl);
+
+            if (curl_errno($curl)) {
+                $data['description'] = 'cURL Error: ' . curl_error($curl);
+                $data['res'] = 'Request failed';
+            } else {
+                $data['description'] = $result;
+                $decoded = json_decode($result);
+                if (isset($decoded->count)) {
+                    $data['res'] = ($decoded->count == 0) ? "Secure" : "Not secure";
+                } else {
+                    $data['res'] = "Invalid response";
+                }
+            }
+
+            curl_close($curl);
+        } catch (Exception $e) {
+            // In case something unexpected goes wrong
+            $data['res'] = 'Exception caught';
+            $data['description'] = $e->getMessage();
+        }
+
+        return $data;
     }
 
     function delete() {
