@@ -36,6 +36,8 @@ class Templates extends MX_Controller
 
 		$this->load->view('front/theme1/front',$data);
 	}
+
+
 	function front2($data){
 
 		$this->load->view('front/theme1/front2',$data);

@@ -38,6 +38,11 @@
 |
 */
 /////////////// ADMIN PAGES ////////////////
+
+// $route['(:any)'] = "front/maintanance";
+// $route['default_controller'] = "front/maintanance";
+
+
 	$route['default_controller'] = 'front_end';
 	$route['admin/login/submit_login'] = "login/submit_login";
 	$route['admin'] = "login";
@@ -57,6 +62,7 @@
 	$route['sff']=$folder."sff";
 	$route['styrkeloft']=$folder."styrkeloft";
 	$route['suksess']=$folder."success_page";
+	$route['maintanance']=$folder."maintanance";
 	$route['kunst']="front_end/kunst";
 	$route['cyber']="front_end/cyber";
 	$route['corporate']="front_end/corporate";

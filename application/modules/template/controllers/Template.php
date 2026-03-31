@@ -51,6 +51,13 @@ parent::__construct();
 
 		$this->load->view('front/theme1/front',$data);
 	}
+
+	
+	function withoutHeader($data){
+		$this->load->view('front/theme1/withoutHeader',$data);
+	}
+
+
 	function front2($data){
 
 		$this->load->view('front/theme1/front2',$data);

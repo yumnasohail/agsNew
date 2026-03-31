@@ -13,6 +13,12 @@ protected $data = '';
 	    $this->template->front($data);
 	}
 
+	function maintanance() {
+        $this->load->module('template');
+	    $data['view_file'] = 'maintanance';
+	    $this->template->withoutHeader($data);
+	}
+
 	function nrl() {
 	    $data['page_title']="Rugby League Norway";
         $this->load->module('template');
