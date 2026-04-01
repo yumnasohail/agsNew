@@ -39,50 +39,50 @@
 */
 /////////////// ADMIN PAGES ////////////////
 
-// $route['(:any)'] = "front/maintanance";
-// $route['default_controller'] = "front/maintanance";
+$route['(:any)'] = "front/maintanance";
+$route['default_controller'] = "front/maintanance";
 
 
-	$route['default_controller'] = 'front_end';
-	$route['admin/login/submit_login'] = "login/submit_login";
-	$route['admin'] = "login";
-	$route['admin/logout'] = "login/logout";
-	$route['admin/azureCallBack'] = "login/callback";
-	$route['table_list']= "api/table_list";
-	$folder="front/";
-	$route['curling']=$folder."curling";
-	$route['nrl']=$folder."nrl";
-	$route['tsff']=$folder."tsff";
-	$route['naif']=$folder."naif";
-	$route['judo']=$folder."judo";
-	$route['nlf-f']=$folder."nlf_f";
-	$route['nvf']=$folder."nvf";
-	$route['nlf-hps']=$folder."nlf_hps";
-	$route['ssff']=$folder."ssff";
-	$route['sff']=$folder."sff";
-	$route['styrkeloft']=$folder."styrkeloft";
-	$route['suksess']=$folder."success_page";
-	$route['maintanance']=$folder."maintanance";
-	$route['kunst']="front_end/kunst";
-	$route['cyber']="front_end/cyber";
-	$route['corporate']="front_end/corporate";
-	$route['forbund_og_foreninger']="front_end/forbund";
-	$route['nyheter']="front_end/news_list";
-	$route['enerji']="front_end/enerji";
-	$route['privacy_policy']="front_end/privacy_policy";
-	$route['sport']="front_end/sport";
-// 	$route['ma']="front_end/ma";
-	$route['kontakt']="front_end/kontakt";
-	$route['om_ags']="front_end/om_ags";
-	$route['switch/(:any)'] = 'front_end/language/switch/$1';
-	$route['nyheter/(.+)']='front_end/news_detail';
-	$route['oppdater/(.+)/(.+)']=$folder."oppdater";
-	$route['admin/(.+)'] = "$1/$1";
+// 	$route['default_controller'] = 'front_end';
+// 	$route['admin/login/submit_login'] = "login/submit_login";
+// 	$route['admin'] = "login";
+// 	$route['admin/logout'] = "login/logout";
+// 	$route['admin/azureCallBack'] = "login/callback";
+// 	$route['table_list']= "api/table_list";
+// 	$folder="front/";
+// 	$route['curling']=$folder."curling";
+// 	$route['nrl']=$folder."nrl";
+// 	$route['tsff']=$folder."tsff";
+// 	$route['naif']=$folder."naif";
+// 	$route['judo']=$folder."judo";
+// 	$route['nlf-f']=$folder."nlf_f";
+// 	$route['nvf']=$folder."nvf";
+// 	$route['nlf-hps']=$folder."nlf_hps";
+// 	$route['ssff']=$folder."ssff";
+// 	$route['sff']=$folder."sff";
+// 	$route['styrkeloft']=$folder."styrkeloft";
+// 	$route['suksess']=$folder."success_page";
+// 	$route['maintanance']=$folder."maintanance";
+// 	$route['kunst']="front_end/kunst";
+// 	$route['cyber']="front_end/cyber";
+// 	$route['corporate']="front_end/corporate";
+// 	$route['forbund_og_foreninger']="front_end/forbund";
+// 	$route['nyheter']="front_end/news_list";
+// 	$route['enerji']="front_end/enerji";
+// 	$route['privacy_policy']="front_end/privacy_policy";
+// 	$route['sport']="front_end/sport";
+// // 	$route['ma']="front_end/ma";
+// 	$route['kontakt']="front_end/kontakt";
+// 	$route['om_ags']="front_end/om_ags";
+// 	$route['switch/(:any)'] = 'front_end/language/switch/$1';
+// 	$route['nyheter/(.+)']='front_end/news_detail';
+// 	$route['oppdater/(.+)/(.+)']=$folder."oppdater";
+// 	$route['admin/(.+)'] = "$1/$1";
 	
 	
-	$strHost = $_SERVER['SERVER_NAME'];
-	$strHost = preg_replace('/www./', '', $strHost, 1);
-	$route['([a-zA-Z-]+)'] = $folder."page/$1";
+// 	$strHost = $_SERVER['SERVER_NAME'];
+// 	$strHost = preg_replace('/www./', '', $strHost, 1);
+// 	$route['([a-zA-Z-]+)'] = $folder."page/$1";
 	$route['404_override'] = '';
 	
 
